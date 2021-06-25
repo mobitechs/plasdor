@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "130193030068",
+    "project_id": "plasdor-5cb6b",
+    "storage_bucket": "plasdor-5cb6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130193030068:android:41fed2d4f944285e7950e1",
+        "android_client_info": {
+          "package_name": "com.plasdor.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130193030068-q7t1sern5u1mgbk4qrjd43oh8oa0m8ia.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plasdor.app",
+            "certificate_hash": "76aff88fda900667f411f58f512af1f03e8dc621"
+          }
+        },
+        {
+          "client_id": "130193030068-pj7nmfu8onh5ia4g8udsrnh96qp6nvg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxkYgFg4cbE-zgFV6XgD1ITbu8bW77bp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130193030068-pj7nmfu8onh5ia4g8udsrnh96qp6nvg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

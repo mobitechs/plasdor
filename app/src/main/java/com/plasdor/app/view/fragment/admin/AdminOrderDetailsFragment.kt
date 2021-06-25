@@ -1,0 +1,165 @@
+package com.plasdor.app.view.fragment.admin
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.fragment.app.Fragment
+import com.plasdor.app.R
+import com.plasdor.app.callbacks.ApiResponse
+import com.plasdor.app.model.AdminAllOrderListItems
+import com.plasdor.app.session.SharePreferenceManager
+import com.plasdor.app.utils.Constants
+import com.plasdor.app.utils.apiPostCall
+import com.plasdor.app.utils.showToastMsg
+import org.json.JSONException
+import org.json.JSONObject
+
+class AdminOrderDetailsFragment : Fragment(), ApiResponse {
+
+    lateinit var rootView: View
+    lateinit var listItem: AdminAllOrderListItems
+    lateinit var txtOrderId: AppCompatTextView
+    lateinit var txtOrderStatus: AppCompatTextView
+    lateinit var txtOrderDate: AppCompatTextView
+    lateinit var txtProductDetails: AppCompatTextView
+    lateinit var txtAmount: AppCompatTextView
+    lateinit var txtDelivery: AppCompatTextView
+    lateinit var txtTotal: AppCompatTextView
+
+    lateinit var txtMerchantName: AppCompatTextView
+    lateinit var txtMerchantEmail: AppCompatTextView
+    lateinit var txtMerchantMobile: AppCompatTextView
+    lateinit var txtMerchantAddress: AppCompatTextView
+
+    lateinit var txtUserName: AppCompatTextView
+    lateinit var txtUserEmail: AppCompatTextView
+    lateinit var txtUserMobileNo: AppCompatTextView
+    lateinit var txtUserAddress: AppCompatTextView
+
+    lateinit var spinner: AppCompatSpinner
+    var userType = ""
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        rootView = inflater.inflate(R.layout.fragment_admin_order_details, container, false)
+        intView()
+        return rootView
+    }
+
+    private fun intView() {
+        listItem = arguments?.getParcelable("OrderDetails")!!
+
+        userType =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.userType.toString()
+
+        txtOrderId = rootView.findViewById(R.id.txtOrderId)!!
+        txtOrderStatus = rootView.findViewById(R.id.txtOrderStatus)!!
+        txtOrderDate = rootView.findViewById(R.id.txtOrderDate)!!
+        txtProductDetails = rootView.findViewById(R.id.txtProductDetails)!!
+        txtAmount = rootView.findViewById(R.id.txtAmount)!!
+        txtDelivery = rootView.findViewById(R.id.txtDelivery)!!
+        txtTotal = rootView.findViewById(R.id.txtTotal)!!
+
+        spinner = rootView.findViewById(R.id.spinner)!!
+
+        txtMerchantName = rootView.findViewById(R.id.txtMerchantName)!!
+        txtMerchantEmail = rootView.findViewById(R.id.txtMerchantEmail)!!
+        txtMerchantMobile = rootView.findViewById(R.id.txtMerchantMobile)!!
+        txtMerchantAddress = rootView.findViewById(R.id.txtMerchantAddress)!!
+
+        txtUserName = rootView.findViewById(R.id.txtUserName)!!
+        txtUserEmail = rootView.findViewById(R.id.txtUserEmail)!!
+        txtUserMobileNo = rootView.findViewById(R.id.txtUserMobileNo)!!
+        txtUserAddress = rootView.findViewById(R.id.txtUserAddress)!!
+
+
+        txtOrderId.text = listItem.orderId
+        txtOrderDate.text = listItem.addedDate
+
+        txtAmount.text = " Rs. " + listItem.totalPrice
+        txtDelivery.text = " Rs. " + listItem.deliveryChages
+        txtTotal.text = " Rs. " + listItem.totalPrice
+        txtProductDetails.text = listItem.productName + " Type " + listItem.type
+
+        txtUserName.text = listItem.name
+        txtUserEmail.text = listItem.email
+        txtUserMobileNo.text = listItem.mobile
+        txtUserAddress.text = listItem.address + " " + listItem.city + " " + listItem.pincode
+
+        txtMerchantName.text = listItem.merchantName
+        txtMerchantEmail.text = listItem.merchantEmail
+        txtMerchantMobile.text = listItem.merchantMobile
+        txtMerchantAddress.text = listItem.merchantAddress + " " + listItem.merchantCity + " " + listItem.merchantPinCode
+
+        setupOrderStatusSpinner()
+    }
+
+    private fun setupOrderStatusSpinner() {
+        if (userType.equals(Constants.ADMIN)) {
+            txtOrderStatus.visibility = View.GONE
+            spinner.visibility = View.VISIBLE
+
+            val adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_layout,
+                Constants.orderStatusArray
+            )
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.setAdapter(adapter)
+
+//            spinner.setSelection(Constants.orderStatusArray.indexOf(listItem.status))
+            spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    var status = Constants.orderStatusArray[p2]
+//                    if (!listItem.status.equals(status)) {
+//                        callAPIToChangeOrderStatus(listItem.orderId, status)
+//                    }
+
+                }
+            })
+        } else {
+            txtOrderStatus.visibility = View.VISIBLE
+            spinner.visibility = View.GONE
+        }
+    }
+
+    private fun callAPIToChangeOrderStatus(orderId: String, status: String) {
+        val method = "ChangeOrderStatus"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("orderId", orderId)
+            jsonObject.put("orderStatus", status)
+            jsonObject.put("clientBusinessId", Constants.clientBusinessId)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
+    }
+
+    override fun onSuccess(data: Any, tag: String) {
+        if (data.equals("SUCCESS")) {
+            requireContext().showToastMsg("Order status change successfully.")
+        } else {
+            requireContext().showToastMsg("Failed to change order status.")
+        }
+    }
+
+    override fun onFailure(message: String) {
+        requireContext().showToastMsg(message)
+    }
+}

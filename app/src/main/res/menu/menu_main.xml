@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuReferToFriend"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_baseline_power_settings_new_24"
+        android:title="Refer to friend"/>
+    <item
+        android:id="@+id/menuLogOut"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_baseline_power_settings_new_24"
+        android:title="Logout"/>
+</menu>

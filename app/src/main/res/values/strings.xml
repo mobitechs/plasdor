@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Plasdor</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="we_have_sent_you_an_email_with_a_code_to_the_nemail_id">we have sent you an email with a code to the \nEmail id -</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="double_tap">Double tap for exit</string>
+    <string name="profit_text">Sell and Earn Rs. </string>
+    <string name="likes">U+1F44D </string>
+    <string name="forgot_password"><u>Forgot Password</u> </string>
+    <string name="register">New User? <u>Register</u> </string>
+    <string name="login"><u>Log In</u> </string>
+    <string name="resend"><u>Resend</u> </string>
+    <string name="viewOnMap"><u>View On Map</u> </string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="resendCode"><u>Resend</u></string>
+</resources>

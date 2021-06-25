@@ -1,0 +1,12 @@
+<com.google.android.material.textfield.TextInputEditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edSearch"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:drawableStart="@drawable/ic_baseline_search_24"
+    android:drawablePadding="@dimen/_5sdp"
+    android:drawableTint="@color/black"
+    android:hint="Search"
+    android:imeOptions="actionDone"
+    android:inputType="text"
+    android:textSize="@dimen/_14sdp" />

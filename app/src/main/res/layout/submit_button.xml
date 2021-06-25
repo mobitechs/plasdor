@@ -1,0 +1,10 @@
+<androidx.appcompat.widget.AppCompatButton android:id="@+id/btnSignIn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/forgetPassword"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@drawable/rounded_bg_orange"
+    android:text="Submit"
+    android:textColor="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
