@@ -46,6 +46,9 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     var productId = ""
     var selectedMerchantId = ""
     var userId = ""
+    var userLat = ""
+    var userLong = ""
+    var userName = ""
 
     var spinnerItemArray = Constants.pieceArray
     var qty = 1
@@ -69,9 +72,10 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
     private fun initView() {
 
-        userId =
-            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
-                ?.get(0)?.userId.toString()
+        userId = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
+        userLat = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.latitude.toString()
+        userLong = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.longitude.toString()
+        userName = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.name.toString()
 
         ivProdImage = rootView.findViewById(R.id.ivProdImage)
         tvProductName = rootView.findViewById(R.id.tvProductName)
@@ -105,7 +109,12 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             (context as UserHomeActivity?)!!.OpenPlaceOrderFragment(bundle)
         }
         txtViewOnMap.setOnClickListener {
-            requireContext().openActivity(MapsActivity::class.java)
+            requireContext().openActivity(MapsActivity::class.java){
+                putParcelableArrayList("merchantListItems", merchantListItems)
+                putString("userLat", userLat)
+                putString("userLong", userLong)
+                putString("userName", userName)
+            }
         }
 
 
