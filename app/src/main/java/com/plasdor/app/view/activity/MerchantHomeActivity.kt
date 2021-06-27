@@ -35,7 +35,7 @@ import kotlinx.android.synthetic.main.drawer_layout_admin.lAllOrder
 import kotlinx.android.synthetic.main.drawer_layout_admin.lAllUsers
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
 
-class MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
+class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     AlertDialogBtnClickedCallBack {
     private var doubleBackToExitPressedOnce = false
     var userType = ""

@@ -51,6 +51,7 @@
                         android:textSize="@dimen/_16sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
                         android:id="@+id/txtType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -59,15 +60,35 @@
                         android:text="Type : 5D"
                         android:textSize="12dp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvPrice"
-                        android:layout_width="wrap_content"
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="Rs. 1,979"
-                        android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Offer Rs. 1,979"
+                            android:textColor="@color/black"
+                            android:textSize="20dp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginStart="10dp"
+                            android:id="@+id/tvLabelPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Offer Rs. 1,979"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -140,6 +161,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

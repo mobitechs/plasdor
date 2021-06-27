@@ -60,7 +60,7 @@ class UserOrderListAdapter(
         holder.txtOrderAmount.text = "Rs." + item.totalPrice
         //holder.status = item.status
         holder.txtOrderStatus.text = holder.status
-        holder.txtProductDetails.text  = item.productName+" Type "+item.type
+        holder.txtProductDetails.text  = item.productName //+" Type "+item.type
 
         var orderDate = parseDateToddMMyyyy(item.addedDate)
         holder.txtOrderDate.text = orderDate

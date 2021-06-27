@@ -49,7 +49,7 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
         val etConfirmPassword: TextInputEditText = rootView.findViewById(R.id.etConfirmPassword)
         val txtAddress: TextInputEditText = rootView.findViewById(R.id.txtAddress)
         val txtCity: TextInputEditText = rootView.findViewById(R.id.txtCity)
-        val txtPinCode: TextInputEditText = rootView.findViewById(R.id.etConfirmPassword)
+        val txtPinCode: TextInputEditText = rootView.findViewById(R.id.txtPinCode)
         val checkIsMerchant: CheckBox = rootView.findViewById(R.id.checkIsMerchant)
 
 //        val navController = activity?.let { Navigation.findNavController(it, R.id.navFragment) }

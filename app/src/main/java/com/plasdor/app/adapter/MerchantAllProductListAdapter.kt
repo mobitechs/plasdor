@@ -86,10 +86,10 @@ class MerchantAllProductListAdapter(
         holder.btnWishList.setOnClickListener {
 
             if (item.isAdded == "1") {
-                holder.btnWishList.setImageResource(R.drawable.ic_outline_add_circle_24)
+//                holder.btnWishList.setImageResource(R.drawable.ic_outline_add_circle_24)
                 merchantProductClickListener.removeMyProduct(item, position)
             } else {
-                holder.btnWishList.setImageResource(R.drawable.ic_baseline_remove_circle_24)
+//                holder.btnWishList.setImageResource(R.drawable.ic_baseline_remove_circle_24)
                 merchantProductClickListener.addMyProduct(item, position)
             }
         }

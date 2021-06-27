@@ -199,7 +199,7 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
 
         // Create an alert builder
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Enter Total Qty")
+        builder.setTitle("Total number of console (s) you are renting")
 
         // set the custom layout
         val customLayout: View = layoutInflater.inflate(R.layout.add_qty_dialog_layout, null)
@@ -211,7 +211,12 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
                     // AlertDialog to the Activity
                     val editText = customLayout.findViewById<EditText>(R.id.etQty)
                     totalQty = editText.text.toString()
-                    addProductWithQty()
+                    if(totalQty.equals("")){
+                            requireContext().showToastMsg("Enter Qty")
+                    }else{
+                        addProductWithQty()
+                    }
+
                 })
         // create and show
         // the alert dialog
@@ -232,6 +237,7 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
         }
         apiPostCall(Constants.BASE_URL, jsonObject, this, method)
         listItems[itemPos].isAdded = "1"
+        listAdapter.notifyDataSetChanged()
     }
 
 }

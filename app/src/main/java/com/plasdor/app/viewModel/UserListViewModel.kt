@@ -13,7 +13,6 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
 
     private val repository = UserListRepository(application)
     val showProgressBar: LiveData<Boolean>
-    val isResponseHaveData: LiveData<Int>
     val allProductListItems: LiveData<ArrayList<ProductListItems>>
     val addressListItems: LiveData<ArrayList<AddressListItems>>
     val myOrderListItems: LiveData<ArrayList<MyOrderListItems>>
@@ -22,7 +21,6 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
 
     init {
         this.showProgressBar = repository.showProgressBar
-        this.isResponseHaveData = repository.isResponseHaveData
         this.addressListItems = repository.addressListItems
         this.myOrderListItems = repository.myOrderListItems
         this.allProductListItems = repository.allProductListItems

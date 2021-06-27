@@ -1,5 +1,6 @@
 package com.plasdor.app.view.fragment.user
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,8 +40,10 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     lateinit var tvProductName: AppCompatTextView
     lateinit var txtType: AppCompatTextView
     lateinit var tvPrice: AppCompatTextView
+    lateinit var tvLabelPrice: AppCompatTextView
     lateinit var txtDescription: AppCompatTextView
     lateinit var txtViewOnMap: AppCompatTextView
+    lateinit var txtSelectMerchantLabel: AppCompatTextView
     lateinit var layoutDescription: LinearLayout
     lateinit var spinner: AppCompatSpinner
     var productId = ""
@@ -49,6 +52,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     var userLat = ""
     var userLong = ""
     var userName = ""
+    var priceToPay = ""
 
     var spinnerItemArray = Constants.pieceArray
     var qty = 1
@@ -81,10 +85,12 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         tvProductName = rootView.findViewById(R.id.tvProductName)
         txtType = rootView.findViewById(R.id.txtType)
         tvPrice = rootView.findViewById(R.id.tvPrice)
+        tvLabelPrice = rootView.findViewById(R.id.tvLabelPrice)
         txtDescription = rootView.findViewById(R.id.txtDescription)
         btnBuyNow = rootView.findViewById(R.id.btnBuyNow)
         layoutDescription = rootView.findViewById(R.id.layoutDescription)
         txtViewOnMap = rootView.findViewById(R.id.txtViewOnMap)
+        txtSelectMerchantLabel = rootView.findViewById(R.id.txtSelectMerchantLabel)
         spinner = rootView.findViewById(R.id.spinner)
 
         listItem = arguments?.getParcelable("item")!!
@@ -93,6 +99,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         ivProdImage.setImage(listItem.img!!)
         tvProductName.text = listItem.productName
         tvPrice.text = "Rs. " + listItem.priceToSell
+        setLabelPrice(listItem.price)
         txtType.text = "Type " + listItem.type
         txtDescription.text = listItem.description
 
@@ -100,7 +107,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             layoutDescription.visibility = View.GONE
         }
 
-
+        hideUI()
         btnBuyNow.setOnClickListener {
             var bundle = Bundle()
             bundle.putParcelable("productItem", listItem)
@@ -137,17 +144,34 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 qty = spinnerItemArray[p2].toInt()
 
-                var totalPrice = qty * (listItem.price).toInt()
-                var discountedPrice = qty * (listItem.priceToSell).toInt()
+                priceToPay = listItem.price
+                var priceToSell = listItem.priceToSell
+                if(listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X")){
+                    priceToPay = Constants.ps5NdXSeriesXPriceArray[p2]
+                }else if(listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X  ")){
+                    priceToPay = Constants.ps4NdXOneXPriceArray[p2]
+                }else  if(listItem.productName.equals("XBOX One S") ){
+                    priceToPay = Constants.XOneSPriceArray[p2]
+                }else  if(listItem.productName.equals("XBOX Series S") ){
+                    priceToPay = Constants.XSeriesSPriceArray[p2]
+                }
 
-                tvPrice.text = "Rs. " +discountedPrice.toString()
 
-
+//                var discountedPrice = qty * priceToSell.toInt()
+//                tvPrice.text = "Rs. " +discountedPrice.toString()
+                tvPrice.text = "Rs. " +priceToPay.toString()
+                var totalPrice = qty * listItem.price.toInt()
+                setLabelPrice(totalPrice.toString())
             }
         })
 
         setupRecyclerView()
 
+    }
+
+    private fun setLabelPrice(totalPrice: String) {
+        tvLabelPrice.text = "Rs. " +totalPrice
+        tvLabelPrice.setPaintFlags(tvLabelPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
     }
 
 
@@ -164,16 +188,16 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
         viewModelUser.merchantListItems.observe(requireActivity(), Observer {
             merchantListItems = it
+
+            if(merchantListItems.size > 0){
+                showUI()
+            }else{
+                hideUI()
+            }
             listAdapter.updateListItems(it)
         })
 
-        viewModelUser.isResponseHaveData.observe(requireActivity(), Observer {
-            if (it == 2) {
-                showUI()
-            } else if (it == 1) {
-                hideUI()
-            }
-        })
+
 
         listAdapter = AvailableMerchantListAdapter(
             requireActivity(),
@@ -185,13 +209,13 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     private fun hideUI() {
         txtViewOnMap.visibility = View.GONE
         btnBuyNow.visibility = View.GONE
-
-        requireActivity().showToastMsg("we do not have any merchant for this product")
+        txtSelectMerchantLabel.text = "we do not have any merchant for this product"
+       // requireActivity().showToastMsg("We do not have any merchant for this product")
     }
 
     private fun showUI() {
         txtViewOnMap.visibility = View.VISIBLE
-
+        txtSelectMerchantLabel.text = "Select Merchant"
     }
 
     override fun selectMerchant(item: UserModel, position: Int) {

@@ -17,7 +17,6 @@ import com.plasdor.app.utils.showToastMsg
 class UserListRepository(val application: Application) : ApiResponse {
 
     val showProgressBar = MutableLiveData<Boolean>()
-    val isResponseHaveData = MutableLiveData<Int>()
     val allProductListItems = MutableLiveData<ArrayList<ProductListItems>>()
     val myOrderListItems = MutableLiveData<ArrayList<MyOrderListItems>>()
     val merchantListItems = MutableLiveData<ArrayList<UserModel>>()
@@ -37,6 +36,7 @@ class UserListRepository(val application: Application) : ApiResponse {
     }
 
     fun getAvailableMerchant(productId: String) {
+
         method = "productWiseAvailableMerchant"
         var url = Constants.BASE_URL + "?method=$method&productId=$productId"
         apiGetCall(url, this, method)
@@ -61,7 +61,6 @@ class UserListRepository(val application: Application) : ApiResponse {
 
         if (data.equals("List not available")) {
             application.showToastMsg(data.toString())
-            isResponseHaveData.value = 1
         } else {
             val gson = Gson()
 
@@ -72,7 +71,6 @@ class UserListRepository(val application: Application) : ApiResponse {
                 allProductListItems.value = productListItems
             }
             else if (method == "productWiseAvailableMerchant") {
-                isResponseHaveData.value = 2
                 val type = object : TypeToken<ArrayList<UserModel>>() {}.type
                 var listItems: ArrayList<UserModel>? =
                     gson.fromJson(data.toString(), type)

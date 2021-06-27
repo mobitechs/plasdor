@@ -99,7 +99,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             jsonObject.put("method", method)
             jsonObject.put("senderUserId", senderUserId)
             jsonObject.put("installerUserId", userId)
-            jsonObject.put("referralPoints", Constants.REFERRAL_POINTS)
+            jsonObject.put("referralPoints", Constants.POINTS_ON_SHARE)
         } catch (e: JSONException) {
             e.printStackTrace()
         }

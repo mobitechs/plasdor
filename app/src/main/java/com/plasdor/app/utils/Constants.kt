@@ -14,7 +14,9 @@ class Constants {
         const val ADMIN = "Admin"
         const val MERCHANT = "Merchant"
         const val USER = "User"
-        const val REFERRAL_POINTS = 101
+        const val POINTS_ON_SHARE = 15
+        const val POINTS_ON_ADS    = 2
+        const val POINTS_ON_ORDER= 20
 
         const val ISLOGIN = "isLogin"
         const val userId = "userId"
@@ -55,7 +57,12 @@ class Constants {
         //if u add new item in weightArray then please add in qtyArray as well its must
         val qtyArray = arrayOf("1", "2", "3", "4", "6", "8 ", "10", "12", "14", "16", "18", "20")
 
-        val pieceArray = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+        val pieceArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
+        val ps5NdXSeriesXPriceArray = arrayOf("999", "1799", "2499", "3199", "3499", "3999", "4499")
+        val ps4NdXOneXPriceArray = arrayOf("499", "899", "1399", "1699", "2099", "2399", "2699")
+        val XOneSPriceArray = arrayOf("449", "849", "1349", "1649", "2049", "2349", "2649")
+        val XSeriesSPriceArray = arrayOf("949", "1749", "2449", "3149", "3449", "3949", "4449")
+
         val unitTypeArray = arrayOf("Grams", "Piece", "Packet", "Dozen", "Bunch", "Stick")
         val orderStatusArray = arrayOf("Received", "Accepted", "Placed", "Completed")
         val categoryArray = arrayOf("Vegetables", "Exotic Vegetables", "Fruits")
