@@ -48,6 +48,7 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
     var method =""
     var productId = ""
     var totalQty = ""
+    var totalControllerQty = ""
 
         lateinit var rootView: View
 
@@ -161,6 +162,7 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
         itemPos = position
         productId = item.pId
         totalQty = item.totalQty
+        totalControllerQty = item.totalControllerQty
         showAlertDialogButtonClicked()
     }
 
@@ -209,13 +211,15 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
 
         // Create an alert builder
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Total number of console (s) you are renting")
+        builder.setTitle("Total number of console (s) you are renting & controller Qty")
 
         // set the custom layout
         val customLayout: View = layoutInflater.inflate(R.layout.add_qty_dialog_layout, null)
         builder.setView(customLayout)
         val editText = customLayout.findViewById<EditText>(R.id.etQty)
+        val etControllerQty = customLayout.findViewById<EditText>(R.id.etControllerQty)
         editText.setText(totalQty)
+        etControllerQty.setText(totalControllerQty)
         // add a button
         builder.setPositiveButton(
             "Update",
@@ -223,8 +227,11 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
                 // AlertDialog to the Activity
 
                 totalQty = editText.text.toString()
+                totalControllerQty = etControllerQty.text.toString()
                 if(totalQty.equals("")){
                     requireContext().showToastMsg("Enter Qty")
+                }else if(totalControllerQty.equals("")){
+                    requireContext().showToastMsg("Enter Controller Qty")
                 }else{
                     updateProductWithQty()
                 }
@@ -243,11 +250,13 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
             jsonObject.put("merchantId", userId)
             jsonObject.put("productId",productId)
             jsonObject.put("totalQty", totalQty)
+            jsonObject.put("totalControllerQty", totalControllerQty)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
         apiPostCall(Constants.BASE_URL, jsonObject, this, method)
         listItems[itemPos].isAdded = "1"
         listItems[itemPos].totalQty = totalQty
+        listItems[itemPos].totalControllerQty = totalControllerQty
     }
 }

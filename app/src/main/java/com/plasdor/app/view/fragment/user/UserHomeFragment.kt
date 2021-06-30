@@ -83,7 +83,6 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener, ApiResponse {
 
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // TODO Auto-generated method stub
             }
         })
     }

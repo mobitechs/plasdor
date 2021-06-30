@@ -57,7 +57,9 @@ class Constants {
         //if u add new item in weightArray then please add in qtyArray as well its must
         val qtyArray = arrayOf("1", "2", "3", "4", "6", "8 ", "10", "12", "14", "16", "18", "20")
 
+        val controllerQtyArray = arrayOf("1", "2", "3", "4")
         val pieceArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
+
         val ps5NdXSeriesXPriceArray = arrayOf("999", "1799", "2499", "3199", "3499", "3999", "4499")
         val ps4NdXOneXPriceArray = arrayOf("499", "899", "1399", "1699", "2099", "2399", "2699")
         val XOneSPriceArray = arrayOf("449", "849", "1349", "1649", "2049", "2349", "2649")
@@ -70,3 +72,5 @@ class Constants {
 
     }
 }
+
+

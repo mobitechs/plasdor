@@ -112,7 +112,6 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         layoutCart.setOnClickListener(this)
         llProfile.setOnClickListener(this)
         llMyOrder.setOnClickListener(this)
-        lProductList.setOnClickListener(this)
         llShare.setOnClickListener(this)
         ivClose.setOnClickListener(this)
         llLogout.setOnClickListener(this)
@@ -129,10 +128,6 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             R.id.llHome -> {
                 displayView(1)
-            }
-
-            R.id.lProductList -> {
-                displayView(5)
             }
             R.id.llProfile -> {
                 displayView(2)
@@ -249,31 +244,15 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         when (pos) {
             1 -> {
                 toolbarTitle("Home")
-                if (userType.equals(Constants.ADMIN)) {
-                    replaceFragment(
-                        AdminHomeFragment(),
-                        false,
-                        R.id.nav_host_fragment,
-                        "AdminHomeFragment"
-                    )
-                } else {
-                    replaceFragment(
-                        UserHomeFragment(),
-                        false,
-                        R.id.nav_host_fragment,
-                        "UserHomeFragment"
-                    )
-                }
-
+                replaceFragment(
+                    UserHomeFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "UserHomeFragment"
+                )
             }
             2 -> {
                 toolbarTitle("Profile")
-//                addFragment(
-//                    ProfileFragment(),
-//                    false,
-//                    R.id.nav_host_fragment,
-//                    "ProfileFragment"
-//                )
                 addFragment(
                     ProfileFragment(),
                     false,
@@ -287,10 +266,6 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             4 -> {
                 openCartPage()
-            }
-            5 -> {
-                toolbarTitle("Products")
-                addFragment(UserHomeFragment(), false, R.id.nav_host_fragment, "UserHomeFragment")
             }
         }
         drawerOpenorClose()

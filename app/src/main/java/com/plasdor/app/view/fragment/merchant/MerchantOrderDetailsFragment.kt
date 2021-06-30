@@ -38,6 +38,11 @@ class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtMerchantAddress: AppCompatTextView
     lateinit var txtMerchantName: AppCompatTextView
     lateinit var spinner: AppCompatSpinner
+
+    lateinit var txtNoOfDays: AppCompatTextView
+    lateinit var txtControllerQty: AppCompatTextView
+    lateinit var txtControllerCharges: AppCompatTextView
+
     var userType = ""
 
     override fun onCreateView(
@@ -73,6 +78,9 @@ class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
         txtMerchantAddress = rootView.findViewById(R.id.txtMerchantAddress)!!
         txtMerchantName = rootView.findViewById(R.id.txtMerchantName)!!
 
+        txtNoOfDays = rootView.findViewById(R.id.txtNoOfDays)!!
+        txtControllerQty = rootView.findViewById(R.id.txtControllerQty)!!
+        txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)!!
 //        var details = listItem.orderDetails.toString().replace(",", "\n")
 
         txtOrderId.text = listItem.orderId
@@ -82,15 +90,19 @@ class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
         txtAddress.text = listItem.address + " " + listItem.addedDate + " " + listItem.city + " " + listItem.pincode
         txtEmail.text = listItem.email
         txtMobileNo.text = listItem.mobile
-        txtAmount.text = " Rs. " + listItem.totalPrice
-        txtDelivery.text = " Rs. " + listItem.deliveryChages
-        txtTotal.text = " Rs. " + listItem.totalPrice
-        txtProductDetails.text = listItem.productName+" Type " + listItem.type
+        txtAmount.text = "Rs. " + listItem.totalPrice
+        txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals("null")) "Rs. 0" else "Rs. " + listItem.deliveryCharges
+        txtTotal.text = "Rs. " + listItem.totalPrice
+        txtProductDetails.text = listItem.productName //+" Type " + listItem.type
 
         txtAdminEmail.text = listItem.email
         txtAdminMobileNo.text = listItem.mobile
         txtMerchantName.text = listItem.name
         txtMerchantAddress.text = listItem.address+" "+listItem.city+" "+listItem.pincode
+
+        txtNoOfDays.text = listItem.noOfDays
+        txtControllerQty.text = listItem.noOfController
+        txtControllerCharges.text = "Rs. "+listItem.controllerCharges
 
         setupOrderStatusSpinner()
     }

@@ -2,15 +2,13 @@ package com.plasdor.app.view.fragment.user
 
 import android.graphics.Paint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.fragment.app.Fragment
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.ProductListItems
@@ -35,6 +33,11 @@ class PlaceOrderFragment : Fragment(), ApiResponse {
     lateinit var txtPrice: AppCompatTextView
     lateinit var txtPriceToSell: AppCompatTextView
     lateinit var txtNoOfDays: AppCompatTextView
+    lateinit var txtControllerQty: AppCompatTextView
+    lateinit var txtControllerCharges: AppCompatTextView
+    lateinit var txtTotalPayable: AppCompatTextView
+
+
     lateinit var txtUAddress: AppCompatTextView
     lateinit var txtUCity: AppCompatTextView
     lateinit var txtUPinCode: AppCompatTextView
@@ -56,9 +59,7 @@ class PlaceOrderFragment : Fragment(), ApiResponse {
     var address = ""
     var city = ""
     var pinCode = ""
-    var price =""
-    var priceToSell =""
-    var qty = 0
+
 
 
     override fun onCreateView(
@@ -74,9 +75,14 @@ class PlaceOrderFragment : Fragment(), ApiResponse {
     private fun initView() {
         userId = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
         userEmail = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.email.toString()
-        address = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.address.toString()
-        city = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.city.toString()
-        pinCode = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.pincode.toString()
+        address =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.address.toString()
+        city = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.city.toString()
+        pinCode =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.pincode.toString()
 
         ivProdImage = rootView.findViewById(R.id.ivProdImage)
         tvProductName = rootView.findViewById(R.id.tvProductName)
@@ -84,6 +90,9 @@ class PlaceOrderFragment : Fragment(), ApiResponse {
         txtPrice = rootView.findViewById(R.id.txtPrice)
         txtPriceToSell = rootView.findViewById(R.id.txtPriceToSell)
         txtNoOfDays = rootView.findViewById(R.id.txtNoOfDays)
+        txtControllerQty = rootView.findViewById(R.id.txtControllerQty)
+        txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)
+        txtTotalPayable = rootView.findViewById(R.id.txtTotalPayable)
 
         txtUAddress = rootView.findViewById(R.id.txtUAddress)
         txtUCity = rootView.findViewById(R.id.txtUCity)
@@ -103,19 +112,25 @@ class PlaceOrderFragment : Fragment(), ApiResponse {
 
         listItem = arguments?.getParcelable("productItem")!!
         merchantItem = arguments?.getParcelable("merchantItem")!!
-        qty = arguments?.getInt("noOfDays")!!
+//        qty = arguments?.getInt("noOfDays")!!
+//        controllerQty = arguments?.getInt("controllerQty")!!
+//        controllerCharges = arguments?.getInt("controllerCharges")!!
+//        totalPayableAmount = arguments?.getInt("totalPayableAmount")!!
 
         productId = listItem.pId
         ivProdImage.setImage(listItem.img!!)
 
         tvProductName.text = listItem.productName
 
-        price = (qty*listItem.price.toInt()).toString()
-        priceToSell = (qty*listItem.priceToSell.toInt()).toString()
-        txtPrice.text = "Rs. " + price
-        txtPriceToSell.text = "Rs. " + priceToSell
+
+        txtPrice.text = "Rs. " + (listItem._qty * listItem.price.toInt()).toString()
+        txtPriceToSell.text = "Rs. " + listItem._qtyWisePrice
         txtType.text = "Type " + listItem.type
-        txtNoOfDays.text = qty.toString()
+        txtNoOfDays.text = listItem._qty.toString()
+
+        txtControllerQty.text = listItem.controllerQty.toString()
+        txtControllerCharges.text = listItem.controllerCharges.toString()
+        txtTotalPayable.text = listItem.totalPayable.toString()
 
         txtPrice.setPaintFlags(txtPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
@@ -143,9 +158,12 @@ class PlaceOrderFragment : Fragment(), ApiResponse {
                 jsonObject.put("userEmail", userEmail)
                 jsonObject.put("productId", productId)
                 jsonObject.put("merchantId", merchantId)
-                jsonObject.put("noOfDays", qty.toString())
+                jsonObject.put("noOfDays", listItem._qty.toString())
                 jsonObject.put("productPrice", listItem.priceToSell)
-                jsonObject.put("totalPrice", priceToSell)
+                jsonObject.put("noOfController", listItem.controllerQty)
+                jsonObject.put("controllerCharges", listItem.controllerCharges)
+                jsonObject.put("discountedPrice", listItem.discountedPrice)
+                jsonObject.put("totalPrice", listItem.totalPayable)
             } catch (e: JSONException) {
                 e.printStackTrace()
             }

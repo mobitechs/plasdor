@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.plasdor.app.callbacks.ApiResponse
-import com.plasdor.app.model.AddressListItems
-import com.plasdor.app.model.MyOrderListItems
-import com.plasdor.app.model.ProductListItems
-import com.plasdor.app.model.UserModel
+import com.plasdor.app.model.*
 import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.apiGetCall
 import com.plasdor.app.utils.showToastMsg
@@ -19,7 +16,7 @@ class UserListRepository(val application: Application) : ApiResponse {
     val showProgressBar = MutableLiveData<Boolean>()
     val allProductListItems = MutableLiveData<ArrayList<ProductListItems>>()
     val myOrderListItems = MutableLiveData<ArrayList<MyOrderListItems>>()
-    val merchantListItems = MutableLiveData<ArrayList<UserModel>>()
+    val merchantListItems = MutableLiveData<ArrayList<AvailableMerchantListItem>>()
     val addressListItems = MutableLiveData<ArrayList<AddressListItems>>()
 
     var method = ""
@@ -71,8 +68,8 @@ class UserListRepository(val application: Application) : ApiResponse {
                 allProductListItems.value = productListItems
             }
             else if (method == "productWiseAvailableMerchant") {
-                val type = object : TypeToken<ArrayList<UserModel>>() {}.type
-                var listItems: ArrayList<UserModel>? =
+                val type = object : TypeToken<ArrayList<AvailableMerchantListItem>>() {}.type
+                var listItems: ArrayList<AvailableMerchantListItem>? =
                     gson.fromJson(data.toString(), type)
                 merchantListItems.value = listItems
             }

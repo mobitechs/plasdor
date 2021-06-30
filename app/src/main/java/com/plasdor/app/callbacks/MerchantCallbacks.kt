@@ -1,9 +1,6 @@
 package com.plasdor.app.callbacks
 
-import com.plasdor.app.model.HomeMenuItems
-import com.plasdor.app.model.MerchantProductListItems
-import com.plasdor.app.model.ProductListItems
-import com.plasdor.app.model.UserModel
+import com.plasdor.app.model.*
 
 interface MerchantProductClickListener {
     fun addMyProduct(item: MerchantProductListItems, position: Int)
@@ -23,5 +20,5 @@ interface AllProductClickListener {
     fun selectProduct(item: ProductListItems, position: Int)
 }
 interface MerchantSelectionClickListener {
-    fun selectMerchant(item: UserModel, position: Int)
+    fun selectMerchant(item: AvailableMerchantListItem, position: Int)
 }

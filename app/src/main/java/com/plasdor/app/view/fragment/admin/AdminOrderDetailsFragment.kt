@@ -41,6 +41,10 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtUserMobileNo: AppCompatTextView
     lateinit var txtUserAddress: AppCompatTextView
 
+    lateinit var txtNoOfDays: AppCompatTextView
+    lateinit var txtControllerQty: AppCompatTextView
+    lateinit var txtControllerCharges: AppCompatTextView
+
     lateinit var spinner: AppCompatSpinner
     var userType = ""
 
@@ -81,14 +85,21 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
         txtUserMobileNo = rootView.findViewById(R.id.txtUserMobileNo)!!
         txtUserAddress = rootView.findViewById(R.id.txtUserAddress)!!
 
+        txtNoOfDays = rootView.findViewById(R.id.txtNoOfDays)!!
+        txtControllerQty = rootView.findViewById(R.id.txtControllerQty)!!
+        txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)!!
 
         txtOrderId.text = listItem.orderId
         txtOrderDate.text = listItem.addedDate
 
-        txtAmount.text = " Rs. " + listItem.totalPrice
-        txtDelivery.text = " Rs. " + listItem.deliveryChages
-        txtTotal.text = " Rs. " + listItem.totalPrice
-        txtProductDetails.text = listItem.productName + " Type " + listItem.type
+        txtAmount.text = "Rs. " + listItem.totalPrice
+        txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals("null")) "Rs. 0" else "Rs. " + listItem.deliveryCharges
+        txtTotal.text = "Rs. " + listItem.totalPrice
+        txtProductDetails.text = listItem.productName// + " Type " + listItem.type
+
+        txtNoOfDays.text = listItem.noOfDays
+        txtControllerQty.text = listItem.noOfController
+        txtControllerCharges.text = "Rs. "+listItem.controllerCharges
 
         txtUserName.text = listItem.name
         txtUserEmail.text = listItem.email

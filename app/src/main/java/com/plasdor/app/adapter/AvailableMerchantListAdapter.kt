@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.MerchantProductClickListener
 import com.plasdor.app.callbacks.MerchantSelectionClickListener
-import com.plasdor.app.model.UserModel
+import com.plasdor.app.model.AvailableMerchantListItem
 import com.plasdor.app.utils.ThreeTwoImageView
 
 class AvailableMerchantListAdapter(
@@ -23,15 +23,15 @@ class AvailableMerchantListAdapter(
 ) :
     RecyclerView.Adapter<AvailableMerchantListAdapter.MyViewHolder>() {
 
-    private var allListItems = ArrayList<UserModel>()
-    private var listItems = ArrayList<UserModel>()
+    private var allListItems = ArrayList<AvailableMerchantListItem>()
+    private var listItems = ArrayList<AvailableMerchantListItem>()
     var context: Context = activityContext
 
     lateinit var adapter: ArrayAdapter<String>
     var selectedPosition = -1
 
 
-    fun updateListItems(items: ArrayList<UserModel>) {
+    fun updateListItems(items: ArrayList<AvailableMerchantListItem>) {
         listItems.clear()
         listItems.addAll(items)
         allListItems.clear()
@@ -54,7 +54,7 @@ class AvailableMerchantListAdapter(
     @SuppressLint("ResourceType")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        var item: UserModel = listItems.get(position)
+        var item: AvailableMerchantListItem = listItems.get(position)
 
         holder.txtName.text = item.name
         holder.txtMobile.text = item.mobile
@@ -62,6 +62,7 @@ class AvailableMerchantListAdapter(
         holder.txtAddress.text = item.address
         holder.txtCity.text = item.city
         holder.txtPinCode.text = item.pincode
+        holder.txtRemainingControllerQty.text = "Remaining \nController Qty: "+item.remainingControllerQty
 
 
         if (selectedPosition == position)
@@ -88,6 +89,7 @@ class AvailableMerchantListAdapter(
         var txtCity: AppCompatTextView = view.findViewById(R.id.txtCity)
         var txtPinCode: AppCompatTextView = view.findViewById(R.id.txtPinCode)
         var imgRadioBtn: AppCompatImageView = view.findViewById(R.id.imgRadioBtn)
+        var txtRemainingControllerQty: AppCompatTextView = view.findViewById(R.id.txtRemainingControllerQty)
 
         val cardView: View = itemView
 
@@ -101,7 +103,7 @@ class AvailableMerchantListAdapter(
                 if (charString.isEmpty()) {
                     listItems = allListItems
                 } else {
-                    val filteredList: MutableList<UserModel> = ArrayList()
+                    val filteredList: MutableList<AvailableMerchantListItem> = ArrayList()
                     for (row in allListItems) {
                         if (row.name.toLowerCase()
                                 .contains(charString.toLowerCase()) || row.city.toLowerCase()
@@ -110,7 +112,7 @@ class AvailableMerchantListAdapter(
                             filteredList.add(row)
                         }
                     }
-                    listItems = filteredList as ArrayList<UserModel>
+                    listItems = filteredList as ArrayList<AvailableMerchantListItem>
                 }
                 val filterResults = FilterResults()
                 filterResults.values = listItems
@@ -121,7 +123,7 @@ class AvailableMerchantListAdapter(
                 charSequence: CharSequence?,
                 filterResults: FilterResults
             ) {
-                listItems = filterResults.values as ArrayList<UserModel>
+                listItems = filterResults.values as ArrayList<AvailableMerchantListItem>
                 notifyDataSetChanged()
             }
         }

@@ -38,6 +38,9 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtAdminMobileNo: AppCompatTextView
     lateinit var txtMerchantAddress: AppCompatTextView
     lateinit var txtMerchantName: AppCompatTextView
+    lateinit var txtNoOfDays: AppCompatTextView
+    lateinit var txtControllerQty: AppCompatTextView
+    lateinit var txtControllerCharges: AppCompatTextView
     lateinit var spinner: AppCompatSpinner
     var userType = ""
 
@@ -73,6 +76,9 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
         spinner = rootView.findViewById(R.id.spinner)!!
         txtMerchantAddress = rootView.findViewById(R.id.txtMerchantAddress)!!
         txtMerchantName = rootView.findViewById(R.id.txtMerchantName)!!
+        txtNoOfDays = rootView.findViewById(R.id.txtNoOfDays)!!
+        txtControllerQty = rootView.findViewById(R.id.txtControllerQty)!!
+        txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)!!
 
 //        var details = listItem.orderDetails.toString().replace(",", "\n")
 
@@ -83,10 +89,13 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
         txtAddress.text = listItem.address + " " + listItem.addedDate + " " + listItem.city + " " + listItem.pincode
         txtEmail.text = listItem.email
         txtMobileNo.text = listItem.mobile
-        txtAmount.text = " Rs. " + listItem.totalPrice
-        txtDelivery.text = " Rs. " + listItem.deliveryChages
-        txtTotal.text = " Rs. " + listItem.totalPrice
-        txtProductDetails.text = listItem.productName+" Type " + listItem.type
+        txtAmount.text = "Rs. " + listItem.discountedPrice
+        txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals("null")) "Rs. 0" else "Rs. " + listItem.deliveryCharges
+        txtTotal.text = "Rs. " + listItem.totalPrice
+        txtProductDetails.text = listItem.productName //+" Type " + listItem.type
+        txtNoOfDays.text = listItem.noOfDays
+        txtControllerQty.text = listItem.noOfController
+        txtControllerCharges.text = "Rs. "+listItem.controllerCharges
 
         txtAdminEmail.text = listItem.email
         txtAdminMobileNo.text = listItem.mobile

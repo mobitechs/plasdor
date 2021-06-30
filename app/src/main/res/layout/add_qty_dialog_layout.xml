@@ -20,6 +20,14 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:inputType="number"
         android:id="@+id/etQty"
+        android:hint="Enter Product Qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_marginStart="@dimen/_10sdp"
+        android:inputType="number"
+        android:id="@+id/etControllerQty"
+        android:hint="Enter Controller Qty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>

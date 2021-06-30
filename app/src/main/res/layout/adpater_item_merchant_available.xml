@@ -67,6 +67,19 @@
 
 
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:id="@+id/txtRemainingControllerQty"
+            android:layout_width="wrap_content"
+            android:textColor="@color/red"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Remaining \nController Qty: 2" />
+
+
     </RelativeLayout>
 
 

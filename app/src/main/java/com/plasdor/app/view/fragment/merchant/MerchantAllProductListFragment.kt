@@ -48,6 +48,7 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
     var itemPos = 0
     var productId = ""
     var totalQty = ""
+    var totalControllerQty = ""
 
     lateinit var rootView: View
     override fun onCreateView(
@@ -199,7 +200,7 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
 
         // Create an alert builder
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Total number of console (s) you are renting")
+        builder.setTitle("Total number of console (s) you are renting & controller Qty")
 
         // set the custom layout
         val customLayout: View = layoutInflater.inflate(R.layout.add_qty_dialog_layout, null)
@@ -210,9 +211,13 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
                 DialogInterface.OnClickListener { dialog, which -> // send data from the
                     // AlertDialog to the Activity
                     val editText = customLayout.findViewById<EditText>(R.id.etQty)
+                    val etControllerQty = customLayout.findViewById<EditText>(R.id.etControllerQty)
                     totalQty = editText.text.toString()
+                    totalControllerQty = etControllerQty.text.toString()
                     if(totalQty.equals("")){
                             requireContext().showToastMsg("Enter Qty")
+                    }else if(totalControllerQty.equals("")){
+                            requireContext().showToastMsg("Enter Controller Qty")
                     }else{
                         addProductWithQty()
                     }
@@ -232,6 +237,7 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
             jsonObject.put("merchantId", userId)
             jsonObject.put("productId",productId)
             jsonObject.put("totalQty", totalQty)
+            jsonObject.put("totalControllerQty", totalControllerQty)
         } catch (e: JSONException) {
             e.printStackTrace()
         }

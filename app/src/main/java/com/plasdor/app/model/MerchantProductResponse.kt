@@ -29,6 +29,8 @@ data class MerchantProductListItems(
     val img: String,
     var isAdded: String,
     var totalQty: String,
+    var totalControllerQty: String,
+    var remainingControllerQty: String,
     var soldQty: String,
     var isSold: String
 

@@ -3,10 +3,7 @@ package com.plasdor.app.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.plasdor.app.model.AddressListItems
-import com.plasdor.app.model.MyOrderListItems
-import com.plasdor.app.model.ProductListItems
-import com.plasdor.app.model.UserModel
+import com.plasdor.app.model.*
 import com.plasdor.app.repository.UserListRepository
 
 class UserListViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,7 +13,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
     val allProductListItems: LiveData<ArrayList<ProductListItems>>
     val addressListItems: LiveData<ArrayList<AddressListItems>>
     val myOrderListItems: LiveData<ArrayList<MyOrderListItems>>
-    val merchantListItems: LiveData<ArrayList<UserModel>>
+    val merchantListItems: LiveData<ArrayList<AvailableMerchantListItem>>
 
 
     init {

@@ -29,6 +29,10 @@ data class ProductListItems(
     var priceToSell: String,
     val img: String,
     var _qty: Int = 1,
-    var _qtyWisePrice: Int = 0
+    var _qtyWisePrice: Int = 0,
+    var controllerQty: Int = 1,
+    var controllerCharges: String,
+    var discountedPrice: String,
+    var totalPayable: Int = 0
 
 ) : Parcelable
