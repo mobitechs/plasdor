@@ -228,7 +228,53 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Refer to Friends"
+                            android:text="Invite to Friend"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/drawer_menu_label" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/llFeedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/drawer_menu_icon_height"
+                            android:layout_height="@dimen/drawer_menu_icon_width"
+                            android:src="@drawable/ic_baseline_feedback_24"
+                            android:tint="@color/colorPrimary" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Feedback"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/drawer_menu_label" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/llSupport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/drawer_menu_icon_height"
+                            android:layout_height="@dimen/drawer_menu_icon_width"
+                            android:src="@drawable/ic_baseline_support_agent_24"
+                            android:tint="@color/colorPrimary" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Support"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>

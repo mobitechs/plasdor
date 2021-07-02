@@ -22,14 +22,6 @@ import com.plasdor.app.view.fragment.ProfileFragment
 import com.plasdor.app.view.fragment.admin.*
 import kotlinx.android.synthetic.main.activity_admin_home.*
 import kotlinx.android.synthetic.main.contenair.*
-import kotlinx.android.synthetic.main.drawer_layout.ivClose
-import kotlinx.android.synthetic.main.drawer_layout.llHome
-import kotlinx.android.synthetic.main.drawer_layout.llLogout
-import kotlinx.android.synthetic.main.drawer_layout.llProfile
-import kotlinx.android.synthetic.main.drawer_layout.llShare
-import kotlinx.android.synthetic.main.drawer_layout.txtEmail
-import kotlinx.android.synthetic.main.drawer_layout.txtMobile
-import kotlinx.android.synthetic.main.drawer_layout.txtUserName
 import kotlinx.android.synthetic.main.drawer_layout_admin.*
 
 class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogBtnClickedCallBack {

@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:touchscreenBlocksFocus="false">
 
-            <include layout="@layout/drawer_layout" />
+            <include layout="@layout/drawer_layout_user" />
         </LinearLayout>
 
     </androidx.drawerlayout.widget.DrawerLayout>

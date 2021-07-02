@@ -11,12 +11,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.plasdor.app.R
+import com.plasdor.app.model.AvailableMerchantListItem
 import com.plasdor.app.model.UserModel
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    var merchantListItems = ArrayList<UserModel>()
+    var merchantListItems = ArrayList<AvailableMerchantListItem>()
     var userLat = ""
     var userLong = ""
     var userName = ""

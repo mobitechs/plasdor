@@ -172,8 +172,6 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
                 controllerQty = spinnerItemArray[p2].toInt()
                 controllerQtyPos = p2
                 setupPrice()
-
-
             }
         })
     }

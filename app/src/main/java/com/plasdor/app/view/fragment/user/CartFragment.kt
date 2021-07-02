@@ -142,17 +142,17 @@ class CartFragment : Fragment(), AddOrRemoveListener, CartListUpdated,
     }
 
     override fun removeFromCart(item: ProductListItems, position: Int) {
-        if (cartListItems2.contains(item)) {
-            var pos = cartListItems.indexOf(item.productName)
-
-            cartListItems.removeAt(position)
-//            cartListItems2.remove(item)
-
-            cartListItems2!!.removeAt(position)
-            listAdapter.notifyItemRemoved(position)
-            listAdapter.notifyItemRangeChanged(position, cartListItems2!!.size)
-            listAdapter.notifyDataSetChanged()
-        }
+//        if (cartListItems2.contains(item)) {
+//            var pos = cartListItems.indexOf(item.productName)
+//
+//            cartListItems.removeAt(position)
+////            cartListItems2.remove(item)
+//
+//            cartListItems2!!.removeAt(position)
+//            listAdapter.notifyItemRemoved(position)
+//            listAdapter.notifyItemRangeChanged(position, cartListItems2!!.size)
+//            listAdapter.notifyDataSetChanged()
+//        }
         (activity as UserHomeActivity)!!.updateCartCount(cartListItems2.size)
         SharePreferenceManager.getInstance(requireContext()).saveCartListItems(
             Constants.CartList,

@@ -68,6 +68,7 @@ class UserListRepository(val application: Application) : ApiResponse {
                 allProductListItems.value = productListItems
             }
             else if (method == "productWiseAvailableMerchant") {
+                merchantListItems.value?.clear()
                 val type = object : TypeToken<ArrayList<AvailableMerchantListItem>>() {}.type
                 var listItems: ArrayList<AvailableMerchantListItem>? =
                     gson.fromJson(data.toString(), type)

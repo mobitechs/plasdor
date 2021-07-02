@@ -22,18 +22,14 @@ import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
-import com.plasdor.app.view.fragment.AddressListFragment
-import com.plasdor.app.view.fragment.AdminOrderFragment
-import com.plasdor.app.view.fragment.AdminProductEditFragment
-import com.plasdor.app.view.fragment.ProfileFragment
+import com.plasdor.app.view.fragment.*
 import com.plasdor.app.view.fragment.admin.AdminHomeFragment
 import com.plasdor.app.view.fragment.user.*
 import kotlinx.android.synthetic.main.activity_home_user.*
 import kotlinx.android.synthetic.main.contenair.*
-import kotlinx.android.synthetic.main.drawer_layout.*
+import kotlinx.android.synthetic.main.drawer_layout_user.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.lang.Exception
 
 
 class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogBtnClickedCallBack,
@@ -73,11 +69,11 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
 
                     showToastMsg(deepLink.toString())
                     var referredLink = deepLink.toString()
-                    Log.e("Received Referral","ptkk Link "+deepLink)
+                    Log.e("Received Referral", "ptkk Link " + deepLink)
 
-                    try{
-                        senderUserId = referredLink.substring(referredLink.lastIndexOf("=")+1)
-                    }catch (e: Exception){
+                    try {
+                        senderUserId = referredLink.substring(referredLink.lastIndexOf("=") + 1)
+                    } catch (e: Exception) {
 
                     }
 
@@ -114,6 +110,9 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         llMyOrder.setOnClickListener(this)
         llShare.setOnClickListener(this)
         ivClose.setOnClickListener(this)
+        llFeedback.setOnClickListener(this)
+        llSupport.setOnClickListener(this)
+        ivClose.setOnClickListener(this)
         llLogout.setOnClickListener(this)
 
     }
@@ -144,6 +143,12 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             R.id.llShare -> {
                 ShareApp()
+            }
+            R.id.llFeedback -> {
+                displayView(5)
+            }
+            R.id.llSupport -> {
+                displayView(6)
             }
 
             R.id.llLogout -> {
@@ -266,6 +271,24 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             4 -> {
                 openCartPage()
+            }
+            5 -> {
+                toolbarTitle("Add Feedback")
+                addFragment(
+                    FeedbackFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "FeedbackFragment"
+                )
+            }
+            6 -> {
+                toolbarTitle("Support")
+                addFragment(
+                    SupportFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "SupportFragment"
+                )
             }
         }
         drawerOpenorClose()

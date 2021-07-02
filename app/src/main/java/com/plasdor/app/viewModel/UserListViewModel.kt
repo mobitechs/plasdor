@@ -42,6 +42,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun getAvailableMerchant(productId:String) {
+        merchantListItems.value?.clear()
         repository.getAvailableMerchant(productId)
     }
 

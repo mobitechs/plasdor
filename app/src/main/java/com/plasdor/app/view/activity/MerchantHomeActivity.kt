@@ -22,17 +22,6 @@ import com.plasdor.app.view.fragment.ProfileFragment
 import com.plasdor.app.view.fragment.merchant.*
 import kotlinx.android.synthetic.main.activity_merchant_home.*
 import kotlinx.android.synthetic.main.contenair.*
-import kotlinx.android.synthetic.main.drawer_layout.ivClose
-import kotlinx.android.synthetic.main.drawer_layout.llHome
-import kotlinx.android.synthetic.main.drawer_layout.llLogout
-import kotlinx.android.synthetic.main.drawer_layout.llProfile
-import kotlinx.android.synthetic.main.drawer_layout.llShare
-import kotlinx.android.synthetic.main.drawer_layout.txtEmail
-import kotlinx.android.synthetic.main.drawer_layout.txtMobile
-import kotlinx.android.synthetic.main.drawer_layout.txtUserName
-import kotlinx.android.synthetic.main.drawer_layout_admin.*
-import kotlinx.android.synthetic.main.drawer_layout_admin.lAllOrder
-import kotlinx.android.synthetic.main.drawer_layout_admin.lAllUsers
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
 
 class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
@@ -59,6 +48,8 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         lMyProduct.setOnClickListener(this)
         llShare.setOnClickListener(this)
         ivClose.setOnClickListener(this)
+        llFeedback.setOnClickListener(this)
+        llSupport.setOnClickListener(this)
         llLogout.setOnClickListener(this)
 
     }

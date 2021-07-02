@@ -2,8 +2,12 @@
 <androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     style="?attr/spinnerDropDownItemStyle"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
+    android:paddingStart="@dimen/_20sdp"
+    android:paddingEnd="@dimen/_15sdp"
+    android:paddingVertical="@dimen/_5sdp"
     android:singleLine="true"
+    android:text="1"
     android:textSize="@dimen/_10sdp" />
