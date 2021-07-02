@@ -183,7 +183,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         val activity: Activity = this
         val co = Checkout()
         //test key
-             co.setKeyID("rzp_test_VNPFueei0vUGKm\n")
+             co.setKeyID("rzp_test_VNPFueei0vUGKm")
         //live key
 //        co.setKeyID("rzp_test_VNPFueei0vUGKm")
 
