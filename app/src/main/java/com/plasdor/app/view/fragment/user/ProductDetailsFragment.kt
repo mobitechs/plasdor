@@ -21,14 +21,13 @@ import com.plasdor.app.adapter.AvailableMerchantListAdapter
 import com.plasdor.app.callbacks.MerchantSelectionClickListener
 import com.plasdor.app.model.AvailableMerchantListItem
 import com.plasdor.app.model.ProductListItems
-import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.ThreeTwoImageView
 import com.plasdor.app.utils.openActivity
 import com.plasdor.app.utils.setImage
 import com.plasdor.app.view.activity.MapsActivity
-import com.plasdor.app.view.activity.UserHomeActivity
+import com.plasdor.app.view.activity.PlaceOrderActivity
 import com.plasdor.app.viewModel.UserListViewModel
 
 
@@ -129,11 +128,11 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             var bundle = Bundle()
             bundle.putParcelable("productItem", listItem)
             bundle.putParcelable("merchantItem", selectedMerchantItem)
-            bundle.putInt("noOfDays", qty)
-            bundle.putInt("controllerQty", controllerQty)
-            bundle.putInt("controllerCharges", controllerCharges)
-            bundle.putInt("totalPayableAmount", totalPriceWithController)
-            (context as UserHomeActivity?)!!.OpenPlaceOrderFragment(bundle)
+            requireActivity().openActivity(PlaceOrderActivity::class.java) {
+                putParcelable("productItem", listItem)
+                putParcelable("merchantItem", selectedMerchantItem)
+            }
+//            (context as UserHomeActivity?)!!.OpenPlaceOrderFragment(bundle)
         }
         txtViewOnMap.setOnClickListener {
             requireContext().openActivity(MapsActivity::class.java) {

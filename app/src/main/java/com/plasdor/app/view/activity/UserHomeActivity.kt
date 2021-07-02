@@ -367,13 +367,20 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
     }
 
     fun OpenPlaceOrderFragment(bundle: Bundle) {
-        addFragmentWithData(
-            PlaceOrderFragment(),
-            false,
-            R.id.nav_host_fragment,
-            "PlaceOrderFragment",
-            bundle
-        )
+//        addFragmentWithData(
+//            PlaceOrderFragment(),
+//            false,
+//            R.id.nav_host_fragment,
+//            "PlaceOrderFragment",
+//            bundle
+//        )
+
+//        openActivity(PlaceOrderFragment::class.java) {
+//            putParcelableArrayList("merchantListItems", merchantListItems)
+//            putString("userLat", userLat)
+//            putString("userLong", userLong)
+//            putString("userName", userName)
+//        }
     }
 
     override fun positiveBtnClicked() {

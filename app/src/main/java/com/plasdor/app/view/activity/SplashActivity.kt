@@ -33,19 +33,12 @@ class SplashActivity : AppCompatActivity() {
         val window: Window = window
         setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
 
-
-        val userDetails = SharePreferenceManager.getInstance(this)
-            .getUserLogin(Constants.USERDATA)
+        val userDetails = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
         if (userDetails?.get(0)?.userType == Constants.ADMIN || userDetails?.get(0)?.userType == Constants.MERCHANT) {
             Handler().postDelayed({ checkLogin() }, SPLASH_TIME_OUT.toLong())
         } else {
             getAllProducts()
         }
-
-    }
-
-    private fun storeReferralDetails() {
-
     }
 
     private fun getAllProducts() {
@@ -58,7 +51,6 @@ class SplashActivity : AppCompatActivity() {
                 .saveCartListItems(Constants.AllProductList, allProductListItems)
             checkLogin()
         })
-
     }
 
     companion object {

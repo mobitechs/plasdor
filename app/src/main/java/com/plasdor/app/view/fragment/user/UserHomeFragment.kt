@@ -35,12 +35,10 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener, ApiResponse {
     var allProductListItems = ArrayList<ProductListItems>()
     lateinit var mLayoutManager: GridLayoutManager
 
-
     var searchText = ""
     var userId = ""
     var userType = ""
     var position = 0
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

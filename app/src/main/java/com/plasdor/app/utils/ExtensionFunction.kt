@@ -196,7 +196,6 @@ fun setStatusColor(window: Window, color: Int) {
 
 fun apiPostCall(url: String, jsonObject: JSONObject, apiResponse: ApiResponse, tag: String) {
     try {
-
         AndroidNetworking.post(url)
             .addJSONObjectBody(jsonObject)
             .setTag(tag)
@@ -220,13 +219,11 @@ fun apiPostCall(url: String, jsonObject: JSONObject, apiResponse: ApiResponse, t
                         apiResponse.onFailure(response?.getString("Response").toString())
                     }
                 }
-
                 override fun onError(error: ANError) {
                     error.errorDetail
                     apiResponse.onFailure(error.errorDetail)
                 }
             })
-
     } catch (e: java.lang.Exception) {
         apiResponse.onFailure(e.message.toString())
     }

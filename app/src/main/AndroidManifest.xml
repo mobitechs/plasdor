@@ -13,6 +13,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +28,12 @@
         android:theme="@style/Theme.Plasdor"
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
+
+        <!-- Add your API key here -->
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_VNPFueei0vUGKm"
+            />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -49,6 +61,9 @@
 <!--        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"-->
         <activity
             android:name=".view.activity.UserHomeActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".view.activity.PlaceOrderActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".view.activity.AuthActivity"

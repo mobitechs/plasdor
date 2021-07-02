@@ -62,6 +62,7 @@ class AvailableMerchantListAdapter(
         holder.txtAddress.text = item.address
         holder.txtCity.text = item.city
         holder.txtPinCode.text = item.pincode
+        holder.txtRemainingControllerQty.visibility = View.VISIBLE
         holder.txtRemainingControllerQty.text = "Remaining \nController Qty: "+item.remainingControllerQty
 
 

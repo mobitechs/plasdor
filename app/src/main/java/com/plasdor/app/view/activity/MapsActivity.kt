@@ -26,6 +26,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_maps)
 
         merchantListItems = intent.getParcelableArrayListExtra("merchantListItems")!!
+
         userLat = intent.getStringExtra("userLat")!!
         userLong = intent.getStringExtra("userLong")!!
         userName = intent.getStringExtra("userName")!!
