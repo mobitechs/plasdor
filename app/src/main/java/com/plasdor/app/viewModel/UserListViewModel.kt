@@ -14,6 +14,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
     val addressListItems: LiveData<ArrayList<AddressListItems>>
     val myOrderListItems: LiveData<ArrayList<MyOrderListItems>>
     val merchantListItems: LiveData<ArrayList<AvailableMerchantListItem>>
+    val bazarListItems: LiveData<ArrayList<BazarListItems>>
 
 
     init {
@@ -22,6 +23,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
         this.myOrderListItems = repository.myOrderListItems
         this.allProductListItems = repository.allProductListItems
         this.merchantListItems = repository.merchantListItems
+        this.bazarListItems = repository.bazarListItems
     }
 
     fun changeState() {
@@ -35,6 +37,9 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
 
     fun getAddressList() {
         repository.getAddressList()
+    }
+    fun getBazarList() {
+        repository.getBazarList()
     }
 
     fun getAllProduct() {

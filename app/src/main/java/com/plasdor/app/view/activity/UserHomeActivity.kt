@@ -110,6 +110,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         llMyOrder.setOnClickListener(this)
         llShare.setOnClickListener(this)
         ivClose.setOnClickListener(this)
+        llBazar.setOnClickListener(this)
         llFeedback.setOnClickListener(this)
         llSupport.setOnClickListener(this)
         ivClose.setOnClickListener(this)
@@ -149,6 +150,9 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             R.id.llSupport -> {
                 displayView(6)
+            }
+            R.id.llBazar -> {
+                displayView(7)
             }
 
             R.id.llLogout -> {
@@ -288,6 +292,15 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     false,
                     R.id.nav_host_fragment,
                     "SupportFragment"
+                )
+            }
+            7 -> {
+                toolbarTitle("Bazar")
+                addFragment(
+                    BazarListFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "BazarListFragment"
                 )
             }
         }
