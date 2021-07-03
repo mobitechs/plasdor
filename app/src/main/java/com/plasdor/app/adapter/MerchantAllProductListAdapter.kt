@@ -28,7 +28,6 @@ class MerchantAllProductListAdapter(
 
     lateinit var adapter: ArrayAdapter<String>
 
-
     fun updateListItems(items: ArrayList<MerchantProductListItems>) {
         listItems.clear()
         listItems.addAll(items)
@@ -84,7 +83,6 @@ class MerchantAllProductListAdapter(
         }
 
         holder.btnWishList.setOnClickListener {
-
             if (item.isAdded == "1") {
 //                holder.btnWishList.setImageResource(R.drawable.ic_outline_add_circle_24)
                 merchantProductClickListener.removeMyProduct(item, position)

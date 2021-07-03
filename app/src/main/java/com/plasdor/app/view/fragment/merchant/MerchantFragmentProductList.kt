@@ -7,9 +7,12 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,6 +53,9 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
     var totalQty = ""
     var totalControllerQty = ""
 
+    var spinnerControllerQtyArray = Constants.controllerQtyArray
+    lateinit var spinnerControllerQty: AppCompatSpinner
+
         lateinit var rootView: View
 
     override fun onCreateView(
@@ -86,7 +92,6 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
                 // TODO Auto-generated method stub
             }
         })
-
         setupRecyclerView()
 
     }
@@ -216,6 +221,9 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
         // set the custom layout
         val customLayout: View = layoutInflater.inflate(R.layout.add_qty_dialog_layout, null)
         builder.setView(customLayout)
+        spinnerControllerQty = customLayout.findViewById(R.id.spinnerControllerQty)
+        setupControllerQtySpinner()
+
         val editText = customLayout.findViewById<EditText>(R.id.etQty)
         val etControllerQty = customLayout.findViewById<EditText>(R.id.etControllerQty)
         editText.setText(totalQty)
@@ -227,11 +235,11 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
                 // AlertDialog to the Activity
 
                 totalQty = editText.text.toString()
-                totalControllerQty = etControllerQty.text.toString()
+//                totalControllerQty = etControllerQty.text.toString()
                 if(totalQty.equals("")){
                     requireContext().showToastMsg("Enter Qty")
                 }else if(totalControllerQty.equals("")){
-                    requireContext().showToastMsg("Enter Controller Qty")
+                    requireContext().showToastMsg("Select Controller Qty")
                 }else{
                     updateProductWithQty()
                 }
@@ -258,5 +266,25 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
         listItems[itemPos].isAdded = "1"
         listItems[itemPos].totalQty = totalQty
         listItems[itemPos].totalControllerQty = totalControllerQty
+    }
+
+    private fun setupControllerQtySpinner() {
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.spinner_layout,
+            spinnerControllerQtyArray
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerControllerQty.setAdapter(adapter)
+        spinnerControllerQty.setSelection(spinnerControllerQtyArray.indexOf(totalControllerQty))
+        spinnerControllerQty.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                totalControllerQty = spinnerControllerQtyArray[p2]
+            }
+        })
     }
 }
