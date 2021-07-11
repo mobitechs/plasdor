@@ -93,7 +93,7 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
         txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals("null")) "Rs. 0" else "Rs. " + listItem.deliveryCharges
         txtTotal.text = "Rs. " + listItem.totalPrice
         txtProductDetails.text = listItem.productName //+" Type " + listItem.type
-        txtNoOfDays.text = listItem.noOfDays
+        txtNoOfDays.text = listItem.noOfDaysHours
         txtControllerQty.text = listItem.noOfController
         txtControllerCharges.text = "Rs. "+listItem.controllerCharges
 

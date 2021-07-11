@@ -79,39 +79,33 @@ class MerchantOrderListAdapter (
             (context as MerchantHomeActivity?)!!.OpenOrderDetails(bundle)
         }
 
-
-        if (userType.equals(Constants.ADMIN)) {
-            holder.txtOrderStatus.visibility = View.GONE
-            holder.spinner.visibility = View.VISIBLE
-            val adapter = ArrayAdapter(
-                context,
-                R.layout.spinner_layout,
-                Constants.orderStatusArray
-            )
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            holder.spinner.setAdapter(adapter)
-
-            holder.spinner.setSelection(Constants.orderStatusArray.indexOf(holder.status))
-            holder.spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-
-                }
-
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    var status = Constants.orderStatusArray[p2]
-                    if (!holder.status.equals(status)) {
-                        holder.status = status
-//                        listItems[position].status = status
-                        callAPIToChangeOrderStatus(item.orderId, status)
-                    }
-
-                }
-            })
-        } else {
-            holder.txtOrderStatus.visibility = View.VISIBLE
-            holder.spinner.visibility = View.GONE
-        }
+//        holder.txtOrderStatus.visibility = View.GONE
+//        holder.spinner.visibility = View.VISIBLE
+//        val adapter = ArrayAdapter(
+//            context,
+//            R.layout.spinner_layout,
+//            Constants.orderStatusArray
+//        )
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        holder.spinner.setAdapter(adapter)
+//
+//        holder.spinner.setSelection(Constants.orderStatusArray.indexOf(holder.status))
+//        holder.spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+//
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//
+//            }
+//
+//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+//                var status = Constants.orderStatusArray[p2]
+//                if (!holder.status.equals(status)) {
+//                    holder.status = status
+////                        listItems[position].status = status
+//                    callAPIToChangeOrderStatus(item.orderId, status)
+//                }
+//
+//            }
+//        })
     }
 
     private fun callAPIToChangeOrderStatus(orderId: String, status: String) {

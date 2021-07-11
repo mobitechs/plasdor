@@ -108,7 +108,7 @@ class SharePreferenceManager {
     fun clearCart() {
         removeValue(Constants.finalOrderMsg)
         removeValue(Constants.totalDiscountedAmount)
-        removeValue(Constants.delCharges)
+        removeValue(Constants.delChargesNormal.toString())
         removeValue(Constants.totalAmount)
         removeValue(Constants.CartList)
     }

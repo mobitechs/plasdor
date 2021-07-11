@@ -205,14 +205,14 @@ class CartFragment : Fragment(), AddOrRemoveListener, CartListUpdated,
 
         for (i in 0..cartListItems2.size - 1) {
             totalDiscountedAmount =
-                totalDiscountedAmount + cartListItems2[i]._qty * cartListItems2[i].priceToSell.toInt()
-            totalAmount = totalAmount + cartListItems2[i]._qty * cartListItems2[i].price.toInt()
+                totalDiscountedAmount + cartListItems2[i].qty * cartListItems2[i].priceToSellDaily.toInt()
+            totalAmount = totalAmount + cartListItems2[i].qty * cartListItems2[i].priceToShowDaily.toInt()
 
             no++;
             pName = cartListItems2[i].productName
-            pQty = cartListItems2[i]._qty
-            var qtyWisePrice = cartListItems2[i]._qtyWisePrice
-            pAmount = cartListItems2[i].priceToSell;
+            pQty = cartListItems2[i].qty
+            var qtyWisePrice = cartListItems2[i].qtyWisePrice
+            pAmount = cartListItems2[i].priceToSellDaily;
             total = pQty * pAmount.toInt()
             fTotal = fTotal + total;
 
@@ -258,7 +258,7 @@ class CartFragment : Fragment(), AddOrRemoveListener, CartListUpdated,
         SharePreferenceManager.getInstance(requireContext())
             .save(Constants.totalDiscountedAmount, totalDiscountedAmount.toString())
         SharePreferenceManager.getInstance(requireContext())
-            .save(Constants.delCharges, deliveryCharges.toString())
+            .save(Constants.delChargesNormal.toString(), deliveryCharges.toString())
         SharePreferenceManager.getInstance(requireContext())
             .save(Constants.totalAmount, totalPayable.toString())
     }

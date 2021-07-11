@@ -10,14 +10,9 @@ import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
-import com.plasdor.app.callbacks.AddOrRemoveListener
-import com.plasdor.app.callbacks.AddressSelectCallback
 import com.plasdor.app.model.ProductListItems
-import com.plasdor.app.session.SharePreferenceManager
-import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.ThreeTwoImageView
 import com.plasdor.app.utils.setImage
-import kotlinx.android.synthetic.main.adapter_items_address.view.*
 
 class AdminAllProductAdapter(
     activityContext: Context
@@ -60,10 +55,10 @@ class AdminAllProductAdapter(
         var item: ProductListItems = listItems.get(position)
 
         holder.txtProductName.text = item.productName
-        holder.lblType.text = "Type: " + item.type
+//        holder.lblType.text = "Type: " + item.type
 
-        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSell
-        holder.lblPrice.text = "Rs." + item.price
+        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSellDaily
+        holder.lblPrice.text = "Rs." + item.priceToShowDaily
         holder.lblPrice.setPaintFlags(holder.lblPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
 
@@ -109,7 +104,7 @@ class AdminAllProductAdapter(
                     val filteredList: MutableList<ProductListItems> = ArrayList()
                     for (row in allListItems) {
                         if (row.productName.toLowerCase()
-                                .contains(charString.toLowerCase()) || row.type.toLowerCase()
+//                                .contains(charString.toLowerCase()) || row.type.toLowerCase()
                                 .contains(charString.toLowerCase())
                         ) {
                             filteredList.add(row)

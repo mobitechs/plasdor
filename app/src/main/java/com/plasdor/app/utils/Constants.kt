@@ -31,43 +31,36 @@ class Constants {
         const val CartList = "CartList"
         const val CartList2 = "CartList2"
         const val AllProductList = "AllProductList"
-        const val tab1List = "tab1List"
-        const val tab2List = "tab2List"
-        const val tab3List = "tab3List"
         const val finalOrderMsg = "finalOrderMsg"
         const val totalDiscountedAmount = "totalDiscountedAmount"
-        const val delCharges = "delCharges"
+        const val delChargesNormal = 40
+        const val delCharges1Hour = 80
+        const val percentBetweenMerchantNPlasdor = 50
         const val totalAmount = "totalAmount"
+        const val Hourly = "Hourly"
+        const val Daily = "Daily"
 
-        val weightArray = arrayOf(
-            "250 grams",
-            "500 grams",
-            "750 grams",
-            "1 kg",
-            "1.5 kg",
-            "2 kg",
-            "2.5 kg ",
-            "3 kg",
-            "3.5 kg",
-            "4 kg",
-            "4.5 kg",
-            "5 kg"
-        )
 
         //if u add new item in weightArray then please add in qtyArray as well its must
         val qtyArray = arrayOf("1", "2", "3", "4", "6", "8 ", "10", "12", "14", "16", "18", "20")
 
         val controllerQtyArray = arrayOf("1", "2", "3", "4")
-        val pieceArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
+        val daysArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
+        val hourArray = arrayOf("1", "3", "6")
+
 
         val ps5NdXSeriesXPriceArray = arrayOf("999", "1799", "2499", "3199", "3499", "3999", "4499")
         val ps4NdXOneXPriceArray = arrayOf("499", "899", "1399", "1699", "2099", "2399", "2699")
         val XOneSPriceArray = arrayOf("449", "849", "1349", "1649", "2049", "2349", "2649")
         val XSeriesSPriceArray = arrayOf("949", "1749", "2449", "3149", "3449", "3949", "4449")
 
-        val unitTypeArray = arrayOf("Grams", "Piece", "Packet", "Dozen", "Bunch", "Stick")
+        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("150", "349", "649")
+        val ps4NdXOneXNdSPriceArrayHr = arrayOf("80", "229", "449")
+//        val XOneSPriceArrayHr = arrayOf("200", "300", "400", "500", "600", "700", "800")
+//        val XSeriesSPriceArrayHr = arrayOf("250", "350", "450", "550", "650", "750", "850")
+
+
         val orderStatusArray = arrayOf("Received", "Accepted", "Placed", "Completed")
-        val categoryArray = arrayOf("Vegetables", "Exotic Vegetables", "Fruits")
 
 
     }

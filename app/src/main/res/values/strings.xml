@@ -22,6 +22,10 @@
     <string name="resend"><u>Resend</u> </string>
     <string name="viewOnMap"><u>View On Map</u> </string>
     <string name="title_activity_maps">Map</string>
+    <string name="willUDeliver">Will you deliver \n this product?</string>
+    <string name="deliveryNote"><i>*Note: </i>If you will not deliver then You will be charged Rs.40 per order.</string>
+    <string name="deliveryNote40"><i>*Note: </i>Delivery Charges is Rs.40.</string>
+    <string name="deliveryNote80"><i>*Note: </i>Delivery Charges is Rs.80.</string>
 
     <string name="resendCode"><u>Resend</u></string>
 </resources>

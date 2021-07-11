@@ -75,9 +75,9 @@ class CartListAdapter(
 
 
         holder.txtProductName.text = item.productName
-        holder.lblType.text = "Type: "+item.type
+//        holder.lblType.text = "Type: "+item.type
 
-        holder.spinnerItemArray = Constants.pieceArray
+        holder.spinnerItemArray = Constants.daysArray
 
 
         val adapter = ArrayAdapter(
@@ -88,7 +88,7 @@ class CartListAdapter(
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         holder.spinner.setAdapter(adapter)
 
-        holder.spinner.setSelection(item._qty - 1)
+        holder.spinner.setSelection(item.qty - 1)
 
         holder.spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
 
@@ -99,15 +99,15 @@ class CartListAdapter(
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 holder.qty = holder.spinnerItemArray[p2].toInt()
 
-                var totalPrice = holder.qty * (item.price).toInt()
-                var discountedPrice = holder.qty * (item.priceToSell).toInt()
+                var totalPrice = holder.qty * (item.priceToShowDaily).toInt()
+                var discountedPrice = holder.qty * (item.priceToSellDaily).toInt()
                 holder.lblDiscountedPrice.text = "Rs." + discountedPrice.toString()
 
                 holder.lblPrice.text = "Rs." + totalPrice
                 holder.lblPrice.setPaintFlags(holder.lblPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
-                listItems[position]._qty = holder.qty
-                listItems[position]._qtyWisePrice = discountedPrice
+                listItems[position].qty = holder.qty
+                listItems[position].qtyWisePrice = discountedPrice
 
                 cartUpdateListener.cartListUpdated(listItems)
                 //save this list to sharedPref
@@ -142,7 +142,7 @@ class CartListAdapter(
         var spinner: AppCompatSpinner = view.findViewById(R.id.spinner)
         val cardView: View = itemView
 
-        var spinnerItemArray = Constants.pieceArray
+        var spinnerItemArray = Constants.daysArray
         var qty = 1
 
     }

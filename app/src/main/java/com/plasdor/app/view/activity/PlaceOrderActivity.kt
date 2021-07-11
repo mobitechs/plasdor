@@ -68,6 +68,8 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
     var paymentType = ""
     var paymentStatus = ""
     var note = ""
+    var rentalType = ""
+    var deliveryChanges = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,9 +93,12 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
     private fun initView() {
         Checkout.preload(applicationContext)
-        userId = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
-        userEmail = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)?.get(0)?.email.toString()
-        userMobile = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)?.get(0)?.mobile.toString()
+        userId = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.userId.toString()
+        userEmail = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.email.toString()
+        userMobile = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.mobile.toString()
         address =
             SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
                 ?.get(0)?.address.toString()
@@ -130,6 +135,8 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 //        layoutLoader = rootView.findViewById(R.id.layoutLoader)
         listItem = intent.getParcelableExtra("productItem")!!
         merchantItem = intent.getParcelableExtra("merchantItem")!!
+        rentalType = intent.getStringExtra("rentalType")!!
+        deliveryChanges = intent.getIntExtra("deliveryChanges",0)!!
 
 //        listItem = arguments?.getParcelable("productItem")!!
 //        merchantItem = arguments?.getParcelable("merchantItem")!!
@@ -141,19 +148,51 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         productId = listItem.pId
         ivProdImage.setImage(listItem.img!!)
 
+        var priceToShow = ""
+        var priceToSell = ""
+        var price = 0
+        var additionalDiscount = 0
+        var discountedPrice = 0
+
         tvProductName.text = listItem.productName
+        txtRentalType.text = rentalType
+        txtNoOfDaysHours.text = listItem.qty.toString()
 
+        if (rentalType.equals(Constants.Hourly)) {
+            labelNoOf.text = "No of Hour:"
+            priceToShow = listItem.priceToShowHourly
+            priceToSell = listItem.priceToSellHourly
 
-        txtPrice.text = "Rs. " + (listItem._qty * listItem.price.toInt()).toString()
-        txtPriceToSell.text = "Rs. " + listItem._qtyWisePrice
-        txtType.text = "Type " + listItem.type
-        txtNoOfDays.text = listItem._qty.toString()
+            labelPriceWithQty.text = "Price (${listItem.priceToSellHourly} * ${listItem.qty})"
+            price  = listItem.qty * listItem.priceToSellHourly.toInt()
+            additionalDiscount = (listItem.qty * listItem.priceToSellHourly.toInt()) - listItem.qtyWisePrice
+        } else {
+            labelNoOf.text = "No of Day:"
+            priceToShow = listItem.priceToShowDaily
+            priceToSell = listItem.priceToSellDaily
+
+            labelPriceWithQty.text = "Price (${listItem.priceToSellDaily} * ${listItem.qty})"
+            price  = listItem.qty * listItem.priceToSellDaily.toInt()
+            additionalDiscount = (listItem.qty * listItem.priceToSellDaily.toInt()) - listItem.qtyWisePrice
+        }
+
+        txtDisplayPriceToShow.text = "Rs. "+priceToShow
+        txtDisplayPriceToSell.text = "Rs. "+priceToSell
+        txtDisplayPriceToShow.setPaintFlags(txtDisplayPriceToShow.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
+
+        txtPrice.text = "Rs. "+price
+        txtAdditionalDiscount.text = "Rs. "+additionalDiscount
+        discountedPrice = price-additionalDiscount
+        txtDiscountedPrice.text = "Rs. "+discountedPrice
 
         txtControllerQty.text = listItem.controllerQty.toString()
-        txtControllerCharges.text = listItem.controllerCharges.toString()
-        txtTotalPayable.text = listItem.totalPayable.toString()
+        txtControllerCharges.text =  "Rs. "+listItem.controllerCharges
 
-        txtPrice.setPaintFlags(txtPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
+        txtDeliveryCharges.text =  "Rs. "+deliveryChanges
+
+        var finalPayableAmount = listItem.totalPayable+deliveryChanges.toInt()
+//        txtTotalPayable.text = listItem.totalPayable.toString()
+        txtTotalPayable.text =  "Rs. "+finalPayableAmount.toString()
 
         txtUAddress.text = address
         txtUCity.text = city
@@ -178,12 +217,14 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         }
     }
 
+
+
     private fun razorPayGateway() {
 
         val activity: Activity = this
         val co = Checkout()
         //test key
-             co.setKeyID("rzp_test_VNPFueei0vUGKm")
+        co.setKeyID("rzp_test_VNPFueei0vUGKm")
         //live key
 //        co.setKeyID("rzp_test_VNPFueei0vUGKm")
 
@@ -197,7 +238,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             options.put("theme.color", "#3169D1")
             options.put("currency", "INR")
             options.put("amount", fAmount)
-            options.put("send_sms_hash",true)
+            options.put("send_sms_hash", true)
             options.put("email", userEmail)
             options.put("contact", userMobile)
 
@@ -216,11 +257,10 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
     override fun onSuccess(data: Any, tag: String) {
         layoutLoader.visibility = View.GONE
-        if(data.equals("SUCCESS")){
+        if (data.equals("SUCCESS")) {
             this.showToastMsg("Order Successfully Placed")
             this.openClearActivity(UserHomeActivity::class.java)
-        }
-        else{
+        } else {
             this.showToastMsg("Order failed try again latter")
         }
     }
@@ -232,7 +272,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
     override fun onPaymentError(p0: Int, p1: String?) {
         paymentStatus = "Transaction failed"
-       // callAPIToSaveOrder()
+        // callAPIToSaveOrder()
     }
 
     override fun onPaymentSuccess(dataString: String?) {
@@ -251,8 +291,8 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             jsonObject.put("userEmail", userEmail)
             jsonObject.put("productId", productId)
             jsonObject.put("merchantId", merchantId)
-            jsonObject.put("noOfDays", listItem._qty.toString())
-            jsonObject.put("productPrice", listItem.priceToSell)
+            jsonObject.put("noOfDays", listItem.qty.toString())
+            jsonObject.put("productPrice", listItem.priceToSellDaily)
             jsonObject.put("noOfController", listItem.controllerQty)
             jsonObject.put("controllerCharges", listItem.controllerCharges)
             jsonObject.put("discountedPrice", listItem.discountedPrice)

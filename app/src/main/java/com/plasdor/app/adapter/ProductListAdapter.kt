@@ -68,10 +68,10 @@ class ProductListAdapter(
         var item: ProductListItems = listItems.get(position)
 
         holder.txtProductName.text = item.productName
-        holder.lblType.text = "Type: " + item.type
+//        holder.lblType.text = "Type: " + item.type
 
-        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSell
-        holder.lblPrice.text = "Rs." + item.price
+        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSellDaily
+        holder.lblPrice.text = "Rs." + item.priceToShowDaily
         holder.lblPrice.setPaintFlags(holder.lblPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
 
@@ -168,7 +168,7 @@ class ProductListAdapter(
                     val filteredList: MutableList<ProductListItems> = ArrayList()
                     for (row in allProduct) {
                         if (row.productName.toLowerCase()
-                                .contains(charString.toLowerCase()) || row.type.toLowerCase()
+//                                .contains(charString.toLowerCase()) || row.type.toLowerCase()
                                 .contains(charString.toLowerCase())
                         ) {
                             filteredList.add(row)

@@ -383,13 +383,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
     }
 
     fun OpenEditProductFragment(bundle: Bundle) {
-        addFragmentWithData(
-            AdminProductEditFragment(),
-            false,
-            R.id.nav_host_fragment,
-            "AdminProductEditFragment",
-            bundle
-        )
+
     }
 
     fun OpenProductDetailsFragment(bundle: Bundle) {

@@ -100,7 +100,7 @@ class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
         txtMerchantName.text = listItem.name
         txtMerchantAddress.text = listItem.address+" "+listItem.city+" "+listItem.pincode
 
-        txtNoOfDays.text = listItem.noOfDays
+        txtNoOfDays.text = listItem.noOfDaysHours
         txtControllerQty.text = listItem.noOfController
         txtControllerCharges.text = "Rs. "+listItem.controllerCharges
 

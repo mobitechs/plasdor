@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.MerchantProductClickListener
 import com.plasdor.app.model.MerchantProductListItems
-import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.ThreeTwoImageView
 import com.plasdor.app.utils.setImage
 
@@ -61,8 +60,8 @@ class MerchantProductListAdapter (
 
         holder.lblType.text = "Type: " + item.type
 
-        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSell
-        holder.lblPrice.text = "Rs." + item.price
+        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSellDaily
+        holder.lblPrice.text = "Rs." + item.priceToShowDaily
         holder.lblPrice.setPaintFlags(holder.lblPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
 

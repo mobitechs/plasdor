@@ -56,8 +56,8 @@ class MerchantAllProductListAdapter(
         holder.txtProductName.text = item.productName
         holder.lblType.text = "Type: " + item.type
 
-        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSell
-        holder.lblPrice.text = "Rs." + item.price
+        holder.lblDiscountedPrice.text = "Offer Rs." + item.priceToSellDaily
+        holder.lblPrice.text = "Rs." + item.priceToShowDaily
         holder.lblPrice.setPaintFlags(holder.lblPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
         val imagepath = item.img

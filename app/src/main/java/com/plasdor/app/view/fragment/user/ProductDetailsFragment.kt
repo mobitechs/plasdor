@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
@@ -42,8 +40,8 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     lateinit var ivProdImage: ThreeTwoImageView
     lateinit var tvProductName: AppCompatTextView
     lateinit var txtType: AppCompatTextView
-    lateinit var tvPrice: AppCompatTextView
-    lateinit var tvLabelPrice: AppCompatTextView
+    lateinit var txtPriceToSell: AppCompatTextView
+    lateinit var txtPriceToShow: AppCompatTextView
     lateinit var txtControllerCharges: AppCompatTextView
     lateinit var txtTotalPayable: AppCompatTextView
     lateinit var txtDescription: AppCompatTextView
@@ -58,9 +56,8 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     var userLat = ""
     var userLong = ""
     var userName = ""
-    var priceToPay = ""
 
-    var spinnerItemArray = Constants.pieceArray
+    var spinnerItemArray = Constants.daysArray
     var spinnerControllerQtyArray = Constants.controllerQtyArray
     var discountedPrice = ""
     var qty = 1
@@ -77,6 +74,23 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     var merchantListItems = ArrayList<AvailableMerchantListItem>()
     lateinit var mLayoutManager: LinearLayoutManager
 
+    lateinit var radio_group: RadioGroup
+    lateinit var rdHourly: RadioButton
+    lateinit var rdDaily: RadioButton
+
+    lateinit var radio_group_delivery: RadioGroup
+    lateinit var redSelfPickup: RadioButton
+    lateinit var rdDeliverByCompany: RadioButton
+
+    lateinit var labelNoOf: AppCompatTextView
+    lateinit var txtDeliveryNote: AppCompatTextView
+    var rentalType = Constants.Daily
+    var deliveryChanges = 0
+    var deliveryType = ""
+    var priceToShow = 0
+    var priceToSell = 0
+    var totalPayable = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -89,16 +103,24 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
     private fun initView() {
 
-        userId = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
-        userLat = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.latitude.toString()
-        userLong = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.longitude.toString()
-        userName = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.name.toString()
+        userId =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.userId.toString()
+        userLat =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.latitude.toString()
+        userLong =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.longitude.toString()
+        userName =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.name.toString()
 
         ivProdImage = rootView.findViewById(R.id.ivProdImage)
         tvProductName = rootView.findViewById(R.id.tvProductName)
         txtType = rootView.findViewById(R.id.txtType)
-        tvPrice = rootView.findViewById(R.id.tvPrice)
-        tvLabelPrice = rootView.findViewById(R.id.tvLabelPrice)
+        txtPriceToSell = rootView.findViewById(R.id.txtPriceToSell)
+        txtPriceToShow = rootView.findViewById(R.id.txtPriceToShow)
         txtDescription = rootView.findViewById(R.id.txtDescription)
         btnBuyNow = rootView.findViewById(R.id.btnBuyNow)
         layoutDescription = rootView.findViewById(R.id.layoutDescription)
@@ -109,14 +131,66 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)
         txtTotalPayable = rootView.findViewById(R.id.txtTotalPayable)
 
+        radio_group = rootView.findViewById(R.id.radio_group)!!
+        rdHourly = rootView.findViewById(R.id.rdHourly)!!
+        rdDaily = rootView.findViewById(R.id.rdDaily)!!
+        labelNoOf = rootView.findViewById(R.id.labelNoOf)!!
+        radio_group_delivery = rootView.findViewById(R.id.radio_group_delivery)!!
+        redSelfPickup = rootView.findViewById(R.id.redSelfPickup)!!
+        txtDeliveryNote = rootView.findViewById(R.id.txtDeliveryNote)!!
+
+        radio_group.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                val radio: RadioButton = rootView.findViewById(checkedId)
+                if (radio.text.toString().equals(Constants.Hourly)) {
+                    rentalType = Constants.Hourly
+                    labelNoOf.text = "No Of Hours:"
+                    spinnerItemArray = Constants.hourArray
+                    if(qty == 1){
+                        deliveryChanges = Constants.delCharges1Hour
+                        txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
+                    }else{
+                        deliveryChanges = Constants.delChargesNormal
+                        txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
+                    }
+
+                } else if (radio.text.toString().equals(Constants.Daily)) {
+                    rentalType = Constants.Daily
+                    labelNoOf.text = "No Of Days:"
+                    spinnerItemArray = Constants.daysArray
+                    deliveryChanges = Constants.delChargesNormal
+                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
+                }
+                setupNoOfDaysHoursSpinner()
+                setupPrice()
+            })
+        radio_group_delivery.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                val radio: RadioButton = rootView.findViewById(checkedId)
+                if (radio.text.toString().equals("Self PickUp")) {
+                    deliveryType = "Self PickUp"
+                    deliveryChanges = 0
+                    txtDeliveryNote.visibility = View.GONE
+                } else if (radio.text.toString().equals("Delivery")) {
+                    deliveryType = "Delivery"
+                    deliveryChanges = Constants.delChargesNormal
+                    txtDeliveryNote.visibility = View.VISIBLE
+                }
+                setupPrice()
+            })
+
         listItem = arguments?.getParcelable("item")!!
 
         productId = listItem.pId
         ivProdImage.setImage(listItem.img!!)
         tvProductName.text = listItem.productName
-        tvPrice.text = "Rs. " + listItem.priceToSell
-        setLabelPrice(listItem.price)
-        txtType.text = "Type " + listItem.type
+
+        priceToShow = listItem.priceToShowDaily.toInt()
+        priceToSell = listItem.priceToSellDaily.toInt()
+
+
+        setLabelPrice()
+//        txtType.text = "Type " + listItem.type
         txtDescription.text = listItem.description
 
         if (listItem.description.equals("")) {
@@ -125,14 +199,12 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
         hideUI()
         btnBuyNow.setOnClickListener {
-            var bundle = Bundle()
-            bundle.putParcelable("productItem", listItem)
-            bundle.putParcelable("merchantItem", selectedMerchantItem)
             requireActivity().openActivity(PlaceOrderActivity::class.java) {
                 putParcelable("productItem", listItem)
                 putParcelable("merchantItem", selectedMerchantItem)
+                putString("rentalType", rentalType)
+                putInt("deliveryChanges", deliveryChanges)
             }
-//            (context as UserHomeActivity?)!!.OpenPlaceOrderFragment(bundle)
         }
         txtViewOnMap.setOnClickListener {
             requireContext().openActivity(MapsActivity::class.java) {
@@ -144,11 +216,40 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         }
 
 
-        setupNoOfDaysSpinner()
+        setupNoOfDaysHoursSpinner()
         setupControllerQtySpinner()
 
         setupRecyclerView()
 
+    }
+
+    private fun setupNoOfDaysHoursSpinner() {
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.spinner_layout,
+            spinnerItemArray
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.setAdapter(adapter)
+        spinner.setSelection(listItem.qty - 1)
+        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+//            event.onNothingSelected()
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                qty = spinnerItemArray[p2].toInt()
+                if (rentalType.equals(Constants.Hourly) && qty == 1) {
+                    deliveryChanges = Constants.delCharges1Hour
+                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
+                } else {
+                    deliveryChanges = Constants.delChargesNormal
+                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
+                }
+                qtyPos = p2
+                setupPrice()
+            }
+        })
     }
 
     private fun setupControllerQtySpinner() {
@@ -177,71 +278,66 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     }
 
     private fun setupPrice() {
-        priceToPay = listItem.price
-        var priceToSell = listItem.priceToSell
-        if (listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X")) {
-            priceToPay = Constants.ps5NdXSeriesXPriceArray[qtyPos]
-        } else if (listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X")) {
-            priceToPay = Constants.ps4NdXOneXPriceArray[qtyPos]
-        } else if (listItem.productName.equals("XBOX One S")) {
-            priceToPay = Constants.XOneSPriceArray[qtyPos]
-        } else if (listItem.productName.equals("XBOX Series S")) {
-            priceToPay = Constants.XSeriesSPriceArray[qtyPos]
+//        priceToPay = listItem.priceToShowDaily
+//        var priceToSell = listItem.priceToSellDaily
+        if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X")) && rentalType.equals(Constants.Daily)) {
+            priceToSell = Constants.ps5NdXSeriesXPriceArray[qtyPos].toInt()
+        } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X")) && rentalType.equals(Constants.Daily)) {
+            priceToSell = Constants.ps4NdXOneXPriceArray[qtyPos].toInt()
+        } else if (listItem.productName.equals("XBOX One S") && rentalType.equals(Constants.Daily)) {
+            priceToSell = Constants.XOneSPriceArray[qtyPos].toInt()
+        } else if (listItem.productName.equals("XBOX Series S") && rentalType.equals(Constants.Daily)) {
+            priceToSell = Constants.XSeriesSPriceArray[qtyPos].toInt()
+        } else if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X") || listItem.productName.equals("XBOX Series S")) && rentalType.equals(Constants.Hourly)) {
+            priceToSell = Constants.ps5NdXSeriesXNdSPriceArrayHr[qtyPos].toInt()
+        } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X") || listItem.productName.equals("XBOX One S")) && rentalType.equals(Constants.Hourly)) {
+            priceToSell = Constants.ps4NdXOneXNdSPriceArrayHr[qtyPos].toInt()
+        }
+//        else if (listItem.productName.equals("XBOX One S") && rentalType.equals(Constants.Hourly)) {
+//            priceToSell = Constants.XOneSPriceArrayHr[qtyPos].toInt()
+//        }
+//        else if (listItem.productName.equals("XBOX Series S") && rentalType.equals(Constants.Hourly)) {
+//            priceToSell = Constants.XSeriesSPriceArrayHr[qtyPos].toInt()
+//        }
+
+
+        if (rentalType.equals(Constants.Hourly)) {
+            priceToShow = (qty * listItem.priceToShowHourly.toInt())
+        } else {
+            priceToShow = (qty * listItem.priceToShowDaily.toInt())
         }
 
-        discountedPrice = priceToPay
 
         if (controllerQty == 1) {
             controllerCharges = 0
         } else {
             controllerCharges = 50 * (controllerQty - 1)
-
         }
-        totalPriceWithController = priceToPay.toInt() + controllerCharges
-        txtTotalPayable.text = "Rs. " + totalPriceWithController.toString()
-        txtControllerCharges.text = "Additional Rs. " + controllerCharges.toString()
 
-        listItem._qtyWisePrice = priceToPay.toInt()
-        listItem._qty = qty
+        setLabelPrice()
+
+    }
+
+
+    private fun setLabelPrice() {
+        txtPriceToSell.text = "Rs. " + priceToSell
+        txtPriceToShow.text = "Rs. " + priceToShow
+        txtPriceToShow.setPaintFlags(txtPriceToShow.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
+
+        txtControllerCharges.text = "Controller Rs. " + controllerCharges.toString()
+        totalPriceWithController = priceToSell.toInt() + controllerCharges
+        var totalChargesWithDelivery = deliveryChanges + totalPriceWithController
+//        txtTotalPayable.text = "Rs. " + totalPriceWithController.toString()
+        txtTotalPayable.text = "Rs. " + totalChargesWithDelivery.toString()
+
+
+        listItem.qtyWisePrice = priceToSell.toInt()
+        listItem.qty = qty
         listItem.controllerQty = controllerQty.toInt()
         listItem.controllerCharges = controllerCharges.toString()
         listItem.totalPayable = totalPriceWithController
-        listItem.discountedPrice = discountedPrice
+        listItem.discountedPrice = priceToSell.toString()
 
-        tvPrice.text = "Rs. " + priceToPay.toString()
-        var totalPrice = qty * listItem.price.toInt()
-        setLabelPrice(totalPrice.toString())
-
-    }
-
-    private fun setupNoOfDaysSpinner() {
-        val adapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_layout,
-            spinnerItemArray
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.setAdapter(adapter)
-
-        spinner.setSelection(listItem._qty - 1)
-
-        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-//            event.onNothingSelected()
-            }
-
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                qty = spinnerItemArray[p2].toInt()
-                qtyPos = p2
-                setupPrice()
-            }
-        })
-    }
-
-    private fun setLabelPrice(totalPrice: String) {
-        tvLabelPrice.text = "Rs. " + totalPrice
-        tvLabelPrice.setPaintFlags(tvLabelPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
     }
 
 
@@ -265,15 +361,13 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         viewModelUser.merchantListItems.observe(requireActivity(), Observer {
             merchantListItems = it
 
-            if(merchantListItems.size > 0){
+            if (merchantListItems.size > 0) {
                 showUI()
-            }else{
+            } else {
                 hideUI()
             }
             listAdapter.updateListItems(it)
         })
-
-
 
 
     }

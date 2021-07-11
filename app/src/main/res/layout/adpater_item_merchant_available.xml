@@ -90,13 +90,10 @@
                         android:textColor="@color/red"
                         android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:text="Remaining \nController Qty: 2" />
+                        android:text="" />
                 </LinearLayout>
 
             </LinearLayout>
-
-
-
 
         </LinearLayout>
 

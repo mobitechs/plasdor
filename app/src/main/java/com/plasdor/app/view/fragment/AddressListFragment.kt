@@ -117,7 +117,7 @@ class AddressListFragment : Fragment(), AddressSelectCallback, AlertDialogBtnCli
         totalDiscountedAmount = SharePreferenceManager.getInstance(requireContext())
             .getValueString(Constants.totalDiscountedAmount).toString()
         delCharges = SharePreferenceManager.getInstance(requireContext())
-            .getValueString(Constants.delCharges).toString()
+            .getValueString(Constants.delChargesNormal.toString()).toString()
         totalAmount = SharePreferenceManager.getInstance(requireContext())
             .getValueString(Constants.totalAmount).toString()
 
