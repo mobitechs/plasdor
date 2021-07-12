@@ -43,7 +43,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     lateinit var txtPriceToSell: AppCompatTextView
     lateinit var txtPriceToShow: AppCompatTextView
     lateinit var txtControllerCharges: AppCompatTextView
-    lateinit var txtTotalPayable: AppCompatTextView
+    lateinit var txtTotalPayableWithDelivery: AppCompatTextView
     lateinit var txtDescription: AppCompatTextView
     lateinit var txtViewOnMap: AppCompatTextView
     lateinit var txtSelectMerchantLabel: AppCompatTextView
@@ -85,7 +85,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     lateinit var labelNoOf: AppCompatTextView
     lateinit var txtDeliveryNote: AppCompatTextView
     var rentalType = Constants.Daily
-    var deliveryChanges = 0
+    var deliveryCharges = 0
     var deliveryType = ""
     var priceToShow = 0
     var priceToSell = 0
@@ -129,7 +129,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         spinner = rootView.findViewById(R.id.spinner)
         spinnerControllerQty = rootView.findViewById(R.id.spinnerControllerQty)
         txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)
-        txtTotalPayable = rootView.findViewById(R.id.txtTotalPayable)
+        txtTotalPayableWithDelivery = rootView.findViewById(R.id.txtTotalPayableWithDelivery)
 
         radio_group = rootView.findViewById(R.id.radio_group)!!
         rdHourly = rootView.findViewById(R.id.rdHourly)!!
@@ -147,10 +147,10 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
                     labelNoOf.text = "No Of Hours:"
                     spinnerItemArray = Constants.hourArray
                     if(qty == 1){
-                        deliveryChanges = Constants.delCharges1Hour
+                        deliveryCharges = Constants.delCharges1Hour
                         txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
                     }else{
-                        deliveryChanges = Constants.delChargesNormal
+                        deliveryCharges = Constants.delChargesNormal
                         txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
                     }
 
@@ -158,7 +158,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
                     rentalType = Constants.Daily
                     labelNoOf.text = "No Of Days:"
                     spinnerItemArray = Constants.daysArray
-                    deliveryChanges = Constants.delChargesNormal
+                    deliveryCharges = Constants.delChargesNormal
                     txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
                 }
                 setupNoOfDaysHoursSpinner()
@@ -167,13 +167,13 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         radio_group_delivery.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { group, checkedId ->
                 val radio: RadioButton = rootView.findViewById(checkedId)
-                if (radio.text.toString().equals("Self PickUp")) {
-                    deliveryType = "Self PickUp"
-                    deliveryChanges = 0
+                if (radio.text.toString().equals(Constants.selfPickup)) {
+                    deliveryType = Constants.selfPickup
+                    deliveryCharges = 0
                     txtDeliveryNote.visibility = View.GONE
-                } else if (radio.text.toString().equals("Delivery")) {
-                    deliveryType = "Delivery"
-                    deliveryChanges = Constants.delChargesNormal
+                } else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
+                    deliveryType = Constants.deliveryByCompany
+                    deliveryCharges = Constants.delChargesNormal
                     txtDeliveryNote.visibility = View.VISIBLE
                 }
                 setupPrice()
@@ -203,7 +203,8 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
                 putParcelable("productItem", listItem)
                 putParcelable("merchantItem", selectedMerchantItem)
                 putString("rentalType", rentalType)
-                putInt("deliveryChanges", deliveryChanges)
+                putInt("deliveryCharges", deliveryCharges)
+                putString("deliveryType", deliveryType)
             }
         }
         txtViewOnMap.setOnClickListener {
@@ -240,10 +241,10 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 qty = spinnerItemArray[p2].toInt()
                 if (rentalType.equals(Constants.Hourly) && qty == 1) {
-                    deliveryChanges = Constants.delCharges1Hour
+                    deliveryCharges = Constants.delCharges1Hour
                     txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
                 } else {
-                    deliveryChanges = Constants.delChargesNormal
+                    deliveryCharges = Constants.delChargesNormal
                     txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
                 }
                 qtyPos = p2
@@ -270,7 +271,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                controllerQty = spinnerItemArray[p2].toInt()
+                controllerQty = spinnerControllerQtyArray[p2].toInt()
                 controllerQtyPos = p2
                 setupPrice()
             }
@@ -326,9 +327,9 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
         txtControllerCharges.text = "Controller Rs. " + controllerCharges.toString()
         totalPriceWithController = priceToSell.toInt() + controllerCharges
-        var totalChargesWithDelivery = deliveryChanges + totalPriceWithController
-//        txtTotalPayable.text = "Rs. " + totalPriceWithController.toString()
-        txtTotalPayable.text = "Rs. " + totalChargesWithDelivery.toString()
+        var totalChargesWithDelivery = deliveryCharges + totalPriceWithController
+//        txtTotalPayableWithDelivery.text = "Rs. " + totalPriceWithController.toString()
+        txtTotalPayableWithDelivery.text = "Rs. " + totalChargesWithDelivery.toString()
 
 
         listItem.qtyWisePrice = priceToSell.toInt()

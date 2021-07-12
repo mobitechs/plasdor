@@ -11,6 +11,7 @@ class Constants {
         const val USERDATA = "userData"
         const val ADMIN_EMAIL = "plasdor@gmail.com"
         const val ADMIN_MOBILE = "9876543210"
+        const val SELF = "Self"
         const val ADMIN = "Admin"
         const val MERCHANT = "Merchant"
         const val USER = "User"
@@ -26,7 +27,7 @@ class Constants {
         const val EMAIL = "email"
         const val orderItemMsg = "orderItemMsg"
         const val orderTotalAmount = "orderTotalAmount"
-        const val deliveryCharges = 100
+        const val deliveryCharges = 40
         const val deliveryChargesBelow = 500
         const val CartList = "CartList"
         const val CartList2 = "CartList2"
@@ -39,6 +40,8 @@ class Constants {
         const val totalAmount = "totalAmount"
         const val Hourly = "Hourly"
         const val Daily = "Daily"
+        const val selfPickup = "Self PickUp"
+        const val deliveryByCompany = "Delivery"
 
 
         //if u add new item in weightArray then please add in qtyArray as well its must
@@ -46,7 +49,7 @@ class Constants {
 
         val controllerQtyArray = arrayOf("1", "2", "3", "4")
         val daysArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
-        val hourArray = arrayOf("1", "3", "6")
+        val hourArray = arrayOf("2", "4", "6")
 
 
         val ps5NdXSeriesXPriceArray = arrayOf("999", "1799", "2499", "3199", "3499", "3999", "4499")
@@ -54,8 +57,8 @@ class Constants {
         val XOneSPriceArray = arrayOf("449", "849", "1349", "1649", "2049", "2349", "2649")
         val XSeriesSPriceArray = arrayOf("949", "1749", "2449", "3149", "3449", "3949", "4449")
 
-        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("150", "349", "649")
-        val ps4NdXOneXNdSPriceArrayHr = arrayOf("80", "229", "449")
+        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("199", "299", "449")
+        val ps4NdXOneXNdSPriceArrayHr = arrayOf("299", "399", "649")
 //        val XOneSPriceArrayHr = arrayOf("200", "300", "400", "500", "600", "700", "800")
 //        val XSeriesSPriceArrayHr = arrayOf("250", "350", "450", "550", "650", "750", "850")
 

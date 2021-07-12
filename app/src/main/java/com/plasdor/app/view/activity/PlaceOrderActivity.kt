@@ -1,12 +1,18 @@
 package com.plasdor.app.view.activity
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.AvailableMerchantListItem
@@ -27,32 +33,6 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
     lateinit var merchantItem: AvailableMerchantListItem
     lateinit var listItem: ProductListItems
 
-//    lateinit var rootView: View
-//    lateinit var btnPlaceOrder: AppCompatTextView
-//    lateinit var ivProdImage: AppCompatImageView
-//    lateinit var tvProductName: AppCompatTextView
-//    lateinit var txtType: AppCompatTextView
-//    lateinit var txtPrice: AppCompatTextView
-//    lateinit var txtPriceToSell: AppCompatTextView
-//    lateinit var txtNoOfDays: AppCompatTextView
-//    lateinit var txtControllerQty: AppCompatTextView
-//    lateinit var txtControllerCharges: AppCompatTextView
-//    lateinit var txtTotalPayable: AppCompatTextView
-//
-//
-//    lateinit var txtUAddress: AppCompatTextView
-//    lateinit var txtUCity: AppCompatTextView
-//    lateinit var txtUPinCode: AppCompatTextView
-//
-//    lateinit var imgRadioBtn: AppCompatImageView
-//    lateinit var txtName: AppCompatTextView
-//    lateinit var txtMobile: AppCompatTextView
-//    lateinit var txtEmail: AppCompatTextView
-//    lateinit var txtAddress: AppCompatTextView
-//    lateinit var txtCity: AppCompatTextView
-//    lateinit var txtPinCode: AppCompatTextView
-//    lateinit var layoutLoader: RelativeLayout
-
     var productId = ""
     var merchantId = ""
     var userId = ""
@@ -69,8 +49,12 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
     var paymentStatus = ""
     var note = ""
     var rentalType = ""
-    var deliveryChanges = 0
-
+    var deliveryType = ""
+    var deliveryCharges = 0
+    var adminWillGet = 0f
+    var merchantWillGet = 0f
+    var deliveredBy = ""
+    var finalPayableAmount =0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,15 +65,6 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         initView()
     }
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        rootView = inflater.inflate(R.layout.fragment_place_order, container, false)
-//        initView()
-//        return rootView
-//    }
 
     private fun initView() {
         Checkout.preload(applicationContext)
@@ -108,42 +83,34 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
                 ?.get(0)?.pincode.toString()
 
-//        ivProdImage = rootView.findViewById(R.id.ivProdImage)
-//        tvProductName = rootView.findViewById(R.id.tvProductName)
-//        txtType = rootView.findViewById(R.id.txtType)
-//        txtPrice = rootView.findViewById(R.id.txtPrice)
-//        txtPriceToSell = rootView.findViewById(R.id.txtPriceToSell)
-//        txtNoOfDays = rootView.findViewById(R.id.txtNoOfDays)
-//        txtControllerQty = rootView.findViewById(R.id.txtControllerQty)
-//        txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)
-//        txtTotalPayable = rootView.findViewById(R.id.txtTotalPayable)
-//
-//        txtUAddress = rootView.findViewById(R.id.txtUAddress)
-//        txtUCity = rootView.findViewById(R.id.txtUCity)
-//        txtUPinCode = rootView.findViewById(R.id.txtUPinCode)
-//
-//
-//        imgRadioBtn = rootView.findViewById(R.id.imgRadioBtn)
-//        txtName = rootView.findViewById(R.id.txtName)
-//        txtMobile = rootView.findViewById(R.id.txtMobile)
-//        txtEmail = rootView.findViewById(R.id.txtEmail)
-//        txtAddress = rootView.findViewById(R.id.txtAddress)
-//        txtCity = rootView.findViewById(R.id.txtCity)
-//        txtPinCode = rootView.findViewById(R.id.txtPinCode)
-//
-//        btnPlaceOrder = rootView.findViewById(R.id.btnPlaceOrder)
-//        layoutLoader = rootView.findViewById(R.id.layoutLoader)
         listItem = intent.getParcelableExtra("productItem")!!
         merchantItem = intent.getParcelableExtra("merchantItem")!!
         rentalType = intent.getStringExtra("rentalType")!!
-        deliveryChanges = intent.getIntExtra("deliveryChanges",0)!!
+        deliveryType = intent.getStringExtra("deliveryType")!!
+        deliveryCharges = intent.getIntExtra("deliveryCharges", 0)!!
 
-//        listItem = arguments?.getParcelable("productItem")!!
-//        merchantItem = arguments?.getParcelable("merchantItem")!!
-//        qty = arguments?.getInt("noOfDays")!!
-//        controllerQty = arguments?.getInt("controllerQty")!!
-//        controllerCharges = arguments?.getInt("controllerCharges")!!
-//        totalPayableAmount = arguments?.getInt("totalPayableAmount")!!
+
+        merchantWillGet = (listItem.totalPayable.toInt() * (Constants.percentBetweenMerchantNPlasdor / 100.0f))
+        adminWillGet = (listItem.totalPayable.toInt() - merchantWillGet)
+
+        if(deliveryType.equals(Constants.selfPickup)){
+            deliveredBy = Constants.SELF
+        }
+        else{
+            if(merchantItem.willDeliver.equals("Yes")){
+                deliveredBy = Constants.MERCHANT
+                merchantWillGet = merchantWillGet + Constants.deliveryCharges
+            }
+            else if(merchantItem.willDeliver.equals("No")){
+                deliveredBy = Constants.ADMIN
+                merchantWillGet = merchantWillGet - Constants.deliveryCharges
+                adminWillGet = adminWillGet + Constants.deliveryCharges
+            }
+        }
+
+
+
+
 
         productId = listItem.pId
         ivProdImage.setImage(listItem.img!!)
@@ -188,9 +155,9 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         txtControllerQty.text = listItem.controllerQty.toString()
         txtControllerCharges.text =  "Rs. "+listItem.controllerCharges
 
-        txtDeliveryCharges.text =  "Rs. "+deliveryChanges
+        txtDeliveryCharges.text =  "Rs. "+deliveryCharges
 
-        var finalPayableAmount = listItem.totalPayable+deliveryChanges.toInt()
+        finalPayableAmount = listItem.totalPayable+deliveryCharges.toInt()
 //        txtTotalPayable.text = listItem.totalPayable.toString()
         txtTotalPayable.text =  "Rs. "+finalPayableAmount.toString()
 
@@ -210,10 +177,12 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
         btnPlaceOrder.setOnClickListener {
             transactionNo = "TID" + System.currentTimeMillis()
-            amount = listItem.totalPayable.toString()
+//            amount = listItem.totalPayable.toString()
+            amount = finalPayableAmount.toString()
             note = "Payment for Plasdor Services."
             //payUsingUpi(amount, upiId, name, note)
-            razorPayGateway()
+
+            showSelectPaymentTypeDialog()
         }
     }
 
@@ -289,21 +258,62 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             jsonObject.put("method", method)
             jsonObject.put("userId", userId)
             jsonObject.put("userEmail", userEmail)
-            jsonObject.put("productId", productId)
+            jsonObject.put("pId", productId)
             jsonObject.put("merchantId", merchantId)
-            jsonObject.put("noOfDays", listItem.qty.toString())
-            jsonObject.put("productPrice", listItem.priceToSellDaily)
+            jsonObject.put("rentalType", rentalType)
+            jsonObject.put("noOfDaysHours", listItem.qty.toString())
+            jsonObject.put("productPriceDaily", listItem.priceToSellDaily)
+            jsonObject.put("productPriceHourly", listItem.priceToSellHourly)
             jsonObject.put("noOfController", listItem.controllerQty)
             jsonObject.put("controllerCharges", listItem.controllerCharges)
             jsonObject.put("discountedPrice", listItem.discountedPrice)
+            jsonObject.put("deliveryCharges", deliveryCharges)
             jsonObject.put("totalPrice", listItem.totalPayable)
             jsonObject.put("transactionNo", transactionNo)
+            jsonObject.put("paymentType", paymentType)
             jsonObject.put("paymentStatus", paymentStatus)
+            jsonObject.put("adminWillGet", adminWillGet)
+            jsonObject.put("merchantWillGet", merchantWillGet)
+            jsonObject.put("deliveredBy", deliveredBy)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
         apiPostCall(Constants.BASE_URL, jsonObject, this, method)
     }
 
+
+    fun showSelectPaymentTypeDialog() {
+
+        // Create an alert builder
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("Select Payment Option")
+
+        // set the custom layout
+        val customLayout: View = layoutInflater.inflate(R.layout.payment_type_dialog_layout, null)
+        builder.setView(customLayout)
+        val radio_group: RadioGroup = customLayout.findViewById(R.id.radio_group)
+        radio_group.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                val radio: RadioButton = customLayout.findViewById(checkedId)
+                paymentType = radio.text.toString()
+            })
+
+        builder.setPositiveButton(
+            "Submit",
+            DialogInterface.OnClickListener { dialog, which -> // send data from the
+                // AlertDialog to the Activity
+
+                if(paymentType.equals("Online")){
+                    razorPayGateway()
+                }else{
+                    callAPIToSaveOrder()
+                }
+            })
+        // create and show
+        // the alert dialog
+        val dialog: AlertDialog = builder.create()
+//        dialog.setCancelable(false)
+        dialog.show()
+    }
 
 }

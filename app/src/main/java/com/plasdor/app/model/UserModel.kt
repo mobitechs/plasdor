@@ -17,7 +17,7 @@ data class UserModel(
     var pincode: String,
     var isSelected: Boolean,
     var latitude: String,
-    var longitude: String,
+    var longitude: String
 ) : Parcelable
 
 
@@ -41,4 +41,5 @@ data class AvailableMerchantListItem(
     var isSold: String,
     var totalControllerQty: String,
     var remainingControllerQty: String,
+    var willDeliver: String
 ) : Parcelable
