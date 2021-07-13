@@ -46,6 +46,72 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/blue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="You Earned: " />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textColor="@color/blue"
+                    android:id="@+id/txtAdminEarned"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Rs.200" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:textColor="@color/green"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Merchant Earned: " />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textColor="@color/green"
+                    android:id="@+id/txtMerchantEarned"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Rs.200" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Order Deliver By: " />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textColor="@color/red"
+                    android:id="@+id/txtOrderDeliverBy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Company" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Order No: " />
 
@@ -57,6 +123,27 @@
                     android:layout_weight="6.5"
                     android:fontFamily="@font/roboto_regular"
                     android:text="1001" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Order Status:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtOderStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,6 +174,28 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Rental Type:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtRentalType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Daily" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/labelNoOf"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
@@ -207,96 +316,136 @@
                     android:background="@color/gray" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.5"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Payment Status:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtPaymentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Success" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Payment Type:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtPaymentType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="COD" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Discounted Amount:" />
 
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtAmount"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6.5"
+                    android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
-            </LinearLayout>
-            <LinearLayout
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.5"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Controller Charges:" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtControllerCharges"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6.5"
+                    android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.5"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="Delivery Charge" />
+                    android:text="Delivery Charges:" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtDelivery"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6.5"
+                    android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.5"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="Total Payable" />
+                    android:text="Total Payable:" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtTotal"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6.5"
+                    android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
-            </LinearLayout>
-
-
+            </RelativeLayout>
 
 
             <LinearLayout

@@ -102,14 +102,11 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
                 merchantWillGet = merchantWillGet + Constants.deliveryCharges
             }
             else if(merchantItem.willDeliver.equals("No")){
-                deliveredBy = Constants.ADMIN
+                deliveredBy = Constants.COMPANY
                 merchantWillGet = merchantWillGet - Constants.deliveryCharges
                 adminWillGet = adminWillGet + Constants.deliveryCharges
             }
         }
-
-
-
 
 
         productId = listItem.pId

@@ -13,6 +13,7 @@ class Constants {
         const val ADMIN_MOBILE = "9876543210"
         const val SELF = "Self"
         const val ADMIN = "Admin"
+        const val COMPANY = "Company"
         const val MERCHANT = "Merchant"
         const val USER = "User"
         const val POINTS_ON_SHARE = 15

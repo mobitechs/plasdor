@@ -38,7 +38,12 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtAdminMobileNo: AppCompatTextView
     lateinit var txtMerchantAddress: AppCompatTextView
     lateinit var txtMerchantName: AppCompatTextView
-    lateinit var txtNoOfDays: AppCompatTextView
+    lateinit var labelNoOf: AppCompatTextView
+    lateinit var txtPaymentStatus: AppCompatTextView
+    lateinit var txtPaymentType: AppCompatTextView
+    lateinit var txtOderStatus: AppCompatTextView
+    lateinit var txtNoOfDaysHours: AppCompatTextView
+    lateinit var txtRentalType: AppCompatTextView
     lateinit var txtControllerQty: AppCompatTextView
     lateinit var txtControllerCharges: AppCompatTextView
     lateinit var spinner: AppCompatSpinner
@@ -76,7 +81,12 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
         spinner = rootView.findViewById(R.id.spinner)!!
         txtMerchantAddress = rootView.findViewById(R.id.txtMerchantAddress)!!
         txtMerchantName = rootView.findViewById(R.id.txtMerchantName)!!
-        txtNoOfDays = rootView.findViewById(R.id.txtNoOfDays)!!
+        txtOderStatus = rootView.findViewById(R.id.txtOderStatus)!!
+        txtPaymentStatus = rootView.findViewById(R.id.txtPaymentStatus)!!
+        txtPaymentType = rootView.findViewById(R.id.txtPaymentType)!!
+        txtRentalType = rootView.findViewById(R.id.txtRentalType)!!
+        labelNoOf = rootView.findViewById(R.id.labelNoOf)!!
+        txtNoOfDaysHours = rootView.findViewById(R.id.txtNoOfDays)!!
         txtControllerQty = rootView.findViewById(R.id.txtControllerQty)!!
         txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)!!
 
@@ -93,7 +103,18 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
         txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals("null")) "Rs. 0" else "Rs. " + listItem.deliveryCharges
         txtTotal.text = "Rs. " + listItem.totalPrice
         txtProductDetails.text = listItem.productName //+" Type " + listItem.type
-        txtNoOfDays.text = listItem.noOfDaysHours
+        txtNoOfDaysHours.text = listItem.noOfDaysHours
+        txtRentalType.text = listItem.rentalType
+        txtPaymentStatus.text = listItem.paymentStatus
+        txtPaymentType.text = listItem.paymentType
+        txtOderStatus.text = listItem.orderStatus
+
+        if(listItem.rentalType.equals(Constants.Hourly)){
+            labelNoOf.text = "No of Hours:"
+        }
+        else{
+            labelNoOf.text = "No of Days:"
+        }
         txtControllerQty.text = listItem.noOfController
         txtControllerCharges.text = "Rs. "+listItem.controllerCharges
 

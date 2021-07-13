@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -13,12 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
 import com.plasdor.app.adapter.AdminAllOrderAdapter
-import com.plasdor.app.adapter.MerchantOrderListAdapter
 import com.plasdor.app.model.AdminAllOrderListItems
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.Constants
 import com.plasdor.app.viewModel.AdminViewModel
-import com.plasdor.app.viewModel.MerchantListViewModel
 
 class AdminAllOrdersListFragment : Fragment() {
     lateinit var rootView: View
@@ -28,6 +27,7 @@ class AdminAllOrdersListFragment : Fragment() {
     lateinit var mLayoutManager: LinearLayoutManager
     var userId = ""
     var userType = ""
+    lateinit var txtTotal: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,12 +55,13 @@ class AdminAllOrdersListFragment : Fragment() {
         viewModelUser = ViewModelProvider(this).get(AdminViewModel::class.java)
         val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView)!!
         val progressBar: ProgressBar = rootView.findViewById(R.id.progressBar)!!
+        txtTotal = rootView.findViewById(R.id.txtTotal)!!
 
         mLayoutManager = LinearLayoutManager(requireActivity())
         recyclerView.layoutManager = mLayoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
 
-        listAdapter = AdminAllOrderAdapter(requireActivity())
+        listAdapter = AdminAllOrderAdapter(requireActivity(),txtTotal)
         recyclerView.adapter = listAdapter
         listAdapter.updateListItems(merchantOrderListItems)
 

@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
@@ -23,21 +21,35 @@ import com.plasdor.app.view.activity.MerchantHomeActivity
 import org.json.JSONException
 import org.json.JSONObject
 
-class MerchantOrderListAdapter (
+class MerchantOrderListAdapter(
     activityContext: Context,
-    val userType: String
+    val userType: String,
+    private val txtTotal: TextView
 ) :
     RecyclerView.Adapter<MerchantOrderListAdapter.MyViewHolder>(), ApiResponse {
 
     private val listItems = ArrayList<MyOrderListItems>()
     var context: Context = activityContext
+    var totalEarnedAmount = 0f
 
     fun updateListItems(categoryModel: ArrayList<MyOrderListItems>) {
         listItems.clear()
         listItems.addAll(categoryModel)
         notifyDataSetChanged()
+        updateTotalAmount()
     }
 
+
+    private fun updateTotalAmount() {
+        for (i in 0..listItems.size - 1) {
+            var bAmt = listItems[i].merchantWillGet
+            if (bAmt.equals("")) {
+                bAmt = "0"
+            }
+            totalEarnedAmount = totalEarnedAmount + bAmt.toFloat()
+        }
+        txtTotal.text = totalEarnedAmount.toString()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var itemView: View =

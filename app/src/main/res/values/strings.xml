@@ -26,6 +26,7 @@
     <string name="deliveryNote"><i>*Note: </i>If you will not deliver then You will be charged Rs.40 per order.</string>
     <string name="deliveryNote40"><i>*Note: </i>Delivery Charges is Rs.40.</string>
     <string name="deliveryNote80"><i>*Note: </i>Delivery Charges is Rs.80.</string>
+    <string name="uEarned">You Earned Total Rs.</string>
 
     <string name="resendCode"><u>Resend</u></string>
 </resources>

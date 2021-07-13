@@ -22,7 +22,6 @@ data class AdminAllOrderListItems(
     val address: String,
     val city: String,
     val pincode: String,
-    val type: String,
     //Merchant Details who took order
     val merchantId: String,
     val merchantName: String,
@@ -36,6 +35,7 @@ data class AdminAllOrderListItems(
     val addedDate: String,
     val pId: String,
     val productName: String,
+    val type: String,
     val productPriceDaily: String,
     val productPriceHourly: String,
     val rentalType: String,
@@ -44,8 +44,12 @@ data class AdminAllOrderListItems(
     val controllerCharges: String,
     val deliveryCharges: String,
     val discountedPrice: String,
+    val transactionNo: String,
     val totalPrice: String,
+    val paymentType: String,
+    val paymentStatus: String,
     val adminWillGet: String,
     val merchantWillGet: String,
+    val orderStatus: String,
     val deliveredBy: String
 ) : Parcelable

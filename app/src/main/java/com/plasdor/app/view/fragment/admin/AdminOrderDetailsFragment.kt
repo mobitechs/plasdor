@@ -41,9 +41,17 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtUserMobileNo: AppCompatTextView
     lateinit var txtUserAddress: AppCompatTextView
 
-    lateinit var txtNoOfDays: AppCompatTextView
+    lateinit var labelNoOf: AppCompatTextView
+    lateinit var txtPaymentStatus: AppCompatTextView
+    lateinit var txtPaymentType: AppCompatTextView
+    lateinit var txtOderStatus: AppCompatTextView
+    lateinit var txtNoOfDaysHours: AppCompatTextView
+    lateinit var txtRentalType: AppCompatTextView
     lateinit var txtControllerQty: AppCompatTextView
     lateinit var txtControllerCharges: AppCompatTextView
+    lateinit var txtOrderDeliverBy: AppCompatTextView
+    lateinit var txtMerchantEarned: AppCompatTextView
+    lateinit var txtAdminEarned: AppCompatTextView
 
     lateinit var spinner: AppCompatSpinner
     var userType = ""
@@ -85,7 +93,15 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
         txtUserMobileNo = rootView.findViewById(R.id.txtUserMobileNo)!!
         txtUserAddress = rootView.findViewById(R.id.txtUserAddress)!!
 
-        txtNoOfDays = rootView.findViewById(R.id.txtNoOfDays)!!
+        txtAdminEarned = rootView.findViewById(R.id.txtAdminEarned)!!
+        txtMerchantEarned = rootView.findViewById(R.id.txtMerchantEarned)!!
+        txtOrderDeliverBy = rootView.findViewById(R.id.txtOrderDeliverBy)!!
+        txtOderStatus = rootView.findViewById(R.id.txtOderStatus)!!
+        txtPaymentStatus = rootView.findViewById(R.id.txtPaymentStatus)!!
+        txtPaymentType = rootView.findViewById(R.id.txtPaymentType)!!
+        txtRentalType = rootView.findViewById(R.id.txtRentalType)!!
+        labelNoOf = rootView.findViewById(R.id.labelNoOf)!!
+        txtNoOfDaysHours = rootView.findViewById(R.id.txtNoOfDays)!!
         txtControllerQty = rootView.findViewById(R.id.txtControllerQty)!!
         txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)!!
 
@@ -97,7 +113,7 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
         txtTotal.text = "Rs. " + listItem.totalPrice
         txtProductDetails.text = listItem.productName// + " Type " + listItem.type
 
-        txtNoOfDays.text = listItem.noOfDaysHours
+        txtNoOfDaysHours.text = listItem.noOfDaysHours
         txtControllerQty.text = listItem.noOfController
         txtControllerCharges.text = "Rs. "+listItem.controllerCharges
 
@@ -110,6 +126,30 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
         txtMerchantEmail.text = listItem.merchantEmail
         txtMerchantMobile.text = listItem.merchantMobile
         txtMerchantAddress.text = listItem.merchantAddress + " " + listItem.merchantCity + " " + listItem.merchantPinCode
+
+
+        if(listItem.deliveredBy.equals(Constants.SELF)){
+            txtOrderDeliverBy.text = "Self Pickup from user."
+        }
+        else if(listItem.deliveredBy.equals(Constants.COMPANY)){
+            txtOrderDeliverBy.text = "Company will deliver this order"
+        }
+        else{
+            txtOrderDeliverBy.text = "You have to deliver this order"
+        }
+        txtMerchantEarned.text = "Rs. "+listItem.merchantWillGet
+        txtAdminEarned.text = "Rs. "+listItem.adminWillGet
+        txtRentalType.text = listItem.rentalType
+        txtPaymentStatus.text = listItem.paymentStatus
+        txtPaymentType.text = listItem.paymentType
+        txtOderStatus.text = listItem.orderStatus
+
+        if(listItem.rentalType.equals(Constants.Hourly)){
+            labelNoOf.text = "No of Hours:"
+        }
+        else{
+            labelNoOf.text = "No of Days:"
+        }
 
         setupOrderStatusSpinner()
     }

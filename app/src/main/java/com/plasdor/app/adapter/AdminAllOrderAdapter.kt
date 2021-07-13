@@ -7,24 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
 import com.plasdor.app.model.AdminAllOrderListItems
-import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.utils.parseDateToddMMyyyy
 import com.plasdor.app.view.activity.AdminHomeActivity
-import com.plasdor.app.view.activity.MerchantHomeActivity
 
 class AdminAllOrderAdapter(
-    activityContext: Context
+    activityContext: Context,
+    private val txtTotal: TextView
 ) :
     RecyclerView.Adapter<AdminAllOrderAdapter.MyViewHolder>() {
 
     private var listItems = ArrayList<AdminAllOrderListItems>()
     private val allListItems = ArrayList<AdminAllOrderListItems>()
     var context: Context = activityContext
+    var totalEarnedAmount = 0f
 
     fun updateListItems(list: ArrayList<AdminAllOrderListItems>) {
         listItems.clear()
@@ -32,8 +33,21 @@ class AdminAllOrderAdapter(
         listItems.addAll(list)
         allListItems.addAll(list)
         notifyDataSetChanged()
+        updateTotalAmount()
     }
 
+
+    private fun updateTotalAmount() {
+        for (i in 0..listItems.size - 1) {
+            var bAmt = listItems[i].adminWillGet
+            if (bAmt.equals("")) {
+                bAmt = "0"
+            }
+            totalEarnedAmount = totalEarnedAmount + bAmt.toFloat()
+        }
+        txtTotal.text = totalEarnedAmount.toString()
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var itemView: View =
