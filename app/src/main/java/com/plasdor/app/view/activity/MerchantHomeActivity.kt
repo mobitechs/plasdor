@@ -19,6 +19,7 @@ import com.plasdor.app.callbacks.AlertDialogBtnClickedCallBack
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import com.plasdor.app.view.fragment.ProfileFragment
+import com.plasdor.app.view.fragment.WalletFragment
 import com.plasdor.app.view.fragment.merchant.*
 import kotlinx.android.synthetic.main.activity_merchant_home.*
 import kotlinx.android.synthetic.main.contenair.*
@@ -51,6 +52,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         llFeedback.setOnClickListener(this)
         llSupport.setOnClickListener(this)
         llLogout.setOnClickListener(this)
+        menuWallet.setOnClickListener(this)
 
     }
 
@@ -75,6 +77,10 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
             R.id.lMyProduct -> {
                 displayView(4)
             }
+            R.id.menuWallet -> {
+                displayView(8)
+            }
+
 
             R.id.llShare -> {
                 ShareApp()
@@ -216,6 +222,15 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                     false,
                     R.id.nav_host_fragment,
                     "MerchantFragmentProductList"
+                )
+            }
+            8 -> {
+                toolbarTitle("Wallet")
+                addFragment(
+                    WalletFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "WalletFragment"
                 )
             }
 
