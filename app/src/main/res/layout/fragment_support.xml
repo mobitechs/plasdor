@@ -8,9 +8,72 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtSupport1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/support1"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txtSupport2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/support2"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txtSupport3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/support3"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txtSupport4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/support4"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txtSupport5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/support5"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txtSupport6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/support6"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_15sdp"

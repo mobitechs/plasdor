@@ -8,6 +8,7 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.plasdor.app.R
 import com.plasdor.app.model.ProductListItems
@@ -32,6 +33,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         val window: Window = window
         setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
+
+        MobileAds.initialize(this) {}
 
         val userDetails = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
         if (userDetails?.get(0)?.userType == Constants.ADMIN || userDetails?.get(0)?.userType == Constants.MERCHANT) {

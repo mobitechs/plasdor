@@ -19,6 +19,7 @@ class Constants {
         const val POINTS_ON_SHARE = 15
         const val POINTS_ON_ADS    = 2
         const val POINTS_ON_ORDER= 20
+        const val EARNED_POINTS= "earnedPoints"
 
         const val ISLOGIN = "isLogin"
         const val userId = "userId"

@@ -115,6 +115,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         llSupport.setOnClickListener(this)
         ivClose.setOnClickListener(this)
         llLogout.setOnClickListener(this)
+        menuWallet.setOnClickListener(this)
 
     }
 
@@ -153,6 +154,9 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             R.id.llBazar -> {
                 displayView(7)
+            }
+            R.id.menuWallet -> {
+                displayView(8)
             }
 
             R.id.llLogout -> {
@@ -301,6 +305,15 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     false,
                     R.id.nav_host_fragment,
                     "BazarListFragment"
+                )
+            }
+            8 -> {
+                toolbarTitle("Wallet")
+                addFragment(
+                    WalletFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "WalletFragment"
                 )
             }
         }

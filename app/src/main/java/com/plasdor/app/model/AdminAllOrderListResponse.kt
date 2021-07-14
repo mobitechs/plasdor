@@ -22,6 +22,8 @@ data class AdminAllOrderListItems(
     val address: String,
     val city: String,
     val pincode: String,
+    val userLat: String,
+    val userLon: String,
     //Merchant Details who took order
     val merchantId: String,
     val merchantName: String,

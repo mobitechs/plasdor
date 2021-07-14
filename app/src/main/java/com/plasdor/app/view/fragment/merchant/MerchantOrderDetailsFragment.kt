@@ -1,14 +1,17 @@
 package com.plasdor.app.view.fragment.merchant
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.fragment.app.Fragment
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.MyOrderListItems
@@ -18,6 +21,7 @@ import com.plasdor.app.utils.apiPostCall
 import com.plasdor.app.utils.showToastMsg
 import org.json.JSONException
 import org.json.JSONObject
+
 
 class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
 
@@ -49,6 +53,7 @@ class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtControllerCharges: AppCompatTextView
     lateinit var txtOrderDeliverBy: AppCompatTextView
     lateinit var txtMerchantEarned: AppCompatTextView
+    lateinit var layoutDirection: LinearLayout
 
     var userType = ""
 
@@ -95,7 +100,20 @@ class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
         txtNoOfDaysHours = rootView.findViewById(R.id.txtNoOfDays)!!
         txtControllerQty = rootView.findViewById(R.id.txtControllerQty)!!
         txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)!!
+
 //        var details = listItem.orderDetails.toString().replace(",", "\n")
+
+        layoutDirection = rootView.findViewById(R.id.layoutDirection)!!
+        layoutDirection.setOnClickListener {
+            var sourceLatitude = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.latitude.toString()
+            var sourceLongitude = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.longitude.toString()
+            var destinationLatitude = listItem.latitude
+            var destinationLongitude = listItem.longitude
+            val uri =
+                "http://maps.google.com/maps?saddr=" + sourceLatitude.toString() + "," + sourceLongitude.toString() + "&daddr=" + destinationLatitude.toString() + "," + destinationLongitude
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(intent)
+        }
 
         txtOrderId.text = listItem.orderId
 //        txtOrderStatus.text = listItem.status
@@ -105,7 +123,9 @@ class MerchantOrderDetailsFragment : Fragment(), ApiResponse {
         txtEmail.text = listItem.email
         txtMobileNo.text = listItem.mobile
         txtAmount.text = "Rs. " + listItem.totalPrice
-        txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals("null")) "Rs. 0" else "Rs. " + listItem.deliveryCharges
+        txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals(
+                "null"
+            )) "Rs. 0" else "Rs. " + listItem.deliveryCharges
         txtTotal.text = "Rs. " + listItem.totalPrice
         txtProductDetails.text = listItem.productName //+" Type " + listItem.type
 

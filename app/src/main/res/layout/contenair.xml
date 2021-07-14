@@ -45,6 +45,15 @@
                 android:textSize="18sp"
                 android:visibility="visible" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/menuWallet"
+                android:layout_alignParentEnd="true"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_12sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_account_balance_wallet_24" />
+
             <RelativeLayout
                 android:id="@+id/layoutCart"
                 android:layout_width="wrap_content"

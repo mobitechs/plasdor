@@ -1,11 +1,14 @@
 package com.plasdor.app.view.fragment.admin
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
@@ -52,6 +55,7 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtOrderDeliverBy: AppCompatTextView
     lateinit var txtMerchantEarned: AppCompatTextView
     lateinit var txtAdminEarned: AppCompatTextView
+    lateinit var layoutDirection: LinearLayout
 
     lateinit var spinner: AppCompatSpinner
     var userType = ""
@@ -149,6 +153,18 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
         }
         else{
             labelNoOf.text = "No of Days:"
+        }
+
+        layoutDirection = rootView.findViewById(R.id.layoutDirection)!!
+        layoutDirection.setOnClickListener {
+            var sourceLatitude = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.latitude.toString()
+            var sourceLongitude = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.longitude.toString()
+            var destinationLatitude = listItem.userLat
+            var destinationLongitude = listItem.userLon
+            val uri =
+                "http://maps.google.com/maps?saddr=" + sourceLatitude.toString() + "," + sourceLongitude.toString() + "&daddr=" + destinationLatitude.toString() + "," + destinationLongitude
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(intent)
         }
 
         setupOrderStatusSpinner()

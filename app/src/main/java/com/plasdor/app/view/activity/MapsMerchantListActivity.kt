@@ -14,7 +14,7 @@ import com.plasdor.app.R
 import com.plasdor.app.model.AvailableMerchantListItem
 import com.plasdor.app.model.UserModel
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsMerchantListActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     var merchantListItems = ArrayList<AvailableMerchantListItem>()
@@ -50,6 +50,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(userLat.toDouble(), userLong.toDouble())
         mMap.addMarker(MarkerOptions().position(sydney).title(userName).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16F))
+
 
 
 

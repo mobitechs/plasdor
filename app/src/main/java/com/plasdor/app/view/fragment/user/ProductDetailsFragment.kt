@@ -24,7 +24,7 @@ import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.ThreeTwoImageView
 import com.plasdor.app.utils.openActivity
 import com.plasdor.app.utils.setImage
-import com.plasdor.app.view.activity.MapsActivity
+import com.plasdor.app.view.activity.MapsMerchantListActivity
 import com.plasdor.app.view.activity.PlaceOrderActivity
 import com.plasdor.app.viewModel.UserListViewModel
 
@@ -208,7 +208,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             }
         }
         txtViewOnMap.setOnClickListener {
-            requireContext().openActivity(MapsActivity::class.java) {
+            requireContext().openActivity(MapsMerchantListActivity::class.java) {
                 putParcelableArrayList("merchantListItems", merchantListItems)
                 putString("userLat", userLat)
                 putString("userLong", userLong)

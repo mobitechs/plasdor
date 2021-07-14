@@ -1,11 +1,14 @@
 package com.plasdor.app.view.fragment.user
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
@@ -47,6 +50,7 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtControllerQty: AppCompatTextView
     lateinit var txtControllerCharges: AppCompatTextView
     lateinit var spinner: AppCompatSpinner
+    lateinit var layoutDirection: LinearLayout
     var userType = ""
 
     override fun onCreateView(
@@ -124,6 +128,18 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
         txtMerchantAddress.text = listItem.address+" "+listItem.city+" "+listItem.pincode
 
         setupOrderStatusSpinner()
+
+        layoutDirection = rootView.findViewById(R.id.layoutDirection)!!
+        layoutDirection.setOnClickListener {
+            var sourceLatitude = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.latitude.toString()
+            var sourceLongitude = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)?.longitude.toString()
+            var destinationLatitude = listItem.latitude  //merchant lat
+            var destinationLongitude = listItem.longitude//merchant lon
+            val uri =
+                "http://maps.google.com/maps?saddr=" + sourceLatitude.toString() + "," + sourceLongitude.toString() + "&daddr=" + destinationLatitude.toString() + "," + destinationLongitude
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(intent)
+        }
     }
 
     private fun setupOrderStatusSpinner() {
