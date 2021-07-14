@@ -1,6 +1,8 @@
 package com.plasdor.app.view.fragment.merchant
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
 import com.plasdor.app.R
 import com.plasdor.app.adapter.MerchantOrderListAdapter
 import com.plasdor.app.model.MyOrderListItems
@@ -30,6 +33,7 @@ class MerchantOrderListFragment : Fragment() {
     lateinit var txtTotal: TextView
     var userId = ""
     var userType = ""
+    var searchText = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +55,24 @@ class MerchantOrderListFragment : Fragment() {
                 ?.get(0)?.userId.toString()
 
         setupRecyclerView()
+        searchFilter()
+    }
+
+    private fun searchFilter() {
+        val edSearch: TextInputEditText = rootView.findViewById(R.id.edSearch)!!
+
+        edSearch.hint= "Search by Order No,status,date address ect"
+        edSearch.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                searchText = s.toString()
+                listAdapter.getFilter()!!.filter(searchText)
+
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+        })
     }
 
     private fun setupRecyclerView() {

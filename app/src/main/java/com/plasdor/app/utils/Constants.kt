@@ -64,7 +64,7 @@ class Constants {
 //        val XSeriesSPriceArrayHr = arrayOf("250", "350", "450", "550", "650", "750", "850")
 
 
-        val orderStatusArray = arrayOf("Received", "Accepted", "Placed", "Completed")
+        val orderStatusArray = arrayOf("Received", "Pending", "Delivered")
 
 
     }

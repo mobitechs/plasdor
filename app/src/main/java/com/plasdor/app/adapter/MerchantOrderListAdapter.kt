@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Filter
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
@@ -28,13 +31,16 @@ class MerchantOrderListAdapter(
 ) :
     RecyclerView.Adapter<MerchantOrderListAdapter.MyViewHolder>(), ApiResponse {
 
-    private val listItems = ArrayList<MyOrderListItems>()
+    private var listItems = ArrayList<MyOrderListItems>()
+    private val allListItems = ArrayList<MyOrderListItems>()
     var context: Context = activityContext
     var totalEarnedAmount = 0f
 
     fun updateListItems(categoryModel: ArrayList<MyOrderListItems>) {
         listItems.clear()
+        allListItems.clear()
         listItems.addAll(categoryModel)
+        allListItems.addAll(categoryModel)
         notifyDataSetChanged()
         updateTotalAmount()
     }
@@ -71,7 +77,7 @@ class MerchantOrderListAdapter(
         holder.txtOrderId.text = item.orderId
         holder.txtOrderAmount.text = "Rs." + item.totalPrice
         //holder.status = item.status
-        holder.txtOrderStatus.text = holder.status
+
         holder.txtProductDetails.text  = item.productName //+" Type "+item.type
         holder.txtUserAddress.text  = item.address+" "+item.city+" "+item.pincode
 
@@ -91,43 +97,69 @@ class MerchantOrderListAdapter(
             (context as MerchantHomeActivity?)!!.OpenOrderDetails(bundle)
         }
 
-//        holder.txtOrderStatus.visibility = View.GONE
-//        holder.spinner.visibility = View.VISIBLE
-//        val adapter = ArrayAdapter(
-//            context,
-//            R.layout.spinner_layout,
-//            Constants.orderStatusArray
-//        )
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        holder.spinner.setAdapter(adapter)
-//
-//        holder.spinner.setSelection(Constants.orderStatusArray.indexOf(holder.status))
-//        holder.spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-//
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//
-//            }
-//
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                var status = Constants.orderStatusArray[p2]
-//                if (!holder.status.equals(status)) {
-//                    holder.status = status
-////                        listItems[position].status = status
-//                    callAPIToChangeOrderStatus(item.orderId, status)
-//                }
-//
-//            }
-//        })
+
+
+        if (item.orderStatus.equals("Delivered")) {
+            holder.txtOrderStatus.text = item.orderStatus
+            holder.txtOrderStatus.visibility = View.VISIBLE
+            holder.spinner.visibility = View.GONE
+            holder.txtDeliverBy.visibility = View.GONE
+
+        } else {
+            if (item.deliveredBy.equals(Constants.COMPANY)) {
+                holder.txtOrderStatus.visibility = View.VISIBLE
+                holder.txtDeliverBy.visibility = View.VISIBLE
+                holder.txtDeliverBy.text = "Delivered by Company"
+                holder.spinner.visibility = View.GONE
+            }
+            else if (item.deliveredBy.equals(Constants.MERCHANT)) {
+                holder.txtOrderStatus.visibility = View.GONE
+                holder.spinner.visibility = View.VISIBLE
+                holder.txtDeliverBy.visibility = View.VISIBLE
+                holder.txtDeliverBy.text = "Delivered by You"
+            }
+            else if (item.deliveredBy.equals(Constants.SELF)) {
+                holder.txtOrderStatus.visibility = View.GONE
+                holder.spinner.visibility = View.VISIBLE
+                holder.txtDeliverBy.visibility = View.VISIBLE
+                holder.txtDeliverBy.text = "Self Pickup by User"
+            }
+        }
+
+
+        val adapter = ArrayAdapter(
+            context,
+            R.layout.spinner_layout,
+            Constants.orderStatusArray
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        holder.spinner.setAdapter(adapter)
+
+        holder.spinner.setSelection(Constants.orderStatusArray.indexOf(item.orderStatus))
+        holder.spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                var status = Constants.orderStatusArray[p2]
+                if (!item.orderStatus.equals(status)) {
+//                        listItems[position].status = status
+                    callAPIToChangeOrderStatus(item.orderId, status)
+                }
+
+            }
+        })
     }
 
     private fun callAPIToChangeOrderStatus(orderId: String, status: String) {
-        val method = "ChangeOrderStatus"
+        val method = "changeOrderStatus"
         val jsonObject = JSONObject()
         try {
             jsonObject.put("method", method)
             jsonObject.put("orderId", orderId)
             jsonObject.put("orderStatus", status)
-            jsonObject.put("clientBusinessId", Constants.clientBusinessId)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -141,13 +173,49 @@ class MerchantOrderListAdapter(
         var txtOrderStatus: AppCompatTextView = view.findViewById(R.id.txtOrderStatus)
         var txtOrderDate: AppCompatTextView = view.findViewById(R.id.txtOrderDate)
         var spinner: AppCompatSpinner = view.findViewById(R.id.spinner)
+        var txtDeliverBy: AppCompatTextView = view.findViewById(R.id.txtDeliverBy)
         var txtProductDetails: AppCompatTextView = view.findViewById(R.id.txtProductDetails)
         var txtUserAddress: AppCompatTextView = view.findViewById(R.id.txtUserAddress)
 
-        var status = ""
-
         val cardView: View = itemView
 
+    }
+
+    fun getFilter(): Filter? {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults? {
+                val charString = charSequence.toString()
+                if (charString.isEmpty()) {
+                    listItems = allListItems
+                } else {
+                    val filteredList: MutableList<MyOrderListItems> = ArrayList()
+                    for (row in allListItems) {
+                        if (row.orderId.toLowerCase().contains(charString.toLowerCase())
+                            || row.totalPrice.toLowerCase().contains(charString.toLowerCase())
+                            || row.orderStatus.toLowerCase().contains(charString.toLowerCase())
+                            || row.addedDate.toLowerCase().contains(charString.toLowerCase())
+                            || row.address.toLowerCase().contains(charString.toLowerCase())
+                            || row.city.toLowerCase().contains(charString.toLowerCase())
+                            || row.productName.toLowerCase().contains(charString.toLowerCase())
+                        ) {
+                            filteredList.add(row)
+                        }
+                    }
+                    listItems = filteredList as ArrayList<MyOrderListItems>
+                }
+                val filterResults = FilterResults()
+                filterResults.values = listItems
+                return filterResults
+            }
+
+            override fun publishResults(
+                charSequence: CharSequence?,
+                filterResults: FilterResults
+            ) {
+                listItems = filterResults.values as ArrayList<MyOrderListItems>
+                notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onSuccess(data: Any, tag: String) {
