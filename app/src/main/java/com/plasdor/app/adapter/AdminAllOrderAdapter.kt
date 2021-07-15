@@ -85,7 +85,14 @@ class AdminAllOrderAdapter(
         holder.txtOrderDate.text = orderDate
 //        holder.txtOrderDetails.text = item.orderDetails
 
-
+        if(item.paymentType.equals("Redeem")){
+            holder.txtRedeemPoint.text = item.redeemPointsUsed+" Points"
+            holder.txtRedeemPoint.visibility = View.VISIBLE
+            holder.txtOrderAmount.visibility = View.GONE
+        }else{
+            holder.txtRedeemPoint.visibility = View.GONE
+            holder.txtOrderAmount.visibility = View.VISIBLE
+        }
         holder.itemView.setOnClickListener {
 //            context.openActivity(ProductDetailsFragment::class.java)
 //            {
@@ -166,6 +173,7 @@ class AdminAllOrderAdapter(
         var txtUserName: AppCompatTextView = view.findViewById(R.id.txtUserName)
         var txtMerchantName: AppCompatTextView = view.findViewById(R.id.txtMerchantName)
         var txtDeliverBy: AppCompatTextView = view.findViewById(R.id.txtDeliverBy)
+        var txtRedeemPoint: AppCompatTextView = view.findViewById(R.id.txtRedeemPoint)
 
         val cardView: View = itemView
 

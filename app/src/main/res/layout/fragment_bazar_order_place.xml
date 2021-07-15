@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_item_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnBuyNow"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.plasdor.app.utils.ThreeTwoImageView
+                android:id="@+id/ivProdImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_not_available" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvProductName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="PS 4"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Redeem for:" />
+                        <RadioGroup
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:id="@+id/radio_group"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <RadioButton
+                                android:checked="true"
+                                android:id="@+id/rd1Day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 Day 700 points" />
+
+                            <RadioButton
+                                android:id="@+id/rd3day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3 Day 1500 points" />
+                            <RadioButton
+                                android:id="@+id/rd5Day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="5 Day 2100 points" />
+
+                            <RadioButton
+                                android:id="@+id/rdFree"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Free 15000 points" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:textStyle="bold"
+                        android:textColor="@color/red"
+                        android:id="@+id/txtDeliveryNote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/insufficientPoint" />
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/black_transparent" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtViewOnMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@string/viewOnMap" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtSelectMerchantLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:text="Select Merchant"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+
+
+                <include layout="@layout/recyclerview" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnBuyNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:padding="@dimen/_12sdp"
+        android:text="BUY NOW"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+    <include layout="@layout/loader" />
+</RelativeLayout>

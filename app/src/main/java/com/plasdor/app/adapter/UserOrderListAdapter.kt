@@ -67,6 +67,15 @@ class UserOrderListAdapter(
 //        holder.txtOrderDetails.text = item.orderDetails
 
 
+        if(item.paymentType.equals("Redeem")){
+            holder.txtRedeemPoint.text = item.redeemPointsUsed+" Points"
+            holder.txtRedeemPoint.visibility = View.VISIBLE
+            holder.txtOrderAmount.visibility = View.GONE
+        }else{
+            holder.txtRedeemPoint.visibility = View.GONE
+            holder.txtOrderAmount.visibility = View.VISIBLE
+        }
+
         holder.itemView.setOnClickListener {
 //            context.openActivity(ProductDetailsFragment::class.java)
 //            {
@@ -135,6 +144,7 @@ class UserOrderListAdapter(
         var txtOrderDate: TextView = view.findViewById(R.id.txtOrderDate)
         var spinner: AppCompatSpinner = view.findViewById(R.id.spinner)
         var txtProductDetails: AppCompatTextView = view.findViewById(R.id.txtProductDetails)
+        var txtRedeemPoint: AppCompatTextView = view.findViewById(R.id.txtRedeemPoint)
 
         var status = ""
 

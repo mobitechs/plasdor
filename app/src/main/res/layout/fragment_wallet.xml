@@ -29,7 +29,7 @@
                 android:id="@+id/txtRewardPoints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_85sdp"
+                android:textSize="@dimen/_65sdp"
                 android:text="55"
                 android:textColor="@color/blue"/>
 

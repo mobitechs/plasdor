@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
@@ -51,6 +52,9 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtControllerCharges: AppCompatTextView
     lateinit var spinner: AppCompatSpinner
     lateinit var layoutDirection: LinearLayout
+    lateinit var layoutRedeemPoints: RelativeLayout
+    lateinit var txtRedeemPoint: AppCompatTextView
+    lateinit var layoutPaymentDetails: LinearLayout
     var userType = ""
 
     override fun onCreateView(
@@ -93,6 +97,19 @@ class UserOrderDetailsFragment : Fragment(), ApiResponse {
         txtNoOfDaysHours = rootView.findViewById(R.id.txtNoOfDays)!!
         txtControllerQty = rootView.findViewById(R.id.txtControllerQty)!!
         txtControllerCharges = rootView.findViewById(R.id.txtControllerCharges)!!
+
+        layoutRedeemPoints = rootView.findViewById(R.id.layoutRedeemPoints)!!
+        layoutPaymentDetails = rootView.findViewById(R.id.layoutPaymentDetails)!!
+        txtRedeemPoint = rootView.findViewById(R.id.txtRedeemPoint)!!
+
+        if(listItem.paymentType.equals("Redeem")){
+            txtRedeemPoint.text = listItem.redeemPointsUsed
+            layoutRedeemPoints.visibility = View.VISIBLE
+            layoutPaymentDetails.visibility = View.GONE
+        }else{
+            layoutRedeemPoints.visibility = View.GONE
+            layoutPaymentDetails.visibility = View.VISIBLE
+        }
 
 //        var details = listItem.orderDetails.toString().replace(",", "\n")
 

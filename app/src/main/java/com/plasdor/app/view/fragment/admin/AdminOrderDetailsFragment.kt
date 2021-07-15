@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
@@ -56,6 +57,10 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtMerchantEarned: AppCompatTextView
     lateinit var txtAdminEarned: AppCompatTextView
     lateinit var layoutDirection: LinearLayout
+
+    lateinit var layoutRedeemPoints: RelativeLayout
+    lateinit var txtRedeemPoint: AppCompatTextView
+    lateinit var layoutPaymentDetails: LinearLayout
 
     lateinit var spinner: AppCompatSpinner
     var userType = ""
@@ -165,6 +170,19 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
                 "http://maps.google.com/maps?saddr=" + sourceLatitude.toString() + "," + sourceLongitude.toString() + "&daddr=" + destinationLatitude.toString() + "," + destinationLongitude
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
             startActivity(intent)
+        }
+
+        layoutRedeemPoints = rootView.findViewById(R.id.layoutRedeemPoints)!!
+        layoutPaymentDetails = rootView.findViewById(R.id.layoutPaymentDetails)!!
+        txtRedeemPoint = rootView.findViewById(R.id.txtRedeemPoint)!!
+
+        if(listItem.paymentType.equals("Redeem")){
+            txtRedeemPoint.text = listItem.redeemPointsUsed
+            layoutRedeemPoints.visibility = View.VISIBLE
+            layoutPaymentDetails.visibility = View.GONE
+        }else{
+            layoutRedeemPoints.visibility = View.GONE
+            layoutPaymentDetails.visibility = View.VISIBLE
         }
 
         setupOrderStatusSpinner()

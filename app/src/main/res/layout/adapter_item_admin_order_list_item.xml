@@ -57,6 +57,17 @@
                     android:text="Rs.450"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_14sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
+                    android:id="@+id/txtRedeemPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="700 Points"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/_14sdp" />
             </RelativeLayout>
 
             <LinearLayout

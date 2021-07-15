@@ -8,20 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
+import com.plasdor.app.callbacks.AddOrRemoveListener
 import com.plasdor.app.callbacks.AddressSelectCallback
-import com.plasdor.app.model.BazarListItems
+import com.plasdor.app.model.ProductListItems
+import com.plasdor.app.utils.setImage
 import kotlinx.android.synthetic.main.adapter_item_bazar_list_item.view.*
 
 class BazarListAdapter(
-    activityContext: Context
+    activityContext: Context,
+    private val addOrRemoveListener: AddOrRemoveListener,
 ) :
     RecyclerView.Adapter<BazarListAdapter.MyViewHolder>() {
 
-    private val listItems = ArrayList<BazarListItems>()
+    private val listItems = ArrayList<ProductListItems>()
     var context: Context = activityContext
     var selectedPosition = -1
 
-    fun updateListItems(listModel: ArrayList<BazarListItems>) {
+    fun updateListItems(listModel: ArrayList<ProductListItems>) {
         listItems.clear()
         listItems.addAll(listModel)
         notifyDataSetChanged()
@@ -44,13 +47,27 @@ class BazarListAdapter(
     @SuppressLint("ResourceType")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        var item: BazarListItems = listItems.get(position)
+        var item: ProductListItems = listItems.get(position)
 
         holder.txtProductName.text = item.productName
-        holder.txtFreePoints.text = item.forFreePoints
-        holder.txtOneDayPoint.text = item.oneDayPoints
-        holder.txt3DayPoint.text = item.threeDayPoints
-        holder.txt5DayPoint.text = item.fiveDayPoints
+        holder.txtFreePoints.text = item.forFreePoints+" Points"
+        holder.txtOneDayPoint.text = item.oneDayPoints+" Points"
+        holder.txt3DayPoint.text = item.threeDayPoints+" Points"
+        holder.txt5DayPoint.text = item.fiveDayPoints+" Points"
+
+        val imagepath = item.img
+        if (imagepath == null || imagepath == " ") {
+            holder.productImage!!.background =
+                context.resources.getDrawable(R.drawable.img_not_available)
+
+        } else {
+            holder.productImage!!.setImage(imagepath)
+
+        }
+
+        holder.itemView.setOnClickListener {
+            addOrRemoveListener.selectProduct(item, position)
+        }
 
     }
 
@@ -61,6 +78,7 @@ class BazarListAdapter(
         var txtOneDayPoint = view.txtOneDayPoint
         var txt3DayPoint = view.txt3DayPoint
         var txt5DayPoint = view.txt5DayPoint
+        var productImage = view.productImage
 
 
         val cardView: View = itemView

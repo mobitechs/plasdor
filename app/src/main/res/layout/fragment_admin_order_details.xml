@@ -359,6 +359,34 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/layoutRedeemPoints"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Redeem Points:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtRedeemPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="" />
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/layoutPaymentDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <RelativeLayout
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
@@ -400,7 +428,6 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </RelativeLayout>
-
             <RelativeLayout
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="match_parent"
@@ -423,7 +450,6 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </RelativeLayout>
-
             <RelativeLayout
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="match_parent"
@@ -446,7 +472,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </RelativeLayout>
-
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

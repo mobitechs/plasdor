@@ -25,7 +25,7 @@ import com.plasdor.app.viewModel.UserListViewModel
 import org.json.JSONException
 import org.json.JSONObject
 
-class UserHomeFragment : Fragment(), AddOrRemoveListener, ApiResponse {
+class UserHomeFragment : Fragment(), AddOrRemoveListener {
 
     lateinit var rootView: View
     lateinit var viewModelUser: UserListViewModel
@@ -127,56 +127,20 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener, ApiResponse {
 
 
     override fun addToCart(item: ProductListItems, position: Int) {
-//        requireContext().addToCart(item)
     }
     override fun selectProduct(item: ProductListItems, position: Int) {
-//        requireActivity().showToastMsg("id:"+item.pId)
         var bundle = Bundle()
         bundle.putParcelable("item", item)
         (context as UserHomeActivity?)!!.OpenProductDetailsFragment(bundle)
     }
 
     override fun removeFromCart(item: ProductListItems, position: Int) {
-//        requireContext().removeToCart(item)
     }
 
     override fun editProduct(item: ProductListItems, position: Int) {
-        var bundle = Bundle()
-        bundle.putParcelable("item", item)
-        (context as UserHomeActivity?)!!.OpenEditProductFragment(bundle)
     }
 
     override fun deleteProduct(item: ProductListItems, pos: Int) {
-        position = pos
-        //call an api to delete product
-        val method = "DeleteProduct"
-        val jsonObject = JSONObject()
-        try {
-            jsonObject.put("method", method)
-            jsonObject.put("productId", item.pId)
-            jsonObject.put("userId", userId)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
-    }
-
-    override fun onSuccess(data: Any, tag: String) {
-        if (data.equals("SUCCESS")) {
-            requireContext().showToastMsg("Product deleted successfully.")
-
-            listItems!!.removeAt(position)
-            listAdapter.notifyItemRemoved(position)
-            listAdapter.notifyItemRangeChanged(position, listItems!!.size)
-            listAdapter.notifyDataSetChanged()
-
-        } else {
-            requireContext().showToastMsg("Failed to product delete.")
-        }
-    }
-
-    override fun onFailure(message: String) {
-        requireContext().showToastMsg(message)
     }
 
     override fun onResume() {

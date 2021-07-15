@@ -16,6 +16,7 @@ data class UserModel(
     var city: String,
     var pincode: String,
     var isSelected: Boolean,
+    var wallet: String,
     var latitude: String,
     var longitude: String
 ) : Parcelable

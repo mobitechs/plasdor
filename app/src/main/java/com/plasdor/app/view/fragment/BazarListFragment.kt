@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,26 +20,30 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.plasdor.app.R
 import com.plasdor.app.adapter.BazarListAdapter
+import com.plasdor.app.callbacks.AddOrRemoveListener
 import com.plasdor.app.callbacks.ApiResponse
-import com.plasdor.app.model.BazarListItems
+import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.apiPostCall
 import com.plasdor.app.utils.showToastMsg
+import com.plasdor.app.view.activity.UserHomeActivity
 import com.plasdor.app.viewModel.UserListViewModel
+import kotlinx.android.synthetic.main.spinner_layout.view.*
 import org.json.JSONException
 import org.json.JSONObject
 
 
-class BazarListFragment : Fragment(), ApiResponse {
+class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 
     lateinit var rootView: View
     lateinit var viewModelUser: UserListViewModel
     lateinit var listAdapter: BazarListAdapter
-    var listItems = ArrayList<BazarListItems>()
+    var listItems = ArrayList<ProductListItems>()
     lateinit var mLayoutManager: LinearLayoutManager
     var userId=""
     var rewardPoints=""
+    var userWalletPoint=""
 
     private var mRewardedAd: RewardedAd? = null
     private final var TAG = "BazarListFragment"
@@ -67,12 +72,21 @@ class BazarListFragment : Fragment(), ApiResponse {
         viewModelUser = ViewModelProvider(this).get(UserListViewModel::class.java)
         val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView)!!
         val progressBar: ProgressBar = rootView.findViewById(R.id.progressBar)!!
+        val txtWalletPoints: TextView = rootView.findViewById(R.id.txtWalletPoints)!!
+
+        userWalletPoint = SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.EARNED_POINTS).toString()
+
+        if (userWalletPoint.equals("null") || userWalletPoint.equals("")) {
+            userWalletPoint = "0"
+        }
+
+        txtWalletPoints.text = userWalletPoint
 
         mLayoutManager = LinearLayoutManager(requireActivity())
         recyclerView.layoutManager = mLayoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
 
-        listAdapter = BazarListAdapter(requireActivity())
+        listAdapter = BazarListAdapter(requireActivity(),this)
         recyclerView.adapter = listAdapter
         listAdapter.updateListItems(listItems)
 
@@ -135,7 +149,6 @@ class BazarListFragment : Fragment(), ApiResponse {
                                 rewardPoints = rewardItem.amount.toString()
                                 var rewardType = rewardItem.getType()
                                 requireContext().showToastMsg("ads success: " + rewardPoints)
-
                                 addRewardPoint()
                                 Log.d(TAG, "User earned the reward.")
                             }
@@ -169,6 +182,29 @@ class BazarListFragment : Fragment(), ApiResponse {
     override fun onFailure(message: String) {
         requireContext().showToastMsg(message)
     }
+
+    override fun selectProduct(item: ProductListItems, position: Int) {
+        var bundle = Bundle()
+        bundle.putParcelable("item", item)
+        (context as UserHomeActivity?)!!.OpenBazarOrderPlaceFragment(bundle)
+    }
+    override fun addToCart(item: ProductListItems, position: Int) {
+
+    }
+
+    override fun removeFromCart(item: ProductListItems, position: Int) {
+
+    }
+
+    override fun editProduct(item: ProductListItems, position: Int) {
+
+    }
+
+    override fun deleteProduct(item: ProductListItems, position: Int) {
+
+    }
+
+
 
 
 }

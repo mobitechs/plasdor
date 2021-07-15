@@ -408,6 +408,15 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             bundle
         )
     }
+    fun OpenBazarOrderPlaceFragment(bundle: Bundle) {
+        addFragmentWithData(
+            BazarOrderPlaceFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "BazarOrderPlaceFragment",
+            bundle
+        )
+    }
 
     fun OpenPlaceOrderFragment(bundle: Bundle) {
 //        addFragmentWithData(

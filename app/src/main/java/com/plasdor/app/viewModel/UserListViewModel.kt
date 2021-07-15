@@ -14,7 +14,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
     val addressListItems: LiveData<ArrayList<AddressListItems>>
     val myOrderListItems: LiveData<ArrayList<MyOrderListItems>>
     val merchantListItems: LiveData<ArrayList<AvailableMerchantListItem>>
-    val bazarListItems: LiveData<ArrayList<BazarListItems>>
+    val bazarListItems: LiveData<ArrayList<ProductListItems>>
 
 
     init {

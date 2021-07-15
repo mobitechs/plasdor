@@ -50,6 +50,7 @@ data class AdminAllOrderListItems(
     val totalPrice: String,
     val paymentType: String,
     val paymentStatus: String,
+    val redeemPointsUsed: String,
     val adminWillGet: String,
     val merchantWillGet: String,
     val orderStatus: String,

@@ -160,6 +160,8 @@ class EnterOTPFragment : Fragment(), ApiResponse {
             Log.d("user", "" + user)
             SharePreferenceManager.getInstance(requireContext()).saveUserLogin(Constants.USERDATA, user)
             userType = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)!!.userType
+
+            SharePreferenceManager.getInstance(requireContext()).save(Constants.EARNED_POINTS, user!![0].wallet)
         }
     }
 

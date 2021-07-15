@@ -18,7 +18,7 @@ class UserListRepository(val application: Application) : ApiResponse {
     val myOrderListItems = MutableLiveData<ArrayList<MyOrderListItems>>()
     val merchantListItems = MutableLiveData<ArrayList<AvailableMerchantListItem>>()
     val addressListItems = MutableLiveData<ArrayList<AddressListItems>>()
-    val bazarListItems = MutableLiveData<ArrayList<BazarListItems>>()
+    val bazarListItems = MutableLiveData<ArrayList<ProductListItems>>()
 
     var method = ""
     var userId = ""
@@ -90,8 +90,8 @@ class UserListRepository(val application: Application) : ApiResponse {
             }
             else if (method == "getBazarProductList") {
                 showProgressBar.value = false
-                val type = object : TypeToken<ArrayList<BazarListItems>>() {}.type
-                var listItems: ArrayList<BazarListItems>? =
+                val type = object : TypeToken<ArrayList<ProductListItems>>() {}.type
+                var listItems: ArrayList<ProductListItems>? =
                     gson.fromJson(data.toString(), type)
                 bazarListItems.value = listItems
             }

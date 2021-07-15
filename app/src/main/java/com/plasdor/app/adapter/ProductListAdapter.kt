@@ -85,52 +85,9 @@ class ProductListAdapter(
             holder.imageLoader!!.visibility = View.GONE
         }
 
-        if (cartListItems.contains(item)) {
-            holder.btnWishList.setImageResource(R.drawable.ic_baseline_remove_circle_24)
-        } else {
-            holder.btnWishList.setImageResource(R.drawable.ic_outline_add_circle_24)
-        }
-
-        holder.btnWishList.setOnClickListener {
-
-            if (SharePreferenceManager.getInstance(context)
-                    .getCartListItems(Constants.CartList) == null
-            ) {
-                holder.btnWishList.setImageResource(R.drawable.ic_baseline_remove_circle_24)
-                addOrRemoveListener.addToCart(item, position)
-            } else {
-                cartListItems = SharePreferenceManager.getInstance(context).getCartListItems(
-                    Constants.CartList
-                ) as ArrayList<ProductListItems>
-                if (cartListItems.contains(item)) {
-                    holder.btnWishList.setImageResource(R.drawable.ic_outline_add_circle_24)
-                    addOrRemoveListener.removeFromCart(item, position)
-                } else {
-                    holder.btnWishList.setImageResource(R.drawable.ic_baseline_remove_circle_24)
-                    addOrRemoveListener.addToCart(item, position)
-                }
-            }
-        }
-
-
-        if (userType.equals(Constants.ADMIN)) {
-            holder.adminBtnLayout.visibility = View.VISIBLE
-            holder.btnWishList.visibility = View.GONE
-
-        } else {
-            holder.btnWishList.visibility = View.VISIBLE
-            holder.adminBtnLayout.visibility = View.GONE
-        }
 
         holder.btnWishList.visibility=View.GONE
 
-
-        holder.btnEdit.setOnClickListener {
-            addOrRemoveListener.editProduct(item, position)
-        }
-        holder.btnDelete.setOnClickListener {
-            addOrRemoveListener.deleteProduct(item, position)
-        }
 
         holder.itemView.setOnClickListener {
             addOrRemoveListener.selectProduct(item, position)

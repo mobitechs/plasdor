@@ -289,8 +289,9 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="COD" />
             </RelativeLayout>
-
             <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/layoutRedeemPoints"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
@@ -301,83 +302,109 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="Discounted Amount:" />
+                    android:text="Redeem Points:" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtAmount"
+                    android:id="@+id/txtRedeemPoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_marginEnd="@dimen/_10sdp"
+            <LinearLayout
+                android:id="@+id/layoutPaymentDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="Controller Charges:" />
+                    android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtControllerCharges"
-                    android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Discounted Amount:" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="" />
-            </RelativeLayout>
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Controller Charges:" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtControllerCharges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="Delivery Charges:" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Delivery Charges:" />
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtDelivery"
-                    android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="" />
-            </RelativeLayout>
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="Total Payable:" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Total Payable:" />
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="" />
-            </RelativeLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="" />
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
