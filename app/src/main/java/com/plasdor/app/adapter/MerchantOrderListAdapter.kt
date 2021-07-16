@@ -85,7 +85,6 @@ class MerchantOrderListAdapter(
         holder.txtOrderDate.text = orderDate
 //        holder.txtOrderDetails.text = item.orderDetails
 
-
         holder.itemView.setOnClickListener {
 //            context.openActivity(ProductDetailsFragment::class.java)
 //            {
@@ -97,15 +96,13 @@ class MerchantOrderListAdapter(
             (context as MerchantHomeActivity?)!!.OpenOrderDetails(bundle)
         }
 
-
-
         if (item.orderStatus.equals("Delivered")) {
             holder.txtOrderStatus.text = item.orderStatus
             holder.txtOrderStatus.visibility = View.VISIBLE
             holder.spinner.visibility = View.GONE
             holder.txtDeliverBy.visibility = View.GONE
-
-        } else {
+        }
+        else {
             if (item.deliveredBy.equals(Constants.COMPANY)) {
                 holder.txtOrderStatus.visibility = View.VISIBLE
                 holder.txtDeliverBy.visibility = View.VISIBLE

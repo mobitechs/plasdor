@@ -60,7 +60,7 @@ class UserOrderFragment : Fragment() {
         recyclerView.layoutManager = mLayoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
 
-        listAdapter = UserOrderListAdapter(requireActivity(), userType)
+        listAdapter = UserOrderListAdapter(requireActivity())
         recyclerView.adapter = listAdapter
         listAdapter.updateListItems(listItems)
 

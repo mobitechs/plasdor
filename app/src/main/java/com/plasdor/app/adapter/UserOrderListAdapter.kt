@@ -24,10 +24,9 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class UserOrderListAdapter(
-    activityContext: Context,
-    val userType: String
+    activityContext: Context
 ) :
-    RecyclerView.Adapter<UserOrderListAdapter.MyViewHolder>(), ApiResponse {
+    RecyclerView.Adapter<UserOrderListAdapter.MyViewHolder>() {
 
     private val listItems = ArrayList<MyOrderListItems>()
     var context: Context = activityContext
@@ -38,15 +37,12 @@ class UserOrderListAdapter(
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var itemView: View =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.adapter_list_items_user_order, parent, false)
-
         return MyViewHolder(itemView)
     }
-
 
     override fun getItemCount(): Int {
         return listItems.size
@@ -64,14 +60,16 @@ class UserOrderListAdapter(
 
         var orderDate = parseDateToddMMyyyy(item.addedDate)
         holder.txtOrderDate.text = orderDate
-//        holder.txtOrderDetails.text = item.orderDetails
+        holder.txtDeliveryStatus.text = item.orderStatus
 
+//        holder.txtOrderDetails.text = item.orderDetails
 
         if(item.paymentType.equals("Redeem")){
             holder.txtRedeemPoint.text = item.redeemPointsUsed+" Points"
             holder.txtRedeemPoint.visibility = View.VISIBLE
             holder.txtOrderAmount.visibility = View.GONE
-        }else{
+        }
+        else{
             holder.txtRedeemPoint.visibility = View.GONE
             holder.txtOrderAmount.visibility = View.VISIBLE
         }
@@ -88,79 +86,23 @@ class UserOrderListAdapter(
         }
 
 
-        if (userType.equals(Constants.ADMIN)) {
-            holder.txtOrderStatus.visibility = View.GONE
-            holder.spinner.visibility = View.VISIBLE
-            val adapter = ArrayAdapter(
-                context,
-                R.layout.spinner_layout,
-                Constants.orderStatusArray
-            )
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            holder.spinner.setAdapter(adapter)
-
-            holder.spinner.setSelection(Constants.orderStatusArray.indexOf(holder.status))
-            holder.spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-
-                }
-
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    var status = Constants.orderStatusArray[p2]
-                    if (!holder.status.equals(status)) {
-                        holder.status = status
-//                        listItems[position].status = status
-                        callAPIToChangeOrderStatus(item.orderId, status)
-                    }
-
-                }
-            })
-        } else {
-            holder.txtOrderStatus.visibility = View.VISIBLE
-            holder.spinner.visibility = View.GONE
-        }
-    }
-
-    private fun callAPIToChangeOrderStatus(orderId: String, status: String) {
-        val method = "ChangeOrderStatus"
-        val jsonObject = JSONObject()
-        try {
-            jsonObject.put("method", method)
-            jsonObject.put("orderId", orderId)
-            jsonObject.put("orderStatus", status)
-            jsonObject.put("clientBusinessId", Constants.clientBusinessId)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
     }
 
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         var txtOrderId: TextView = view.findViewById(R.id.txtOrderId)
         var txtOrderAmount: TextView = view.findViewById(R.id.txtOrderAmount)
         var txtOrderStatus: TextView = view.findViewById(R.id.txtOrderStatus)
         var txtOrderDate: TextView = view.findViewById(R.id.txtOrderDate)
         var spinner: AppCompatSpinner = view.findViewById(R.id.spinner)
+        var txtDeliveryStatus: AppCompatTextView = view.findViewById(R.id.txtDeliveryStatus)
         var txtProductDetails: AppCompatTextView = view.findViewById(R.id.txtProductDetails)
         var txtRedeemPoint: AppCompatTextView = view.findViewById(R.id.txtRedeemPoint)
 
         var status = ""
-
         val cardView: View = itemView
 
     }
 
-    override fun onSuccess(data: Any, tag: String) {
-        if (data.equals("SUCCESS")) {
-            context.showToastMsg("Order status change successfully.")
-        } else {
-            context.showToastMsg("Failed to change order status.")
-        }
-    }
-
-    override fun onFailure(message: String) {
-        context.showToastMsg(message)
-    }
 }

@@ -33,7 +33,6 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_register, container, false)
-
         initView()
         return rootView
     }

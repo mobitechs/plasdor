@@ -13,6 +13,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
     val allProductListItems: LiveData<ArrayList<ProductListItems>>
     val addressListItems: LiveData<ArrayList<AddressListItems>>
     val myOrderListItems: LiveData<ArrayList<MyOrderListItems>>
+    val redeemHistoryListItems: LiveData<ArrayList<MyOrderListItems>>
     val merchantListItems: LiveData<ArrayList<AvailableMerchantListItem>>
     val bazarListItems: LiveData<ArrayList<ProductListItems>>
 
@@ -21,6 +22,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
         this.showProgressBar = repository.showProgressBar
         this.addressListItems = repository.addressListItems
         this.myOrderListItems = repository.myOrderListItems
+        this.redeemHistoryListItems = repository.redeemHistoryListItems
         this.allProductListItems = repository.allProductListItems
         this.merchantListItems = repository.merchantListItems
         this.bazarListItems = repository.bazarListItems
@@ -33,6 +35,9 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
 
     fun getMyOrderList(userId: String) {
         repository.getMyOrderList(userId)
+    }
+    fun getMyRedeemHistory(userId: String) {
+        repository.getMyRedeemHistory(userId)
     }
 
     fun getAddressList() {

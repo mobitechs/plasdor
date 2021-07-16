@@ -16,6 +16,7 @@ class UserListRepository(val application: Application) : ApiResponse {
     val showProgressBar = MutableLiveData<Boolean>()
     val allProductListItems = MutableLiveData<ArrayList<ProductListItems>>()
     val myOrderListItems = MutableLiveData<ArrayList<MyOrderListItems>>()
+    val redeemHistoryListItems = MutableLiveData<ArrayList<MyOrderListItems>>()
     val merchantListItems = MutableLiveData<ArrayList<AvailableMerchantListItem>>()
     val addressListItems = MutableLiveData<ArrayList<AddressListItems>>()
     val bazarListItems = MutableLiveData<ArrayList<ProductListItems>>()
@@ -43,6 +44,11 @@ class UserListRepository(val application: Application) : ApiResponse {
     fun getMyOrderList(userId: String) {
         showProgressBar.value = true
         method = "getUserWiseOrders"
+        var url = Constants.BASE_URL + "?method=$method&userId=$userId"
+        apiGetCall(url, this, method)
+    }
+    fun getMyRedeemHistory(userId: String) {
+        method = "getRedeemHistory"
         var url = Constants.BASE_URL + "?method=$method&userId=$userId"
         apiGetCall(url, this, method)
     }
@@ -87,6 +93,11 @@ class UserListRepository(val application: Application) : ApiResponse {
                 var listItems: ArrayList<MyOrderListItems>? =
                     gson.fromJson(data.toString(), type)
                 myOrderListItems.value = listItems
+            }else if (method == "getRedeemHistory") {
+                val type = object : TypeToken<ArrayList<MyOrderListItems>>() {}.type
+                var listItems: ArrayList<MyOrderListItems>? =
+                    gson.fromJson(data.toString(), type)
+                redeemHistoryListItems.value = listItems
             }
             else if (method == "getBazarProductList") {
                 showProgressBar.value = false
