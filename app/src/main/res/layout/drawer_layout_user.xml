@@ -195,7 +195,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
-                            android:src="@drawable/ic_baseline_add_circle_outline_24"
+                            android:src="@drawable/ic_baseline_format_list_numbered_rtl_24"
                             android:tint="@color/colorPrimary" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -219,7 +219,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
-                            android:src="@drawable/ic_baseline_add_circle_outline_24"
+                            android:src="@drawable/ic_baseline_shopping_cart_24"
                             android:tint="@color/colorPrimary" />
 
                         <androidx.appcompat.widget.AppCompatTextView

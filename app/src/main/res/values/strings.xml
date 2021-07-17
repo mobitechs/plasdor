@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Plasdor</string>
 
-    <string name="admob_app_id">ca-app-pub-6867366913789478~8304818397</string>
+    <string name="admob_app_id">ca-app-pub-5799348942632742~8783416261</string>
+    <string name="rewardedAd">ca-app-pub-5799348942632742/6098022101</string>
 
 
 

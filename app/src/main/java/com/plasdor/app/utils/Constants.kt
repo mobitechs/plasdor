@@ -58,7 +58,7 @@ class Constants {
         val XSeriesSPriceArray = arrayOf("949", "1749", "2449", "3149", "3449", "3949", "4449")
 
         val ps4NdXOneXNdSPriceArrayHr = arrayOf("199", "299", "449")
-        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("299", "399", "649")
+        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("299", "499", "649")
 //        val XOneSPriceArrayHr = arrayOf("200", "300", "400", "500", "600", "700", "800")
 //        val XSeriesSPriceArrayHr = arrayOf("250", "350", "450", "550", "650", "750", "850")
 

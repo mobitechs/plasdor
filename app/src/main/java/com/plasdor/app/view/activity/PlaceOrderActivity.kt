@@ -1,4 +1,4 @@
-package com.plasdor.app.view.activity
+    package com.plasdor.app.view.activity
 
 import android.app.Activity
 import android.content.DialogInterface
@@ -127,7 +127,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             priceToShow = (listItem.priceToShowHourly.toInt() * listItem.qty).toString()
             priceToSell = listItem.priceToSellHourly
 
-            labelPriceWithQty.text = "Price (${listItem.priceToSellHourly} * ${listItem.qty})"
+            labelPriceWithQty.text = "Price (${listItem.priceToSellHourly} * ${listItem.qty} Hr)"
             price  = listItem.qty * listItem.priceToSellHourly.toInt()
             additionalDiscount = (listItem.qty * listItem.priceToSellHourly.toInt()) - listItem.qtyWisePrice
         } else {
@@ -135,7 +135,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             priceToShow = listItem.priceToShowDaily
             priceToSell = listItem.priceToSellDaily
 
-            labelPriceWithQty.text = "Price (${listItem.priceToSellDaily} * ${listItem.qty})"
+            labelPriceWithQty.text = "Price (${listItem.priceToSellDaily} * ${listItem.qty} Day)"
             price  = listItem.qty * listItem.priceToSellDaily.toInt()
             additionalDiscount = (listItem.qty * listItem.priceToSellDaily.toInt()) - listItem.qtyWisePrice
         }
@@ -147,12 +147,12 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         txtPrice.text = "Rs. "+price
         txtAdditionalDiscount.text = "Rs. "+additionalDiscount
         discountedPrice = price-additionalDiscount
-        txtDiscountedPrice.text = "Rs. "+discountedPrice
+        txtDiscountedPrice.text = "- Rs. "+discountedPrice
 
         txtControllerQty.text = listItem.controllerQty.toString()
         txtControllerCharges.text =  "Rs. "+listItem.controllerCharges
 
-        txtDeliveryCharges.text =  "Rs. "+deliveryCharges
+        txtDeliveryCharges.text =  "+ Rs. "+deliveryCharges
 
         finalPayableAmount = listItem.totalPayable+deliveryCharges.toInt()
 //        txtTotalPayable.text = listItem.totalPayable.toString()

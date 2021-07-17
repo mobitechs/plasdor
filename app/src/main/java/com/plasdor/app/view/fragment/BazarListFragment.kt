@@ -113,7 +113,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         var adRequest = AdRequest.Builder().build()
         RewardedAd.load(
             requireContext(),
-            "ca-app-pub-6867366913789478/9973123288",
+            "ca-app-pub-5799348942632742/6098022101",
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
