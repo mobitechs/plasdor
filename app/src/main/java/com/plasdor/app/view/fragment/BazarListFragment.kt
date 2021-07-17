@@ -32,6 +32,8 @@ import com.plasdor.app.viewModel.UserListViewModel
 import kotlinx.android.synthetic.main.spinner_layout.view.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
@@ -63,6 +65,8 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         userId = SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
         setupRecyclerView()
 
+        MobileAds.initialize(requireContext())
+        RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("E3EBB20286FEE729C04269FCFBA201EE"))
         MobileAds.initialize(requireContext(),
             OnInitializationCompleteListener { getRewardAd() })
 //        getRewardAd()

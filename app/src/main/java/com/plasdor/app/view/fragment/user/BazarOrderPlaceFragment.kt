@@ -124,7 +124,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
 
 
         listItem = arguments?.getParcelable("item")!!
-        requiredPoints = listItem.oneDayPoints
+        requiredPoints = listItem.oneDayPoints.toString()
 
         checkCanBuyOrNot()
 
@@ -136,18 +136,18 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
                 if (checkedId == R.id.rd1Day) {
                     qty = 1
                     requireContext().showToastMsg("1day")
-                    requiredPoints = listItem.oneDayPoints
+                    requiredPoints = listItem.oneDayPoints.toString()
                 } else if (checkedId == R.id.rd3day) {
                     qty = 3
                     requireContext().showToastMsg("3day")
-                    requiredPoints = listItem.threeDayPoints
+                    requiredPoints = listItem.threeDayPoints.toString()
                 } else if (checkedId == R.id.rd5Day) {
                     qty = 5
                     requireContext().showToastMsg("5day")
-                    requiredPoints = listItem.fiveDayPoints
+                    requiredPoints = listItem.fiveDayPoints.toString()
                 } else if (checkedId == R.id.rdFree) {
                     requireContext().showToastMsg("free")
-                    requiredPoints = listItem.forFreePoints
+                    requiredPoints = listItem.forFreePoints.toString()
                 }
 
                 checkCanBuyOrNot()

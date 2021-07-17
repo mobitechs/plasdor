@@ -45,7 +45,6 @@ class Constants {
         const val selfPickup = "Self PickUp"
         const val deliveryByCompany = "Delivery"
 
-
         //if u add new item in weightArray then please add in qtyArray as well its must
         val qtyArray = arrayOf("1", "2", "3", "4", "6", "8 ", "10", "12", "14", "16", "18", "20")
 
@@ -53,20 +52,17 @@ class Constants {
         val daysArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
         val hourArray = arrayOf("2", "4", "6")
 
-
         val ps5NdXSeriesXPriceArray = arrayOf("999", "1799", "2499", "3199", "3499", "3999", "4499")
         val ps4NdXOneXPriceArray = arrayOf("499", "899", "1399", "1699", "2099", "2399", "2699")
         val XOneSPriceArray = arrayOf("449", "849", "1349", "1649", "2049", "2349", "2649")
         val XSeriesSPriceArray = arrayOf("949", "1749", "2449", "3149", "3449", "3949", "4449")
 
-        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("199", "299", "449")
-        val ps4NdXOneXNdSPriceArrayHr = arrayOf("299", "399", "649")
+        val ps4NdXOneXNdSPriceArrayHr = arrayOf("199", "299", "449")
+        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("299", "399", "649")
 //        val XOneSPriceArrayHr = arrayOf("200", "300", "400", "500", "600", "700", "800")
 //        val XSeriesSPriceArrayHr = arrayOf("250", "350", "450", "550", "650", "750", "850")
 
-
         val orderStatusArray = arrayOf("Received", "Pending", "Delivered")
-
 
     }
 }

@@ -32,7 +32,7 @@ import com.plasdor.app.viewModel.UserListViewModel
 class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
 
-    lateinit var listItem: ProductListItems
+
     var addedToCart = false
 
     lateinit var rootView: View
@@ -68,6 +68,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     var controllerCharges = 0
 
     lateinit var selectedMerchantItem: AvailableMerchantListItem
+    lateinit var listItem: ProductListItems
 
     lateinit var viewModelUser: UserListViewModel
     lateinit var listAdapter: AvailableMerchantListAdapter
@@ -86,7 +87,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     lateinit var txtDeliveryNote: AppCompatTextView
     var rentalType = Constants.Daily
     var deliveryCharges = 0
-    var deliveryType = ""
+    var deliveryType = Constants.deliveryByCompany
     var priceToShow = 0
     var priceToSell = 0
     var totalPayable = 0
@@ -171,7 +172,8 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
                     deliveryType = Constants.selfPickup
                     deliveryCharges = 0
                     txtDeliveryNote.visibility = View.GONE
-                } else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
+                }
+                else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
                     deliveryType = Constants.deliveryByCompany
                     deliveryCharges = Constants.delChargesNormal
                     txtDeliveryNote.visibility = View.VISIBLE
@@ -199,12 +201,19 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
         hideUI()
         btnBuyNow.setOnClickListener {
+//            var bundle = Bundle()
+//            bundle.putParcelable("productItem", listItem)
+//            bundle.putParcelable("merchantItem", selectedMerchantItem)
+//            bundle.putString("rentalType", rentalType)
+//            bundle.putString("deliveryType", deliveryType)
+//            bundle.putString("deliveryType", deliveryType)
+
             requireActivity().openActivity(PlaceOrderActivity::class.java) {
                 putParcelable("productItem", listItem)
                 putParcelable("merchantItem", selectedMerchantItem)
                 putString("rentalType", rentalType)
-                putInt("deliveryCharges", deliveryCharges)
                 putString("deliveryType", deliveryType)
+                putInt("deliveryCharges", deliveryCharges)
             }
         }
         txtViewOnMap.setOnClickListener {

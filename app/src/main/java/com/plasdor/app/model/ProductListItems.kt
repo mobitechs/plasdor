@@ -36,8 +36,8 @@ data class ProductListItems(
     var controllerCharges: String,
     var discountedPrice: String,
     var totalPayable: Int = 0,
-    val forFreePoints: String,
-    val oneDayPoints: String,
-    val threeDayPoints: String,
-    val fiveDayPoints: String
+    val forFreePoints: String?,
+    val oneDayPoints: String?,
+    val threeDayPoints: String?,
+    val fiveDayPoints: String?
 ) : Parcelable

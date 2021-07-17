@@ -22,19 +22,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_20sdp"
                     android:text="Your total points are:"
-                    android:textColor="@color/blue"/>
-                <TextView
-                    android:id="@+id/txtWalletPoints"
-                    android:layout_width="wrap_content"
+                    android:textColor="@color/blue" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_45sdp"
-                    android:text="55"
-                    android:textColor="@color/blue"/>
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/coin" />
+
+                    <TextView
+                        android:id="@+id/txtWalletPoints"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="55"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_45sdp" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
