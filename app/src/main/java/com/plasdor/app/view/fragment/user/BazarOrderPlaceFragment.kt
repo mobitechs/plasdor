@@ -25,7 +25,6 @@ import com.plasdor.app.utils.*
 import com.plasdor.app.view.activity.MapsMerchantListActivity
 import com.plasdor.app.view.activity.UserHomeActivity
 import com.plasdor.app.viewModel.UserListViewModel
-import kotlinx.android.synthetic.main.loader.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -41,7 +40,10 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
     lateinit var tvProductName: AppCompatTextView
     lateinit var txtSelectMerchantLabel: AppCompatTextView
     lateinit var txtViewOnMap: AppCompatTextView
-    lateinit var txtDeliveryNote: AppCompatTextView
+    lateinit var txtInsufficientPointNote: AppCompatTextView
+    lateinit var txtDeliveryCharges: AppCompatTextView
+    lateinit var txtTotalPayable: AppCompatTextView
+    lateinit var txtPointRequired: AppCompatTextView
     lateinit var layoutLoader: RelativeLayout
 
     var productId = ""
@@ -70,7 +72,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
 
     var priceToSell = 0
     var deliveryCharges = Constants.deliveryCharges
-    var deliveryType = ""
+    var deliveryType = Constants.deliveryByCompany
     var rentalType = Constants.Daily
     var deliveredBy = ""
     var merchantWillGet = 0f
@@ -78,6 +80,13 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
 
     var requiredPoints = ""
     var userCanBuy = false
+
+    lateinit var radio_group_delivery: RadioGroup
+    lateinit var redSelfPickup: RadioButton
+    lateinit var rdDeliverByCompany: RadioButton
+
+    lateinit var labelNoOf: AppCompatTextView
+    lateinit var txtDeliveryNote: AppCompatTextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -117,14 +126,44 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
         btnBuyNow = rootView.findViewById(R.id.btnBuyNow)
         txtViewOnMap = rootView.findViewById(R.id.txtViewOnMap)
         txtSelectMerchantLabel = rootView.findViewById(R.id.txtSelectMerchantLabel)
-        txtDeliveryNote = rootView.findViewById(R.id.txtDeliveryNote)
+        txtInsufficientPointNote = rootView.findViewById(R.id.txtInsufficientPointNote)
         layoutLoader = rootView.findViewById(R.id.layoutLoader)
 
         radio_group = rootView.findViewById(R.id.radio_group)!!
 
+        radio_group_delivery = rootView.findViewById(R.id.radio_group_delivery)!!
+        redSelfPickup = rootView.findViewById(R.id.redSelfPickup)!!
+        txtDeliveryNote = rootView.findViewById(R.id.txtDeliveryNote)!!
+        txtDeliveryCharges = rootView.findViewById(R.id.txtDeliveryCharges)!!
+        txtTotalPayable = rootView.findViewById(R.id.txtTotalPayable)!!
+        txtPointRequired = rootView.findViewById(R.id.txtPointRequired)!!
+
+
+
+
+        radio_group_delivery.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                val radio: RadioButton = rootView.findViewById(checkedId)
+                if (radio.text.toString().equals(Constants.selfPickup)) {
+                    deliveryType = Constants.selfPickup
+                    deliveryCharges = 0
+                    txtDeliveryNote.visibility = View.GONE
+                } else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
+                    deliveryType = Constants.deliveryByCompany
+                    deliveryCharges = Constants.delChargesNormal
+                    txtDeliveryNote.visibility = View.VISIBLE
+                }
+
+                txtDeliveryCharges.text = deliveryCharges.toString()
+                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
+
+            })
 
         listItem = arguments?.getParcelable("item")!!
         requiredPoints = listItem.oneDayPoints.toString()
+
+        txtDeliveryCharges.text = deliveryCharges.toString()
+        txtTotalPayable.text = requiredPoints+" Points & "+deliveryCharges+" Rs."
 
         checkCanBuyOrNot()
 
@@ -150,6 +189,8 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
                     requiredPoints = listItem.forFreePoints.toString()
                 }
 
+                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
+                txtPointRequired.text = requiredPoints
                 checkCanBuyOrNot()
                 setupPrice()
             })
@@ -182,11 +223,11 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
                 btnBuyNow.visibility = View.VISIBLE
             }
             userCanBuy = true
-            txtDeliveryNote.visibility = View.GONE
+            txtInsufficientPointNote.visibility = View.GONE
         } else {
             userCanBuy = false
             btnBuyNow.visibility = View.GONE
-            txtDeliveryNote.visibility = View.VISIBLE
+            txtInsufficientPointNote.visibility = View.VISIBLE
         }
     }
 

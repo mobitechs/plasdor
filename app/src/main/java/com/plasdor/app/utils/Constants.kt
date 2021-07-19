@@ -29,7 +29,7 @@ class Constants {
         const val EMAIL = "email"
         const val orderItemMsg = "orderItemMsg"
         const val orderTotalAmount = "orderTotalAmount"
-        const val deliveryCharges = 40
+        const val deliveryCharges = 49
         const val deliveryChargesBelow = 500
         const val CartList = "CartList"
         const val CartList2 = "CartList2"

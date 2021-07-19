@@ -227,7 +227,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Bazar"
+                            android:text="Bazaar"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
@@ -297,7 +297,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Support"
+                            android:text="Help &amp; Support"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>

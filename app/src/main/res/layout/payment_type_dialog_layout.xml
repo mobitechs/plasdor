@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:text="Online" />
+                android:text="UPI/Card/NEFT" />
 
             <RadioButton
                 android:id="@+id/rdCOD"

@@ -11,13 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_5sdp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <com.plasdor.app.utils.ThreeTwoImageView
             android:id="@+id/productImage"
-            android:layout_width="@dimen/_90sdp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/_90sdp"
             android:scaleType="centerInside" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

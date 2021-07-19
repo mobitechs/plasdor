@@ -300,7 +300,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             DialogInterface.OnClickListener { dialog, which -> // send data from the
                 // AlertDialog to the Activity
 
-                if(paymentType.equals("Online")){
+                if(paymentType.equals("UPI/Card/NEFT")){
                     razorPayGateway()
                 }else{
                     callAPIToSaveOrder()

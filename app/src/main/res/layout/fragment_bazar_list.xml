@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_20sdp"
-                    android:text="Your total points are:"
+                    android:text="Your total plasdor points:"
                     android:textColor="@color/blue" />
 
                 <LinearLayout
@@ -36,9 +36,9 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/coin" />
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:src="@drawable/logo" />
 
                     <TextView
                         android:id="@+id/txtWalletPoints"
@@ -52,6 +52,18 @@
 
 
             </LinearLayout>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnGetRewards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/purple_500"
+                android:paddingVertical="@dimen/_10sdp"
+                android:text="Get Rewards"
+                android:textColor="@color/white" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

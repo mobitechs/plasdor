@@ -27,7 +27,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your total points are:"
+                    android:text="Your total plasdor points:"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_26sdp" />
 
@@ -37,9 +37,10 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/coin" />
+                        android:scaleType="centerCrop"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:src="@drawable/logo" />
 
                     <TextView
                         android:id="@+id/txtRewardPoints"

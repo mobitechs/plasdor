@@ -15,6 +15,7 @@ import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.apiPostCall
+import com.plasdor.app.utils.openCallLauncher
 import com.plasdor.app.utils.showToastMsg
 import com.plasdor.app.view.activity.MerchantHomeActivity
 import com.plasdor.app.view.activity.UserHomeActivity
@@ -34,6 +35,7 @@ class SupportFragment : Fragment(), ApiResponse {
     lateinit var txtSupport4: TextView
     lateinit var txtSupport5: TextView
     lateinit var txtSupport6: TextView
+    lateinit var txtContactUs: TextView
 
     var userId=""
     var userType=""
@@ -64,7 +66,11 @@ class SupportFragment : Fragment(), ApiResponse {
         txtSupport4 = rootView.findViewById(R.id.txtSupport4)!!
         txtSupport5 = rootView.findViewById(R.id.txtSupport5)!!
         txtSupport6 = rootView.findViewById(R.id.txtSupport6)!!
+        txtContactUs = rootView.findViewById(R.id.txtContactUs)!!
 
+        txtContactUs.setOnClickListener {
+            requireContext().openCallLauncher(getString(R.string.contactUsNo))
+        }
         txtSupport1.setOnClickListener {
             videoUrl = "https://youtu.be/51ZcdbimBL0"
             playOnYoutube()
