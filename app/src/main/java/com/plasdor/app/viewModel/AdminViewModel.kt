@@ -14,6 +14,7 @@ class AdminViewModel(application: Application) : AndroidViewModel(application) {
     val allProductListItems: LiveData<ArrayList<ProductListItems>>
     val allMerchantListItems: LiveData<ArrayList<UserModel>>
     val allUserListItems: LiveData<ArrayList<UserModel>>
+    val allPendingUserList: LiveData<ArrayList<UserModel>>
 
 
     init {
@@ -22,6 +23,7 @@ class AdminViewModel(application: Application) : AndroidViewModel(application) {
         this.allProductListItems = repository.allProductListItems
         this.allMerchantListItems = repository.allMerchantListItems
         this.allUserListItems = repository.allUserListItems
+        this.allPendingUserList = repository.allPendingUserList
     }
 
     fun changeState() {
@@ -40,6 +42,9 @@ class AdminViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun adminAllUserList() {
         repository.adminAllUserList()
+    }
+    fun getAllPendingUserList() {
+        repository.getAllPendingUserList()
     }
 
 

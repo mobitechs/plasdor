@@ -3,6 +3,7 @@ package com.plasdor.app.view.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -20,14 +21,26 @@ import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AuthRegisterFragment : Fragment(), ApiResponse {
 
     lateinit var rootView: View
     lateinit var layoutLoader: RelativeLayout
+    lateinit var txtDob: TextInputEditText
     var userType = "User"
     var email = ""
+    var dd = ""
+    var mm = ""
+    var yyyy = ""
+    var dob = ""
+    var age = 0
+
+    lateinit var datePicker: DatePickerHelper
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +57,7 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
         val etName: TextInputEditText = rootView.findViewById(R.id.etName)!!
         val etEmail: TextInputEditText = rootView.findViewById(R.id.etEmail)
         val etMobileNo: TextInputEditText = rootView.findViewById(R.id.etMobileNo)
+        txtDob = rootView.findViewById(R.id.txtDob)
         val etPassword: TextInputEditText = rootView.findViewById(R.id.etPassword)
         val etConfirmPassword: TextInputEditText = rootView.findViewById(R.id.etConfirmPassword)
         val txtAddress: TextInputEditText = rootView.findViewById(R.id.txtAddress)
@@ -55,6 +69,16 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
 
         etEmail.setText(email)
         etEmail.isEnabled = false
+
+        txtDob.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> showDatePickerDialog()
+                    //Do Something
+                }
+                return v?.onTouchEvent(event) ?: true
+            }
+        })
 
         btnSignUp.setOnClickListener {
 
@@ -111,6 +135,24 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
         }
     }
 
+    private fun showDatePickerDialog() {
+        val cal = Calendar.getInstance()
+        val d = cal.get(Calendar.DAY_OF_MONTH)
+        val m = cal.get(Calendar.MONTH)
+        val y = cal.get(Calendar.YEAR)
+        datePicker.showDialog(d, m, y, object : DatePickerHelper.Callback {
+
+            override fun onDateSelected(dayofMonth: Int, month: Int, year: Int) {
+                val dayStr = if (dayofMonth < 10) "0${dayofMonth}" else "${dayofMonth}"
+                val mon = month + 1
+                val monthStr = if (mon < 10) "0${mon}" else "${mon}"
+//                age =  getAge(year,mon,dayofMonth).toInt()
+                txtDob.setText("${dayStr}-${monthStr}-${year}".toString())
+
+            }
+        })
+        datePicker.setMaxDate(Calendar.getInstance().timeInMillis)
+    }
 
     override fun onSuccess(data: Any, tag: String) {
 

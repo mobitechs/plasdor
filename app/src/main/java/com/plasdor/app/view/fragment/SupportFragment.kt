@@ -36,6 +36,7 @@ class SupportFragment : Fragment(), ApiResponse {
     lateinit var txtSupport5: TextView
     lateinit var txtSupport6: TextView
     lateinit var txtContactUs: TextView
+    lateinit var layoutChatWithUs: TextView
 
     var userId=""
     var userType=""
@@ -60,16 +61,22 @@ class SupportFragment : Fragment(), ApiResponse {
         txtEmail = rootView.findViewById(R.id.txtEmail)!!
         txtDetails = rootView.findViewById(R.id.txtDetails)!!
         btnSubmit = rootView.findViewById(R.id.btnSubmit)!!
+
         txtSupport1 = rootView.findViewById(R.id.txtSupport1)!!
         txtSupport2 = rootView.findViewById(R.id.txtSupport2)!!
         txtSupport3 = rootView.findViewById(R.id.txtSupport3)!!
         txtSupport4 = rootView.findViewById(R.id.txtSupport4)!!
         txtSupport5 = rootView.findViewById(R.id.txtSupport5)!!
         txtSupport6 = rootView.findViewById(R.id.txtSupport6)!!
+
         txtContactUs = rootView.findViewById(R.id.txtContactUs)!!
+        layoutChatWithUs = rootView.findViewById(R.id.layoutChatWithUs)!!
 
         txtContactUs.setOnClickListener {
             requireContext().openCallLauncher(getString(R.string.contactUsNo))
+        }
+        layoutChatWithUs.setOnClickListener {
+
         }
         txtSupport1.setOnClickListener {
             videoUrl = "https://youtu.be/51ZcdbimBL0"

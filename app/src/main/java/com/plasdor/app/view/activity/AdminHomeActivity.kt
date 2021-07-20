@@ -49,6 +49,7 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
         llShare.setOnClickListener(this)
         ivClose.setOnClickListener(this)
         llLogout.setOnClickListener(this)
+        lUserVerification.setOnClickListener(this)
 
     }
 
@@ -74,6 +75,9 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
             }
             R.id.lAllMerchant -> {
                 displayView(5)
+            }
+            R.id.lUserVerification -> {
+                displayView(9)
             }
             R.id.llShare -> {
                 ShareApp()
@@ -225,6 +229,15 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
                     "AdminAllMerchantListFragment"
                 )
             }
+            9 -> {
+                toolbarTitle("Pending Verification")
+                addFragment(
+                    AdminPendingUserListFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "AdminPendingUserListFragment"
+                )
+            }
 
         }
     }
@@ -249,6 +262,15 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
             false,
             R.id.nav_host_fragment,
             "AdminOrderDetailsFragment",
+            bundle
+        )
+    }
+    fun OpenPendingUserDetails(bundle: Bundle) {
+        addFragmentWithData(
+            AdminPendingUserDetailsFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "AdminPendingUserDetailsFragment",
             bundle
         )
     }

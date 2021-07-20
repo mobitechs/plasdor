@@ -41,6 +41,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
     var address = ""
     var city = ""
     var pinCode = ""
+    var isVerified = ""
 
     var transactionNo = ""
     var amount = "0"
@@ -82,6 +83,9 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         pinCode =
             SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
                 ?.get(0)?.pincode.toString()
+        isVerified =
+            SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.isVerified.toString()
 
         listItem = intent.getParcelableExtra("productItem")!!
         merchantItem = intent.getParcelableExtra("merchantItem")!!
@@ -147,7 +151,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         txtPrice.text = "Rs. "+price
         txtAdditionalDiscount.text = "Rs. "+additionalDiscount
         discountedPrice = price-additionalDiscount
-        txtDiscountedPrice.text = "- Rs. "+discountedPrice
+        txtDiscountedPrice.text = "Rs. "+discountedPrice
 
         txtControllerQty.text = listItem.controllerQty.toString()
         txtControllerCharges.text =  "Rs. "+listItem.controllerCharges
@@ -172,6 +176,11 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
         imgRadioBtn.visibility = View.GONE
 
+        if(isVerified.equals("1")){
+            btnPlaceOrder.visibility = View.VISIBLE
+        }else{
+            btnPlaceOrder.visibility = View.GONE
+        }
         btnPlaceOrder.setOnClickListener {
             transactionNo = "TID" + System.currentTimeMillis()
 //            amount = listItem.totalPayable.toString()

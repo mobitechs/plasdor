@@ -17,6 +17,7 @@ class AdminRepository(val application: Application) : ApiResponse {
     val allProductListItems = MutableLiveData<ArrayList<ProductListItems>>()
     val allMerchantListItems = MutableLiveData<ArrayList<UserModel>>()
     val allUserListItems = MutableLiveData<ArrayList<UserModel>>()
+    val allPendingUserList = MutableLiveData<ArrayList<UserModel>>()
     var method = ""
     var userId = ""
 
@@ -52,6 +53,12 @@ class AdminRepository(val application: Application) : ApiResponse {
         var url = Constants.BASE_URL + "?method=$method"
         apiGetCall(url, this, method)
     }
+    fun getAllPendingUserList() {
+        showProgressBar.value = true
+        method = "getAllPendingUserList"
+        var url = Constants.BASE_URL + "?method=$method"
+        apiGetCall(url, this, method)
+    }
 
 
     override fun onSuccess(data: Any, tag: String) {
@@ -82,6 +89,12 @@ class AdminRepository(val application: Application) : ApiResponse {
                 var listItems: ArrayList<UserModel>? =
                     gson.fromJson(data.toString(), type)
                 allUserListItems.value = listItems
+            }
+            else if (method == "getAllPendingUserList") {
+                val type = object : TypeToken<ArrayList<UserModel>>() {}.type
+                var listItems: ArrayList<UserModel>? =
+                    gson.fromJson(data.toString(), type)
+                allPendingUserList.value = listItems
             }
 
         }

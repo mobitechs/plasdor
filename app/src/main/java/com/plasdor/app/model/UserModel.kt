@@ -17,6 +17,10 @@ data class UserModel(
     var pincode: String,
     var isSelected: Boolean,
     var wallet: String,
+    var isVerified: String,
+    var imgElectricityBill: String,
+    var imgAdharFront: String,
+    var imgAdharBack: String,
     var latitude: String,
     var longitude: String
 ) : Parcelable
@@ -42,5 +46,6 @@ data class AvailableMerchantListItem(
     var isSold: String,
     var totalControllerQty: String,
     var remainingControllerQty: String,
-    var willDeliver: String
+    var willDeliver: String,
+    var isVerified: String
 ) : Parcelable

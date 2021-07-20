@@ -25,6 +25,7 @@ import com.plasdor.app.utils.*
 import com.plasdor.app.view.activity.MapsMerchantListActivity
 import com.plasdor.app.view.activity.UserHomeActivity
 import com.plasdor.app.viewModel.UserListViewModel
+import kotlinx.android.synthetic.main.activity_place_order.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -53,6 +54,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
     var userLat = ""
     var userLong = ""
     var userName = ""
+    var isVerified = ""
     var userWalletPoint = ""
 
     var qty = 1
@@ -115,6 +117,9 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
         userName =
             SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
                 ?.get(0)?.name.toString()
+        isVerified =
+            SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.isVerified.toString()
         userWalletPoint = SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.EARNED_POINTS).toString()
 
         if (userWalletPoint.equals("null") || userWalletPoint.equals("")) {
@@ -139,7 +144,11 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
         txtPointRequired = rootView.findViewById(R.id.txtPointRequired)!!
 
 
-
+        if(isVerified.equals("1")){
+            btnBuyNow.visibility = View.VISIBLE
+        }else{
+            btnBuyNow.visibility = View.GONE
+        }
 
         radio_group_delivery.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { group, checkedId ->

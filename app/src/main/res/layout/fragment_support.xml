@@ -17,6 +17,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/layoutSupport1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -42,6 +43,7 @@
                 android:background="@color/border"/>
 
             <RelativeLayout
+                android:id="@+id/layoutSupport2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -68,6 +70,7 @@
                 android:background="@color/border"/>
 
             <RelativeLayout
+                android:id="@+id/layoutSupport3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -94,6 +97,7 @@
                 android:background="@color/border"/>
 
             <RelativeLayout
+                android:id="@+id/layoutSupport4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -119,6 +123,7 @@
                 android:background="@color/border"/>
 
             <RelativeLayout
+                android:id="@+id/layoutSupport5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -144,6 +149,7 @@
                 android:background="@color/border"/>
 
             <RelativeLayout
+                android:id="@+id/layoutSupport6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -168,36 +174,77 @@
                 android:layout_height="1dp"
                 android:background="@color/border"/>
 
-
         </LinearLayout>
+
 
         <LinearLayout
-            android:layout_marginStart="@dimen/_10sdp"
+
             android:layout_marginBottom="@dimen/_20sdp"
             android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/border" />
+
+            <RelativeLayout
+                android:id="@+id/layoutChatWithUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Chat With Us"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/_12sdp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/border" />
+
+            <LinearLayout
+                android:id="@+id/layoutContact"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contact Us On"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12sdp" />
+                android:layout_marginStart="@dimen/_10sdp">
 
-            <TextView
-                android:id="@+id/txtContactUs"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="@string/contactUsNo"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/_12sdp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:text="Contact Us On"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
 
-
+                <TextView
+                    android:id="@+id/txtContactUs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/contactUsNo"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
+
 
         <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"

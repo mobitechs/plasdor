@@ -116,6 +116,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         ivClose.setOnClickListener(this)
         llLogout.setOnClickListener(this)
         menuWallet.setOnClickListener(this)
+        llRentOnPlasdor.setOnClickListener(this)
 
     }
 
@@ -158,7 +159,9 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             R.id.menuWallet -> {
                 displayView(8)
             }
-
+              R.id.llRentOnPlasdor -> {
+                displayView(9)
+            }
             R.id.llLogout -> {
                 //clear sesssion
                 drawerOpenorClose()
@@ -314,6 +317,15 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     false,
                     R.id.nav_host_fragment,
                     "WalletFragment"
+                )
+            }
+            8 -> {
+                toolbarTitle("Rent On Plasdor")
+                addFragment(
+                    RentOnPlasdorFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "RentOnPlasdorFragment"
                 )
             }
         }
