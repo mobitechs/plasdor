@@ -25,7 +25,6 @@ import com.plasdor.app.utils.*
 import com.plasdor.app.view.activity.MapsMerchantListActivity
 import com.plasdor.app.view.activity.UserHomeActivity
 import com.plasdor.app.viewModel.UserListViewModel
-import kotlinx.android.synthetic.main.activity_place_order.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -73,7 +72,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
     lateinit var radio_group: RadioGroup
 
     var priceToSell = 0
-    var deliveryCharges = Constants.deliveryCharges
+    var deliveryCharges = 0
     var deliveryType = Constants.deliveryByCompany
     var rentalType = Constants.Daily
     var deliveredBy = ""
@@ -172,7 +171,8 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
         requiredPoints = listItem.oneDayPoints.toString()
 
         txtDeliveryCharges.text = deliveryCharges.toString()
-        txtTotalPayable.text = requiredPoints+" Points & "+deliveryCharges+" Rs."
+//        txtTotalPayable.text = requiredPoints+" Points & "+deliveryCharges+" Rs."
+        txtTotalPayable.text = requiredPoints+" Points"
 
         checkCanBuyOrNot()
 
@@ -198,7 +198,8 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
                     requiredPoints = listItem.forFreePoints.toString()
                 }
 
-                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
+//                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
+                txtTotalPayable.text = requiredPoints+"Points"
                 txtPointRequired.text = requiredPoints
                 checkCanBuyOrNot()
                 setupPrice()
@@ -270,7 +271,9 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
 
         listAdapter = AvailableMerchantListAdapter(
             requireActivity(),
-            this
+            this,
+            userLat,
+            userLong
         )
         recyclerView.adapter = listAdapter
 

@@ -22,7 +22,14 @@
                 android:layout_height="wrap_content" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/_5sdp"
                 android:id="@+id/imgElectricityBill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/imgAdhar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

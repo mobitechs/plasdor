@@ -27,6 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plasdor"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:replace="android:theme">
 
         <!-- Add your API key here -->

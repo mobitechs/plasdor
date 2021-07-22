@@ -18,9 +18,9 @@ data class UserModel(
     var isSelected: Boolean,
     var wallet: String,
     var isVerified: String,
-    var imgElectricityBill: String,
-    var imgAdharFront: String,
-    var imgAdharBack: String,
+    var imgPathAvatar: String,
+    var imgPathAdhar: String,
+    var imgPathEBill: String,
     var latitude: String,
     var longitude: String
 ) : Parcelable
@@ -47,5 +47,8 @@ data class AvailableMerchantListItem(
     var totalControllerQty: String,
     var remainingControllerQty: String,
     var willDeliver: String,
-    var isVerified: String
+    var isVerified: String,
+    var imgPathAvatar: String,
+    var imgPathAdhar: String,
+    var imgPathEBill: String
 ) : Parcelable

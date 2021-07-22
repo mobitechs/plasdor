@@ -319,7 +319,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     "WalletFragment"
                 )
             }
-            8 -> {
+            9 -> {
                 toolbarTitle("Rent On Plasdor")
                 addFragment(
                     RentOnPlasdorFragment(),
@@ -403,6 +403,16 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             false,
             R.id.nav_host_fragment,
             "AddAddressFragment",
+            bundle
+        )
+    }
+
+    fun OpenRegisterFragmentForRentOn(bundle: Bundle) {
+        addFragmentWithData(
+            AuthRegisterFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "AuthRegisterFragment",
             bundle
         )
     }

@@ -22,7 +22,6 @@ import com.plasdor.app.utils.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AuthRegisterFragment : Fragment(), ApiResponse {
@@ -37,6 +36,7 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
     var yyyy = ""
     var dob = ""
     var age = 0
+    var IamFor = ""
 
     lateinit var datePicker: DatePickerHelper
 
@@ -52,6 +52,8 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
 
     private fun initView() {
         email = arguments?.getString("email").toString()
+        datePicker = DatePickerHelper(requireActivity(), true)
+
         layoutLoader = rootView.findViewById(R.id.layoutLoader)
         val btnSignUp: Button = rootView.findViewById(R.id.btnSignUp)!!
         val etName: TextInputEditText = rootView.findViewById(R.id.etName)!!
@@ -67,8 +69,14 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
 
 //        val navController = activity?.let { Navigation.findNavController(it, R.id.navFragment) }
 
-        etEmail.setText(email)
-        etEmail.isEnabled = false
+        IamFor = arguments?.getString("IamFor")!!
+        if (IamFor.equals("RentOn")) {
+            etEmail.isEnabled = true
+            checkIsMerchant.isChecked = true
+        } else {
+            etEmail.setText(email)
+            etEmail.isEnabled = false
+        }
 
         txtDob.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -162,6 +170,11 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
             requireActivity().showToastMsg("Registration failed")
         } else {
             requireActivity().showToastMsg("Registration successfully done")
+
+            //do logout
+            SharePreferenceManager.getInstance(requireContext()).clearSharedPreference(requireContext())
+            requireActivity().finish()
+
             val gson = Gson()
             val type = object : TypeToken<ArrayList<UserModel>>() {}.type
             var user: ArrayList<UserModel>? = gson.fromJson(data.toString(), type)

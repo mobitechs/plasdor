@@ -103,6 +103,7 @@
                         android:text="@string/insufficientPoint" />
 
                     <RelativeLayout
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -139,11 +140,12 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:textStyle="bold"
-                        android:textColor="@color/red"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="@color/green"
                         android:id="@+id/txtDeliveryNote"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/deliveryNote40" />
+                        android:text="@string/freeDelivery" />
                 </LinearLayout>
 
             </RelativeLayout>

@@ -2,6 +2,8 @@ package com.plasdor.app.view.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,23 +13,28 @@ import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.bumptech.glide.Glide
+import com.fxn.pix.Options
+import com.fxn.pix.Pix
+import com.fxn.utility.PermUtil
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.ApiResponse
+import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
-import com.plasdor.app.utils.Constants
-import com.plasdor.app.utils.apiPostCall
-import com.plasdor.app.utils.checkLogin
-import com.plasdor.app.utils.showToastMsg
+import com.plasdor.app.utils.*
 import de.hdodenhof.circleimageview.CircleImageView
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
@@ -49,6 +56,12 @@ class ProfileFragment : Fragment(), ApiResponse {
     var avatarPath = ""
     var avatarFile: File? = null
 
+    var adharPath = ""
+    var adharFile: File? = null
+
+    var electricityBillPath = ""
+    var electricityBillFile: File? = null
+
     lateinit var imgAvatar: CircleImageView
     lateinit var tvName: AppCompatEditText
     lateinit var tvEmail: TextView
@@ -59,6 +72,10 @@ class ProfileFragment : Fragment(), ApiResponse {
 
     lateinit var btnUpdate: Button
     lateinit var layoutLoader: RelativeLayout
+    lateinit var imgElectricityBill: AppCompatImageView
+    lateinit var imgAdhar: AppCompatImageView
+
+    var imageType = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,12 +100,24 @@ class ProfileFragment : Fragment(), ApiResponse {
         btnUpdate = rootView.findViewById(R.id.btnUpdate)!!
         imgAvatar = rootView.findViewById(R.id.imgAvatar)!!
         layoutLoader = rootView.findViewById(R.id.layoutLoader)!!
+        imgElectricityBill = rootView.findViewById(R.id.imgElectricityBill)!!
+        imgAdhar = rootView.findViewById(R.id.imgAdhar)!!
 
         updadteUI()
 
         imgAvatar.setOnClickListener {
+            imageType = 0
             getImage()
         }
+        imgAdhar.setOnClickListener {
+            imageType = 1
+            getImage()
+        }
+        imgElectricityBill.setOnClickListener {
+            imageType = 2
+            getImage()
+        }
+
 
         btnUpdate.setOnClickListener {
             name = tvName.text.toString()
@@ -109,28 +138,10 @@ class ProfileFragment : Fragment(), ApiResponse {
                 requireContext().showToastMsg("PinCode cannot be empty")
             } else {
                 layoutLoader.visibility = View.VISIBLE
-                //callUpdateProfileAPI()
-                profileUpdateAPI()
+                callUpdateProfileAPI()
+//                profileUpdateAPI()
             }
         }
-    }
-
-    private fun profileUpdateAPI() {
-        val method = "editProfileDetails"
-        val jsonObject = JSONObject()
-        try {
-            jsonObject.put("method", method)
-            jsonObject.put("userId", userId)
-            jsonObject.put("name", name)
-            jsonObject.put("mobile", mobile)
-
-            jsonObject.put("address", address)
-            jsonObject.put("city", city)
-            jsonObject.put("pinCode", pinCode)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
     }
 
     private fun updadteUI() {
@@ -162,11 +173,30 @@ class ProfileFragment : Fragment(), ApiResponse {
             SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
                 ?.get(0)?.pincode.toString()
 
-//        avatarPath = SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)?.get(0)?.userImgPath.toString()
+        avatarPath =
+            SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.imgPathAvatar.toString()
+        adharPath =
+            SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.imgPathAdhar.toString()
+        electricityBillPath =
+            SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.imgPathEBill.toString()
 
-//        if(avatarPath != null){
-//            requireContext().setImage(avatarPath, R.drawable.ic_man,imgAvatar)
-//        }
+        if (avatarPath != null || avatarPath != "null") {
+            //setImage()
+        }
+        if (adharPath != null || adharPath != "null" || adharPath != "") {
+            imgAdhar.setImage(adharPath)
+
+//            Glide.with(requireContext()).load(adharPath)
+//                .into(imgAdhar)
+        }
+        if (electricityBillPath != null || electricityBillPath != "null" || electricityBillPath != "") {
+            imgElectricityBill.setImage(electricityBillPath)
+//            Glide.with(requireContext()).load(electricityBillPath)
+//                .into(imgElectricityBill)
+        }
 
         if (email.equals("")) {
             email = "Not available"
@@ -182,60 +212,126 @@ class ProfileFragment : Fragment(), ApiResponse {
     }
 
     fun getImage() {
-        ImagePicker.with(this)
-            .crop()                    //Crop image(Optional), Check Customization for more option
-            .compress(1024)            //Final image size will be less than 1 MB(Optional)
-            .maxResultSize(
-                1080,
-                1080
-            )    //Final image resolution will be less than 1080 x 1080(Optional)
-            .start()
+//        ImagePicker.with(this)
+//            .crop()                    //Crop image(Optional), Check Customization for more option
+//            .compress(1024)            //Final image size will be less than 1 MB(Optional)
+//            .maxResultSize(
+//                1080,
+//                1080
+//            )    //Final image resolution will be less than 1080 x 1080(Optional)
+//            .start()
+
+        Pix.start(this, Options.init().setRequestCode(100))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
 
-            avatarFile = ImagePicker.getFile(data)!!
-            val fileUri = data?.data
-            imgAvatar.setImageURI(null)
-            imgAvatar.setImageURI(fileUri)
-            avatarPath = ImagePicker.getFilePath(data)!!
+        if (resultCode == Activity.RESULT_OK  && requestCode == 100 )  {
+            val returnValue = data!!.getStringArrayListExtra(Pix.IMAGE_RESULTS)
+            val abc = "file://" + returnValue!![0]
+            val fileUri = Uri.parse(abc)
+
+
+            if (imageType == 0) {
+                avatarFile = null
+                avatarFile = File(fileUri.path)
+//                avatarFile = ImagePicker.getFile(data)!!
+//                avatarPath = ImagePicker.getFilePath(data)!!
+                imgAvatar.setImageURI(null)
+                imgAvatar.setImageURI(fileUri)
+            }
+            else if (imageType == 1) {
+                adharFile = null
+                adharFile = File(fileUri.path)
+//                adharFile = ImagePicker.getFile(data)!!
+//                adharPath = ImagePicker.getFilePath(data)!!
+                imgAdhar.setImageURI(null)
+                imgAdhar.setImageURI(fileUri)
+
+            }
+            else if (imageType == 2) {
+                electricityBillFile = null
+                electricityBillFile = File(fileUri.path)
+//                electricityBillFile = ImagePicker.getFile(data)!!
+//                electricityBillPath = ImagePicker.getFilePath(data)!!
+                imgElectricityBill.setImageURI(null)
+                imgElectricityBill.setImageURI(fileUri)
+
+            }
+
         }
     }
 
-    private fun callUpdateProfileAPI() {
+    private fun profileUpdateAPI() {
+        val method = "editProfileDetails"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("userId", userId)
+            jsonObject.put("name", name)
+            jsonObject.put("mobile", mobile)
 
-        val method = "editProfile"
+            jsonObject.put("address", address)
+            jsonObject.put("city", city)
+            jsonObject.put("pinCode", pinCode)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
+    }
+
+    private fun callUpdateProfileAPI() {
+        var address =
+            txtAddress.text.toString() + " " + txtCity.text.toString() + "" + txtPinCode.text.toString()
+        var latlong: LatLng = getLocationFromAddress(requireContext(), address)!!
+
+        val method = "editProfileWithImage"
         AndroidNetworking.upload(Constants.BASE_URL)
-            .addMultipartFile("imgPath", avatarFile)
+            .addMultipartFile("avatarFile", avatarFile)
+            .addMultipartFile("adharFile", adharFile)
+            .addMultipartFile("electricityBillFile", electricityBillFile)
             .addMultipartParameter("userId", userId)
-            .addMultipartParameter("userName", name)
-            .addMultipartParameter("mobileNo", mobile)
-            .addMultipartParameter("password", password)
+            .addMultipartParameter("name", name)
+            .addMultipartParameter("mobile", mobile)
+            .addMultipartParameter("address", address)
+            .addMultipartParameter("city", city)
+            .addMultipartParameter("pinCode", pinCode)
+            .addMultipartParameter("latitude", latlong.latitude.toString())
+            .addMultipartParameter("longitude", latlong.longitude.toString())
             .addMultipartParameter("userImgUrl", avatarPath)
+            .addMultipartParameter("adharImgUrl", adharPath)
+            .addMultipartParameter("electricityBillUrl", electricityBillPath)
             .addMultipartParameter("method", method)
             .setTag(method)
             .setPriority(Priority.HIGH)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
-                override fun onResponse(response: JSONObject) {
+                override fun onResponse(data: JSONObject) {
                     layoutLoader.visibility = View.GONE
                     try {
-                        if (response.getString("Response") == "FAILED") {
-                            requireContext().showToastMsg("Profile details update failed.")
+                        if (data.equals("FAILED") || data.equals("FAILED_IMAGE")) {
+                            requireActivity().showToastMsg("failed to update profile")
                         } else {
-                            requireContext().showToastMsg("Profile details successfully updated.")
-                            val gson = Gson()
-                            val type = object : TypeToken<ArrayList<UserModel>>() {}.type
-                            var user: ArrayList<UserModel>? =
-                                gson.fromJson(response.getString("Response").toString(), type)
+                            requireActivity().showToastMsg("Profile Successfully Updated")
 
-                            SharePreferenceManager.getInstance(requireActivity())
-                                .save(Constants.ISLOGIN, true)
-                            SharePreferenceManager.getInstance(requireActivity())
-                                .saveUserLogin(Constants.USERDATA, user)
+                            if (data.get("Response") is JSONArray) {
+                                val userData = data.getJSONArray("Response")
+
+                                val gson = Gson()
+                                val type = object : TypeToken<ArrayList<UserModel>>() {}.type
+                                var user: ArrayList<UserModel>? = gson.fromJson(userData.toString(), type)
+
+                                Log.d("user", "" + user)
+                                SharePreferenceManager.getInstance(requireActivity())
+                                    .save(Constants.ISLOGIN, true)
+                                SharePreferenceManager.getInstance(requireActivity())
+                                    .saveUserLogin(Constants.USERDATA, user)
+
+                                requireActivity().checkLogin()
+                            }
                         }
+                        layoutLoader.visibility = View.GONE
                     } catch (e: java.lang.Exception) {
                         e.message
                         requireContext().showToastMsg("Exception: " + e.message)
@@ -251,7 +347,7 @@ class ProfileFragment : Fragment(), ApiResponse {
     }
 
     override fun onSuccess(data: Any, tag: String) {
-        if (data.equals("FAILED_UPDATE")) {
+        if (data.equals("FAILED") || data.equals("FAILED_IMAGE")) {
             requireActivity().showToastMsg("failed to update profile")
         } else {
             requireActivity().showToastMsg("Profile Successfully Updated")
@@ -274,4 +370,25 @@ class ProfileFragment : Fragment(), ApiResponse {
         layoutLoader.visibility = View.GONE
         requireContext().showToastMsg("Failure "+message)
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS -> {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getImage()
+                } else {
+                    requireContext().showToastMsg("Approve permissions to open Pix ImagePicker.")
+                }
+                return
+            }
+        }
+    }
+
 }

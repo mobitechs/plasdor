@@ -49,51 +49,62 @@
                 android:layout_height="wrap_content"
                 android:text="abc@gmail.com" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="full Address" />
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txtCity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Mumbai" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txtPinCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="123456" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:gravity="end"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
+                    android:id="@+id/txtAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:visibility="visible"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:id="@+id/txtRemainingControllerQty"
+                    android:layout_height="wrap_content"
+                    android:text="full Address" />
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/red"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:text="" />
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mumbai" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtPinCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="123456" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:gravity="end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:visibility="visible"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:id="@+id/txtRemainingControllerQty"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/red"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/txtDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Distance " />
+
+
 
         </LinearLayout>
 

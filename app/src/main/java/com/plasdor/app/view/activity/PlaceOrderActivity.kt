@@ -178,8 +178,10 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
         if(isVerified.equals("1")){
             btnPlaceOrder.visibility = View.VISIBLE
+            btnVerificationPending.visibility = View.GONE
         }else{
             btnPlaceOrder.visibility = View.GONE
+            btnVerificationPending.visibility = View.VISIBLE
         }
         btnPlaceOrder.setOnClickListener {
             transactionNo = "TID" + System.currentTimeMillis()

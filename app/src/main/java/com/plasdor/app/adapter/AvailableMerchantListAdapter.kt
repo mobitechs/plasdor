@@ -2,6 +2,7 @@ package com.plasdor.app.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +13,15 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
-import com.plasdor.app.callbacks.MerchantProductClickListener
 import com.plasdor.app.callbacks.MerchantSelectionClickListener
 import com.plasdor.app.model.AvailableMerchantListItem
 import com.plasdor.app.utils.ThreeTwoImageView
 
 class AvailableMerchantListAdapter(
     activityContext: Context,
-    private val merchantSelectionClickListener: MerchantSelectionClickListener
+    private val merchantSelectionClickListener: MerchantSelectionClickListener,
+    val userLat: String,
+    val userLong: String
 ) :
     RecyclerView.Adapter<AvailableMerchantListAdapter.MyViewHolder>() {
 
@@ -29,7 +31,6 @@ class AvailableMerchantListAdapter(
 
     lateinit var adapter: ArrayAdapter<String>
     var selectedPosition = -1
-
 
     fun updateListItems(items: ArrayList<AvailableMerchantListItem>) {
         listItems.clear()
@@ -65,6 +66,24 @@ class AvailableMerchantListAdapter(
         holder.txtRemainingControllerQty.visibility = View.VISIBLE
         holder.txtRemainingControllerQty.text = "Remaining \nController Qty: "+item.remainingControllerQty
 
+        val startPoint = Location("locationA")
+        startPoint.setLatitude(userLat.toDouble())
+        startPoint.setLongitude(userLong.toDouble())
+
+        val endPoint = Location("locationB")
+        endPoint.setLatitude(item.latitude.toDouble())
+        endPoint.setLongitude(item.longitude.toDouble())
+
+
+        val distance = (startPoint.distanceTo(endPoint)/1000).toString();
+//        val distance = calculateDistance(
+//            userLat.toDouble(),
+//            userLong.toDouble(),
+//            item.latitude.toDouble(),
+//            item.longitude.toDouble()
+//        )
+
+        holder.txtDistance.text = "Distance "+distance+" Km"
 
         if (selectedPosition == position)
             holder.imgRadioBtn.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
@@ -90,11 +109,35 @@ class AvailableMerchantListAdapter(
         var txtCity: AppCompatTextView = view.findViewById(R.id.txtCity)
         var txtPinCode: AppCompatTextView = view.findViewById(R.id.txtPinCode)
         var imgRadioBtn: AppCompatImageView = view.findViewById(R.id.imgRadioBtn)
+        var txtDistance: AppCompatTextView = view.findViewById(R.id.txtDistance)
         var txtRemainingControllerQty: AppCompatTextView = view.findViewById(R.id.txtRemainingControllerQty)
 
         val cardView: View = itemView
 
     }
+
+    private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val theta = lon1 - lon2
+        var dist = (Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + (Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta))))
+        dist = Math.acos(dist)
+        dist = rad2deg(dist)
+        dist = dist * 60 * 1.1515
+//        dist = (0.621371 * dist)
+        return dist
+    }
+
+    private fun deg2rad(deg: Double): Double {
+        return deg * Math.PI / 180.0
+    }
+
+    private fun rad2deg(rad: Double): Double {
+        return rad * 180.0 / Math.PI
+    }
+
 
 
     fun getFilter(): Filter? {

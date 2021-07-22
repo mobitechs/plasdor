@@ -30,6 +30,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="willUDeliver">Will you deliver \n this product?</string>
     <string name="deliveryNote"><i>*Note: </i>If you will not deliver then You will be charged Rs.40 per order.</string>
+    <string name="freeDelivery"><i>*Note: </i>Free Delivery</string>
     <string name="deliveryNote40"><i>*Note: </i>Delivery Charges is Rs.49.</string>
     <string name="deliveryNote80"><i>*Note: </i>Delivery Charges is Rs.80.</string>
     <string name="insufficientPoint"><i>*Note: </i>Sorry, You don\'t have sufficient point.</string>

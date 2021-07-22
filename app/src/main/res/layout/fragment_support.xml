@@ -191,6 +191,7 @@
                 android:background="@color/border" />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/layoutChatWithUs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

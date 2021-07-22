@@ -24,6 +24,7 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
     lateinit var rootView: View
     lateinit var txtAddress: TextView
     lateinit var imgElectricityBill: AppCompatImageView
+    lateinit var imgAdhar: AppCompatImageView
     lateinit var btnVerify: Button
 
     lateinit var listItem: UserModel
@@ -48,17 +49,27 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
         listItem = arguments?.getParcelable("userDetails")!!
         txtAddress = rootView.findViewById(R.id.txtAddress)
         imgElectricityBill = rootView.findViewById(R.id.imgElectricityBill)
+        imgAdhar = rootView.findViewById(R.id.imgAdhar)
         btnVerify = rootView.findViewById(R.id.btnVerify)
 
 
         userId = listItem.userId
         txtAddress.setText(listItem.address + " " + listItem.city + " " + listItem.pincode)
-        val imagepath = listItem.imgElectricityBill
+
+        val imagepath = listItem.imgPathEBill
         if (imagepath == null || imagepath == "") {
             imgElectricityBill!!.background =
                 requireContext().resources.getDrawable(R.drawable.img_not_available)
         } else {
             imgElectricityBill!!.setImage(imagepath)
+        }
+
+        val imagepath2 = listItem.imgPathAdhar
+        if (imagepath2 == null || imagepath2 == "") {
+            imgAdhar!!.background =
+                requireContext().resources.getDrawable(R.drawable.img_not_available)
+        } else {
+            imgAdhar!!.setImage(imagepath2)
         }
 
 

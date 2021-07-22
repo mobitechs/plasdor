@@ -147,39 +147,42 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
                     rentalType = Constants.Hourly
                     labelNoOf.text = "No Of Hours:"
                     spinnerItemArray = Constants.hourArray
-                    if(qty == 1){
-                        deliveryCharges = Constants.delCharges1Hour
-                        txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
-                    }else{
-                        deliveryCharges = Constants.delChargesNormal
-                        txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
-                    }
+//                    if(qty == 1){
+//                        deliveryCharges = Constants.delCharges1Hour
+//                        txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
+//                    }else{
+//                        deliveryCharges = Constants.delChargesNormal
+//                        txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
+//                    }
 
                 } else if (radio.text.toString().equals(Constants.Daily)) {
                     rentalType = Constants.Daily
                     labelNoOf.text = "No Of Days:"
                     spinnerItemArray = Constants.daysArray
-                    deliveryCharges = Constants.delChargesNormal
-                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
+//                    deliveryCharges = Constants.delChargesNormal
+//                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
                 }
+                spinnerControllerQty.setSelection(0)
                 setupNoOfDaysHoursSpinner()
-                setupPrice()
+//                spinner.setSelection(0)
+
+               // setupPrice()
             })
-        radio_group_delivery.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { group, checkedId ->
-                val radio: RadioButton = rootView.findViewById(checkedId)
-                if (radio.text.toString().equals(Constants.selfPickup)) {
-                    deliveryType = Constants.selfPickup
-                    deliveryCharges = 0
-                    txtDeliveryNote.visibility = View.GONE
-                }
-                else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
-                    deliveryType = Constants.deliveryByCompany
-                    deliveryCharges = Constants.delChargesNormal
-                    txtDeliveryNote.visibility = View.VISIBLE
-                }
-                setupPrice()
-            })
+//        radio_group_delivery.setOnCheckedChangeListener(
+//            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+//                val radio: RadioButton = rootView.findViewById(checkedId)
+//                if (radio.text.toString().equals(Constants.selfPickup)) {
+//                    deliveryType = Constants.selfPickup
+//                    deliveryCharges = 0
+//                    txtDeliveryNote.visibility = View.GONE
+//                }
+//                else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
+//                    deliveryType = Constants.deliveryByCompany
+//                    deliveryCharges = Constants.delChargesNormal
+//                    txtDeliveryNote.visibility = View.VISIBLE
+//                }
+//                setupPrice()
+//            })
 
         listItem = arguments?.getParcelable("item")!!
 
@@ -241,7 +244,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.setAdapter(adapter)
-        spinner.setSelection(listItem.qty - 1)
+        spinner.setSelection(0)
         spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
 //            event.onNothingSelected()
@@ -249,13 +252,13 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 qty = spinnerItemArray[p2].toInt()
-                if (rentalType.equals(Constants.Hourly) && qty == 1) {
-                    deliveryCharges = Constants.delCharges1Hour
-                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
-                } else {
-                    deliveryCharges = Constants.delChargesNormal
-                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
-                }
+//                if (rentalType.equals(Constants.Hourly) && qty == 1) {
+//                    deliveryCharges = Constants.delCharges1Hour
+//                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote80)
+//                } else {
+//                    deliveryCharges = Constants.delChargesNormal
+//                    txtDeliveryNote.text = requireActivity().getString(R.string.deliveryNote40)
+//                }
                 qtyPos = p2
                 setupPrice()
             }
@@ -270,11 +273,8 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerControllerQty.setAdapter(adapter)
-
         spinnerControllerQty.setSelection(listItem.controllerQty - 1)
-
         spinnerControllerQty.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
 //            event.onNothingSelected()
             }
@@ -292,7 +292,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 //        var priceToSell = listItem.priceToSellDaily
         if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X")) && rentalType.equals(Constants.Daily)) {
             priceToSell = Constants.ps5NdXSeriesXPriceArray[qtyPos].toInt()
-        } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X")) && rentalType.equals(Constants.Daily)) {
+           } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X")) && rentalType.equals(Constants.Daily)) {
             priceToSell = Constants.ps4NdXOneXPriceArray[qtyPos].toInt()
         } else if (listItem.productName.equals("XBOX One S") && rentalType.equals(Constants.Daily)) {
             priceToSell = Constants.XOneSPriceArray[qtyPos].toInt()
@@ -319,9 +319,9 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
 
         if (controllerQty == 1) {
-            controllerCharges = 0
+            controllerCharges = 50
         } else {
-            controllerCharges = 50 * (controllerQty - 1)
+            controllerCharges = 50 * (controllerQty)
         }
 
         setLabelPrice()
@@ -362,7 +362,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
         listAdapter = AvailableMerchantListAdapter(
             requireActivity(),
-            this
+            this,userLat,userLong
         )
         recyclerView.adapter = listAdapter
 

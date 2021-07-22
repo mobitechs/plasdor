@@ -103,7 +103,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
             override fun onUserEarnedReward(rewardItem: RewardItem) {
                 rewardPoints = rewardItem.amount.toString()
                 var rewardType = rewardItem.getType()
-                requireContext().showToastMsg("ads success: " + rewardPoints)
+//                requireContext().showToastMsg("ads success: " + rewardPoints)
                 addRewardPoint()
                 Log.d(TAG, "User earned the reward.")
             }
@@ -115,20 +115,20 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
             override fun onAdShowedFullScreenContent() {
                 // Called when ad is shown.
                 Log.d(TAG, "Ad was shown.")
-                requireContext().showToastMsg("Ad was shown")
+//                requireContext().showToastMsg("Ad was shown")
             }
 
             override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
                 // Called when ad fails to show.
                 Log.d(TAG, "Ad failed to show.")
-                requireContext().showToastMsg("Ad failed to show.")
+//                requireContext().showToastMsg("Ad failed to show.")
             }
 
             override fun onAdDismissedFullScreenContent() {
                 // Called when ad is dismissed.
                 // Set the ad reference to null so you don't show the ad a second time.
                 Log.d(TAG, "Ad was dismissed.")
-                requireContext().showToastMsg("Ad was dismissed.")
+//                requireContext().showToastMsg("Ad was dismissed.")
                 mRewardedAd = null
             }
         }
