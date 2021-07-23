@@ -75,15 +75,18 @@ class AvailableMerchantListAdapter(
         endPoint.setLongitude(item.longitude.toDouble())
 
 
-        val distance = (startPoint.distanceTo(endPoint)/1000).toString();
-//        val distance = calculateDistance(
+        var distance = (startPoint.distanceTo(endPoint)/1000)
+
+        val solution = String.format("%.1f", distance).toDouble()
+
+//        val distance = distance(
 //            userLat.toDouble(),
 //            userLong.toDouble(),
 //            item.latitude.toDouble(),
 //            item.longitude.toDouble()
 //        )
 
-        holder.txtDistance.text = "Distance "+distance+" Km"
+        holder.txtDistance.text = "Distance "+solution  +" Km"
 
         if (selectedPosition == position)
             holder.imgRadioBtn.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
@@ -114,6 +117,17 @@ class AvailableMerchantListAdapter(
 
         val cardView: View = itemView
 
+    }
+
+    fun distance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Double {
+        val earthRadius = 6371000.0 //meters
+        val dLat = Math.toRadians((lat2 - lat1).toDouble())
+        val dLng = Math.toRadians((lng2 - lng1).toDouble())
+        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1.toDouble())) * Math.cos(Math.toRadians(lat2.toDouble())) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        return (earthRadius * c)
     }
 
     private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
