@@ -220,7 +220,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/_3sdp"
@@ -537,7 +537,7 @@
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
             android:padding="@dimen/_12sdp"
-            android:text="You are not verified yet. "
+            android:text="@string/notVerifiedRefresh"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold"

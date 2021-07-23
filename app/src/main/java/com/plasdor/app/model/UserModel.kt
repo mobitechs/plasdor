@@ -50,5 +50,6 @@ data class AvailableMerchantListItem(
     var isVerified: String,
     var imgPathAvatar: String,
     var imgPathAdhar: String,
-    var imgPathEBill: String
+    var imgPathEBill: String,
+    var distance: String
 ) : Parcelable

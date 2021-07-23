@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.EditText
@@ -13,10 +14,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.AvailableMerchantListItem
 import com.plasdor.app.model.ProductListItems
+import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import com.razorpay.Checkout
@@ -56,6 +60,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
     var merchantWillGet = 0f
     var deliveredBy = ""
     var finalPayableAmount =0
+    var method=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,18 +133,20 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
         if (rentalType.equals(Constants.Hourly)) {
             labelNoOf.text = "No of Hour:"
-            priceToShow = (listItem.priceToShowHourly.toInt() * listItem.qty).toString()
+            priceToShow = (listItem.priceToShowHourly.toInt() * 2).toString()
             priceToSell = listItem.priceToSellHourly
 
-            labelPriceWithQty.text = "Price (${listItem.priceToSellHourly} * ${listItem.qty} Hr)"
-            price  = listItem.qty * listItem.priceToSellHourly.toInt()
-            additionalDiscount = (listItem.qty * listItem.priceToSellHourly.toInt()) - listItem.qtyWisePrice
+//            labelPriceWithQty.text = "Price (${listItem.priceToSellHourly} * ${listItem.qty} Hr)"
+            labelPriceWithQty.text = "Price for ${listItem.qty} Hr"
+            price  = listItem.qty * listItem.priceToShowHourly.toInt()
+            additionalDiscount = (listItem.qty * listItem.priceToShowHourly.toInt()) - listItem.qtyWisePrice
         } else {
             labelNoOf.text = "No of Day:"
             priceToShow = listItem.priceToShowDaily
             priceToSell = listItem.priceToSellDaily
 
-            labelPriceWithQty.text = "Price (${listItem.priceToSellDaily} * ${listItem.qty} Day)"
+//            labelPriceWithQty.text = "Price (${listItem.priceToSellDaily} * ${listItem.qty} Day)"
+            labelPriceWithQty.text = "Price for  ${listItem.qty} Day"
             price  = listItem.qty * listItem.priceToSellDaily.toInt()
             additionalDiscount = (listItem.qty * listItem.priceToSellDaily.toInt()) - listItem.qtyWisePrice
         }
@@ -149,12 +156,12 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         txtDisplayPriceToShow.setPaintFlags(txtDisplayPriceToShow.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
         txtPrice.text = "Rs. "+price
-        txtAdditionalDiscount.text = "Rs. "+additionalDiscount
+        txtAdditionalDiscount.text = "- Rs. "+additionalDiscount
         discountedPrice = price-additionalDiscount
         txtDiscountedPrice.text = "Rs. "+discountedPrice
 
         txtControllerQty.text = listItem.controllerQty.toString()
-        txtControllerCharges.text =  "Rs. "+listItem.controllerCharges
+        txtControllerCharges.text =  "+ Rs. "+listItem.controllerCharges
 
         txtDeliveryCharges.text =  "+ Rs. "+deliveryCharges
 
@@ -173,6 +180,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         txtAddress.text = merchantItem.address
         txtCity.text = merchantItem.city
         txtPinCode.text = merchantItem.pincode
+        txtDistance.text = "Distance "+merchantItem.distance  +" Km"
 
         imgRadioBtn.visibility = View.GONE
 
@@ -192,8 +200,23 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
             showSelectPaymentTypeDialog()
         }
+        btnVerificationPending.setOnClickListener {
+            getUserDetails()
+        }
     }
 
+    private fun getUserDetails() {
+        layoutLoader.visibility = View.VISIBLE
+        method = "GetUserDetails"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("userId", userId)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
+    }
 
 
     private fun razorPayGateway() {
@@ -234,12 +257,32 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
     override fun onSuccess(data: Any, tag: String) {
         layoutLoader.visibility = View.GONE
-        if (data.equals("SUCCESS")) {
-            this.showToastMsg("Order Successfully Placed")
-            this.openClearActivity(UserHomeActivity::class.java)
-        } else {
-            this.showToastMsg("Order failed try again latter")
+
+        if(method.equals("GetUserDetails")){
+            val gson = Gson()
+            val type = object : TypeToken<ArrayList<UserModel>>() {}.type
+            var user: ArrayList<UserModel>? = gson.fromJson(data.toString(), type)
+
+            Log.d("user", "" + user)
+
+            SharePreferenceManager.getInstance(this)
+                .saveUserLogin(Constants.USERDATA, user)
+
+            if(user!![0].isVerified.equals("1")){
+                btnPlaceOrder.visibility = View.VISIBLE
+                btnVerificationPending.visibility = View.GONE
+            }else{
+                this.showToastMsg("You are not verified yet.")
+            }
+        }else{
+            if (data.equals("SUCCESS")) {
+                this.showToastMsg("Order Successfully Placed")
+                this.openClearActivity(UserHomeActivity::class.java)
+            } else {
+                this.showToastMsg("Order failed try again latter")
+            }
         }
+
     }
 
     override fun onFailure(message: String) {
@@ -260,7 +303,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
     private fun callAPIToSaveOrder() {
         layoutLoader.visibility = View.VISIBLE
-        val method = "placeOrder"
+         method = "placeOrder"
         val jsonObject = JSONObject()
         try {
             jsonObject.put("method", method)

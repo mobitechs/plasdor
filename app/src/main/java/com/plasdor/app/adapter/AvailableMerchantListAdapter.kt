@@ -79,6 +79,8 @@ class AvailableMerchantListAdapter(
 
         val solution = String.format("%.1f", distance).toDouble()
 
+        item.distance = solution.toString()
+
 //        val distance = distance(
 //            userLat.toDouble(),
 //            userLong.toDouble(),
