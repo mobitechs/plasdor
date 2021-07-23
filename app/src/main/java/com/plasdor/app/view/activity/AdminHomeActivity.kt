@@ -18,6 +18,7 @@ import com.plasdor.app.R
 import com.plasdor.app.callbacks.AlertDialogBtnClickedCallBack
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
+import com.plasdor.app.view.fragment.FullScreenImageFragment
 import com.plasdor.app.view.fragment.ProfileFragment
 import com.plasdor.app.view.fragment.admin.*
 import kotlinx.android.synthetic.main.activity_admin_home.*
@@ -271,6 +272,15 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
             false,
             R.id.nav_host_fragment,
             "AdminPendingUserDetailsFragment",
+            bundle
+        )
+    }
+    fun OpenFullScreenImageFragment(bundle: Bundle) {
+        addFragmentWithData(
+            FullScreenImageFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "FullScreenImageFragment",
             bundle
         )
     }

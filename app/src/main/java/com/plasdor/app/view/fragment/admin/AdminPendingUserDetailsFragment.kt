@@ -15,6 +15,7 @@ import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.apiPostCall
 import com.plasdor.app.utils.setImage
 import com.plasdor.app.utils.showToastMsg
+import com.plasdor.app.view.activity.AdminHomeActivity
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -70,6 +71,18 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
                 requireContext().resources.getDrawable(R.drawable.img_not_available)
         } else {
             imgAdhar!!.setImage(imagepath2)
+        }
+
+
+        imgElectricityBill.setOnClickListener {
+            var bundle = Bundle()
+            bundle.putString("imagePath",listItem.imgPathEBill)
+            (context as AdminHomeActivity).OpenFullScreenImageFragment(bundle)
+        }
+        imgAdhar.setOnClickListener {
+            var bundle = Bundle()
+            bundle.putString("imagePath",listItem.imgPathAdhar)
+            (context as AdminHomeActivity).OpenFullScreenImageFragment(bundle)
         }
 
 
