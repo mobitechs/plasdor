@@ -3,7 +3,6 @@ package com.plasdor.app.view.fragment
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,8 +19,6 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.bumptech.glide.Glide
-import com.fxn.pix.Options
-import com.fxn.pix.Pix
 import com.fxn.utility.PermUtil
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.maps.model.LatLng
@@ -29,7 +26,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.ApiResponse
-import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
@@ -187,15 +183,10 @@ class ProfileFragment : Fragment(), ApiResponse {
             //setImage()
         }
         if (adharPath != null || adharPath != "null" || adharPath != "") {
-            imgAdhar.setImage(adharPath)
-
-//            Glide.with(requireContext()).load(adharPath)
-//                .into(imgAdhar)
+            imgAdhar.setImage(adharPath,R.drawable.img_not_available)
         }
         if (electricityBillPath != null || electricityBillPath != "null" || electricityBillPath != "") {
-            imgElectricityBill.setImage(electricityBillPath)
-//            Glide.with(requireContext()).load(electricityBillPath)
-//                .into(imgElectricityBill)
+            imgElectricityBill.setImage(electricityBillPath,R.drawable.img_not_available)
         }
 
         if (email.equals("")) {
@@ -212,50 +203,53 @@ class ProfileFragment : Fragment(), ApiResponse {
     }
 
     fun getImage() {
-//        ImagePicker.with(this)
-//            .crop()                    //Crop image(Optional), Check Customization for more option
-//            .compress(1024)            //Final image size will be less than 1 MB(Optional)
-//            .maxResultSize(
-//                1080,
-//                1080
-//            )    //Final image resolution will be less than 1080 x 1080(Optional)
-//            .start()
+        ImagePicker.with(this)
+            .crop()                    // Crop image(Optional), Check Customization for more option
+            .saveDir(requireActivity().filesDir.path + File.separator + "Images/")
 
-        Pix.start(this, Options.init().setRequestCode(100))
+            .compress(1024)            //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                1080,
+                1080
+            )    //Final image resolution will be less than 1080 x 1080(Optional)
+            .start()
+
+//        Pix.start(this, Options.init().setRequestCode(100))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK  && requestCode == 100 )  {
-            val returnValue = data!!.getStringArrayListExtra(Pix.IMAGE_RESULTS)
-            val abc = "file://" + returnValue!![0]
-            val fileUri = Uri.parse(abc)
+        if (resultCode == Activity.RESULT_OK) {
+//            val returnValue = data!!.getStringArrayListExtra(Pix.IMAGE_RESULTS)
+//            val abc = "file://" + returnValue!![0]
+//            val fileUri = Uri.parse(abc)
+            val fileUri = data?.data
 
 
             if (imageType == 0) {
                 avatarFile = null
-                avatarFile = File(fileUri.path)
-//                avatarFile = ImagePicker.getFile(data)!!
-//                avatarPath = ImagePicker.getFilePath(data)!!
-                imgAvatar.setImageURI(null)
+//                avatarFile = File(fileUri.path)
+                avatarFile = ImagePicker.getFile(data)!!
+                avatarPath = ImagePicker.getFilePath(data)!!
+               // imgAvatar.setImageURI(null)
                 imgAvatar.setImageURI(fileUri)
             }
             else if (imageType == 1) {
                 adharFile = null
-                adharFile = File(fileUri.path)
-//                adharFile = ImagePicker.getFile(data)!!
-//                adharPath = ImagePicker.getFilePath(data)!!
-                imgAdhar.setImageURI(null)
+//                adharFile = File(fileUri.path)
+                adharFile = ImagePicker.getFile(data)!!
+                adharPath = ImagePicker.getFilePath(data)!!
+               // imgAdhar.setImageURI(null)
                 imgAdhar.setImageURI(fileUri)
 
             }
             else if (imageType == 2) {
                 electricityBillFile = null
-                electricityBillFile = File(fileUri.path)
-//                electricityBillFile = ImagePicker.getFile(data)!!
-//                electricityBillPath = ImagePicker.getFilePath(data)!!
-                imgElectricityBill.setImageURI(null)
+//                electricityBillFile = File(fileUri.path)
+                electricityBillFile = ImagePicker.getFile(data)!!
+                electricityBillPath = ImagePicker.getFilePath(data)!!
+//                imgElectricityBill.setImageURI(null)
                 imgElectricityBill.setImageURI(fileUri)
 
             }
@@ -287,25 +281,36 @@ class ProfileFragment : Fragment(), ApiResponse {
         var latlong: LatLng = getLocationFromAddress(requireContext(), address)!!
 
         val method = "editProfileWithImage"
-        AndroidNetworking.upload(Constants.BASE_URL)
-            .addMultipartFile("avatarFile", avatarFile)
-            .addMultipartFile("adharFile", adharFile)
-            .addMultipartFile("electricityBillFile", electricityBillFile)
-            .addMultipartParameter("userId", userId)
-            .addMultipartParameter("name", name)
-            .addMultipartParameter("mobile", mobile)
-            .addMultipartParameter("address", address)
-            .addMultipartParameter("city", city)
-            .addMultipartParameter("pinCode", pinCode)
-            .addMultipartParameter("latitude", latlong.latitude.toString())
-            .addMultipartParameter("longitude", latlong.longitude.toString())
-            .addMultipartParameter("userImgUrl", avatarPath)
-            .addMultipartParameter("adharImgUrl", adharPath)
-            .addMultipartParameter("electricityBillUrl", electricityBillPath)
-            .addMultipartParameter("method", method)
-            .setTag(method)
-            .setPriority(Priority.HIGH)
-            .build()
+        val androidNetworking = AndroidNetworking.upload(Constants.BASE_URL)
+        if (avatarFile?.isFile == true) {
+            androidNetworking.addMultipartFile("avatarFile", avatarFile)
+        }
+        if (adharFile?.isFile == true) {
+            androidNetworking.addMultipartFile("adharFile", adharFile)
+        }
+        if (electricityBillFile?.isFile == true) {
+            androidNetworking.addMultipartFile("electricityBillFile", electricityBillFile)
+        }
+
+        //AndroidNetworking.upload(Constants.BASE_URL)
+//            .addMultipartFile("avatarFile", avatarFile)
+//            .addMultipartFile("adharFile", adharFile)
+//            .addMultipartFile("electricityBillFile", electricityBillFile)
+        androidNetworking.addMultipartParameter("userId", userId)
+        androidNetworking.addMultipartParameter("name", name)
+        androidNetworking.addMultipartParameter("mobile", mobile)
+        androidNetworking.addMultipartParameter("address", address)
+        androidNetworking.addMultipartParameter("city", city)
+        androidNetworking.addMultipartParameter("pinCode", pinCode)
+        androidNetworking.addMultipartParameter("latitude", latlong.latitude.toString())
+        androidNetworking.addMultipartParameter("longitude", latlong.longitude.toString())
+        androidNetworking.addMultipartParameter("userImgUrl", avatarPath)
+        androidNetworking.addMultipartParameter("adharImgUrl", adharPath)
+        androidNetworking.addMultipartParameter("electricityBillUrl", electricityBillPath)
+        androidNetworking.addMultipartParameter("method", method)
+        androidNetworking.setTag(method)
+        androidNetworking.setPriority(Priority.HIGH)
+        androidNetworking.build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(data: JSONObject) {
                     layoutLoader.visibility = View.GONE

@@ -26,6 +26,7 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
@@ -59,11 +60,11 @@ fun Context.checkLogin() {
             .getUserLogin(Constants.USERDATA)
 
         if (userDetails?.get(0)?.userType == Constants.ADMIN) {
-            openActivity(AdminHomeActivity::class.java)
+            openClearActivity(AdminHomeActivity::class.java)
         } else if (userDetails?.get(0)?.userType == Constants.MERCHANT) {
-            openActivity(MerchantHomeActivity::class.java)
+            openClearActivity(MerchantHomeActivity::class.java)
         } else if (userDetails?.get(0)?.userType == Constants.USER) {
-            openActivity(UserHomeActivity::class.java)
+            openClearActivity(UserHomeActivity::class.java)
         }
 //        openActivity(UserHomeActivity::class.java)
     } else {
@@ -317,8 +318,6 @@ fun Context.getDateFromPicker(v: View): String {
     )
     mDatePicker.show()
     return selectedDateForSubmission
-
-
 }
 
 fun isEmailValid(email: String): Boolean {
@@ -332,12 +331,23 @@ fun ImageView.setImage(image: Any, default: Int) {
         .into(this);
 
 }
+fun AppCompatImageView.setImage(image: Any, default: Int) {
+    val options: RequestOptions = RequestOptions().error(default)
+    Glide.with(context).load(image)
+        .apply(options)
+        .into(this);
+
+}
 
 fun AppCompatImageView.setImage(image: Any) {
     val options: RequestOptions = RequestOptions().error(R.drawable.img_not_available)
     Glide.with(context).load(image)
         .apply(options)
         .into(this);
+
+
+//    .skipMemoryCache(true)
+//        .diskCacheStrategy(DiskCacheStrategy.NONE)
 
 }
 
