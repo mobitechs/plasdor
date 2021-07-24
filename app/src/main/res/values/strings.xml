@@ -30,7 +30,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="willUDeliver">Will you deliver \n this product?</string>
     <string name="deliveryNote"><i>*Note: </i>If you will not deliver then You will be charged Rs.40 per order.</string>
-    <string name="freeDelivery"><i>*Note: </i>Free Delivery</string>
+    <string name="freeDelivery">Enjoy Free Delivery</string>
     <string name="deliveryNote40"><i>*Note: </i>Delivery Charges is Rs.49.</string>
     <string name="deliveryNote80"><i>*Note: </i>Delivery Charges is Rs.80.</string>
     <string name="insufficientPoint"><i>*Note: </i>Sorry, You don\'t have sufficient point.</string>
@@ -48,4 +48,5 @@
     <string name="support6">6.<u>How can i find received orders?</u></string>
     <string name="getDirections"><u>Get Direction</u></string>
     <string name="notVerifiedRefresh">You are not verified yet.  <u>Update KYC</u></string>
+    <string name="tnc"><u>Terms &amp; Condition</u></string>
 </resources>

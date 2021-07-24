@@ -6,6 +6,7 @@ class Constants {
 
         const val clientBusinessId = "1"
         const val BASE_URL = "https://mobitechs.in/plasdor/api/plasdor.php"
+        const val TNC = "https://mobitechs.in/plasdor/tnc.html"
 
         const val PROJECT_NAME = "Plasdor"
         const val USERDATA = "userData"

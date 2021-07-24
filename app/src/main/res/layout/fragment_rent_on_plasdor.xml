@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="To start rent on plasdor, you need to create account as a merchant with different email address. Once yor count confirm then you can add your console for renting."
+            android:text="To start rent on plasdor, you need to create account as a merchant with different email address. Once your account verified then you can add your console for renting."
             android:textSize="@dimen/_18sdp"/>
     </LinearLayout>
 

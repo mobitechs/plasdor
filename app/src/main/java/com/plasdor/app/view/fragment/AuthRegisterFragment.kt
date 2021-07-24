@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.androidnetworking.AndroidNetworking
@@ -29,6 +30,7 @@ import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
+import com.plasdor.app.view.activity.AuthActivity
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -103,6 +105,15 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
         imgElectricityBill = rootView.findViewById(R.id.imgElectricityBill)!!
         imgAdhar = rootView.findViewById(R.id.imgAdhar)!!
 
+        val tvTnc: TextView = rootView.findViewById(R.id.tvTnc)
+        val checkTnc: CheckBox = rootView.findViewById(R.id.checkTnc)
+
+        tvTnc.setOnClickListener {
+            var bundle =  Bundle()
+            bundle.putString("url",Constants.TNC)
+            (context as AuthActivity).openWebView(bundle)
+        }
+
 //        val navController = activity?.let { Navigation.findNavController(it, R.id.navFragment) }
 
 
@@ -151,11 +162,13 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                 requireActivity().showToastMsg("Enter City")
             } else if (etPincode.text.toString().equals("")) {
                 requireActivity().showToastMsg("Enter PinCode ")
-            } else if (adharFile == null) {
-                requireActivity().showToastMsg("Please add Adhar card Photo. ")
-            } else if (electricityBillFile == null) {
-                requireActivity().showToastMsg("Please add Electricity Bill Photo. ")
-            } else {
+            }
+//            else if (adharFile == null) {
+//                requireActivity().showToastMsg("Please add Adhar card Photo. ")
+//            } else if (electricityBillFile == null) {
+//                requireActivity().showToastMsg("Please add Electricity Bill Photo. ")
+//            }
+            else {
                 var address =
                     etAddress.text.toString() + " " + etCity.text.toString() + "" + etPincode.text.toString()
                 latlong = getLocationFromAddress(requireContext(), address)!!
@@ -167,9 +180,16 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                     if (checkIsMerchant.isChecked) {
                         userType = "Merchant"
                     }
-                    layoutLoader.visibility = View.VISIBLE
-                    //callRegisterAPIWithImg()
-                    callRegisterAPI()
+
+                    if (checkTnc.isChecked) {
+                        layoutLoader.visibility = View.VISIBLE
+                        //callRegisterAPIWithImg()
+                        callRegisterAPI()
+                    }
+                    else {
+                        requireActivity().showToastMsg("Please accept terms and conditions")
+                    }
+
 
 
                 }

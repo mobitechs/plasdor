@@ -98,6 +98,14 @@ class AuthActivity : AppCompatActivity() {
             "AuthRegisterFragment", bundle
         )
     }
+    fun openWebView(bundle: Bundle) {
+        addFragmentWithData(
+            WebViewFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "WebViewFragment", bundle
+        )
+    }
 
 
 }
