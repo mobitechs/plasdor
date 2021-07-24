@@ -85,12 +85,35 @@
 
         </LinearLayout>
 
-            <Button
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBlock"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="5"
+                android:background="@color/red"
                 android:layout_height="wrap_content"
+                android:text="Block"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="5"
+                android:background="@color/green"
+                android:text="Verify"
                 android:id="@+id/btnVerify"
-                android:text="Verify"/>
+                android:textColor="@color/white" />
         </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

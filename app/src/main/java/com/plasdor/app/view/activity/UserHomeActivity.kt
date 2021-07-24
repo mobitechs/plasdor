@@ -117,6 +117,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         llLogout.setOnClickListener(this)
         menuWallet.setOnClickListener(this)
         llRentOnPlasdor.setOnClickListener(this)
+        llUpdateKyc.setOnClickListener(this)
 
     }
 
@@ -159,8 +160,11 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             R.id.menuWallet -> {
                 displayView(8)
             }
-              R.id.llRentOnPlasdor -> {
+            R.id.llRentOnPlasdor -> {
                 displayView(9)
+            }
+            R.id.llUpdateKyc -> {
+                displayView(10)
             }
             R.id.llLogout -> {
                 //clear sesssion
@@ -328,8 +332,21 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     "RentOnPlasdorFragment"
                 )
             }
+            10 -> {
+                OpenKYCUpdate()
+            }
         }
         drawerOpenorClose()
+    }
+
+    fun OpenKYCUpdate() {
+        toolbarTitle("KYC Update")
+        addFragment(
+            UpdateKycFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "UpdateKycFragment"
+        )
     }
 
     fun openCartPage() {

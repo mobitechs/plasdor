@@ -18,6 +18,7 @@ data class UserModel(
     var isSelected: Boolean,
     var wallet: String,
     var isVerified: String,
+    var imgPathPassbook: String,
     var imgPathAvatar: String,
     var imgPathAdhar: String,
     var imgPathEBill: String,
@@ -48,7 +49,8 @@ data class AvailableMerchantListItem(
     var remainingControllerQty: String,
     var willDeliver: String,
     var isVerified: String,
-    var imgPathAvatar: String,
+    var imgPathPassbook: String,
+    var imgPathAvatar: String?,
     var imgPathAdhar: String,
     var imgPathEBill: String,
     var distance: String

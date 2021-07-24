@@ -23,6 +23,7 @@ import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
+import com.plasdor.app.view.fragment.UpdateKycFragment
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import kotlinx.android.synthetic.main.activity_place_order.*
@@ -117,7 +118,6 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             }
         }
 
-
         productId = listItem.pId
         ivProdImage.setImage(listItem.img!!)
 
@@ -192,17 +192,32 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             btnVerificationPending.visibility = View.VISIBLE
         }
         btnPlaceOrder.setOnClickListener {
-            transactionNo = "TID" + System.currentTimeMillis()
+            if(isVerified.equals("1")){
+                transactionNo = "TID" + System.currentTimeMillis()
 //            amount = listItem.totalPayable.toString()
-            amount = finalPayableAmount.toString()
-            note = "Payment for Plasdor Services."
-            //payUsingUpi(amount, upiId, name, note)
+                amount = finalPayableAmount.toString()
+                note = "Payment for Plasdor Services."
+                //payUsingUpi(amount, upiId, name, note)
+                showSelectPaymentTypeDialog()
+            }else{
+                getUserDetails()
+            }
 
-            showSelectPaymentTypeDialog()
         }
         btnVerificationPending.setOnClickListener {
-            getUserDetails()
+           // getUserDetails()
+            OpenKYCUpdate()
+
         }
+    }
+    fun OpenKYCUpdate() {
+        nav_host_fragment.visibility = View.VISIBLE
+        addFragment(
+            UpdateKycFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "UpdateKycFragment"
+        )
     }
 
     private fun getUserDetails() {
@@ -272,6 +287,8 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
                 btnPlaceOrder.visibility = View.VISIBLE
                 btnVerificationPending.visibility = View.GONE
             }else{
+                btnPlaceOrder.visibility = View.GONE
+                btnVerificationPending.visibility = View.VISIBLE
                 this.showToastMsg("You are not verified yet.")
             }
         }else{

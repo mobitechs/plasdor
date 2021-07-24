@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.plasdor.app.R
@@ -26,7 +27,8 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
     lateinit var txtAddress: TextView
     lateinit var imgElectricityBill: AppCompatImageView
     lateinit var imgAdhar: AppCompatImageView
-    lateinit var btnVerify: Button
+    lateinit var btnVerify: AppCompatButton
+    lateinit var btnBlock: AppCompatButton
 
     lateinit var listItem: UserModel
 
@@ -52,6 +54,7 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
         imgElectricityBill = rootView.findViewById(R.id.imgElectricityBill)
         imgAdhar = rootView.findViewById(R.id.imgAdhar)
         btnVerify = rootView.findViewById(R.id.btnVerify)
+        btnBlock = rootView.findViewById(R.id.btnBlock)
 
 
         userId = listItem.userId
@@ -87,19 +90,27 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
 
 
 
+        btnBlock.setOnClickListener {
+            isVerified = 2
+            verifyBlockAPICall()
+        }
         btnVerify.setOnClickListener {
             isVerified = 1
-            val method = "isVerifiedOrRejected"
-            val jsonObject = JSONObject()
-            try {
-                jsonObject.put("method", method)
-                jsonObject.put("userId", userId)
-                jsonObject.put("isVerified", isVerified)
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-            apiPostCall(Constants.BASE_URL, jsonObject, this, method)
+            verifyBlockAPICall()
         }
+    }
+
+    private fun verifyBlockAPICall() {
+        val method = "isVerifiedOrRejected"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("userId", userId)
+            jsonObject.put("isVerified", isVerified)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
     }
 
     override fun onSuccess(data: Any, tag: String) {

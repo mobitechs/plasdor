@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -36,6 +39,9 @@ class WalletFragment : Fragment(), ApiResponse {
 
     lateinit var  rootView:View
     lateinit var  txtRewardPoints:TextView
+    lateinit var  txtRedeemHistory:TextView
+    lateinit var  layoutPointDetails: LinearLayout
+    lateinit var  hideShowPointDetails: ImageView
 
     lateinit var viewModelUser: UserListViewModel
     lateinit var listAdapter: UserOrderListAdapter
@@ -45,6 +51,7 @@ class WalletFragment : Fragment(), ApiResponse {
 
     var userId=""
     var rewardPoints=""
+    var isHide = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +67,27 @@ class WalletFragment : Fragment(), ApiResponse {
         userId = SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
         rewardPoints = SharePreferenceManager.getInstance(requireActivity()).getValueString(Constants.EARNED_POINTS).toString()
         txtRewardPoints = rootView.findViewById(R.id.txtRewardPoints)
+        txtRedeemHistory = rootView.findViewById(R.id.txtRedeemHistory)!!
         recyclerView = rootView.findViewById(R.id.recyclerView)!!
+        layoutPointDetails = rootView.findViewById(R.id.layoutPointDetails)!!
+        hideShowPointDetails = rootView.findViewById(R.id.hideShowPointDetails)!!
+
+        hideShowPointDetails.setOnClickListener{
+            if(isHide){
+                isHide = false
+                layoutPointDetails.visibility = View.VISIBLE
+//                hideShowPointDetails.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_up_24)
+                hideShowPointDetails.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24));
+
+            }
+            else{
+                isHide = true
+                layoutPointDetails.visibility = View.GONE
+//                hideShowPointDetails.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_down_24)
+                hideShowPointDetails.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24));
+            }
+        }
+
         txtRewardPoints.text = rewardPoints
         getWalletPoints()
         setupRecyclerView()
@@ -93,6 +120,12 @@ class WalletFragment : Fragment(), ApiResponse {
         viewModelUser.getMyRedeemHistory(userId)
 
         viewModelUser.redeemHistoryListItems.observe(requireActivity(), Observer {
+            if(it.size == 0){
+                txtRedeemHistory.visibility = View.GONE
+            }
+            else{
+                txtRedeemHistory.visibility = View.VISIBLE
+            }
             listAdapter.updateListItems(it)
         })
 

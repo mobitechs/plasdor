@@ -323,6 +323,7 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
                     android:id="@+id/txtViewOnMap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

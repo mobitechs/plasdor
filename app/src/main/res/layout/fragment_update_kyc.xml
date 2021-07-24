@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".view.fragment.UpdateKycFragment">
+
+    <LinearLayout
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_130sdp"
+            android:layout_weight="5">
+
+            <TextView
+                android:id="@+id/txtAdharCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:text="Adhar Card" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/imgAdhar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:src="@drawable/img_not_available"
+                android:layout_below="@+id/txtAdharCard"
+                android:layout_marginEnd="@dimen/_10sdp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_130sdp"
+            android:layout_weight="5">
+
+            <TextView
+                android:id="@+id/txtElectricityBill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:text="Electricity Bill" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/imgElectricityBill"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_below="@+id/txtElectricityBill"
+                android:layout_marginStart="@dimen/_10sdp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutPassbook"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_130sdp"
+            android:layout_weight="5">
+
+            <TextView
+                android:id="@+id/txtPassbookTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:text="Adhar Card" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/imgPassbook"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_below="@+id/txtPassbookTitle"
+                android:layout_marginEnd="@dimen/_10sdp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_130sdp"
+            android:layout_weight="5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:text="Electricity Bill" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_marginStart="@dimen/_10sdp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/colorPrimary"
+        android:text="Update"
+        android:textColor="@color/white" />
+    </LinearLayout>
+
+    <include layout="@layout/loader"></include>
+</RelativeLayout>

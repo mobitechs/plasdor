@@ -255,6 +255,7 @@ class MerchantAllProductListFragment : Fragment(), MerchantProductClickListener,
     }
 
     private fun addProductWithQty() {
+        willDeliver = "No"  //default no bcz company will deliver all product
         val method = "addMerchantsProduct"
         val jsonObject = JSONObject()
         try {

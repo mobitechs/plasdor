@@ -47,5 +47,5 @@
     <string name="support5">5.<u>How can i add product to my list?</u></string>
     <string name="support6">6.<u>How can i find received orders?</u></string>
     <string name="getDirections"><u>Get Direction</u></string>
-    <string name="notVerifiedRefresh">You are not verified yet.  <u>Refresh</u></string>
+    <string name="notVerifiedRefresh">You are not verified yet.  <u>Update KYC</u></string>
 </resources>

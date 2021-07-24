@@ -70,7 +70,6 @@ class ProfileFragment : Fragment(), ApiResponse {
     lateinit var layoutLoader: RelativeLayout
     lateinit var imgElectricityBill: AppCompatImageView
     lateinit var imgAdhar: AppCompatImageView
-
     var imageType = 0
 
     override fun onCreateView(
@@ -134,8 +133,8 @@ class ProfileFragment : Fragment(), ApiResponse {
                 requireContext().showToastMsg("PinCode cannot be empty")
             } else {
                 layoutLoader.visibility = View.VISIBLE
-                callUpdateProfileAPI()
-//                profileUpdateAPI()
+//                callUpdateProfileAPI()
+                profileUpdateAPI()
             }
         }
     }
@@ -219,41 +218,26 @@ class ProfileFragment : Fragment(), ApiResponse {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (resultCode == Activity.RESULT_OK) {
-//            val returnValue = data!!.getStringArrayListExtra(Pix.IMAGE_RESULTS)
-//            val abc = "file://" + returnValue!![0]
-//            val fileUri = Uri.parse(abc)
             val fileUri = data?.data
-
-
             if (imageType == 0) {
                 avatarFile = null
-//                avatarFile = File(fileUri.path)
                 avatarFile = ImagePicker.getFile(data)!!
                 avatarPath = ImagePicker.getFilePath(data)!!
-               // imgAvatar.setImageURI(null)
                 imgAvatar.setImageURI(fileUri)
             }
             else if (imageType == 1) {
                 adharFile = null
-//                adharFile = File(fileUri.path)
                 adharFile = ImagePicker.getFile(data)!!
                 adharPath = ImagePicker.getFilePath(data)!!
-               // imgAdhar.setImageURI(null)
                 imgAdhar.setImageURI(fileUri)
-
             }
             else if (imageType == 2) {
                 electricityBillFile = null
-//                electricityBillFile = File(fileUri.path)
                 electricityBillFile = ImagePicker.getFile(data)!!
                 electricityBillPath = ImagePicker.getFilePath(data)!!
-//                imgElectricityBill.setImageURI(null)
                 imgElectricityBill.setImageURI(fileUri)
-
             }
-
         }
     }
 
@@ -291,11 +275,6 @@ class ProfileFragment : Fragment(), ApiResponse {
         if (electricityBillFile?.isFile == true) {
             androidNetworking.addMultipartFile("electricityBillFile", electricityBillFile)
         }
-
-        //AndroidNetworking.upload(Constants.BASE_URL)
-//            .addMultipartFile("avatarFile", avatarFile)
-//            .addMultipartFile("adharFile", adharFile)
-//            .addMultipartFile("electricityBillFile", electricityBillFile)
         androidNetworking.addMultipartParameter("userId", userId)
         androidNetworking.addMultipartParameter("name", name)
         androidNetworking.addMultipartParameter("mobile", mobile)
@@ -366,7 +345,6 @@ class ProfileFragment : Fragment(), ApiResponse {
                 .saveUserLogin(Constants.USERDATA, user)
 
             requireActivity().checkLogin()
-//            requireActivity().openActivity(UserHomeActivity::class.java)
         }
         layoutLoader.visibility = View.GONE
     }

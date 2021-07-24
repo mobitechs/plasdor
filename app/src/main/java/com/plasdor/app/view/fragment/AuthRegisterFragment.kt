@@ -30,6 +30,7 @@ import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
 import java.util.*
@@ -167,34 +168,37 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                         userType = "Merchant"
                     }
                     layoutLoader.visibility = View.VISIBLE
+                    //callRegisterAPIWithImg()
                     callRegisterAPI()
 
-//                    val method = "userRegister"
-//                    val jsonObject = JSONObject()
-//                    try {
-//                        jsonObject.put("method", method)
-//                        jsonObject.put("userType", userType)
-//                        jsonObject.put("name", etName.text.toString())
-//                        jsonObject.put("mobile", etMobileNo.text.toString())
-//                        jsonObject.put("email", etEmail.text.toString())
-//                        jsonObject.put("password", etPassword.text.toString())
-//                        jsonObject.put("address", txtAddress.text.toString())
-//                        jsonObject.put("city", txtCity.text.toString())
-//                        jsonObject.put("pincode", txtPinCode.text.toString())
-//                        jsonObject.put("latitude", latlong.latitude.toString())
-//                        jsonObject.put("longitude", latlong.longitude.toString())
-//                    } catch (e: JSONException) {
-//                        e.printStackTrace()
-//                    }
-//                    apiPostCall(Constants.BASE_URL, jsonObject, this, method)
+
                 }
             }
         }
     }
 
     private fun callRegisterAPI() {
-
-
+        val method = "userRegister"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("userType", userType)
+            jsonObject.put("name", etName.text.toString())
+            jsonObject.put("mobile", etMobileNo.text.toString())
+            jsonObject.put("dob", txtDob.text.toString())
+            jsonObject.put("email", etEmail.text.toString())
+            jsonObject.put("password", etPassword.text.toString())
+            jsonObject.put("address", etAddress.text.toString())
+            jsonObject.put("city", etCity.text.toString())
+            jsonObject.put("pincode", etPincode.text.toString())
+            jsonObject.put("latitude", latlong.latitude.toString())
+            jsonObject.put("longitude", latlong.longitude.toString())
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
+    }
+    private fun callRegisterAPIWithImg() {
         val method = "registerWithImage"
         val androidNetworking = AndroidNetworking.upload(Constants.BASE_URL)
 
@@ -213,7 +217,7 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
         androidNetworking.addMultipartParameter("password", etConfirmPassword.text.toString())
         androidNetworking.addMultipartParameter("address", etAddress.text.toString())
         androidNetworking.addMultipartParameter("city", etCity.text.toString())
-        androidNetworking.addMultipartParameter("pinCode", etPincode.text.toString())
+        androidNetworking.addMultipartParameter("pincode", etPincode.text.toString())
         androidNetworking.addMultipartParameter("latitude", latlong.latitude.toString())
         androidNetworking.addMultipartParameter("longitude", latlong.longitude.toString())
         androidNetworking.addMultipartParameter("adharImgUrl", adharPath)
