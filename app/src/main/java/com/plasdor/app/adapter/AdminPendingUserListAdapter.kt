@@ -11,6 +11,7 @@ import android.widget.Filter
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
 import com.plasdor.app.model.UserModel
@@ -61,6 +62,18 @@ class AdminPendingUserListAdapter(
         holder.txtAddress.text = item.address
         holder.txtCity.text = item.city
         holder.txtPinCode.text = item.pincode
+        holder.txtUserType.text = item.userType
+
+        if(item.isVerified == "2"){
+            //blocked
+            holder.txtVerification.text = "Verification Blocked"
+            holder.txtVerification.setTextColor(ContextCompat.getColor(context, R.color.red))
+        }
+        else{
+            //pending
+            holder.txtVerification.text = "Verification Pending"
+            holder.txtVerification.setTextColor(ContextCompat.getColor(context, R.color.green))
+        }
 
         holder.imgRadioBtn.visibility = View.GONE
         holder.txtDistance.visibility = View.GONE
@@ -69,6 +82,8 @@ class AdminPendingUserListAdapter(
         holder.txtAddress.visibility = View.VISIBLE
         holder.txtCity.visibility = View.VISIBLE
         holder.txtPinCode.visibility = View.VISIBLE
+        holder.txtUserType.visibility = View.VISIBLE
+        holder.txtVerification.visibility = View.VISIBLE
 
         holder.itemView.setOnClickListener {
 
@@ -90,6 +105,8 @@ class AdminPendingUserListAdapter(
         var txtPinCode: AppCompatTextView = view.findViewById(R.id.txtPinCode)
         var imgRadioBtn: AppCompatImageView = view.findViewById(R.id.imgRadioBtn)
         var txtDistance: AppCompatTextView = view.findViewById(R.id.txtDistance)
+        var txtUserType: AppCompatTextView = view.findViewById(R.id.txtUserType)
+        var txtVerification: AppCompatTextView = view.findViewById(R.id.txtVerification)
 
         val cardView: View = itemView
 
@@ -107,6 +124,7 @@ class AdminPendingUserListAdapter(
                     for (row in allListItems) {
                         if (row.name.toLowerCase()
                                 .contains(charString.toLowerCase()) || row.city.toLowerCase()
+                                .contains(charString.toLowerCase()) || row.userType.toLowerCase()
                                 .contains(charString.toLowerCase())
                         ) {
                             filteredList.add(row)

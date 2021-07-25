@@ -121,6 +121,8 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
             btnVerify.setText("Verified")
             btnVerify.isEnabled = false
             btnVerify.isClickable = false
+
+            (context as AdminHomeActivity).openUserVerificationPendingList()
         }
     }
 

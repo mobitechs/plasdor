@@ -232,12 +232,7 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
             }
             9 -> {
                 toolbarTitle("Pending Verification")
-                addFragment(
-                    AdminPendingUserListFragment(),
-                    false,
-                    R.id.nav_host_fragment,
-                    "AdminPendingUserListFragment"
-                )
+                openUserVerificationPendingList()
             }
 
         }
@@ -282,6 +277,14 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
             R.id.nav_host_fragment,
             "FullScreenImageFragment",
             bundle
+        )
+    }
+    fun openUserVerificationPendingList() {
+        addFragment(
+            AdminPendingUserListFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "AdminPendingUserListFragment"
         )
     }
 

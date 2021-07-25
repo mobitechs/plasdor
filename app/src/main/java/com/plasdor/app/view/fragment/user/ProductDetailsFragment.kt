@@ -383,14 +383,14 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     }
 
     private fun hideUI() {
-        txtViewOnMap.visibility = View.GONE
+//        txtViewOnMap.visibility = View.GONE
         btnBuyNow.visibility = View.GONE
         txtSelectMerchantLabel.text = "we do not have any merchant for this product"
         // requireActivity().showToastMsg("We do not have any merchant for this product")
     }
 
     private fun showUI() {
-        txtViewOnMap.visibility = View.VISIBLE
+//        txtViewOnMap.visibility = View.VISIBLE
         txtSelectMerchantLabel.text = "Select Merchant"
     }
 
