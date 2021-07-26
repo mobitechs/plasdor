@@ -31,8 +31,6 @@ import com.plasdor.app.viewModel.UserListViewModel
 
 class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
-
-
     var addedToCart = false
 
     lateinit var rootView: View

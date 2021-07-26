@@ -242,7 +242,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textColor="@color/red"
+                android:textColor="@color/green"
                 android:id="@+id/txtDeliveryNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
