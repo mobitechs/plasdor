@@ -14,16 +14,11 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import com.plasdor.app.R
-import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.AdminAllOrderListItems
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.Constants
-import com.plasdor.app.utils.apiPostCall
-import com.plasdor.app.utils.showToastMsg
-import org.json.JSONException
-import org.json.JSONObject
 
-class AdminOrderDetailsFragment : Fragment(), ApiResponse {
+class AdminOrderDetailsFragment : Fragment() {
 
     lateinit var rootView: View
     lateinit var listItem: AdminAllOrderListItems
@@ -222,29 +217,5 @@ class AdminOrderDetailsFragment : Fragment(), ApiResponse {
         }
     }
 
-    private fun callAPIToChangeOrderStatus(orderId: String, status: String) {
-        val method = "ChangeOrderStatus"
-        val jsonObject = JSONObject()
-        try {
-            jsonObject.put("method", method)
-            jsonObject.put("orderId", orderId)
-            jsonObject.put("orderStatus", status)
-            jsonObject.put("clientBusinessId", Constants.clientBusinessId)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
-    }
 
-    override fun onSuccess(data: Any, tag: String) {
-        if (data.equals("SUCCESS")) {
-            requireContext().showToastMsg("Order status change successfully.")
-        } else {
-            requireContext().showToastMsg("Failed to change order status.")
-        }
-    }
-
-    override fun onFailure(message: String) {
-        requireContext().showToastMsg(message)
-    }
 }

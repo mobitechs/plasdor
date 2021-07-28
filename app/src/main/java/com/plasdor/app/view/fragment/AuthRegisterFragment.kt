@@ -152,11 +152,14 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                 requireActivity().showToastMsg("Enter Email Id")
             } else if (etMobileNo.text.toString().equals("")) {
                 requireActivity().showToastMsg("Enter Mobile No")
-            } else if (etPassword.text.toString().equals("")) {
-                requireActivity().showToastMsg("Enter Password")
-            } else if (etConfirmPassword.text.toString().equals("")) {
-                requireActivity().showToastMsg("Enter Confirm Password ")
-            } else if (etAddress.text.toString().equals("")) {
+            }
+//            else if (etPassword.text.toString().equals("")) {
+//                requireActivity().showToastMsg("Enter Password")
+//            }
+//            else if (etConfirmPassword.text.toString().equals("")) {
+//                requireActivity().showToastMsg("Enter Confirm Password ")
+//            }
+            else if (etAddress.text.toString().equals("")) {
                 requireActivity().showToastMsg("Enter Address")
             } else if (etCity.text.toString().equals("")) {
                 requireActivity().showToastMsg("Enter City")
@@ -174,9 +177,11 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                 latlong = getLocationFromAddress(requireContext(), address)!!
                 if (isEmailValid(etEmail.text.toString()) != true) {
                     requireActivity().showToastMsg("Email is not valid")
-                } else if (!etPassword.text.toString().equals(etConfirmPassword.text.toString())) {
-                    requireActivity().showToastMsg("Passwords are not matched")
-                } else {
+                }
+//                else if (!etPassword.text.toString().equals(etConfirmPassword.text.toString())) {
+//                    requireActivity().showToastMsg("Passwords are not matched")
+//                }
+                else {
                     if (checkIsMerchant.isChecked) {
                         userType = "Merchant"
                     }
@@ -185,8 +190,7 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                         layoutLoader.visibility = View.VISIBLE
                         //callRegisterAPIWithImg()
                         callRegisterAPI()
-                    }
-                    else {
+                    } else {
                         requireActivity().showToastMsg("Please accept terms and conditions")
                     }
 

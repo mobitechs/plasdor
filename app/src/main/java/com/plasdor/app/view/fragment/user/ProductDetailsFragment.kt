@@ -20,10 +20,7 @@ import com.plasdor.app.callbacks.MerchantSelectionClickListener
 import com.plasdor.app.model.AvailableMerchantListItem
 import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.session.SharePreferenceManager
-import com.plasdor.app.utils.Constants
-import com.plasdor.app.utils.ThreeTwoImageView
-import com.plasdor.app.utils.openActivity
-import com.plasdor.app.utils.setImage
+import com.plasdor.app.utils.*
 import com.plasdor.app.view.activity.MapsMerchantListActivity
 import com.plasdor.app.view.activity.PlaceOrderActivity
 import com.plasdor.app.viewModel.UserListViewModel
@@ -50,6 +47,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     lateinit var spinnerControllerQty: AppCompatSpinner
     var productId = ""
     var selectedMerchantId = ""
+    var merchantControllerQty = ""
     var userId = ""
     var userLat = ""
     var userLong = ""
@@ -208,13 +206,16 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 //            bundle.putString("rentalType", rentalType)
 //            bundle.putString("deliveryType", deliveryType)
 //            bundle.putString("deliveryType", deliveryType)
-
-            requireActivity().openActivity(PlaceOrderActivity::class.java) {
-                putParcelable("productItem", listItem)
-                putParcelable("merchantItem", selectedMerchantItem)
-                putString("rentalType", rentalType)
-                putString("deliveryType", deliveryType)
-                putInt("deliveryCharges", deliveryCharges)
+            if (controllerQty.toInt() > merchantControllerQty.toInt()) {
+                requireContext().showToastMsg("This merchant have remains only $merchantControllerQty Controller.")
+            } else {
+                requireActivity().openActivity(PlaceOrderActivity::class.java) {
+                    putParcelable("productItem", listItem)
+                    putParcelable("merchantItem", selectedMerchantItem)
+                    putString("rentalType", rentalType)
+                    putString("deliveryType", deliveryType)
+                    putInt("deliveryCharges", deliveryCharges)
+                }
             }
         }
         txtViewOnMap.setOnClickListener {
@@ -225,7 +226,6 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
                 putString("userName", userName)
             }
         }
-
 
         setupNoOfDaysHoursSpinner()
         setupControllerQtySpinner()
@@ -397,6 +397,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
         selectedMerchantItem = item
         btnBuyNow.visibility = View.VISIBLE
         selectedMerchantId = item.userId
+        merchantControllerQty = item.remainingControllerQty
 //        requireActivity().showToastMsg("id:" + selectedMerchantId)
     }
 
