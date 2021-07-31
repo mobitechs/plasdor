@@ -188,6 +188,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             btnPlaceOrder.visibility = View.VISIBLE
             btnVerificationPending.visibility = View.GONE
         }else{
+            getUserDetails()
             btnPlaceOrder.visibility = View.GONE
             btnVerificationPending.visibility = View.VISIBLE
         }
@@ -200,7 +201,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
                 //payUsingUpi(amount, upiId, name, note)
                 showSelectPaymentTypeDialog()
             }else{
-                getUserDetails()
+
             }
 
         }
@@ -282,7 +283,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
             SharePreferenceManager.getInstance(this)
                 .saveUserLogin(Constants.USERDATA, user)
-
+            isVerified = user!![0].isVerified
             if(user!![0].isVerified.equals("1")){
                 btnPlaceOrder.visibility = View.VISIBLE
                 btnVerificationPending.visibility = View.GONE

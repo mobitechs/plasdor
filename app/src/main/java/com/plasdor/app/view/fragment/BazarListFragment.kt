@@ -1,6 +1,7 @@
 package com.plasdor.app.view.fragment
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -26,14 +26,14 @@ import com.plasdor.app.callbacks.AddOrRemoveListener
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.session.SharePreferenceManager
-import com.plasdor.app.utils.Constants
-import com.plasdor.app.utils.apiPostCall
-import com.plasdor.app.utils.showToastMsg
+import com.plasdor.app.utils.*
 import com.plasdor.app.view.activity.UserHomeActivity
 import com.plasdor.app.viewModel.UserListViewModel
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
@@ -46,9 +46,15 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     lateinit var mLayoutManager: LinearLayoutManager
     lateinit var btnGetRewards: Button
     lateinit var txtWalletPoints: TextView
-    var userId=""
-    var rewardPoints=""
-    var userWalletPoint=""
+    lateinit var nextRewardTime: TextView
+    var userId = ""
+    var rewardPoints = ""
+    var userWalletPoint = ""
+    var getRewardCounter = 0
+    var todaysDate = ""
+    var rewardDate = ""
+    var lastRewardTime = ""
+    var canIncreament = false
 
     private var mRewardedAd: RewardedAd? = null
     private final var TAG = "BazarListFragment"
@@ -65,19 +71,46 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     }
 
     private fun intView() {
-        userId = SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)?.get(
-            0
-        )?.userId.toString()
+        todaysDate = getTodaysDate()
+        getRewardCounter = SharePreferenceManager.getInstance(requireActivity())
+            .getValueInt(Constants.GET_REWARD_COUNTER)
+        rewardDate = SharePreferenceManager.getInstance(requireActivity())
+            .getValueString(Constants.GET_REWARD_DATE).toString()
+        lastRewardTime = SharePreferenceManager.getInstance(requireActivity())
+            .getValueString(Constants.LAST_REWARD_TIME).toString()
+
+       // rewardDate = "31-08-2021"
+
+        userId =
+            SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.userId.toString()
         userWalletPoint = SharePreferenceManager.getInstance(requireContext()).getValueString(
             Constants.EARNED_POINTS
         ).toString()
 
+        txtWalletPoints = rootView.findViewById(R.id.txtWalletPoints)!!
+        nextRewardTime = rootView.findViewById(R.id.nextRewardTime)!!
+        btnGetRewards = rootView.findViewById(R.id.btnGetRewards)!!
+
+        if (!todaysDate.equals(rewardDate)) {
+            getRewardCounter = 0
+            rewardDate = getTodaysDate()
+            SharePreferenceManager.getInstance(requireContext())
+                .save(Constants.GET_REWARD_COUNTER, getRewardCounter)
+            SharePreferenceManager.getInstance(requireContext())
+                .save(Constants.GET_REWARD_DATE, rewardDate)
+
+            canIncreament = true
+
+        }
+
+        checkRewardCountAndBtnVisiblity()
 
         if (userWalletPoint.equals("null") || userWalletPoint.equals("")) {
             userWalletPoint = "0"
         }
 
-        txtWalletPoints = rootView.findViewById(R.id.txtWalletPoints)!!
+
 
         txtWalletPoints.text = userWalletPoint
 
@@ -87,14 +120,25 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("E3EBB20286FEE729C04269FCFBA201EE"))
         MobileAds.initialize(requireContext(),
             OnInitializationCompleteListener {
-                getRewardAd()
+
             })
 
 
 
-        btnGetRewards = rootView.findViewById(R.id.btnGetRewards)!!
+
         btnGetRewards.setOnClickListener {
             playAd()
+        }
+    }
+
+    private fun rewardButtonHideShow() {
+        if (canIncreament) {
+            checkRewardCountAndBtnVisiblity()
+        } else {
+            btnGetRewards.visibility = View.GONE
+            nextRewardTime.visibility = View.VISIBLE
+            nextRewardTime.setText("Next eward in 10 mins")
+            //show timer here
         }
     }
 
@@ -109,7 +153,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
             }
 
         }
-        mRewardedAd?.show(requireActivity(),cb)
+        mRewardedAd?.show(requireActivity(), cb)
 
         mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdShowedFullScreenContent() {
@@ -150,7 +194,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     Log.d(TAG, "Ad was loaded.")
                     mRewardedAd = rewardedAd
-                    btnGetRewards.visibility = View.VISIBLE
+//                    btnGetRewards.visibility = View.VISIBLE
 
                 }
             })
@@ -205,7 +249,100 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 
         userWalletPoint = (userWalletPoint.toInt() + rewardPoints.toInt()).toString()
         txtWalletPoints.text = userWalletPoint
-        SharePreferenceManager.getInstance(requireContext()).save(Constants.EARNED_POINTS, userWalletPoint)
+        SharePreferenceManager.getInstance(requireContext())
+            .save(Constants.EARNED_POINTS, userWalletPoint)
+
+        getRewardCounter = SharePreferenceManager.getInstance(requireActivity())
+            .getValueInt(Constants.GET_REWARD_COUNTER)
+
+        getRewardCounter = getRewardCounter + 1
+        SharePreferenceManager.getInstance(requireContext())
+            .save(Constants.GET_REWARD_COUNTER, getRewardCounter)
+
+        SharePreferenceManager.getInstance(requireContext())
+            .save(Constants.GET_REWARD_DATE, todaysDate)
+
+        lastRewardTime = getTodaysDateTime()
+        SharePreferenceManager.getInstance(requireContext())
+            .save(Constants.LAST_REWARD_TIME, lastRewardTime)
+
+       checkRewardCountAndBtnVisiblity()
+    }
+
+    private fun checkRewardCountAndBtnVisiblity() {
+        if(getRewardCounter > Constants.REWARD_LIMIT){
+            btnGetRewards.visibility = View.GONE
+            nextRewardTime.visibility = View.VISIBLE
+            nextRewardTime.setText("Today's limit reached")
+        }
+        else{
+
+            if(getRewardCounter == 0){
+                btnGetRewards.visibility = View.VISIBLE
+                nextRewardTime.visibility = View.GONE
+            }else{
+                btnGetRewards.visibility = View.GONE
+                nextRewardTime.visibility = View.VISIBLE
+                nextRewardTime.setText("Next Rewards in 5 min")
+                calculateTimeDifferance()
+            }
+
+            getRewardAd()
+        }
+    }
+
+    private fun calculateTimeDifferance() {
+        lastRewardTime =   SharePreferenceManager.getInstance(requireActivity())
+            .getValueString(Constants.LAST_REWARD_TIME).toString()
+        var currentDateTime = getTodaysDateTime()
+
+
+        val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
+        val d1: Date = sdf.parse(lastRewardTime)
+        val d2: Date = sdf.parse(currentDateTime)
+
+        val difference_In_Time = d2.time - d1.time
+        val difference_In_Seconds = (difference_In_Time / 1000)
+        val tenMinInSeconds = (Constants.NEXT_REWARD_TIME * 60)
+        if(difference_In_Seconds > tenMinInSeconds){
+            btnGetRewards.visibility = View.VISIBLE
+            nextRewardTime.visibility = View.GONE
+        }else{
+            val timeToRunTimer = tenMinInSeconds - difference_In_Seconds
+            startTimetimerCounter(timeToRunTimer)
+        }
+
+
+
+    }
+
+    private fun startTimetimerCounter(differenceInSeconds: Long) {
+        var timerCounter = differenceInSeconds
+        var timeInMiliSeconds = differenceInSeconds * 1000
+
+        object : CountDownTimer(timeInMiliSeconds, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                var remainTime = String.format(
+                    "%d min, %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes(timerCounter*1000),
+                    TimeUnit.MILLISECONDS.toSeconds(timerCounter*1000) -
+                            TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(
+                                    timerCounter*1000
+                                )
+                            )
+                );
+
+//                nextRewardTime.text = "Next reward in :" + timerCounter.toString()
+                nextRewardTime.text = "Next reward in :" + remainTime
+                timerCounter--
+            }
+
+            override fun onFinish() {
+                nextRewardTime.visibility = View.GONE
+                btnGetRewards.visibility = View.VISIBLE
+            }
+        }.start()
     }
 
     override fun onFailure(message: String) {

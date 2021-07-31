@@ -520,3 +520,14 @@ fun getLocationFromAddress(context: Context?, strAddress: String?): LatLng? {
     }
     return p1
 }
+
+fun getTodaysDate(): String {
+    val simpleDateFormat= SimpleDateFormat("dd-MM-yyyy")
+    var todaysDate = simpleDateFormat.format(Date())
+    return todaysDate
+}
+fun getTodaysDateTime(): String {
+    val simpleDateFormat= SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
+    var todaysDate = simpleDateFormat.format(Date())
+    return todaysDate
+}

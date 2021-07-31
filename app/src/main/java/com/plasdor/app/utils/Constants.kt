@@ -21,7 +21,12 @@ class Constants {
         const val POINTS_ON_SHARE = 15
         const val POINTS_ON_ADS    = 2
         const val POINTS_ON_ORDER= 20
+        const val GET_REWARD_COUNTER= "getRewardCounter"
+        const val GET_REWARD_DATE= "getRewardDate"
+        const val LAST_REWARD_TIME= "lastRewardTime"
         const val EARNED_POINTS= "earnedPoints"
+        const val REWARD_LIMIT= 7
+        const val NEXT_REWARD_TIME= 20
 
         const val ISLOGIN = "isLogin"
         const val userId = "userId"
