@@ -117,7 +117,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         setupRecyclerView()
 
         MobileAds.initialize(requireContext())
-        RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("E3EBB20286FEE729C04269FCFBA201EE"))
+//        RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("E3EBB20286FEE729C04269FCFBA201EE"))
         MobileAds.initialize(requireContext(),
             OnInitializationCompleteListener {
 

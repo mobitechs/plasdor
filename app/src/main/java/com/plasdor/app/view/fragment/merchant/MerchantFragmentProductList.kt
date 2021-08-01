@@ -225,30 +225,31 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
         val txtDeliverNote: AppCompatTextView = customLayout.findViewById(R.id.txtDeliverNote)
         val radio_group: RadioGroup = customLayout.findViewById(R.id.radio_group)
         spinnerControllerQty = customLayout.findViewById(R.id.spinnerControllerQty)
-        setupControllerQtySpinner()
+//        setupControllerQtySpinner()
         val rdYes: RadioButton = customLayout.findViewById(R.id.rdYes)
         val rdNo: RadioButton = customLayout.findViewById(R.id.rdNo)
-        radio_group.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { group, checkedId ->
-                val radio: RadioButton = customLayout.findViewById(checkedId)
-                willDeliver = radio.text.toString()
-                if(willDeliver.equals("Yes")){
-                    txtDeliverNote.visibility=View.GONE
-                }else
-                {
-                    txtDeliverNote.visibility=View.VISIBLE
-                }
-            })
-        if(willDeliver.equals("Yes")){
-            radio_group.check(R.id.rdYes)
-            txtDeliverNote.visibility=View.GONE
-        }else{
-            radio_group.check(R.id.rdNo)
-            txtDeliverNote.visibility=View.VISIBLE
-        }
+//        radio_group.setOnCheckedChangeListener(
+//            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+//                val radio: RadioButton = customLayout.findViewById(checkedId)
+//                willDeliver = radio.text.toString()
+//                if(willDeliver.equals("Yes")){
+//                    txtDeliverNote.visibility=View.GONE
+//                }else
+//                {
+//                    txtDeliverNote.visibility=View.VISIBLE
+//                }
+//            })
+//        if(willDeliver.equals("Yes")){
+//            radio_group.check(R.id.rdYes)
+//            txtDeliverNote.visibility=View.GONE
+//        }else{
+//            radio_group.check(R.id.rdNo)
+//            txtDeliverNote.visibility=View.VISIBLE
+//        }
         editText.setText(totalQty)
         etControllerQty.setText(totalControllerQty)
 
+//        builder.setCancelable(false)
         // add a button
         builder.setPositiveButton(
             "Update",
@@ -256,7 +257,7 @@ class MerchantFragmentProductList : Fragment(), MerchantProductClickListener, Ap
                 // AlertDialog to the Activity
 
                 totalQty = editText.text.toString()
-//                totalControllerQty = etControllerQty.text.toString() //cz we are use=ing spinner for this
+                totalControllerQty = etControllerQty.text.toString() //cz we are use=ing spinner for this
                 if(totalQty.equals("")){
                     requireContext().showToastMsg("Enter Qty")
                 }else if(totalControllerQty.equals("")){
