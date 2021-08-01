@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.plasdor.app">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -12,8 +11,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -25,21 +22,18 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Plasdor"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         tools:replace="android:theme"
         tools:targetApi="m">
-
+        <activity android:name=".view.activity.DeliveryAgentHomeActivity" android:theme="@style/noActionBar"/>
         <!-- Add your API key here -->
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_VNPFueei0vUGKm"
-            />
-
-
+            android:value="rzp_test_VNPFueei0vUGKm" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -48,27 +42,23 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-<!--        plasdorservices@gmail.com account used-->
+        <!-- plasdorservices@gmail.com account used -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6867366913789478~8304818397"/>
+            android:value="ca-app-pub-6867366913789478~8304818397" />
 
         <activity
             android:name=".view.activity.MapsMerchantListActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".view.activity.AdminHomeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-             />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".view.activity.MerchantHomeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            />
-<!--        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"-->
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" /> <!-- android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" -->
         <activity
             android:name=".view.activity.UserHomeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -88,7 +78,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

@@ -37,6 +37,9 @@ class AdminViewModel(application: Application) : AndroidViewModel(application) {
     fun adminAllOrderList() {
         repository.adminAllOrderList()
     }
+    fun getOrderListForDeliveryAgent() {
+        repository.getOrderListForDeliveryAgent()
+    }
     fun adminAllMerchantList() {
         repository.adminAllMerchantList()
     }

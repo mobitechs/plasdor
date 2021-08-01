@@ -18,6 +18,7 @@ class Constants {
         const val COMPANY = "Company"
         const val MERCHANT = "Merchant"
         const val USER = "User"
+        const val DELIVERY_AGENT = "DeliveryAgent"
         const val POINTS_ON_SHARE = 15
         const val POINTS_ON_ADS    = 2
         const val POINTS_ON_ORDER= 20

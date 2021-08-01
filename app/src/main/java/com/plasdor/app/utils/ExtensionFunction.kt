@@ -36,10 +36,7 @@ import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.callbacks.SpinnerItemSelectedCallback
 import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.session.SharePreferenceManager
-import com.plasdor.app.view.activity.AdminHomeActivity
-import com.plasdor.app.view.activity.AuthActivity
-import com.plasdor.app.view.activity.MerchantHomeActivity
-import com.plasdor.app.view.activity.UserHomeActivity
+import com.plasdor.app.view.activity.*
 import com.plasdor.app.view.fragment.admin.AdminOrderDetailsFragment
 import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONArray
@@ -65,6 +62,8 @@ fun Context.checkLogin() {
             openClearActivity(MerchantHomeActivity::class.java)
         } else if (userDetails?.get(0)?.userType == Constants.USER) {
             openClearActivity(UserHomeActivity::class.java)
+        } else if (userDetails?.get(0)?.userType == Constants.DELIVERY_AGENT) {
+            openClearActivity(DeliveryAgentHomeActivity::class.java)
         }
 //        openActivity(UserHomeActivity::class.java)
     } else {

@@ -39,6 +39,12 @@ class AdminRepository(val application: Application) : ApiResponse {
         var url = Constants.BASE_URL + "?method=$method"
         apiGetCall(url, this, method)
     }
+    fun getOrderListForDeliveryAgent() {
+        showProgressBar.value = true
+        method = "getOrderListForDeliveryAgent"
+        var url = Constants.BASE_URL + "?method=$method"
+        apiGetCall(url, this, method)
+    }
 
     fun adminAllMerchantList() {
         showProgressBar.value = true
@@ -74,7 +80,7 @@ class AdminRepository(val application: Application) : ApiResponse {
                 var productListItems: ArrayList<ProductListItems>? =
                     gson.fromJson(data.toString(), type)
                 allProductListItems.value = productListItems
-            } else if (method == "AdminAllOrder") {
+            } else if (method == "AdminAllOrder" || method == "getOrderListForDeliveryAgent") {
                 val type = object : TypeToken<ArrayList<AdminAllOrderListItems>>() {}.type
                 var productListItems: ArrayList<AdminAllOrderListItems>? =
                     gson.fromJson(data.toString(), type)
