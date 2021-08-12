@@ -57,7 +57,8 @@ class Constants {
         val qtyArray = arrayOf("1", "2", "3", "4", "6", "8 ", "10", "12", "14", "16", "18", "20")
 
         val controllerQtyArray = arrayOf("1", "2", "3", "4")
-        val daysArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
+//        val daysArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
+        val daysArray = arrayOf("1", "2")
         val hourArray = arrayOf("2", "4", "6")
 
         val ps5NdXSeriesXPriceArray = arrayOf("999", "1799", "2499", "3199", "3499", "3999", "4499")
