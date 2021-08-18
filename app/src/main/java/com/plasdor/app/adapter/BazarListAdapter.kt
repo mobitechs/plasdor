@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.AddOrRemoveListener
-import com.plasdor.app.callbacks.AddressSelectCallback
 import com.plasdor.app.model.ProductListItems
 import com.plasdor.app.utils.setImage
 import kotlinx.android.synthetic.main.adapter_item_bazar_list_item.view.*
@@ -17,6 +16,7 @@ import kotlinx.android.synthetic.main.adapter_item_bazar_list_item.view.*
 class BazarListAdapter(
     activityContext: Context,
     private val addOrRemoveListener: AddOrRemoveListener,
+    val firstFreeOrder: String,
 ) :
     RecyclerView.Adapter<BazarListAdapter.MyViewHolder>() {
 
@@ -68,6 +68,18 @@ class BazarListAdapter(
         holder.itemView.setOnClickListener {
             addOrRemoveListener.selectProduct(item, position)
         }
+        holder.btnPlaceFreeOrder.setOnClickListener {
+            addOrRemoveListener.selectProduct(item, position)
+        }
+
+
+        if(firstFreeOrder.equals("0")){
+            holder.layoutForPaid.visibility = View.GONE
+            holder.layoutForFree.visibility = View.VISIBLE
+        }else{
+            holder.layoutForFree.visibility = View.GONE
+            holder.layoutForPaid.visibility = View.VISIBLE
+        }
 
     }
 
@@ -79,6 +91,9 @@ class BazarListAdapter(
         var txt3DayPoint = view.txt3DayPoint
         var txt5DayPoint = view.txt5DayPoint
         var productImage = view.productImage
+        var layoutForFree = view.layoutForFree
+        var layoutForPaid = view.layoutForPaid
+        var btnPlaceFreeOrder = view.btnPlaceFreeOrder
 
 
         val cardView: View = itemView

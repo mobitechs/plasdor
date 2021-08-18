@@ -277,6 +277,7 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                                     .saveUserLogin(Constants.USERDATA, user)
                                 SharePreferenceManager.getInstance(requireContext())
                                     .save(Constants.EARNED_POINTS, user!![0].wallet)
+                                SharePreferenceManager.getInstance(requireContext()).save(Constants.FIRST_FREE_ORDER_COMPLETE, user!![0].firstFreeOrder)
                                 requireActivity().checkLogin()
                             }
 

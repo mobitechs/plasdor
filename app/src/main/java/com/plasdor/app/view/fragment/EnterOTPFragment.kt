@@ -162,6 +162,7 @@ class EnterOTPFragment : Fragment(), ApiResponse {
             userType = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)?.get(0)!!.userType
 
             SharePreferenceManager.getInstance(requireContext()).save(Constants.EARNED_POINTS, user!![0].wallet)
+            SharePreferenceManager.getInstance(requireContext()).save(Constants.FIRST_FREE_ORDER_COMPLETE, user!![0].firstFreeOrder)
         }
     }
 

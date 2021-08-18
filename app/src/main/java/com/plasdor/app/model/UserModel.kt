@@ -23,7 +23,8 @@ data class UserModel(
     var imgPathAdhar: String,
     var imgPathEBill: String,
     var latitude: String,
-    var longitude: String
+    var longitude: String,
+    var firstFreeOrder: String,
 ) : Parcelable
 
 

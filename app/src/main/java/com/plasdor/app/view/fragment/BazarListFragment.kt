@@ -55,6 +55,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     var rewardDate = ""
     var lastRewardTime = ""
     var canIncreament = false
+    var firstFreeOrder = ""
 
     private var mRewardedAd: RewardedAd? = null
     private final var TAG = "BazarListFragment"
@@ -81,12 +82,9 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 
        // rewardDate = "31-08-2021"
 
-        userId =
-            SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
-                ?.get(0)?.userId.toString()
-        userWalletPoint = SharePreferenceManager.getInstance(requireContext()).getValueString(
-            Constants.EARNED_POINTS
-        ).toString()
+        userId = SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
+        firstFreeOrder =SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.FIRST_FREE_ORDER_COMPLETE).toString()
+        userWalletPoint = SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.EARNED_POINTS).toString()
 
         txtWalletPoints = rootView.findViewById(R.id.txtWalletPoints)!!
         nextRewardTime = rootView.findViewById(R.id.nextRewardTime)!!
@@ -101,7 +99,6 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                 .save(Constants.GET_REWARD_DATE, rewardDate)
 
             canIncreament = true
-
         }
 
         checkRewardCountAndBtnVisiblity()
@@ -109,8 +106,6 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         if (userWalletPoint.equals("null") || userWalletPoint.equals("")) {
             userWalletPoint = "0"
         }
-
-
 
         txtWalletPoints.text = userWalletPoint
 
@@ -120,11 +115,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 //        RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("E3EBB20286FEE729C04269FCFBA201EE"))
         MobileAds.initialize(requireContext(),
             OnInitializationCompleteListener {
-
             })
-
-
-
 
         btnGetRewards.setOnClickListener {
             playAd()
@@ -211,7 +202,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         recyclerView.layoutManager = mLayoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
 
-        listAdapter = BazarListAdapter(requireActivity(), this)
+        listAdapter = BazarListAdapter(requireActivity(), this,firstFreeOrder)
         recyclerView.adapter = listAdapter
         listAdapter.updateListItems(listItems)
 

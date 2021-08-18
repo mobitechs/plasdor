@@ -49,4 +49,5 @@
     <string name="getDirections"><u>Get Direction</u></string>
     <string name="notVerifiedRefresh">You are not verified yet.  <u>Update KYC</u></string>
     <string name="tnc"><u>I agree Terms &amp; Condition</u></string>
+    <string name="freeOrder">You are eligible for first free order for <b>2 hours</b></string>
 </resources>

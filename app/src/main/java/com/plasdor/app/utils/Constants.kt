@@ -26,6 +26,7 @@ class Constants {
         const val GET_REWARD_DATE= "getRewardDate"
         const val LAST_REWARD_TIME= "lastRewardTime"
         const val EARNED_POINTS= "earnedPoints"
+        const val FIRST_FREE_ORDER_COMPLETE= "firstFreeOrderComplete"
         const val REWARD_LIMIT= 7
         const val NEXT_REWARD_TIME= 20
 
@@ -71,7 +72,7 @@ class Constants {
 //        val XOneSPriceArrayHr = arrayOf("200", "300", "400", "500", "600", "700", "800")
 //        val XSeriesSPriceArrayHr = arrayOf("250", "350", "450", "550", "650", "750", "850")
 
-        val orderStatusArray = arrayOf("Received", "Pending", "Delivered")
+        val orderStatusArray = arrayOf("Pending", "Complete")
 
     }
 }

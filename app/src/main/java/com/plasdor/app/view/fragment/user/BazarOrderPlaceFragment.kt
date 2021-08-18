@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
@@ -79,6 +80,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
     var merchantWillGet = 0f
     var adminWillGet = 0f
 
+    var firstFreeOrder = ""
     var requiredPoints = ""
     var userCanBuy = false
 
@@ -88,6 +90,12 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
 
     lateinit var labelNoOf: AppCompatTextView
     lateinit var txtDeliveryNote: AppCompatTextView
+    lateinit var layoutPaymentDetails: LinearLayout
+    lateinit var rdFirstFreeOrder: RadioButton
+    lateinit var rd1Day: RadioButton
+    lateinit var rd3day: RadioButton
+    lateinit var rd5Day: RadioButton
+    lateinit var rdFree: RadioButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,6 +108,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
     }
 
     private fun initView() {
+        firstFreeOrder =SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.FIRST_FREE_ORDER_COMPLETE).toString()
 
         userId =
             SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
@@ -141,7 +150,36 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
         txtDeliveryCharges = rootView.findViewById(R.id.txtDeliveryCharges)!!
         txtTotalPayable = rootView.findViewById(R.id.txtTotalPayable)!!
         txtPointRequired = rootView.findViewById(R.id.txtPointRequired)!!
+        layoutPaymentDetails = rootView.findViewById(R.id.layoutPaymentDetails)!!
+        rdFirstFreeOrder = rootView.findViewById(R.id.rdFirstFreeOrder)!!
+        rd1Day = rootView.findViewById(R.id.rd1Day)!!
+        rd3day = rootView.findViewById(R.id.rd3day)!!
+        rd5Day = rootView.findViewById(R.id.rd5Day)!!
+        rdFree = rootView.findViewById(R.id.rdFree)!!
 
+        listItem = arguments?.getParcelable("item")!!
+
+        if(firstFreeOrder.equals("0")){
+            requiredPoints = listItem.firstOrderPoint.toString()
+//            layoutPaymentDetails.visibility = View.GONE
+            rentalType = Constants.Hourly
+            rd1Day.visibility = View.GONE
+            rd3day.visibility = View.GONE
+            rd5Day.visibility = View.GONE
+            rdFree.visibility = View.GONE
+            rdFirstFreeOrder.isChecked = true
+            rdFirstFreeOrder.visibility = View.VISIBLE
+        }else{
+            requiredPoints = listItem.oneDayPoints.toString()
+//            layoutPaymentDetails.visibility = View.VISIBLE
+            rentalType = Constants.Daily
+            rd1Day.visibility = View.VISIBLE
+            rd3day.visibility = View.VISIBLE
+            rd5Day.visibility = View.VISIBLE
+            rdFree.visibility = View.VISIBLE
+            rd1Day.isChecked = true
+            rdFirstFreeOrder.visibility = View.GONE
+        }
 
         if(isVerified.equals("1")){
             btnBuyNow.visibility = View.VISIBLE
@@ -167,8 +205,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
 
             })
 
-        listItem = arguments?.getParcelable("item")!!
-        requiredPoints = listItem.oneDayPoints.toString()
+
 
         txtDeliveryCharges.text = deliveryCharges.toString()
 //        txtTotalPayable.text = requiredPoints+" Points & "+deliveryCharges+" Rs."
@@ -197,6 +234,10 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
                     requireContext().showToastMsg("free")
                     requiredPoints = listItem.forFreePoints.toString()
                 }
+                else if (checkedId == R.id.rdFirstFreeOrder) {
+                    requireContext().showToastMsg("free for 2 hours")
+                    requiredPoints = listItem.firstOrderPoint.toString()
+                }
 
 //                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
                 txtTotalPayable.text = requiredPoints+"Points"
@@ -204,8 +245,6 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
                 checkCanBuyOrNot()
                 setupPrice()
             })
-
-
 
         productId = listItem.pId
         ivProdImage.setImage(listItem.img!!)
@@ -234,24 +273,45 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
             }
             userCanBuy = true
             txtInsufficientPointNote.visibility = View.GONE
-        } else {
+        }
+        else {
             userCanBuy = false
             btnBuyNow.visibility = View.GONE
             txtInsufficientPointNote.visibility = View.VISIBLE
         }
+
+//        if(firstFreeOrder.equals("0")){
+//            userCanBuy = true
+//            if(!selectedMerchantId.equals("")){
+//                btnBuyNow.visibility = View.VISIBLE
+//            }
+//        }
+
+
     }
 
 
     private fun setupPrice() {
-        if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X"))) {
-            priceToSell = Constants.ps5NdXSeriesXPriceArray[qty - 1].toInt()
-        } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X"))) {
-            priceToSell = Constants.ps4NdXOneXPriceArray[qty - 1].toInt()
-        } else if (listItem.productName.equals("XBOX One S")) {
-            priceToSell = Constants.XOneSPriceArray[qty - 1].toInt()
-        } else if (listItem.productName.equals("XBOX Series S")) {
-            priceToSell = Constants.XSeriesSPriceArray[qty - 1].toInt()
+
+        if(firstFreeOrder.equals("0")){
+            qty = 1
+            if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X") || listItem.productName.equals("XBOX Series S"))) {
+                priceToSell = Constants.ps5NdXSeriesXNdSPriceArrayHr[qty-1].toInt()
+            } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X") || listItem.productName.equals("XBOX One S"))) {
+                priceToSell = Constants.ps4NdXOneXNdSPriceArrayHr[qty-1].toInt()
+            }
+        }else{
+            if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X"))) {
+                priceToSell = Constants.ps5NdXSeriesXPriceArray[qty - 1].toInt()
+            } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X"))) {
+                priceToSell = Constants.ps4NdXOneXPriceArray[qty - 1].toInt()
+            } else if (listItem.productName.equals("XBOX One S")) {
+                priceToSell = Constants.XOneSPriceArray[qty - 1].toInt()
+            } else if (listItem.productName.equals("XBOX Series S")) {
+                priceToSell = Constants.XSeriesSPriceArray[qty - 1].toInt()
+            }
         }
+
 
         totalPriceWithController = priceToSell.toInt() + controllerCharges
 
@@ -299,7 +359,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
     }
 
     private fun showUI() {
-        txtViewOnMap.visibility = View.VISIBLE
+//        txtViewOnMap.visibility = View.VISIBLE
         txtSelectMerchantLabel.text = "Select Merchant"
     }
 
@@ -351,6 +411,7 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
             jsonObject.put("adminWillGet", adminWillGet)
             jsonObject.put("merchantWillGet", merchantWillGet)
             jsonObject.put("deliveredBy", deliveredBy)
+            jsonObject.put("isFirstFreeOrder", firstFreeOrder)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -365,6 +426,8 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
 
             userWalletPoint =  (userWalletPoint.toInt() - requiredPoints.toInt()).toString()
             SharePreferenceManager.getInstance(requireContext()).save(Constants.EARNED_POINTS, userWalletPoint)
+            firstFreeOrder = "1"
+            SharePreferenceManager.getInstance(requireContext()).save(Constants.FIRST_FREE_ORDER_COMPLETE, firstFreeOrder)
 
         } else {
             requireContext().showToastMsg("Order failed try again latter")
