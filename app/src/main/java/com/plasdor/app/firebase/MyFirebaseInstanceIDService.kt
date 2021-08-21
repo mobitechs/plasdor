@@ -1,16 +1,13 @@
 package com.plasdor.app.firebase
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import android.media.RingtoneManager
-import android.os.Build
+import android.provider.Settings
+import android.telephony.TelephonyManager
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.plasdor.app.session.SharePreferenceManager
+import com.plasdor.app.utils.Constants
 
 class MyFirebaseInstanceIDService : FirebaseMessagingService() {
 
@@ -60,6 +57,13 @@ class MyFirebaseInstanceIDService : FirebaseMessagingService() {
         // manage this apps subscriptions on the server side, send the
         // FCM registration token to your app server.
         sendRegistrationToServer(token)
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID).toString()
+
+        SharePreferenceManager.getInstance(applicationContext).save(Constants.TOKEN, token)
+        SharePreferenceManager.getInstance(applicationContext).save(Constants.IS_TOKEN_UPDATE, true)
+        SharePreferenceManager.getInstance(applicationContext)
+            .save(Constants.IS_TOKEN_SAVE_API_CALLED, false)
+        SharePreferenceManager.getInstance(applicationContext).save(Constants.DEVICE_ID, deviceId)
     }
 
 

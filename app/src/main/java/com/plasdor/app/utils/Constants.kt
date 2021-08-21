@@ -30,6 +30,10 @@ class Constants {
         const val REWARD_LIMIT= 7
         const val NEXT_REWARD_TIME= 20
 
+        const val IS_TOKEN_SAVE_API_CALLED = "isTokenSAveAPICalled"
+        const val IS_TOKEN_UPDATE = "isTokenUpdate"
+        const val TOKEN = "token"
+        const val DEVICE_ID = "deviceId"
         const val ISLOGIN = "isLogin"
         const val userId = "userId"
         const val userType = "userType"
