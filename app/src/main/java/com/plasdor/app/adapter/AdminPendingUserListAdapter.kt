@@ -63,6 +63,7 @@ class AdminPendingUserListAdapter(
         holder.txtCity.text = item.city
         holder.txtPinCode.text = item.pincode
         holder.txtUserType.text = item.userType
+        holder.txtDOB.text = item.dob
 
         if(item.isVerified == "2"){
             //blocked
@@ -84,6 +85,7 @@ class AdminPendingUserListAdapter(
         holder.txtPinCode.visibility = View.VISIBLE
         holder.txtUserType.visibility = View.VISIBLE
         holder.txtVerification.visibility = View.VISIBLE
+        holder.txtDOB.visibility = View.VISIBLE
 
         holder.itemView.setOnClickListener {
 
@@ -107,6 +109,7 @@ class AdminPendingUserListAdapter(
         var txtDistance: AppCompatTextView = view.findViewById(R.id.txtDistance)
         var txtUserType: AppCompatTextView = view.findViewById(R.id.txtUserType)
         var txtVerification: AppCompatTextView = view.findViewById(R.id.txtVerification)
+        var txtDOB: AppCompatTextView = view.findViewById(R.id.txtDOB)
 
         val cardView: View = itemView
 

@@ -59,6 +59,7 @@ class AdminAllMerchantAdapter(
         holder.txtAddress.text = item.address
         holder.txtCity.text = item.city
         holder.txtPinCode.text = item.pincode
+        holder.txtDOB.text = item.dob
 
         holder.imgRadioBtn.visibility = View.GONE
         holder.txtDistance.visibility = View.GONE
@@ -67,6 +68,7 @@ class AdminAllMerchantAdapter(
         holder.txtAddress.visibility = View.VISIBLE
         holder.txtCity.visibility = View.VISIBLE
         holder.txtPinCode.visibility = View.VISIBLE
+        holder.txtDOB.visibility = View.VISIBLE
 
     }
 
@@ -81,6 +83,7 @@ class AdminAllMerchantAdapter(
         var txtPinCode: AppCompatTextView = view.findViewById(R.id.txtPinCode)
         var imgRadioBtn: AppCompatImageView = view.findViewById(R.id.imgRadioBtn)
         var txtDistance: AppCompatTextView = view.findViewById(R.id.txtDistance)
+        var txtDOB: AppCompatTextView = view.findViewById(R.id.txtDOB)
 
         val cardView: View = itemView
 

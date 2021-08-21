@@ -110,17 +110,18 @@
 
                     <RadioButton
                         android:checked="true"
+                        android:id="@+id/rdHourly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hourly" />
+                    <RadioButton
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:id="@+id/rdDaily"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Daily" />
 
-                    <RadioButton
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:id="@+id/rdHourly"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hourly" />
+
 
                 </RadioGroup>
             </RelativeLayout>

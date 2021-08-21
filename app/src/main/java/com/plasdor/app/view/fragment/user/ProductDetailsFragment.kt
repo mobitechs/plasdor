@@ -53,7 +53,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
     var userLong = ""
     var userName = ""
 
-    var spinnerItemArray = Constants.daysArray
+    var spinnerItemArray = Constants.hourArray
     var spinnerControllerQtyArray = Constants.controllerQtyArray
     var discountedPrice = ""
     var qty = 1
@@ -81,7 +81,7 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
     lateinit var labelNoOf: AppCompatTextView
     lateinit var txtDeliveryNote: AppCompatTextView
-    var rentalType = Constants.Daily
+    var rentalType = Constants.Hourly
     var deliveryCharges = 0
     var deliveryType = Constants.deliveryByCompany
     var priceToShow = 0

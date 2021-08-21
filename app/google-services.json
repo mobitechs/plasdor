@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "130193030068",
-    "project_id": "plasdor-5cb6b",
-    "storage_bucket": "plasdor-5cb6b.appspot.com"
+    "project_number": "448090107772",
+    "project_id": "plasdor-92ea6",
+    "storage_bucket": "plasdor-92ea6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:130193030068:android:41fed2d4f944285e7950e1",
+        "mobilesdk_app_id": "1:448090107772:android:05ea01b43475083cb8fef9",
         "android_client_info": {
           "package_name": "com.plasdor.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "130193030068-q7t1sern5u1mgbk4qrjd43oh8oa0m8ia.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.plasdor.app",
-            "certificate_hash": "76aff88fda900667f411f58f512af1f03e8dc621"
-          }
-        },
-        {
-          "client_id": "130193030068-pj7nmfu8onh5ia4g8udsrnh96qp6nvg9.apps.googleusercontent.com",
+          "client_id": "448090107772-of839l97ttatho6vju43r1l3vo42a917.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCxkYgFg4cbE-zgFV6XgD1ITbu8bW77bp8"
+          "current_key": "AIzaSyCbwdd0DcG2UXMdouHcGyKZrhFqItW0kT0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "130193030068-pj7nmfu8onh5ia4g8udsrnh96qp6nvg9.apps.googleusercontent.com",
+              "client_id": "448090107772-of839l97ttatho6vju43r1l3vo42a917.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
