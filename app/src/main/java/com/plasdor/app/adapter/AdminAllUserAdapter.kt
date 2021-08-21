@@ -59,7 +59,7 @@ class AdminAllUserAdapter(
         holder.txtAddress.text = item.address
         holder.txtCity.text = item.city
         holder.txtPinCode.text = item.pincode
-        holder.txtDOB.text = item.dob
+        holder.txtDOB.text = "Dob: "+item.dob
 
         holder.imgRadioBtn.visibility = View.GONE
 
