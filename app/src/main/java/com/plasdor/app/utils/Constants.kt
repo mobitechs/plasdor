@@ -5,7 +5,8 @@ class Constants {
     companion object {
 
         const val clientBusinessId = "1"
-        const val BASE_URL = "https://mobitechs.in/plasdor/api/plasdor.php"
+//        const val BASE_URL = "https://mobitechs.in/plasdor/api/plasdor.php"
+        const val BASE_URL = "http://plasdorservice.com/plasdorApi/api/plasdor.php"
         const val TNC = "http://plasdorservice.com/tnc.html"
         const val Privacy = "http://plasdorservice.com/privacy.html"
 

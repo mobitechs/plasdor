@@ -73,6 +73,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
 
                     try {
                         senderUserId = referredLink.substring(referredLink.lastIndexOf("=") + 1)
+                        showToastMsg(senderUserId)
                     } catch (e: Exception) {
 
                     }
@@ -197,18 +198,10 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
     }
 
     private fun ShareApp() {
-//        val sendIntent = Intent()
-//        sendIntent.action = Intent.ACTION_SEND
-//        sendIntent.putExtra(
-//            Intent.EXTRA_TEXT,
-//            "Download the app from given url. \n\n "
-//        )
-//        sendIntent.type = "text/plain"
-//        startActivity(sendIntent)
 
         val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
             .setLink(Uri.parse("https://www.mobitechs.in/"))
-            .setDomainUriPrefix("https://plasdor.page.link") // Open links with this app on Android
+            .setDomainUriPrefix("https://plasdorservicemobi.page.link") // Open links with this app on Android
             .setAndroidParameters(
                 AndroidParameters.Builder().build()
             ) // Open links with com.example.ios on iOS
@@ -219,12 +212,12 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         Log.e("main", "Long Refer " + dynamicLinkUri)
 
         ///manual Url Link Text
-        val manualUrlLinkText = "https://plasdor.page.link/?" +
+        val manualUrlLinkText = "https://plasdorservicemobi.page.link/?" +
                 "link=http://www.mobitechs.in/plasdor/api/plasdor.php?referalUserId=$userId" +
                 "&apn=" + packageName +
                 "&st=" + "My Refer Link" +
                 "&sd=" + "Reward Coins 20" +
-                "&si=" + "https://mobitechs.in/assets/images/mobitechsmain.webp"
+                "&si=" + "https://plasdorservice.com/images/logo_.png"
 
         val shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
 //            .setLongLink(Uri.parse(dynamicLink.uri.toString()))
@@ -238,7 +231,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     val shortLink = task.result.shortLink
                     val flowchartLink = task.result.previewLink
                     Log.e("main", "short Refer " + shortLink)
-
+                    showToastMsg(shortLink.toString())
                     val sendIntent = Intent()
                     sendIntent.action = Intent.ACTION_SEND
                     sendIntent.putExtra(
@@ -251,6 +244,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     // Error
                     // ...
                     Log.e("main", "Error " + task.exception)
+                    showToastMsg(task.exception.toString())
                 }
             }
     }

@@ -123,8 +123,8 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
 //        startActivity(sendIntent)
 
         val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-            .setLink(Uri.parse("https://www.mobitechs.in/"))
-            .setDomainUriPrefix("https://plasdor.page.link") // Open links with this app on Android
+            .setLink(Uri.parse("https://www.plasdorservice.com/"))
+            .setDomainUriPrefix("https://plasdorservice.page.link/") // Open links with this app on Android
             .setAndroidParameters(
                 DynamicLink.AndroidParameters.Builder().build()
             ) // Open links with com.example.ios on iOS
@@ -135,12 +135,12 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         Log.e("main", "Long Refer " + dynamicLinkUri)
 
         ///manual Url Link Text
-        val manualUrlLinkText = "https://plasdor.page.link/?" +
-                "link=http://www.mobitechs.in/" +
+        val manualUrlLinkText = "https://plasdorservice.page.link//?" +
+                "link=http://www.plasdorservice.com/" +
                 "&apn=" + packageName +
                 "&st=" + "My Refer Link" +
                 "&sd=" + "Reward Coins 20" +
-                "&si=" + "https://mobitechs.in/assets/images/mobitechsmain.webp"
+                "&si=" + "https://plasdorservice.com/images/logo_.png"
 
         val shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
 //            .setLongLink(Uri.parse(dynamicLink.uri.toString()))

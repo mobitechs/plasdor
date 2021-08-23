@@ -13,9 +13,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
 
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
 
     <application
         android:name=".utils.PlasdorApplication"
@@ -71,7 +71,16 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" /> <!-- android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" -->
         <activity
             android:name=".view.activity.UserHomeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="plasdorservicemobi.page.link"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.activity.PlaceOrderActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

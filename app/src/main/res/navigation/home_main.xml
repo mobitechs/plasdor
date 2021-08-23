@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.HomeFragment"
+        android:name="com.plasdor.app.view.fragment.admin.AdminHomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home_user">
 
@@ -29,52 +29,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/tabList"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.TabListFragment"
-        android:label="fragment_tab_list"
-        tools:layout="@layout/fragment_tab_list">
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/cart"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart">
-
-        <action
-            android:id="@+id/action_cart_to_home"
-            app:destination="@id/home" />
-        <action
-            android:id="@+id/action_cart_to_addressList"
-            app:destination="@id/addressList" />
-    </fragment>
-    <fragment
-        android:id="@+id/addressList"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.AddressListFragment"
-        android:label="fragment_address"
-        tools:layout="@layout/fragment_address_list">
-
-        <action
-            android:id="@+id/action_addressList_to_addAddress"
-            app:destination="@id/addAddress" />
-        <action
-            android:id="@+id/action_addressList_to_cart"
-            app:destination="@id/cart" />
-    </fragment>
-    <fragment
-        android:id="@+id/addAddress"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.AddAddressFragment"
-        android:label="fragment_address_add"
-        tools:layout="@layout/fragment_add_address">
-
-        <action
-            android:id="@+id/action_addAddress_to_addressList"
-            app:destination="@id/addressList" />
-    </fragment>
-    <fragment
         android:id="@+id/myOrder"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.MyOrderFragment"
+        android:name="com.plasdor.app.view.fragment.admin.AdminAllOrdersListFragment"
         android:label="fragment_myOrder"
         tools:layout="@layout/fragment_user_order">
 
@@ -87,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/myOrderDetails"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.MyOrderDetailsFragment"
+        android:name="com.plasdor.app.view.fragment.admin.AdminOrderDetailsFragment"
         android:label="fragment_myOrder_details"
         tools:layout="@layout/fragment_user_order_details">
 
@@ -97,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.ProfileFragment"
+        android:name="com.plasdor.app.view.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
 

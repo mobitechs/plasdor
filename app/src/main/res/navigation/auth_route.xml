@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/login"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.LoginFragment"
+        android:name="com.plasdor.app.view.fragment.AuthLoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/register"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.RegisterFragment"
+        android:name="com.plasdor.app.view.fragment.AuthRegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.ForgotPasswordFragment"
+        android:name="com.plasdor.app.view.fragment.AuthForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password">
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/setPasswordFragment"
-        android:name="com.mobitechs.tejasfruitsnvegetables.view.fragment.SetPasswordFragment"
+        android:name="com.plasdor.app.view.fragment.AuthSetPasswordFragment"
         android:label="fragment_set_password"
         tools:layout="@layout/fragment_set_password">
         <action
