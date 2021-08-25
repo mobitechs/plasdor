@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "448090107772-anog997j15lni7e6dmubc8tbkl9ift70.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plasdor.app",
+            "certificate_hash": "76aff88fda900667f411f58f512af1f03e8dc621"
+          }
+        },
+        {
           "client_id": "448090107772-of839l97ttatho6vju43r1l3vo42a917.apps.googleusercontent.com",
           "client_type": 3
         }

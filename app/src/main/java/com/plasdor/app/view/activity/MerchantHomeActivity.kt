@@ -16,6 +16,7 @@ import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.AlertDialogBtnClickedCallBack
+import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import com.plasdor.app.view.fragment.ProfileFragment
@@ -24,21 +25,73 @@ import com.plasdor.app.view.fragment.merchant.*
 import kotlinx.android.synthetic.main.activity_merchant_home.*
 import kotlinx.android.synthetic.main.contenair.*
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
+import org.json.JSONException
+import org.json.JSONObject
 
 class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
-    AlertDialogBtnClickedCallBack {
+    AlertDialogBtnClickedCallBack, ApiResponse {
     private var doubleBackToExitPressedOnce = false
     var userType = ""
-
+    var senderUserId = ""
+    var userId = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_merchant_home)
 
         setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
         displayView(1)
+
         drawerInit()
         setupDrawer()
+        getReferralLinkDetails()
 
+    }
+
+    private fun getReferralLinkDetails() {
+        FirebaseDynamicLinks.getInstance()
+            .getDynamicLink(intent)
+            .addOnSuccessListener(
+                this
+            ) { pendingDynamicLinkData ->
+                // Get deep link from result (may be null if no link is found)
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+
+//                    showToastMsg(deepLink.toString())
+                    var referredLink = deepLink.toString()
+                    Log.e("Received Referral", "ptkk Link " + deepLink)
+
+                    try {
+                        senderUserId = referredLink.substring(referredLink.lastIndexOf("=") + 1)
+//                        showToastMsg(senderUserId)
+                    } catch (e: Exception) {
+
+                    }
+
+                    storeReferralDetails()
+                }
+
+            }
+            .addOnFailureListener(
+                this
+            ) { e ->
+                Log.w("Referred Link ", "getDynamicLink:onFailure", e)
+            }
+    }
+
+    private fun storeReferralDetails() {
+        val method = "addReferralPoints"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("senderUserId", senderUserId)
+            jsonObject.put("installerUserId", userId)
+            jsonObject.put("referralPoints", Constants.POINTS_ON_SHARE)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
     }
 
     fun drawerInit() {
@@ -104,6 +157,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
 
         if (userDetails?.get(0)?.name != null) {
             userType = userDetails!![0].userType
+            userId = userDetails!![0].userId
             txtUserName.setText(userDetails!![0].name)
             txtMobile.setText(userDetails!![0].mobile)
             txtEmail.setText(userDetails!![0].email)
@@ -124,7 +178,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
 
         val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
             .setLink(Uri.parse("https://www.plasdorservice.com/"))
-            .setDomainUriPrefix("https://plasdorservice.page.link/") // Open links with this app on Android
+            .setDomainUriPrefix("https://plasdorservicemobi.page.link/") // Open links with this app on Android
             .setAndroidParameters(
                 DynamicLink.AndroidParameters.Builder().build()
             ) // Open links with com.example.ios on iOS
@@ -135,11 +189,11 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         Log.e("main", "Long Refer " + dynamicLinkUri)
 
         ///manual Url Link Text
-        val manualUrlLinkText = "https://plasdorservice.page.link//?" +
+        val manualUrlLinkText = "https://plasdorservicemobi.page.link//?" +
                 "link=http://www.plasdorservice.com/" +
                 "&apn=" + packageName +
                 "&st=" + "My Refer Link" +
-                "&sd=" + "Reward Coins 20" +
+                "&sd=" + "Reward Coins 15" +
                 "&si=" + "https://plasdorservice.com/images/logo_.png"
 
         val shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
@@ -293,6 +347,14 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun negativeBtnClicked() {
+
+    }
+
+    override fun onSuccess(data: Any, tag: String) {
+
+    }
+
+    override fun onFailure(message: String) {
 
     }
 }

@@ -67,13 +67,13 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 if (pendingDynamicLinkData != null) {
                     deepLink = pendingDynamicLinkData.link
 
-                    showToastMsg(deepLink.toString())
+//                    showToastMsg(deepLink.toString())
                     var referredLink = deepLink.toString()
                     Log.e("Received Referral", "ptkk Link " + deepLink)
 
                     try {
                         senderUserId = referredLink.substring(referredLink.lastIndexOf("=") + 1)
-                        showToastMsg(senderUserId)
+//                        showToastMsg(senderUserId)
                     } catch (e: Exception) {
 
                     }
@@ -200,7 +200,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
     private fun ShareApp() {
 
         val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-            .setLink(Uri.parse("https://www.mobitechs.in/"))
+            .setLink(Uri.parse("http://www.plasdorservice.com/"))
             .setDomainUriPrefix("https://plasdorservicemobi.page.link") // Open links with this app on Android
             .setAndroidParameters(
                 AndroidParameters.Builder().build()
@@ -216,7 +216,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 "link=http://www.mobitechs.in/plasdor/api/plasdor.php?referalUserId=$userId" +
                 "&apn=" + packageName +
                 "&st=" + "My Refer Link" +
-                "&sd=" + "Reward Coins 20" +
+                "&sd=" + "Reward Coins 15" +
                 "&si=" + "https://plasdorservice.com/images/logo_.png"
 
         val shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
@@ -231,7 +231,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                     val shortLink = task.result.shortLink
                     val flowchartLink = task.result.previewLink
                     Log.e("main", "short Refer " + shortLink)
-                    showToastMsg(shortLink.toString())
+//                    showToastMsg(shortLink.toString())
                     val sendIntent = Intent()
                     sendIntent.action = Intent.ACTION_SEND
                     sendIntent.putExtra(

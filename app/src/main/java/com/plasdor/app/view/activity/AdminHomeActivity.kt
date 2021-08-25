@@ -16,6 +16,7 @@ import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.AlertDialogBtnClickedCallBack
+import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import com.plasdor.app.view.fragment.FullScreenImageFragment
@@ -24,17 +25,27 @@ import com.plasdor.app.view.fragment.admin.*
 import kotlinx.android.synthetic.main.activity_admin_home.*
 import kotlinx.android.synthetic.main.contenair.*
 import kotlinx.android.synthetic.main.drawer_layout_admin.*
+import org.json.JSONException
+import org.json.JSONObject
 
-class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogBtnClickedCallBack {
+class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogBtnClickedCallBack,
+    ApiResponse {
     private var doubleBackToExitPressedOnce = false
 
     var userType = ""
+    var userId = ""
+    var deviceId = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home)
 
         setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
-        displayView(1)
+
+        if(intent.getStringExtra("ImFrom").equals("Notification")){
+            displayView(9)
+        }else{
+            displayView(1)
+        }
         drawerInit()
         setupDrawer()
 
@@ -102,6 +113,7 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
 
         if (userDetails?.get(0)?.name != null) {
             userType = userDetails!![0].userType
+            userId = userDetails!![0].userId
             txtUserName.setText(userDetails!![0].name)
             txtMobile.setText(userDetails!![0].mobile)
             txtEmail.setText(userDetails!![0].email)
@@ -310,6 +322,18 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
     }
 
     private fun logout() {
+        deviceId = SharePreferenceManager.getInstance(this).getValueString(Constants.DEVICE_ID).toString()
+        // call api to remove to token from server
+        val method = "removeAdminToken"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("userId", userId)
+            jsonObject.put("deviceId", deviceId)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
 
         SharePreferenceManager.getInstance(this).clearSharedPreference(this)
         finish()
@@ -321,5 +345,12 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
 
     override fun negativeBtnClicked() {
 
+    }
+
+    override fun onSuccess(data: Any, tag: String) {
+
+    }
+
+    override fun onFailure(message: String) {
     }
 }

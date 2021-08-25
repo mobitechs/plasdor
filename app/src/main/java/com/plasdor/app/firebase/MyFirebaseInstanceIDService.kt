@@ -1,13 +1,24 @@
 package com.plasdor.app.firebase
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.media.RingtoneManager
+import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
-import android.telephony.TelephonyManager
 import android.util.Log
+import android.widget.RemoteViews
+import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.plasdor.app.R
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.Constants
+import com.plasdor.app.view.activity.AdminHomeActivity
 
 class MyFirebaseInstanceIDService : FirebaseMessagingService() {
 
@@ -16,38 +27,41 @@ class MyFirebaseInstanceIDService : FirebaseMessagingService() {
         Log.d(TAG, "Notification Message: $remoteMessage")
 
         var title =remoteMessage.notification?.title
-        var description =remoteMessage.notification?.body
-        var imageURL =remoteMessage.notification?.imageUrl
+        var description =remoteMessage.data["DESCRIPTION"]
+        var imageURL = remoteMessage.notification?.imageUrl
 
-//        val intent = Intent(this, NotificationActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//        intent.putExtra("title",title)
-//        intent.putExtra("description",description)
-//        intent.putExtra("imageURL",imageURL)
-//        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-//            PendingIntent.FLAG_UPDATE_CURRENT)
-//
-//        val channelId = getString(R.string.default_notification_channel_id)
-//        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-//        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-//            .setSmallIcon(R.drawable.in_notification)
-//            .setContentTitle("ptk "+title)
-//            .setContentText(description)
-//            .setAutoCancel(true)
-//            .setSound(defaultSoundUri)
-//            .setContentIntent(pendingIntent)
-//
-//        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//
-//        // Since android Oreo notification channel is needed.
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val channel = NotificationChannel(channelId,
-//                "Channel human readable title",
-//                NotificationManager.IMPORTANCE_DEFAULT)
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//
-//        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+
+
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        var channelId = getString(R.string.channel_id)
+
+        val intent = Intent(this, AdminHomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("ImFrom","Notification")
+        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT)
+
+
+        var notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.new_logo)
+            .setContentTitle(remoteMessage.data["TITLE"])
+            .setContentText(remoteMessage.data["DESCRIPTION"])
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+            .setPriority(2)//high
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setLights(Color.GREEN, 1000, 1000)
+            .setContentIntent(pendingIntent)
+
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+                val channel = NotificationChannel(channelId, getString(R.string.channel_name), NotificationManager.IMPORTANCE_HIGH)
+                notificationManager.createNotificationChannel(channel)
+            }
+        }
+        notificationManager.notify(0, notificationBuilder.build())
     }
 
     override fun onNewToken(token: String) {

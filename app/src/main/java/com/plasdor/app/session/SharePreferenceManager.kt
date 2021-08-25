@@ -92,15 +92,24 @@ class SharePreferenceManager {
 
     fun clearSharedPreference(context: Context) {
 
+        var token =  getInstance(context).getValueString(Constants.TOKEN).toString()
+        var deviceId = getInstance(context).getValueString(Constants.DEVICE_ID).toString()
+
         val editor: SharedPreferences.Editor = sharedPref!!.edit()
-
         //sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-
         editor.clear()
         removeValue(Constants.USERDATA)
         removeValue(Constants.ISLOGIN)
         clearCart()
         // editor.commit()
+
+
+        // this is done becoz if a user  gogged in as a Admin and lout and login as user then he will recive notification for user approval
+        getInstance(context).save(Constants.TOKEN, token)
+        getInstance(context).save(Constants.IS_TOKEN_UPDATE, true)
+        getInstance(context).save(Constants.IS_TOKEN_SAVE_API_CALLED, false)
+        getInstance(context).save(Constants.DEVICE_ID, deviceId)
+
 
         context.openActivity(AuthActivity::class.java)
     }
