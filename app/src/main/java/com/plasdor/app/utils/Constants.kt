@@ -65,15 +65,17 @@ class Constants {
         val controllerQtyArray = arrayOf("1", "2", "3", "4")
 //        val daysArray = arrayOf("1", "2", "3", "4", "5", "6", "7")
         val daysArray = arrayOf("1", "2")
-        val hourArray = arrayOf("2", "4", "6")
+        val hourArray = arrayOf("1","2", "4", "6")
 
         val ps5NdXSeriesXPriceArray = arrayOf("999", "1799", "2499", "3199", "3499", "3999", "4499")
         val ps4NdXOneXPriceArray = arrayOf("499", "899", "1399", "1699", "2099", "2399", "2699")
         val XOneSPriceArray = arrayOf("449", "849", "1349", "1649", "2049", "2349", "2649")
         val XSeriesSPriceArray = arrayOf("949", "1749", "2449", "3149", "3449", "3949", "4449")
 
-        val ps4NdXOneXNdSPriceArrayHr = arrayOf("199", "299", "449")
-        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("299", "499", "649")
+        val ps4NdXOneXNdSPriceArrayHr = arrayOf("99","199", "299", "399")
+        val ps5NdXSeriesXNdSPriceArrayHr = arrayOf("199","299", "399", "499")
+        val xboxSeriesSPriceArrayHr = arrayOf("149","249", "449", "599")
+        val xboxOneSPriceArrayHr = arrayOf("79","149", "249", "349")
 //        val XOneSPriceArrayHr = arrayOf("200", "300", "400", "500", "600", "700", "800")
 //        val XSeriesSPriceArrayHr = arrayOf("250", "350", "450", "550", "650", "750", "850")
 

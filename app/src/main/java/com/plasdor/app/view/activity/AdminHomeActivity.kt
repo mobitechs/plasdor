@@ -41,9 +41,13 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
 
         setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
 
-        if(intent.getStringExtra("ImFrom").equals("Notification")){
+        if(intent.getStringExtra("ImFrom").equals("UserApproval")){
             displayView(9)
-        }else{
+        }
+        else if(intent.getStringExtra("ImFrom").equals("OrderGenerate")){
+            displayView(3)
+        }
+        else{
             displayView(1)
         }
         drawerInit()

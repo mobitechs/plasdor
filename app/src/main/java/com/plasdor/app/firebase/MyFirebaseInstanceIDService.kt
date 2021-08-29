@@ -19,25 +19,46 @@ import com.plasdor.app.R
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.Constants
 import com.plasdor.app.view.activity.AdminHomeActivity
+import com.plasdor.app.view.activity.MerchantHomeActivity
+import com.plasdor.app.view.activity.UserHomeActivity
 
 class MyFirebaseInstanceIDService : FirebaseMessagingService() {
 
 
+    lateinit var intent: Intent
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "Notification Message: $remoteMessage")
 
-        var title =remoteMessage.notification?.title
-        var description =remoteMessage.data["DESCRIPTION"]
-        var imageURL = remoteMessage.notification?.imageUrl
+        var iamFor =remoteMessage.data["IM_FOR"]
 
-
+        var userType = SharePreferenceManager.getInstance(this).getUserLogin(Constants.USERDATA)!![0].userType
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         var channelId = getString(R.string.channel_id)
 
-        val intent = Intent(this, AdminHomeActivity::class.java)
+        if(iamFor.equals("UserApproval")){
+             intent = Intent(this, AdminHomeActivity::class.java)
+        }
+        else if(iamFor.equals("Campaign")){
+            intent = Intent(this, UserHomeActivity::class.java)
+        }
+        else if(iamFor.equals("OrderGenerate") && userType.equals(Constants.USER)){
+             intent = Intent(this, UserHomeActivity::class.java)
+        }
+        else if(iamFor.equals("OrderGenerate") && userType.equals(Constants.MERCHANT)){
+             intent = Intent(this, MerchantHomeActivity::class.java)
+        }
+        else if(iamFor.equals("OrderGenerate") && userType.equals(Constants.ADMIN)){
+             intent = Intent(this, AdminHomeActivity::class.java)
+        }
+
+        else{
+            intent = Intent(this, UserHomeActivity::class.java)
+        }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra("ImFrom","Notification")
+        intent.putExtra("ImFrom",iamFor)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
             PendingIntent.FLAG_UPDATE_CURRENT)
 

@@ -69,7 +69,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Offer Rs. 1,979"
+                            android:text="Rs. 299"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -80,7 +80,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Offer Rs. 1,979"
+                            android:text="Offer Rs. 149"
                             android:textColor="@color/black"
                             android:textSize="20dp" />
 
@@ -144,7 +144,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:text="No Of Days:   " />
+                    android:text="No Of Hours:   " />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

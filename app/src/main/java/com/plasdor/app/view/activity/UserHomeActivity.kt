@@ -52,7 +52,16 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         drawerInit()
         setupDrawer()
         getReferralLinkDetails()
-        displayView(1)
+
+        if(intent.getStringExtra("ImFrom").equals("Campaign")){
+            displayView(7)
+        }
+        else if(intent.getStringExtra("ImFrom").equals("OrderGenerate")){
+            displayView(3)
+        }
+        else{
+            displayView(1)
+        }
 
     }
 

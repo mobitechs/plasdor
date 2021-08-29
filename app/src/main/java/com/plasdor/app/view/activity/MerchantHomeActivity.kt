@@ -21,7 +21,10 @@ import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import com.plasdor.app.view.fragment.ProfileFragment
 import com.plasdor.app.view.fragment.WalletFragment
-import com.plasdor.app.view.fragment.merchant.*
+import com.plasdor.app.view.fragment.merchant.MerchantAllProductListFragment
+import com.plasdor.app.view.fragment.merchant.MerchantFragmentProductList
+import com.plasdor.app.view.fragment.merchant.MerchantOrderDetailsFragment
+import com.plasdor.app.view.fragment.merchant.MerchantOrderListFragment
 import kotlinx.android.synthetic.main.activity_merchant_home.*
 import kotlinx.android.synthetic.main.contenair.*
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
@@ -39,7 +42,13 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         setContentView(R.layout.activity_merchant_home)
 
         setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
-        displayView(1)
+
+        if (intent.getStringExtra("ImFrom").equals("OrderGenerate")) {
+            displayView(3)
+        } else {
+            displayView(1)
+        }
+
 
         drawerInit()
         setupDrawer()

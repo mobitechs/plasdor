@@ -296,17 +296,20 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             priceToSell = Constants.XOneSPriceArray[qtyPos].toInt()
         } else if (listItem.productName.equals("XBOX Series S") && rentalType.equals(Constants.Daily)) {
             priceToSell = Constants.XSeriesSPriceArray[qtyPos].toInt()
-        } else if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X") || listItem.productName.equals("XBOX Series S")) && rentalType.equals(Constants.Hourly)) {
+        }
+        else if ((listItem.productName.equals("PS5") || listItem.productName.equals("XBOX Series X")) && rentalType.equals(Constants.Hourly)) {
             priceToSell = Constants.ps5NdXSeriesXNdSPriceArrayHr[qtyPos].toInt()
-        } else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X") || listItem.productName.equals("XBOX One S")) && rentalType.equals(Constants.Hourly)) {
+        }
+        else if ((listItem.productName.equals("PS4") || listItem.productName.equals("XBOX One X")) && rentalType.equals(Constants.Hourly)) {
             priceToSell = Constants.ps4NdXOneXNdSPriceArrayHr[qtyPos].toInt()
         }
-//        else if (listItem.productName.equals("XBOX One S") && rentalType.equals(Constants.Hourly)) {
-//            priceToSell = Constants.XOneSPriceArrayHr[qtyPos].toInt()
-//        }
-//        else if (listItem.productName.equals("XBOX Series S") && rentalType.equals(Constants.Hourly)) {
-//            priceToSell = Constants.XSeriesSPriceArrayHr[qtyPos].toInt()
-//        }
+        else if (( listItem.productName.equals("XBOX Series S")) && rentalType.equals(Constants.Hourly)) {
+            priceToSell = Constants.xboxSeriesSPriceArrayHr[qtyPos].toInt()
+        }
+        else if (( listItem.productName.equals("XBOX One S")) && rentalType.equals(Constants.Hourly)) {
+            priceToSell = Constants.xboxOneSPriceArrayHr[qtyPos].toInt()
+        }
+
 
 
         if (rentalType.equals(Constants.Hourly)) {

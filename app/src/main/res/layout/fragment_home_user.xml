@@ -27,6 +27,33 @@
                 <include layout="@layout/progressbar" />
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/btnGetRewards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:background="@color/purple_500"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:text="Get Rewards"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Next Reward:"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/green"
+                    android:id="@+id/nextRewardTime"/>
+            </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

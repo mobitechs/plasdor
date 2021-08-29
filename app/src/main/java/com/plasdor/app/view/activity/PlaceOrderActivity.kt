@@ -133,7 +133,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
 
         if (rentalType.equals(Constants.Hourly)) {
             labelNoOf.text = "No of Hour:"
-            priceToShow = (listItem.priceToShowHourly.toInt() * 2).toString()
+            priceToShow = (listItem.priceToShowHourly.toInt() * 1).toString()
             priceToSell = listItem.priceToSellHourly
 
 //            labelPriceWithQty.text = "Price (${listItem.priceToSellHourly} * ${listItem.qty} Hr)"
