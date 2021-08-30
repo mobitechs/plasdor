@@ -138,16 +138,6 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener, ApiResponse {
     }
 
 
-    private fun rewardButtonHideShow() {
-        if (canIncreament) {
-            checkRewardCountAndBtnVisiblity()
-        } else {
-            btnGetRewards.visibility = View.GONE
-            nextRewardTime.visibility = View.VISIBLE
-            nextRewardTime.setText("Next eward in 10 mins")
-            //show timer here
-        }
-    }
 
     private fun playAd() {
         val  cb = object : OnUserEarnedRewardListener {
@@ -196,12 +186,13 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener, ApiResponse {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d(TAG, adError?.message)
                     mRewardedAd = null
+                    btnGetRewards.visibility = View.GONE
                 }
 
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     Log.d(TAG, "Ad was loaded.")
                     mRewardedAd = rewardedAd
-//                    btnGetRewards.visibility = View.VISIBLE
+                    btnGetRewards.visibility = View.VISIBLE
 
                 }
             })
@@ -322,7 +313,7 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener, ApiResponse {
         else{
 
             if(getRewardCounter == 0){
-                btnGetRewards.visibility = View.VISIBLE
+//                btnGetRewards.visibility = View.VISIBLE
                 nextRewardTime.visibility = View.GONE
             }else{
                 btnGetRewards.visibility = View.GONE

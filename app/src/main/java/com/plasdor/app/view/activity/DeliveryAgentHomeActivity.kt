@@ -15,7 +15,7 @@ class DeliveryAgentHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_delivery_agent)
 
-        setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
+        setStatusColor(window, resources.getColor(R.color.colorAccent))
 
         actionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimaryDark)))
         displayView(1)

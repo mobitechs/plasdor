@@ -41,7 +41,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_merchant_home)
 
-        setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
+        setStatusColor(window, resources.getColor(R.color.colorAccent))
 
         if (intent.getStringExtra("ImFrom").equals("OrderGenerate")) {
             displayView(3)

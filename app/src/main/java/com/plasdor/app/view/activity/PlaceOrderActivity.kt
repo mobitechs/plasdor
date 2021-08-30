@@ -67,7 +67,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place_order)
         val window: Window = window
-        setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
+        setStatusColor(window, resources.getColor(R.color.colorAccent))
 
         initView()
     }
@@ -197,7 +197,8 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
                 transactionNo = "TID" + System.currentTimeMillis()
 //            amount = listItem.totalPayable.toString()
                 amount = finalPayableAmount.toString()
-                note = "Payment for Plasdor Services."
+//                note = "Payment for Plasdor Services."
+                note = listItem.productName
                 //payUsingUpi(amount, upiId, name, note)
                 showSelectPaymentTypeDialog()
             }else{
@@ -250,8 +251,8 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
             val options = JSONObject()
             options.put("name", "Plasdor Services")
             options.put("description", note)
-            options.put("image", R.drawable.logo)
-            options.put("theme.color", "#3169D1")
+//            options.put("image", R.drawable.logo)
+            options.put("theme.color", "#116AF9")
             options.put("currency", "INR")
             options.put("amount", fAmount)
             options.put("send_sms_hash", true)

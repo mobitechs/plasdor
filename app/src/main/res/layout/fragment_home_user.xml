@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
+    android:background="@drawable/logo"
     android:orientation="vertical">
 
     <include layout="@layout/search_edittext" />
@@ -33,26 +33,27 @@
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:visibility="gone"
                     android:id="@+id/btnGetRewards"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginVertical="@dimen/_10sdp"
-                    android:background="@color/purple_500"
-                    android:paddingVertical="@dimen/_10sdp"
-                    android:text="Get Rewards"
-                    android:textColor="@color/white" />
+                    android:background="@color/green"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:text="Get Reward"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/black" />
 
                 <TextView
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:id="@+id/nextRewardTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
                     android:text="Next Reward:"
-                    android:textSize="@dimen/_20sdp"
                     android:textColor="@color/green"
-                    android:id="@+id/nextRewardTime"/>
+                    android:textSize="@dimen/_20sdp" />
             </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

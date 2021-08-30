@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:background="@color/colorAccent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="What's your Email?"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:lineSpacingExtra="@dimen/_5sdp"
                 android:text="We protect our community by making sure everyone using plasdor is real."
-                android:textColor="@color/black"
+                android:textColor="@color/white"
 
                 android:textSize="@dimen/_12sdp" />
 
@@ -72,11 +72,14 @@
     </LinearLayout>
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/bg_solid"
         android:text="Submit" />
 
 

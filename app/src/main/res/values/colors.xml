@@ -24,17 +24,19 @@
 <!--        <color name="colorPrimary">#99f2c8</color>-->
 <!--        <color name="colorPrimaryDark">#1f4037</color>-->
 
-    <color name="colorPrimary">#E4108D</color>
-    <color name="colorPrimaryDark">#C50275</color>
-    <color name="midleColor">#3169D1</color>
+
+    <color name="colorPrimary">#F50067</color>
+    <color name="colorPrimaryDark">#F50067</color>
+    <color name="midleColor">#116AF9</color>
 
 
-    <color name="colorAccent">#3169D1</color>
+    <color name="colorAccent">#116AF9</color>
     <color name="blue">#2196F3</color>
     <color name="bg">#C9E5FA</color>
     <color name="red">#FF0000</color>
     <color name="orange">#FF5722</color>
     <color name="green">#4CAF50</color>
+    <color name="yellow">#FFEB3B</color>
 
     <color name="black_transparent">#80000000</color>
     <color name="border">#8E8E8E</color>

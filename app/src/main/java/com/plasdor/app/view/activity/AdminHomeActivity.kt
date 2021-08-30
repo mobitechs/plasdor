@@ -39,7 +39,7 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home)
 
-        setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
+        setStatusColor(window, resources.getColor(R.color.colorAccent))
 
         if(intent.getStringExtra("ImFrom").equals("UserApproval")){
             displayView(9)

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorAccent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -288,12 +288,12 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnSignUp"
                         android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_3sdp"
-                        android:background="@drawable/rounded_bg_orange"
+                        android:background="@drawable/bg_solid"
                         android:text="Submit"
                         android:textColor="@color/white" />
                 </LinearLayout>

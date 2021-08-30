@@ -42,7 +42,7 @@ class SplashActivity : AppCompatActivity(), ApiResponse {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         val window: Window = window
-        setStatusColor(window, resources.getColor(R.color.colorPrimaryDark))
+        setStatusColor(window, resources.getColor(R.color.colorAccent))
 
         val userDetails2 = SharePreferenceManager.getInstance(this)
             .getUserLogin(Constants.USERDATA)

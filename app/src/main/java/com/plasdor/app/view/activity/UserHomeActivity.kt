@@ -46,7 +46,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_user)
         val window: Window = window
-        setStatusColor(window, resources.getColor(R.color.colorPrimary))
+        setStatusColor(window, resources.getColor(R.color.colorAccent))
 
 
         drawerInit()

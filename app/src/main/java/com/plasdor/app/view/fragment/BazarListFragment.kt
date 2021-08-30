@@ -122,16 +122,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         }
     }
 
-    private fun rewardButtonHideShow() {
-        if (canIncreament) {
-            checkRewardCountAndBtnVisiblity()
-        } else {
-            btnGetRewards.visibility = View.GONE
-            nextRewardTime.visibility = View.VISIBLE
-            nextRewardTime.setText("Next eward in 10 mins")
-            //show timer here
-        }
-    }
+
 
     private fun playAd() {
         val  cb = object :OnUserEarnedRewardListener{
@@ -179,13 +170,16 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d(TAG, adError?.message)
+//                    requireContext().showToastMsg("FailedToLoad:"+adError?.message)
                     mRewardedAd = null
+                    btnGetRewards.visibility = View.GONE
                 }
 
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     Log.d(TAG, "Ad was loaded.")
+//                    requireContext().showToastMsg("onAdLoaded:")
                     mRewardedAd = rewardedAd
-//                    btnGetRewards.visibility = View.VISIBLE
+                    btnGetRewards.visibility = View.VISIBLE
 
                 }
             })
@@ -269,7 +263,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         else{
 
             if(getRewardCounter == 0){
-                btnGetRewards.visibility = View.VISIBLE
+                //btnGetRewards.visibility = View.VISIBLE
                 nextRewardTime.visibility = View.GONE
             }else{
                 btnGetRewards.visibility = View.GONE

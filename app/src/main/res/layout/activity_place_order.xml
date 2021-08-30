@@ -3,7 +3,7 @@
     android:id="@+id/activity_item_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorAccent"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -27,23 +27,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_3sdp"
                 android:text="Product Details"
-                android:textColor="@color/black"
+                android:textColor="@color/yellow"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/black_transparent" />
+                android:background="@color/yellow" />
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="@dimen/_8sdp"
-                app:cardUseCompatPadding="true">
+<!--            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:cardElevation="@dimen/_8sdp"-->
+<!--                app:cardUseCompatPadding="true">-->
 
                 <LinearLayout
+                    android:layout_marginVertical="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -73,7 +73,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="PS 4"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/_12sdp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -98,6 +98,7 @@
                                     android:layout_marginTop="4dp"
                                     android:fontFamily="@font/roboto_regular"
                                     android:text="Rs.499"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/_12sdp" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
@@ -108,7 +109,7 @@
                                     android:layout_marginTop="4dp"
                                     android:fontFamily="@font/roboto_regular"
                                     android:text="Rs. 459"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/_12sdp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -117,14 +118,14 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_3sdp"
                 android:text="Order Summery"
-                android:textColor="@color/black"
+                android:textColor="@color/yellow"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
 
@@ -132,15 +133,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/black_transparent" />
+                android:background="@color/yellow" />
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="@dimen/_8sdp"
-                app:cardUseCompatPadding="true">
+<!--            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:cardElevation="@dimen/_8sdp"-->
+<!--                app:cardUseCompatPadding="true">-->
 
                 <LinearLayout
+                    android:layout_marginVertical="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -155,6 +157,7 @@
 
 
                         <RelativeLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/_3sdp"
@@ -164,6 +167,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
+                                android:textColor="@color/white"
                                 android:text="Rental Type: " />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -172,10 +176,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:fontFamily="@font/roboto_regular"
+                                android:textColor="@color/white"
                                 android:text="Daily" />
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/_3sdp"
@@ -183,6 +189,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/labelNoOf"
+                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
@@ -193,11 +200,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="2" />
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/_3sdp"
@@ -207,6 +216,7 @@
                                 android:id="@+id/labelPriceWithQty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Price (449 * 2) " />
 
@@ -215,12 +225,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="898" />
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:visibility="visible"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/_3sdp"
@@ -229,6 +240,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Additional Discount " />
 
@@ -237,6 +249,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="50" />
                         </RelativeLayout>
@@ -250,6 +263,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Price " />
 
@@ -258,6 +272,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="849" />
                         </RelativeLayout>
@@ -271,6 +286,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Controller Qty:" />
 
@@ -279,6 +295,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="1" />
                         </RelativeLayout>
@@ -292,6 +309,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Controller Charges:"
                                 android:textSize="@dimen/_12sdp" />
@@ -301,6 +319,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="0" />
                         </RelativeLayout>
@@ -316,6 +335,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Delivery Charges:"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/_12sdp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -323,6 +343,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:textColor="@color/white"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="0" />
                         </RelativeLayout>
@@ -343,8 +364,8 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Total Payable:"
-                                android:textColor="@color/blue"
-                                android:textSize="@dimen/_14sdp"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_16sdp"
                                 android:textStyle="bold" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -354,8 +375,8 @@
                                 android:layout_alignParentEnd="true"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="1979"
-                                android:textColor="@color/blue"
-                                android:textSize="@dimen/_14sdp"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_16sdp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
 
@@ -364,10 +385,11 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -377,7 +399,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_3sdp"
                     android:text="Address Details"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
 
@@ -385,7 +407,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
-                    android:background="@color/black_transparent" />
+                    android:background="@color/yellow" />
 
                 <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
@@ -481,6 +503,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -491,7 +514,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_3sdp"
                     android:text="Merchant Details"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
 
@@ -499,7 +522,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
-                    android:background="@color/black_transparent" />
+                    android:background="@color/yellow" />
 
                 <include layout="@layout/adpater_item_merchant_available" />
 
