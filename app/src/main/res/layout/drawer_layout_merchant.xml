@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/black"
         android:clickable="true"
         android:touchscreenBlocksFocus="false">
 
@@ -46,7 +46,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:singleLine="true"
                             android:text="Pratik Sonawane"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_title" />
                         <!--close icon-->
 
@@ -65,7 +65,7 @@
                             android:layout_width="@dimen/drawer_subtitle_icon_height"
                             android:layout_height="@dimen/drawer_subtitle_icon_width"
                             android:src="@drawable/ic_baseline_local_phone_24"
-                            android:tint="@color/colorAccent" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtMobile"
@@ -75,7 +75,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="8655883062"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_subtitle" />
 
                     </LinearLayout>
@@ -92,7 +92,7 @@
                             android:layout_width="@dimen/drawer_subtitle_icon_height"
                             android:layout_height="@dimen/drawer_subtitle_icon_width"
                             android:src="@drawable/ic_baseline_email_24"
-                            android:tint="@color/colorAccent" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtEmail"
@@ -102,7 +102,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="sonawane.ptk@gmail.com"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_subtitle" />
 
                     </LinearLayout>
@@ -122,7 +122,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/black_transparent" />
+                android:background="@color/iconColor" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -145,7 +145,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_home_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvHome"
@@ -154,7 +154,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Home"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
 
@@ -170,7 +170,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_person_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/edProfile"
@@ -179,7 +179,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Edit Profile"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
 
@@ -195,7 +195,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_shopping_cart_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtMyOrder"
@@ -204,7 +204,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="My Order"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
 
@@ -220,7 +220,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_format_list_numbered_rtl_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -228,7 +228,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="My Products"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
 
@@ -244,7 +244,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_share_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -252,7 +252,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Invite to Friend"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
                     <LinearLayout
@@ -267,7 +267,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_feedback_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -275,7 +275,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Feedback"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
                     <LinearLayout
@@ -290,7 +290,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_support_agent_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -298,7 +298,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Support"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
                     <LinearLayout
@@ -313,7 +313,7 @@
                             android:layout_width="@dimen/drawer_menu_icon_height"
                             android:layout_height="@dimen/drawer_menu_icon_width"
                             android:src="@drawable/ic_baseline_power_settings_new_24"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/btnLogOut"
@@ -322,7 +322,7 @@
                             android:layout_marginLeft="20dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Log Out"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
 

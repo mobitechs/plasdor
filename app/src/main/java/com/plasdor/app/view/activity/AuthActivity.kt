@@ -14,7 +14,7 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         val window: Window = window
-        setStatusColor(window, resources.getColor(R.color.colorAccent))
+        setStatusColor(window, resources.getColor(R.color.black))
 
         displayView(1)
     }

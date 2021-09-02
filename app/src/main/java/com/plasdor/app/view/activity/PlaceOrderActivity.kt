@@ -67,7 +67,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place_order)
         val window: Window = window
-        setStatusColor(window, resources.getColor(R.color.colorAccent))
+        setStatusColor(window, resources.getColor(R.color.black))
 
         initView()
     }

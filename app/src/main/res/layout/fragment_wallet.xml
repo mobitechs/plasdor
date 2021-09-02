@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     tools:context=".view.fragment.WalletFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -28,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Your total plasdor points:"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_26sdp" />
 
                 <LinearLayout
@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="55"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/yellow"
                         android:textSize="@dimen/_65sdp" />
                 </LinearLayout>
 
@@ -69,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="How to earn point?"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_22sdp" />
 
                     <ImageView
@@ -91,6 +91,7 @@
 
 
                     <TextView
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -98,6 +99,7 @@
                         android:text="@string/point1" />
 
                     <TextView
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -105,6 +107,7 @@
                         android:text="@string/point2" />
 
                     <TextView
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -126,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:text="Redeem History"
                     android:visibility="gone"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_22sdp" />
 
                 <androidx.recyclerview.widget.RecyclerView

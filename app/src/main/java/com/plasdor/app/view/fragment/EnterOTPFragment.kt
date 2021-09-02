@@ -134,7 +134,7 @@ class EnterOTPFragment : Fragment(), ApiResponse {
     private fun getOtpAPI() {
         val rand = Random()
         actualOTP = String.format("%04d", rand.nextInt(10000))
-//        requireContext().showToastMsgLong("Your OTP is: " + actualOTP)
+        requireContext().showToastMsgLong("Your OTP is: " + actualOTP)
 
         //call get otp api
         val method = "GetOTPForEmailLogin"

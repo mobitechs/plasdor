@@ -19,7 +19,9 @@ import com.plasdor.app.callbacks.AlertDialogBtnClickedCallBack
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
+import com.plasdor.app.view.fragment.FeedbackFragment
 import com.plasdor.app.view.fragment.ProfileFragment
+import com.plasdor.app.view.fragment.SupportFragment
 import com.plasdor.app.view.fragment.WalletFragment
 import com.plasdor.app.view.fragment.merchant.MerchantAllProductListFragment
 import com.plasdor.app.view.fragment.merchant.MerchantFragmentProductList
@@ -141,6 +143,12 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
             }
             R.id.menuWallet -> {
                 displayView(8)
+            }
+            R.id.llFeedback -> {
+                displayView(5)
+            }
+            R.id.llSupport -> {
+                displayView(6)
             }
 
 
@@ -285,6 +293,24 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                     false,
                     R.id.nav_host_fragment,
                     "MerchantFragmentProductList"
+                )
+            }
+            5 -> {
+                toolbarTitle("Add Feedback")
+                addFragment(
+                    FeedbackFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "FeedbackFragment"
+                )
+            }
+            6 -> {
+                toolbarTitle("Support")
+                addFragment(
+                    SupportFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "SupportFragment"
                 )
             }
             8 -> {

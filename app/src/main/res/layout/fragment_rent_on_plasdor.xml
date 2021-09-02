@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     tools:context=".view.fragment.user.RentOnPlasdorFragment">
 
 
@@ -16,6 +16,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="To start rent on plasdor, you need to create account as a merchant with different email address. Once your account verified then you can add your console for renting."
             android:textSize="@dimen/_18sdp"/>
     </LinearLayout>
@@ -24,8 +25,9 @@
         android:id="@+id/btnStartRentOn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bg_solid"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center"
         android:padding="@dimen/_12sdp"

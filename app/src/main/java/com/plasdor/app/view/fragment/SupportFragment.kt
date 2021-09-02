@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.textfield.TextInputEditText
@@ -36,7 +37,13 @@ class SupportFragment : Fragment(), ApiResponse {
     lateinit var txtSupport5: TextView
     lateinit var txtSupport6: TextView
     lateinit var txtContactUs: TextView
-    lateinit var layoutChatWithUs: TextView
+    lateinit var layoutChatWithUs: RelativeLayout
+    lateinit var layoutSupport1: RelativeLayout
+    lateinit var layoutSupport2: RelativeLayout
+    lateinit var layoutSupport3: RelativeLayout
+    lateinit var layoutSupport4: RelativeLayout
+    lateinit var layoutSupport5: RelativeLayout
+    lateinit var layoutSupport6: RelativeLayout
 
     var userId=""
     var userType=""
@@ -69,6 +76,13 @@ class SupportFragment : Fragment(), ApiResponse {
         txtSupport5 = rootView.findViewById(R.id.txtSupport5)!!
         txtSupport6 = rootView.findViewById(R.id.txtSupport6)!!
 
+        layoutSupport1 = rootView.findViewById(R.id.layoutSupport1)!!
+        layoutSupport2 = rootView.findViewById(R.id.layoutSupport2)!!
+        layoutSupport3 = rootView.findViewById(R.id.layoutSupport3)!!
+        layoutSupport4 = rootView.findViewById(R.id.layoutSupport4)!!
+        layoutSupport5 = rootView.findViewById(R.id.layoutSupport5)!!
+        layoutSupport6 = rootView.findViewById(R.id.layoutSupport6)!!
+
         txtContactUs = rootView.findViewById(R.id.txtContactUs)!!
         layoutChatWithUs = rootView.findViewById(R.id.layoutChatWithUs)!!
 
@@ -78,27 +92,27 @@ class SupportFragment : Fragment(), ApiResponse {
         layoutChatWithUs.setOnClickListener {
 
         }
-        txtSupport1.setOnClickListener {
+        layoutSupport1.setOnClickListener {
             videoUrl = "https://youtu.be/51ZcdbimBL0"
             playOnYoutube()
         }
-        txtSupport2.setOnClickListener  {
+        layoutSupport2.setOnClickListener  {
             videoUrl = "https://youtu.be/vXZYYCx-_-c"
             playOnYoutube()
         }
-        txtSupport3.setOnClickListener {
+        layoutSupport3.setOnClickListener {
             videoUrl = "https://www.youtube.com/watch?v=USccSZnS8MQ"
             playOnYoutube()
         }
-        txtSupport4.setOnClickListener {
+        layoutSupport4.setOnClickListener {
             videoUrl = "https://www.youtube.com/watch?v=DUwlGduupRI"
             playOnYoutube()
         }
-        txtSupport5.setOnClickListener  {
+        layoutSupport5.setOnClickListener  {
             videoUrl = "https://www.youtube.com/watch?v=h7gyJRWrjbg"
             playOnYoutube()
         }
-        txtSupport6.setOnClickListener  {
+        layoutSupport6.setOnClickListener  {
             videoUrl = "https://www.youtube.com/watch?v=KVh4KtUSW3A"
             playOnYoutube()
         }

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
+    android:background="@color/black"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_20sdp"
                     android:text="Your total plasdor points:"
-                    android:textColor="@color/blue" />
+                    android:textColor="@color/yellow" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="55"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/yellow"
                         android:textSize="@dimen/_45sdp" />
                 </LinearLayout>
 

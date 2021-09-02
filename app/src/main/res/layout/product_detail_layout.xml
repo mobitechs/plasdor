@@ -3,7 +3,7 @@
     android:id="@+id/activity_item_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:text="PS 4"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_16sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -70,7 +70,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Rs. 299"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="15dp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -81,7 +81,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Offer Rs. 149"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="20dp" />
 
 
@@ -103,7 +103,7 @@
 
                     <TextView
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rental On Basis" />
@@ -113,10 +113,14 @@
                         android:id="@+id/rdHourly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:buttonTint="@color/white"
                         android:text="Hourly" />
                     <RadioButton
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:textColor="@color/white"
                         android:id="@+id/rdDaily"
+                        android:buttonTint="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Daily" />
@@ -142,7 +146,7 @@
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:text="No Of Hours:   " />
 
@@ -175,7 +179,7 @@
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:text="Controller Qty: " />
 
@@ -200,7 +204,7 @@
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:text="Controller Charges 50" />
             </LinearLayout>
 
@@ -218,7 +222,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="PickUp/Delivery" />
@@ -302,7 +306,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Details"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -337,9 +341,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_3sdp"
                     android:text="Select Merchant"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.5dp"
+                    android:background="@color/yellow"/>
 
 
                 <include layout="@layout/recyclerview" />
@@ -348,11 +356,13 @@
     </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:id="@+id/btnBuyNow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bg_solid"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center"
         android:padding="@dimen/_12sdp"

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     android:orientation="vertical"
     tools:context=".view.fragment.user.UserOrderDetailsFragment">
 
@@ -29,12 +29,13 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Order Details"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_20sdp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="@color/yellow" />
             </LinearLayout>
 
             <LinearLayout
@@ -46,6 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Order No: " />
 
@@ -55,6 +57,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="1001" />
             </LinearLayout>
@@ -68,12 +71,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Order Status:" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtOderStatus"
                     android:layout_width="0dp"
+                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
                     android:fontFamily="@font/roboto_regular"
@@ -89,6 +94,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Product Details:" />
 
@@ -97,6 +103,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="PS4" />
             </LinearLayout>
@@ -110,6 +117,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Rental Type:" />
 
@@ -118,6 +126,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Daily" />
              </LinearLayout>
@@ -132,6 +141,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="No of Days:" />
 
@@ -140,6 +150,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="5" />
             </LinearLayout>
@@ -153,6 +164,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Controller Qty:" />
 
@@ -161,6 +173,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="2" />
             </LinearLayout>
@@ -175,6 +188,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Order Status: " />
 
@@ -216,6 +230,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Order Date:" />
 
@@ -224,6 +239,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="10-Mar-2021" />
             </LinearLayout>
@@ -240,12 +256,13 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Payment Details"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_20sdp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="@color/yellow" />
             </LinearLayout>
 
             <RelativeLayout
@@ -258,6 +275,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/white"
                     android:text="Payment Status:" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -266,7 +284,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Success" />
+                    android:text="Success"
+                    android:textColor="@color/white" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -279,12 +298,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/white"
                     android:text="Payment Type:" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtPaymentType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Cash On Delivery" />
@@ -302,6 +323,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/white"
                     android:text="Redeem Points:" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -309,6 +331,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </RelativeLayout>
@@ -322,18 +345,21 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/white"
                         android:text="Discounted Amount:" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/roboto_regular"
                         android:text="" />
@@ -348,6 +374,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/roboto_bold"
                         android:text="Controller Charges:" />
 
@@ -356,6 +383,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/roboto_regular"
                         android:text="" />
                 </RelativeLayout>
@@ -369,6 +397,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/roboto_bold"
                         android:text="Delivery Charges:" />
 
@@ -378,6 +407,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/roboto_regular"
                         android:text="" />
                 </RelativeLayout>
@@ -392,6 +422,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/white"
                         android:text="Total Payable:" />
 
 
@@ -401,6 +432,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/white"
                         android:text="" />
                 </RelativeLayout>
 
@@ -418,12 +450,13 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Shipping Details"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_20sdp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="@color/yellow" />
             </LinearLayout>
 
             <LinearLayout
@@ -435,6 +468,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Delivery Address:" />
 
@@ -444,6 +478,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </LinearLayout>
@@ -458,6 +493,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Email:" />
 
@@ -467,6 +503,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </LinearLayout>
@@ -481,6 +518,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Mobile No:" />
 
@@ -490,11 +528,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </LinearLayout>
 
 
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -507,12 +551,13 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Merchant Details"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/_20sdp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="@color/yellow" />
             </LinearLayout>
 
             <LinearLayout
@@ -524,6 +569,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Name:" />
 
@@ -533,6 +579,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </LinearLayout>
@@ -547,6 +594,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Email:" />
 
@@ -556,6 +604,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </LinearLayout>
@@ -570,6 +619,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Mobile No:" />
 
@@ -579,6 +629,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </LinearLayout>
@@ -593,6 +644,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Address:" />
 
@@ -602,10 +654,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6.5"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/roboto_regular"
                     android:text="" />
             </LinearLayout>
-
+            </LinearLayout>
             <LinearLayout
                 android:visibility="gone"
                 android:layout_marginBottom="@dimen/_20sdp"

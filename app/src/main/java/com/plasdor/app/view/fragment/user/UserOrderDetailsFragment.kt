@@ -112,9 +112,18 @@ class UserOrderDetailsFragment : Fragment() {
 //        txtOrderStatus.text = listItem.status
         txtOrderDate.text = listItem.addedDate
 //        txtOrderDetails.text = details
-        txtAddress.text = listItem.address + " " + listItem.addedDate + " " + listItem.city + " " + listItem.pincode
-        txtEmail.text = listItem.email
-        txtMobileNo.text = listItem.mobile
+        var userOwnAddress = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.address.toString()+ " " + SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.city.toString()+ " " + SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.pincode.toString()
+        txtAddress.text = userOwnAddress
+//        txtAddress.text = listItem.address + " " + listItem.city + " " + listItem.pincode
+        txtEmail.text = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.email.toString()
+//        txtEmail.text = listItem.email
+        txtMobileNo.text = SharePreferenceManager.getInstance(requireContext()).getUserLogin(Constants.USERDATA)
+            ?.get(0)?.mobile.toString()
+//        txtMobileNo.text = listItem.mobile
         txtAmount.text = "Rs. " + listItem.discountedPrice
         txtDelivery.text = if(listItem.deliveryCharges.equals("") || listItem.deliveryCharges.equals("null")) "Rs. 0" else "Rs. " + listItem.deliveryCharges
         txtTotal.text = "Rs. " + listItem.totalPrice

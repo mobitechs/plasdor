@@ -3,7 +3,7 @@
     android:id="@+id/activity_item_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/black"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -532,16 +532,20 @@
     </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:id="@+id/btnLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btnPlaceOrder"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bg_solid"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
             android:padding="@dimen/_12sdp"
@@ -556,10 +560,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bg_solid"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
             android:padding="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:text="@string/notVerifiedRefresh"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"

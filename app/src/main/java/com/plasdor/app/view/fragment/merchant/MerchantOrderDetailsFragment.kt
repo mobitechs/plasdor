@@ -114,7 +114,7 @@ class MerchantOrderDetailsFragment : Fragment() {
 //        txtOrderStatus.text = listItem.status
         txtOrderDate.text = listItem.addedDate
 //        txtOrderDetails.text = details
-        txtAddress.text = listItem.address + " " + listItem.addedDate + " " + listItem.city + " " + listItem.pincode
+        txtAddress.text = listItem.address + " " + listItem.city + " " + listItem.pincode
         txtEmail.text = listItem.email
         txtMobileNo.text = listItem.mobile
         txtAmount.text = "Rs. " + listItem.totalPrice

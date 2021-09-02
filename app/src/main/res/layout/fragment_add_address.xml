@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/black">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:background="@drawable/rounded_bg_orange"
+                        android:background="@drawable/bg_solid"
                         android:text="Submit"
                         android:textColor="@color/white" />
                 </LinearLayout>

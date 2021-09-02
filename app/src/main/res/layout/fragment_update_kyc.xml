@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     android:orientation="vertical"
     tools:context=".view.fragment.UpdateKycFragment">
 
@@ -30,9 +30,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:text="Adhar Card"
                 android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
-                android:text="Adhar Card" />
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_marginTop="@dimen/_5sdp"
@@ -54,9 +55,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:text="Electricity Bill"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
-                android:text="Electricity Bill" />
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_marginTop="@dimen/_5sdp"
@@ -88,6 +90,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:text="Adhar Card" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -111,6 +114,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:text="Electricity Bill" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -128,7 +132,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
-        android:background="@color/colorPrimary"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@drawable/bg_solid"
         android:text="Update"
         android:textColor="@color/white" />
     </LinearLayout>
