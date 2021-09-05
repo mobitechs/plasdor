@@ -34,7 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatButton
-                    android:visibility="gone"
                     android:id="@+id/btnGetRewards"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
@@ -46,14 +45,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/nextRewardTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
-                    android:text="Next Reward:"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/_20sdp" />
+
             </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="What's your Email?"
+                android:text="What's your DOB?"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
@@ -33,53 +33,40 @@
                 android:lineSpacingExtra="@dimen/_5sdp"
                 android:text="We protect our community by making sure everyone using plasdor is real."
                 android:textColor="@color/white"
-
                 android:textSize="@dimen/_12sdp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_rect_stroke"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp">
 
-
-                <LinearLayout
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/txtDob"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:background="@drawable/bg_rect_stroke"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/txtEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:background="@null"
-                        android:hint="Email"
-                        android:imeOptions="actionGo"
-                        android:inputType="textEmailAddress"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp" />
-                </LinearLayout>
-
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Your DOB"
+                    android:inputType="text"
+                    android:imeOptions="actionGo"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
 
         </LinearLayout>
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_solid"
+            android:text="Submit"
+            android:textColor="@color/white" />
+    </RelativeLayout>
 
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
-        android:layout_margin="@dimen/_15sdp"
-        android:background="@drawable/bg_solid"
-        android:text="Submit" />
-
-
+    <include layout="@layout/loader" />
 </RelativeLayout>

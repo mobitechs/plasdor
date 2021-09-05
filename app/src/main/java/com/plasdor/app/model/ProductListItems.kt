@@ -40,5 +40,7 @@ data class ProductListItems(
     val oneDayPoints: String?,
     val threeDayPoints: String?,
     val fiveDayPoints: String?,
-    val firstOrderPoint: String?
+    val firstOrderPoint: String?,
+    val reason: String?,
+    val points: String?
 ) : Parcelable

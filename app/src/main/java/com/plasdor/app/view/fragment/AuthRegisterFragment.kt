@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.androidnetworking.AndroidNetworking
@@ -61,9 +62,9 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
     lateinit var imgAdhar: AppCompatImageView
     var imageType = 0
 
-    lateinit var etName: TextInputEditText
-    lateinit var etEmail: TextInputEditText
-    lateinit var etMobileNo: TextInputEditText
+    lateinit var etName: AppCompatEditText
+    lateinit var etEmail: AppCompatEditText
+    lateinit var etMobileNo: AppCompatEditText
     lateinit var etPassword: TextInputEditText
     lateinit var etConfirmPassword: TextInputEditText
     lateinit var etAddress: TextInputEditText
@@ -159,22 +160,22 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
 //            else if (etConfirmPassword.text.toString().equals("")) {
 //                requireActivity().showToastMsg("Enter Confirm Password ")
 //            }
-            else if (etAddress.text.toString().equals("")) {
-                requireActivity().showToastMsg("Enter Address")
-            } else if (etCity.text.toString().equals("")) {
-                requireActivity().showToastMsg("Enter City")
-            } else if (etPincode.text.toString().equals("")) {
-                requireActivity().showToastMsg("Enter PinCode ")
-            }
+//            else if (etAddress.text.toString().equals("")) {
+//                requireActivity().showToastMsg("Enter Address")
+//            } else if (etCity.text.toString().equals("")) {
+//                requireActivity().showToastMsg("Enter City")
+//            } else if (etPincode.text.toString().equals("")) {
+//                requireActivity().showToastMsg("Enter PinCode ")
+//            }
 //            else if (adharFile == null) {
 //                requireActivity().showToastMsg("Please add Adhar card Photo. ")
 //            } else if (electricityBillFile == null) {
 //                requireActivity().showToastMsg("Please add Electricity Bill Photo. ")
 //            }
             else {
-                var address =
-                    etAddress.text.toString() + " " + etCity.text.toString() + "" + etPincode.text.toString()
-                latlong = getLocationFromAddress(requireContext(), address)!!
+//                var address =
+//                    etAddress.text.toString() + " " + etCity.text.toString() + "" + etPincode.text.toString()
+//                latlong = getLocationFromAddress(requireContext(), address)!!
                 if (isEmailValid(etEmail.text.toString()) != true) {
                     requireActivity().showToastMsg("Email is not valid")
                 }
@@ -187,14 +188,21 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
                     }
 
                     if (checkTnc.isChecked) {
-                        layoutLoader.visibility = View.VISIBLE
-                        //callRegisterAPIWithImg()
-                        callRegisterAPI()
-                    } else {
+//                        layoutLoader.visibility = View.VISIBLE
+//                        callRegisterAPIWithImg()
+//                        callRegisterAPI()
+
+                        val bundle = Bundle()
+                        bundle.putString("userType", userType)
+                        bundle.putString("name", etName.text.toString())
+                        bundle.putString("mobile", etMobileNo.text.toString())
+                        bundle.putString("email", etEmail.text.toString())
+                        bundle.putString("password", etPassword.text.toString())
+                        (context as AuthActivity).openDOBFragment(bundle)
+                    }
+                    else {
                         requireActivity().showToastMsg("Please accept terms and conditions")
                     }
-
-
 
                 }
             }

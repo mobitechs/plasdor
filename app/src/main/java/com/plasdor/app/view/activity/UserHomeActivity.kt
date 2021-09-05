@@ -309,13 +309,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 )
             }
             7 -> {
-                toolbarTitle("Bazar")
-                addFragment(
-                    BazarListFragment(),
-                    false,
-                    R.id.nav_host_fragment,
-                    "BazarListFragment"
-                )
+                openBazarFragment()
             }
             8 -> {
                 toolbarTitle("Wallet")
@@ -340,6 +334,16 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
         }
         drawerOpenorClose()
+    }
+
+    fun openBazarFragment() {
+        toolbarTitle("Bazar")
+        addFragment(
+            BazarListFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "BazarListFragment"
+        )
     }
 
     fun OpenKYCUpdate() {

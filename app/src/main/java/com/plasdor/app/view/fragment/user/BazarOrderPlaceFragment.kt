@@ -158,28 +158,28 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
         rdFree = rootView.findViewById(R.id.rdFree)!!
 
         listItem = arguments?.getParcelable("item")!!
-
-        if(firstFreeOrder.equals("0")){
-            requiredPoints = listItem.firstOrderPoint.toString()
-//            layoutPaymentDetails.visibility = View.GONE
-            rentalType = Constants.Hourly
-            rd1Day.visibility = View.GONE
-            rd3day.visibility = View.GONE
-            rd5Day.visibility = View.GONE
-            rdFree.visibility = View.GONE
-            rdFirstFreeOrder.isChecked = true
-            rdFirstFreeOrder.visibility = View.VISIBLE
-        }else{
-            requiredPoints = listItem.oneDayPoints.toString()
-//            layoutPaymentDetails.visibility = View.VISIBLE
-            rentalType = Constants.Daily
-            rd1Day.visibility = View.VISIBLE
-            rd3day.visibility = View.VISIBLE
-            rd5Day.visibility = View.VISIBLE
-            rdFree.visibility = View.VISIBLE
-            rd1Day.isChecked = true
-            rdFirstFreeOrder.visibility = View.GONE
-        }
+        requiredPoints = listItem.points.toString()
+//        if(firstFreeOrder.equals("0")){
+//            requiredPoints = listItem.firstOrderPoint.toString()
+////            layoutPaymentDetails.visibility = View.GONE
+//            rentalType = Constants.Hourly
+//            rd1Day.visibility = View.GONE
+//            rd3day.visibility = View.GONE
+//            rd5Day.visibility = View.GONE
+//            rdFree.visibility = View.GONE
+//            rdFirstFreeOrder.isChecked = true
+//            rdFirstFreeOrder.visibility = View.VISIBLE
+//        }else{
+//            requiredPoints = listItem.oneDayPoints.toString()
+////            layoutPaymentDetails.visibility = View.VISIBLE
+//            rentalType = Constants.Daily
+//            rd1Day.visibility = View.VISIBLE
+//            rd3day.visibility = View.VISIBLE
+//            rd5Day.visibility = View.VISIBLE
+//            rdFree.visibility = View.VISIBLE
+//            rd1Day.isChecked = true
+//            rdFirstFreeOrder.visibility = View.GONE
+//        }
 
         if(isVerified.equals("1")){
             btnBuyNow.visibility = View.VISIBLE
@@ -187,23 +187,23 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
             btnBuyNow.visibility = View.GONE
         }
 
-        radio_group_delivery.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { group, checkedId ->
-                val radio: RadioButton = rootView.findViewById(checkedId)
-                if (radio.text.toString().equals(Constants.selfPickup)) {
-                    deliveryType = Constants.selfPickup
-                    deliveryCharges = 0
-                    txtDeliveryNote.visibility = View.GONE
-                } else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
-                    deliveryType = Constants.deliveryByCompany
-                    deliveryCharges = Constants.delChargesNormal
-                    txtDeliveryNote.visibility = View.VISIBLE
-                }
-
-                txtDeliveryCharges.text = deliveryCharges.toString()
-                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
-
-            })
+//        radio_group_delivery.setOnCheckedChangeListener(
+//            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+//                val radio: RadioButton = rootView.findViewById(checkedId)
+//                if (radio.text.toString().equals(Constants.selfPickup)) {
+//                    deliveryType = Constants.selfPickup
+//                    deliveryCharges = 0
+//                    txtDeliveryNote.visibility = View.GONE
+//                } else if (radio.text.toString().equals(Constants.deliveryByCompany)) {
+//                    deliveryType = Constants.deliveryByCompany
+//                    deliveryCharges = Constants.delChargesNormal
+//                    txtDeliveryNote.visibility = View.VISIBLE
+//                }
+//
+//                txtDeliveryCharges.text = deliveryCharges.toString()
+//                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
+//
+//            })
 
 
 
@@ -212,39 +212,38 @@ class BazarOrderPlaceFragment : Fragment(), MerchantSelectionClickListener, ApiR
         txtTotalPayable.text = requiredPoints+" Points"
 
         checkCanBuyOrNot()
-
         setupPrice()
 
-        radio_group.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { group, checkedId ->
-                val radio: RadioButton = rootView.findViewById(checkedId)
-                if (checkedId == R.id.rd1Day) {
-                    qty = 1
-                    requireContext().showToastMsg("1day")
-                    requiredPoints = listItem.oneDayPoints.toString()
-                } else if (checkedId == R.id.rd3day) {
-                    qty = 3
-                    requireContext().showToastMsg("3day")
-                    requiredPoints = listItem.threeDayPoints.toString()
-                } else if (checkedId == R.id.rd5Day) {
-                    qty = 5
-                    requireContext().showToastMsg("5day")
-                    requiredPoints = listItem.fiveDayPoints.toString()
-                } else if (checkedId == R.id.rdFree) {
-                    requireContext().showToastMsg("free")
-                    requiredPoints = listItem.forFreePoints.toString()
-                }
-                else if (checkedId == R.id.rdFirstFreeOrder) {
-                    requireContext().showToastMsg("free for 2 hours")
-                    requiredPoints = listItem.firstOrderPoint.toString()
-                }
-
-//                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
-                txtTotalPayable.text = requiredPoints+"Points"
-                txtPointRequired.text = requiredPoints
-                checkCanBuyOrNot()
-                setupPrice()
-            })
+//        radio_group.setOnCheckedChangeListener(
+//            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+//                val radio: RadioButton = rootView.findViewById(checkedId)
+//                if (checkedId == R.id.rd1Day) {
+//                    qty = 1
+//                    requireContext().showToastMsg("1day")
+//                    requiredPoints = listItem.oneDayPoints.toString()
+//                } else if (checkedId == R.id.rd3day) {
+//                    qty = 3
+//                    requireContext().showToastMsg("3day")
+//                    requiredPoints = listItem.threeDayPoints.toString()
+//                } else if (checkedId == R.id.rd5Day) {
+//                    qty = 5
+//                    requireContext().showToastMsg("5day")
+//                    requiredPoints = listItem.fiveDayPoints.toString()
+//                } else if (checkedId == R.id.rdFree) {
+//                    requireContext().showToastMsg("free")
+//                    requiredPoints = listItem.forFreePoints.toString()
+//                }
+//                else if (checkedId == R.id.rdFirstFreeOrder) {
+//                    requireContext().showToastMsg("free for 2 hours")
+//                    requiredPoints = listItem.firstOrderPoint.toString()
+//                }
+//
+////                txtTotalPayable.text = requiredPoints+"Points & "+deliveryCharges+" Rs."
+//                txtTotalPayable.text = requiredPoints+"Points"
+//                txtPointRequired.text = requiredPoints
+//                checkCanBuyOrNot()
+//                setupPrice()
+//            })
 
         productId = listItem.pId
         ivProdImage.setImage(listItem.img!!)

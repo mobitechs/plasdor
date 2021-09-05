@@ -55,6 +55,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     var rewardDate = ""
     var lastRewardTime = ""
     var canIncreament = false
+    var isAddAvailable = false
     var firstFreeOrder = ""
 
     private var mRewardedAd: RewardedAd? = null
@@ -83,7 +84,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
        // rewardDate = "31-08-2021"
 
         userId = SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
-        firstFreeOrder =SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.FIRST_FREE_ORDER_COMPLETE).toString()
+        firstFreeOrder = SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.FIRST_FREE_ORDER_COMPLETE).toString()
         userWalletPoint = SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.EARNED_POINTS).toString()
 
         txtWalletPoints = rootView.findViewById(R.id.txtWalletPoints)!!
@@ -125,38 +126,44 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 
 
     private fun playAd() {
-        val  cb = object :OnUserEarnedRewardListener{
-            override fun onUserEarnedReward(rewardItem: RewardItem) {
-                rewardPoints = rewardItem.amount.toString()
-                var rewardType = rewardItem.getType()
+
+        if (isAddAvailable) {
+            val cb = object : OnUserEarnedRewardListener {
+                override fun onUserEarnedReward(rewardItem: RewardItem) {
+                    rewardPoints = rewardItem.amount.toString()
+                    var rewardType = rewardItem.getType()
 //                requireContext().showToastMsg("ads success: " + rewardPoints)
-                addRewardPoint()
-                Log.d(TAG, "User earned the reward.")
+                    addRewardPoint()
+                    Log.d(TAG, "User earned the reward.")
+                }
+
             }
+            mRewardedAd?.show(requireActivity(), cb)
 
-        }
-        mRewardedAd?.show(requireActivity(), cb)
-
-        mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdShowedFullScreenContent() {
-                // Called when ad is shown.
-                Log.d(TAG, "Ad was shown.")
+            mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdShowedFullScreenContent() {
+                    // Called when ad is shown.
+                    Log.d(TAG, "Ad was shown.")
 //                requireContext().showToastMsg("Ad was shown")
-            }
+                }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                // Called when ad fails to show.
-                Log.d(TAG, "Ad failed to show.")
+                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                    // Called when ad fails to show.
+                    Log.d(TAG, "Ad failed to show.")
 //                requireContext().showToastMsg("Ad failed to show.")
-            }
+                }
 
-            override fun onAdDismissedFullScreenContent() {
-                // Called when ad is dismissed.
-                // Set the ad reference to null so you don't show the ad a second time.
-                Log.d(TAG, "Ad was dismissed.")
+                override fun onAdDismissedFullScreenContent() {
+                    // Called when ad is dismissed.
+                    // Set the ad reference to null so you don't show the ad a second time.
+                    Log.d(TAG, "Ad was dismissed.")
 //                requireContext().showToastMsg("Ad was dismissed.")
-                mRewardedAd = null
+                    mRewardedAd = null
+                }
             }
+        } else {
+            rewardPoints = "2"
+            addRewardPoint()
         }
     }
 
@@ -172,12 +179,15 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                     Log.d(TAG, adError?.message)
 //                    requireContext().showToastMsg("FailedToLoad:"+adError?.message)
                     mRewardedAd = null
-                    btnGetRewards.visibility = View.GONE
+                    //this is added here because for now google added limitations on ads
+                    isAddAvailable = false
+//                    btnGetRewards.visibility = View.GONE
                 }
 
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     Log.d(TAG, "Ad was loaded.")
 //                    requireContext().showToastMsg("onAdLoaded:")
+                    isAddAvailable = true
                     mRewardedAd = rewardedAd
                     btnGetRewards.visibility = View.VISIBLE
 

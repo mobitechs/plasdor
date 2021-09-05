@@ -78,6 +78,31 @@ class AuthActivity : AppCompatActivity() {
         displayView(4)
     }
 
+    fun openFullAddress(bundle: Bundle) {
+        addFragmentWithData(
+            AddFullAddressFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "AddFullAddressFragment", bundle
+        )
+    }
+    fun openDOBFragment(bundle: Bundle) {
+        addFragmentWithData(
+            AddDobFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "AddDobFragment", bundle
+        )
+    }
+    fun openCityPincodeFragment(bundle: Bundle) {
+        addFragmentWithData(
+            AuthAddCityPinCodeFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "AuthAddCityPinCodeFragment", bundle
+        )
+    }
+
     fun openSetPassword(email: String) {
         val bundle = Bundle()
         bundle.putString("email", email)

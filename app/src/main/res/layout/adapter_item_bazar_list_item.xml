@@ -124,6 +124,40 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutForPaid2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtReason"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Free: " />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtPoints"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:text="700"
+                        android:fontFamily="@font/roboto_light" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
                 android:layout_margin="@dimen/_5sdp"
                 android:id="@+id/layoutForFree"
                 android:layout_width="match_parent"

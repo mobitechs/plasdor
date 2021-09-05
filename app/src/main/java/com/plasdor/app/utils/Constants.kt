@@ -58,6 +58,7 @@ class Constants {
         const val Daily = "Daily"
         const val selfPickup = "Self PickUp"
         const val deliveryByCompany = "Delivery"
+        const val First_Order = "First Order"
 
         //if u add new item in weightArray then please add in qtyArray as well its must
         val qtyArray = arrayOf("1", "2", "3", "4", "6", "8 ", "10", "12", "14", "16", "18", "20")

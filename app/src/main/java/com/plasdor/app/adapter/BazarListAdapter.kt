@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.AddOrRemoveListener
 import com.plasdor.app.model.ProductListItems
+import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.setImage
 import kotlinx.android.synthetic.main.adapter_item_bazar_list_item.view.*
 
@@ -27,6 +28,21 @@ class BazarListAdapter(
     fun updateListItems(listModel: ArrayList<ProductListItems>) {
         listItems.clear()
         listItems.addAll(listModel)
+        var tempItem = listModel
+        if (firstFreeOrder.equals("1")) {
+            //remove
+            for (i in 0..listItems.size - 1) {
+                var itemNO = listItems[i]
+                if (listItems[i].reason.equals(Constants.First_Order)) {
+                    tempItem.remove(itemNO)
+                }
+            }
+            listItems.clear()
+            listItems.addAll(tempItem)
+        }
+
+
+
         notifyDataSetChanged()
     }
 
@@ -54,6 +70,8 @@ class BazarListAdapter(
         holder.txtOneDayPoint.text = item.oneDayPoints+" Points"
         holder.txt3DayPoint.text = item.threeDayPoints+" Points"
         holder.txt5DayPoint.text = item.fiveDayPoints+" Points"
+        holder.txtReason.text = item.reason
+        holder.txtPoints.text = item.points+" Points"
 
         val imagepath = item.img
         if (imagepath == null || imagepath == " ") {
@@ -73,12 +91,14 @@ class BazarListAdapter(
         }
 
 
-        if(firstFreeOrder.equals("0")){
-            holder.layoutForPaid.visibility = View.GONE
+        if(firstFreeOrder.equals("0") && item.reason.equals(Constants.First_Order)){
+//            holder.layoutForPaid.visibility = View.GONE
+            holder.layoutForPaid2.visibility = View.GONE
             holder.layoutForFree.visibility = View.VISIBLE
         }else{
             holder.layoutForFree.visibility = View.GONE
-            holder.layoutForPaid.visibility = View.VISIBLE
+//            holder.layoutForPaid.visibility = View.VISIBLE
+            holder.layoutForPaid2.visibility = View.VISIBLE
         }
 
     }
@@ -93,7 +113,10 @@ class BazarListAdapter(
         var productImage = view.productImage
         var layoutForFree = view.layoutForFree
         var layoutForPaid = view.layoutForPaid
+        var layoutForPaid2 = view.layoutForPaid2
         var btnPlaceFreeOrder = view.btnPlaceFreeOrder
+        var txtReason = view.txtReason
+        var txtPoints = view.txtPoints
 
 
         val cardView: View = itemView
