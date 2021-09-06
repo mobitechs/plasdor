@@ -6,16 +6,77 @@
     android:background="@color/black">
 
     <LinearLayout
+        android:layout_marginTop="@dimen/_40sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:orientation="vertical">
 
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/btnGmailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/bg_rect_stroke"
+            android:backgroundTint="@color/white"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingVertical="@dimen/_2sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/onb_google_plus_logo" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="Login With Google"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/btnEmailLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/bg_rect_stroke"
+            android:backgroundTint="@color/white"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingVertical="@dimen/_2sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/onb_email" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="Login With Email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/loginViaEmailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -34,7 +95,6 @@
                 android:lineSpacingExtra="@dimen/_5sdp"
                 android:text="We protect our community by making sure everyone using plasdor is real."
                 android:textColor="@color/white"
-
                 android:textSize="@dimen/_12sdp" />
 
             <LinearLayout
@@ -66,22 +126,23 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/bg_solid"
+                android:text="Submit" />
 
+        </LinearLayout>
 
-        </LinearLayout> <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/bg_solid"
-        android:text="Submit" />
 
     </LinearLayout>
 
 
-
+<include layout="@layout/loader"/>
 
 
 </RelativeLayout>
