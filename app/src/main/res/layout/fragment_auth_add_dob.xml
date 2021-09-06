@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="What's your DOB?"
@@ -26,7 +27,7 @@
                 android:textSize="@dimen/_16sdp" />
 
             <androidx.appcompat.widget.AppCompatTextView
-
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -48,24 +49,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Your DOB"
-                    android:inputType="text"
                     android:imeOptions="actionGo"
-                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
-
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_solid"
+                android:text="Submit"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="@color/white" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_solid"
-            android:text="Submit"
-            android:textColor="@color/white" />
+
     </RelativeLayout>
 
     <include layout="@layout/loader" />

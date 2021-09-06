@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="gone"
                 android:id="@+id/txtVerifyYour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
                 android:textSize="@dimen/_16sdp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -36,6 +38,7 @@
                 android:textSize="@dimen/_12sdp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="gone"
                 android:id="@+id/txtUserEmailMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +67,8 @@
                     app:pinCount="4"
                     app:pinSize="@dimen/_40sdp"
                     app:showPasswordToggle="false"
-                    app:textColor="@color/black" />
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
             </LinearLayout>
 
 
@@ -115,16 +119,16 @@
 
 
         </LinearLayout>
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_solid"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_alignParentBottom="true"
+            android:text="Submit" />
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_solid"
-        android:textColor="@color/white"
-        android:layout_margin="@dimen/_10sdp"
-        android:layout_alignParentBottom="true"
-        android:text="Submit" />
+
 </RelativeLayout>

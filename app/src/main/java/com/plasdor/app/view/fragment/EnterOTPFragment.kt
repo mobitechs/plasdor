@@ -55,7 +55,7 @@ class EnterOTPFragment : Fragment(), ApiResponse {
         email = arguments?.getString("email").toString()
         pinView = rootView.findViewById(R.id.pinview)
 
-        pinView.setPinBackground(getResources().getDrawable(R.drawable.bg_rect_stroke_idle))
+        pinView.setPinBackground(getResources().getDrawable(R.drawable.bg_rect_stroke))
 
         txtUserEmailMobile = rootView.findViewById(R.id.txtUserEmailMobile)!!
         btnResend = rootView.findViewById(R.id.btnResend)!!

@@ -31,6 +31,7 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="What's your Details?"
@@ -38,7 +39,7 @@
                         android:textSize="@dimen/_16sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
@@ -83,7 +84,8 @@
                             android:layout_height="wrap_content"
                             android:hint="Enter Your Name"
                             android:inputType="text"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
 
@@ -101,7 +103,8 @@
                             android:layout_height="wrap_content"
                             android:hint="Enter Your Mobile No"
                             android:inputType="text"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
 
@@ -119,7 +122,8 @@
                             android:layout_height="wrap_content"
                             android:hint="Enter Your Email"
                             android:inputType="text"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
 
@@ -370,18 +374,19 @@
 
                     </LinearLayout>
 
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_solid"
+                        android:text="Submit"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSignUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
 
-                    android:background="@drawable/bg_solid"
-                    android:text="Submit"
-                    android:textColor="@color/white" />
             </RelativeLayout>
 <!--        </androidx.cardview.widget.CardView>-->
 <!--    </androidx.core.widget.NestedScrollView>-->
