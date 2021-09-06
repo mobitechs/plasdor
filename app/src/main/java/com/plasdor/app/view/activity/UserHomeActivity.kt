@@ -30,11 +30,22 @@ import kotlinx.android.synthetic.main.contenair.*
 import kotlinx.android.synthetic.main.drawer_layout_user.*
 import org.json.JSONException
 import org.json.JSONObject
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+import androidx.annotation.NonNull
+
+
+
+
+
+
 
 
 class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogBtnClickedCallBack,
     ApiResponse {
 
+    lateinit var bottomNavigation: BottomNavigationView
+    lateinit var bottomNavigationMerchant: BottomNavigationView
     private var doubleBackToExitPressedOnce = false
     var cartCount = 0
     var userType = ""
@@ -48,7 +59,12 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         val window: Window = window
         setStatusColor(window, resources.getColor(R.color.colorAccent))
 
+        bottomNavigation = findViewById(R.id.bottom_navigation)
+        bottomNavigationMerchant = findViewById(R.id.merchant_bottom_navigation)
 
+        bottomNavigation.visibility = View.VISIBLE
+        bottomNavigationMerchant.visibility = View.GONE
+        bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
         drawerInit()
         setupDrawer()
         getReferralLinkDetails()
@@ -64,6 +80,31 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         }
 
     }
+
+
+    var navigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menuHome -> {
+                    displayView(1)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.menuBazar -> {
+                    displayView(7)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.menuMyOrder -> {
+                    displayView(3)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.menuWallet -> {
+                    displayView(8)
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+
 
     private fun getReferralLinkDetails() {
         FirebaseDynamicLinks.getInstance()
@@ -507,7 +548,8 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
 
                 Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
             } else {
-//                displayView(1)
+                displayView(1)
+                bottomNavigation.selectedItemId = R.id.menuHome
                 super.onBackPressed()
             }
         }

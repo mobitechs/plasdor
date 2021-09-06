@@ -135,6 +135,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/llHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -208,6 +209,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/llMyOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -232,6 +234,7 @@
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/llBazar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

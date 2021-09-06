@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.plasdor.app.R
@@ -39,11 +40,21 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     var userType = ""
     var senderUserId = ""
     var userId = ""
+    lateinit var bottomNavigation: BottomNavigationView
+    lateinit var bottomNavigationMerchant: BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_merchant_home)
 
         setStatusColor(window, resources.getColor(R.color.colorAccent))
+
+        bottomNavigation = findViewById(R.id.bottom_navigation)
+        bottomNavigationMerchant = findViewById(R.id.merchant_bottom_navigation)
+
+        bottomNavigation.visibility = View.GONE
+        bottomNavigationMerchant.visibility = View.VISIBLE
+        bottomNavigationMerchant.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
 
         if (intent.getStringExtra("ImFrom").equals("OrderGenerate")) {
             displayView(3)
@@ -57,6 +68,26 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         getReferralLinkDetails()
 
     }
+
+    var navigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menuHome -> {
+                    displayView(1)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.menuMyProduct -> {
+                    displayView(4)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.menuMyOrder -> {
+                    displayView(3)
+                    return@OnNavigationItemSelectedListener true
+                }
+
+            }
+            false
+        }
 
     private fun getReferralLinkDetails() {
         FirebaseDynamicLinks.getInstance()
@@ -366,8 +397,10 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
 
             Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
         } else {
+
+            displayView(1)
+            bottomNavigationMerchant.selectedItemId = R.id.menuHome
             super.onBackPressed()
-            displayView(0)
         }
     }
 
