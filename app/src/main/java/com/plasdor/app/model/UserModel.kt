@@ -19,6 +19,7 @@ data class UserModel(
     var isSelected: Boolean,
     var wallet: String,
     var isVerified: String,
+    var userProfilePic: String,
     var imgPathPassbook: String,
     var imgPathAvatar: String,
     var imgPathAdhar: String,

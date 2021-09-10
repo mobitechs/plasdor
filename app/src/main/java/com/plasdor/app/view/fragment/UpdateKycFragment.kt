@@ -43,7 +43,10 @@ class UpdateKycFragment : Fragment() {
     lateinit var imgElectricityBill: AppCompatImageView
     lateinit var imgAdhar: AppCompatImageView
     lateinit var imgPassbook: AppCompatImageView
-    lateinit var layoutPassbook: LinearLayout
+    lateinit var layoutPassbook: RelativeLayout
+    lateinit var btnUpdateAdhar: AppCompatButton
+    lateinit var btnUpdateElectricityBill: AppCompatButton
+    lateinit var btnUpdatePassbook: AppCompatButton
     var imageType = 0
 
     var passbookPath = ""
@@ -82,6 +85,9 @@ class UpdateKycFragment : Fragment() {
         imgPassbook = rootView.findViewById(R.id.imgPassbook)!!
         layoutPassbook = rootView.findViewById(R.id.layoutPassbook)!!
         btnUpdate = rootView.findViewById(R.id.btnUpdate)!!
+        btnUpdateAdhar = rootView.findViewById(R.id.btnUpdateAdhar)!!
+        btnUpdatePassbook = rootView.findViewById(R.id.btnUpdatePassbook)!!
+        btnUpdateElectricityBill = rootView.findViewById(R.id.btnUpdateElectricityBill)!!
 
 
 
@@ -106,15 +112,15 @@ class UpdateKycFragment : Fragment() {
         } else {
             layoutPassbook.visibility = View.GONE
         }
-        imgPassbook.setOnClickListener {
+        btnUpdatePassbook.setOnClickListener {
             imageType = 0
             getImage()
         }
-        imgAdhar.setOnClickListener {
+        btnUpdateAdhar.setOnClickListener {
             imageType = 1
             getImage()
         }
-        imgElectricityBill.setOnClickListener {
+        btnUpdateElectricityBill.setOnClickListener {
             imageType = 2
             getImage()
         }

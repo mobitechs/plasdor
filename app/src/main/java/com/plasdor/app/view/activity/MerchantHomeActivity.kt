@@ -1,6 +1,8 @@
 package com.plasdor.app.view.activity
 
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -12,12 +14,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.common.Priority
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.bumptech.glide.Glide
+import com.fxn.utility.PermUtil
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.plasdor.app.R
 import com.plasdor.app.callbacks.AlertDialogBtnClickedCallBack
 import com.plasdor.app.callbacks.ApiResponse
+import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
 import com.plasdor.app.view.fragment.FeedbackFragment
@@ -31,8 +43,23 @@ import com.plasdor.app.view.fragment.merchant.MerchantOrderListFragment
 import kotlinx.android.synthetic.main.activity_merchant_home.*
 import kotlinx.android.synthetic.main.contenair.*
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
+import kotlinx.android.synthetic.main.drawer_layout_merchant.imgUserPic
+import kotlinx.android.synthetic.main.drawer_layout_merchant.ivClose
+import kotlinx.android.synthetic.main.drawer_layout_merchant.llFeedback
+import kotlinx.android.synthetic.main.drawer_layout_merchant.llHome
+import kotlinx.android.synthetic.main.drawer_layout_merchant.llLogout
+import kotlinx.android.synthetic.main.drawer_layout_merchant.llMyOrder
+import kotlinx.android.synthetic.main.drawer_layout_merchant.llProfile
+import kotlinx.android.synthetic.main.drawer_layout_merchant.llShare
+import kotlinx.android.synthetic.main.drawer_layout_merchant.llSupport
+import kotlinx.android.synthetic.main.drawer_layout_merchant.txtEmail
+import kotlinx.android.synthetic.main.drawer_layout_merchant.txtMobile
+import kotlinx.android.synthetic.main.drawer_layout_merchant.txtUserName
+import kotlinx.android.synthetic.main.drawer_layout_user.*
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 
 class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     AlertDialogBtnClickedCallBack, ApiResponse {
@@ -42,6 +69,8 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     var userId = ""
     lateinit var bottomNavigation: BottomNavigationView
     lateinit var bottomNavigationMerchant: BottomNavigationView
+    var proPicUrlPath = ""
+    var proPicFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +111,10 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                 }
                 R.id.menuMyOrder -> {
                     displayView(3)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.menuProfile -> {
+                    displayView(2)
                     return@OnNavigationItemSelectedListener true
                 }
 
@@ -148,6 +181,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         llSupport.setOnClickListener(this)
         llLogout.setOnClickListener(this)
         menuWallet.setOnClickListener(this)
+        imgUserPic.setOnClickListener(this)
 
     }
 
@@ -157,7 +191,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                 drawer.openDrawer(Gravity.LEFT)
             }
             R.id.ivClose -> {
-
+                drawerOpenorClose()
             }
             R.id.llHome -> {
                 displayView(1)
@@ -182,7 +216,9 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                 displayView(6)
             }
 
-
+            R.id.imgUserPic -> {
+                getImage()
+            }
             R.id.llShare -> {
                 ShareApp()
             }
@@ -191,13 +227,28 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                 showAlertDialog("Confirmation", "Do you really want to logout?", "Yes", "NO", this)
             }
         }
-        drawerOpenorClose()
+//        drawerOpenorClose()
     }
 
     fun drawerOpenorClose() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+    }
+
+    fun getImage() {
+        ImagePicker.with(this)
+            .crop()                    // Crop image(Optional), Check Customization for more option
+            .saveDir(this.filesDir.path + File.separator + "Images/")
+
+            .compress(1024)            //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                1080,
+                1080
+            )    //Final image resolution will be less than 1080 x 1080(Optional)
+            .start()
+
+//        Pix.start(this, Options.init().setRequestCode(100))
     }
 
     private fun setupDrawer() {
@@ -210,6 +261,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
             txtMobile.setText(userDetails!![0].mobile)
             txtEmail.setText(userDetails!![0].email)
 
+            imgUserPic.setImage(userDetails!![0].userProfilePic,R.drawable.ic_baseline_add_24)
         }
 
     }
@@ -288,6 +340,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     fun displayView(pos: Int) {
+        drawerOpenorClose()
         when (pos) {
             1 -> {
                 toolbarTitle("All Products")
@@ -424,5 +477,94 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onFailure(message: String) {
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            val fileUri = data?.data
+
+            proPicFile = null
+            proPicFile = ImagePicker.getFile(data)!!
+            proPicUrlPath = ImagePicker.getFilePath(data)!!
+//                imgPassbook.setImageURI(fileUri)
+
+            Glide.with(this)
+                .load(fileUri)
+                .into(imgUserPic)
+
+            callUpdateProfileAPI()
+
+
+        }
+    }
+    private fun callUpdateProfileAPI() {
+//        progressBar.visibility = View.VISIBLE
+        val method = "updateProfilePic"
+        val androidNetworking = AndroidNetworking.upload(Constants.BASE_URL)
+        if (proPicFile?.isFile == true) {
+            androidNetworking.addMultipartFile("proPicFile", proPicFile)
+        }
+
+        androidNetworking.addMultipartParameter("userId", userId)
+        androidNetworking.addMultipartParameter("proPicUrl", proPicUrlPath)
+        androidNetworking.addMultipartParameter("method", method)
+        androidNetworking.setTag(method)
+        androidNetworking.setPriority(Priority.HIGH)
+        androidNetworking.build()
+            .getAsJSONObject(object : JSONObjectRequestListener {
+                override fun onResponse(data: JSONObject) {
+                    try {
+                        if (data.equals("FAILED") || data.equals("FAILED_IMAGE")) {
+                            showToastMsg("failed to update profile pic")
+                        } else {
+                            showToastMsg("Profile Pic Successfully Updated")
+
+                            if (data.get("Response") is JSONArray) {
+                                val userData = data.getJSONArray("Response")
+
+                                val gson = Gson()
+                                val type = object : TypeToken<ArrayList<UserModel>>() {}.type
+                                var user: ArrayList<UserModel>? =
+                                    gson.fromJson(userData.toString(), type)
+
+                                Log.d("user", "" + user)
+                                SharePreferenceManager.getInstance(this@MerchantHomeActivity)
+                                    .saveUserLogin(Constants.USERDATA, user)
+
+                            }
+                        }
+                    } catch (e: java.lang.Exception) {
+                        e.message
+                        showToastMsg("Exception: " + e.message)
+                    }
+                }
+
+                override fun onError(error: ANError) {
+                    error.errorDetail
+                    showToastMsg("Error: " + error.errorDetail)
+                }
+            })
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS -> {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getImage()
+                } else {
+                    showToastMsg("Approve permissions to open Pix ImagePicker.")
+                }
+                return
+            }
+        }
     }
 }

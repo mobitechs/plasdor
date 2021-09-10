@@ -1,6 +1,8 @@
 package com.plasdor.app.view.activity
 
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -33,12 +35,31 @@ import org.json.JSONObject
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import androidx.annotation.NonNull
-
-
-
-
-
-
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.common.Priority
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.bumptech.glide.Glide
+import com.fxn.utility.PermUtil
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.plasdor.app.model.UserModel
+import kotlinx.android.synthetic.main.drawer_layout_merchant.*
+import kotlinx.android.synthetic.main.drawer_layout_user.imgUserPic
+import kotlinx.android.synthetic.main.drawer_layout_user.ivClose
+import kotlinx.android.synthetic.main.drawer_layout_user.llFeedback
+import kotlinx.android.synthetic.main.drawer_layout_user.llHome
+import kotlinx.android.synthetic.main.drawer_layout_user.llLogout
+import kotlinx.android.synthetic.main.drawer_layout_user.llMyOrder
+import kotlinx.android.synthetic.main.drawer_layout_user.llProfile
+import kotlinx.android.synthetic.main.drawer_layout_user.llShare
+import kotlinx.android.synthetic.main.drawer_layout_user.llSupport
+import kotlinx.android.synthetic.main.drawer_layout_user.txtEmail
+import kotlinx.android.synthetic.main.drawer_layout_user.txtMobile
+import kotlinx.android.synthetic.main.drawer_layout_user.txtUserName
+import org.json.JSONArray
+import java.io.File
 
 
 class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogBtnClickedCallBack,
@@ -52,6 +73,10 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
     var userId = ""
     var senderUserId = ""
     var alertFor = ""
+
+    var isProfilePicNeedToChange= false
+    var proPicUrlPath = ""
+    var proPicFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +124,10 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 }
                 R.id.menuWallet -> {
                     displayView(8)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.menuProfile -> {
+                    displayView(2)
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -169,6 +198,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         menuWallet.setOnClickListener(this)
         llRentOnPlasdor.setOnClickListener(this)
         llUpdateKyc.setOnClickListener(this)
+        imgUserPic.setOnClickListener(this)
 
     }
 
@@ -178,7 +208,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 drawer.openDrawer(Gravity.LEFT)
             }
             R.id.ivClose -> {
-
+                drawerOpenorClose()
             }
             R.id.llHome -> {
                 displayView(1)
@@ -217,19 +247,38 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             R.id.llUpdateKyc -> {
                 displayView(10)
             }
+            R.id.imgUserPic -> {
+                isProfilePicNeedToChange=true
+                getImage()
+            }
             R.id.llLogout -> {
                 //clear sesssion
                 drawerOpenorClose()
                 showAlertDialog("Confirmation", "Do you really want to logout?", "Yes", "NO", this)
             }
         }
-        drawerOpenorClose()
+
     }
 
     fun drawerOpenorClose() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+    }
+
+    fun getImage() {
+        ImagePicker.with(this)
+            .crop()                    // Crop image(Optional), Check Customization for more option
+            .saveDir(this.filesDir.path + File.separator + "Images/")
+
+            .compress(1024)            //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                1080,
+                1080
+            )    //Final image resolution will be less than 1080 x 1080(Optional)
+            .start()
+
+//        Pix.start(this, Options.init().setRequestCode(100))
     }
 
     private fun setupDrawer() {
@@ -242,6 +291,8 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             txtUserName.setText(userDetails!![0].name)
             txtMobile.setText(userDetails!![0].mobile)
             txtEmail.setText(userDetails!![0].email)
+
+            imgUserPic.setImage(userDetails!![0].userProfilePic,R.drawable.ic_baseline_add_24)
 
         }
 
@@ -305,6 +356,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
     }
 
     fun displayView(pos: Int) {
+        drawerOpenorClose()
         when (pos) {
             1 -> {
                 toolbarTitle("Home")
@@ -563,4 +615,94 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+     if(isProfilePicNeedToChange){
+         if (resultCode == Activity.RESULT_OK) {
+             val fileUri = data?.data
+
+             proPicFile = null
+             proPicFile = ImagePicker.getFile(data)!!
+             proPicUrlPath = ImagePicker.getFilePath(data)!!
+//                imgPassbook.setImageURI(fileUri)
+
+             Glide.with(this)
+                 .load(fileUri)
+                 .into(imgUserPic)
+
+             callUpdateProfileAPI()
+
+         }
+     }
+
+    }
+    private fun callUpdateProfileAPI() {
+//        progressBar.visibility = View.VISIBLE
+        val method = "updateProfilePic"
+        val androidNetworking = AndroidNetworking.upload(Constants.BASE_URL)
+        if (proPicFile?.isFile == true) {
+            androidNetworking.addMultipartFile("proPicFile", proPicFile)
+        }
+
+        androidNetworking.addMultipartParameter("userId", userId)
+        androidNetworking.addMultipartParameter("proPicUrl", proPicUrlPath)
+        androidNetworking.addMultipartParameter("method", method)
+        androidNetworking.setTag(method)
+        androidNetworking.setPriority(Priority.HIGH)
+        androidNetworking.build()
+            .getAsJSONObject(object : JSONObjectRequestListener {
+                override fun onResponse(data: JSONObject) {
+                    try {
+                        if (data.equals("FAILED") || data.equals("FAILED_IMAGE")) {
+                            showToastMsg("failed to update profile pic")
+                        } else {
+                            showToastMsg("Profile Pic Successfully Updated")
+
+                            if (data.get("Response") is JSONArray) {
+                                val userData = data.getJSONArray("Response")
+
+                                val gson = Gson()
+                                val type = object : TypeToken<ArrayList<UserModel>>() {}.type
+                                var user: ArrayList<UserModel>? =
+                                    gson.fromJson(userData.toString(), type)
+
+                                Log.d("user", "" + user)
+                                SharePreferenceManager.getInstance(this@UserHomeActivity)
+                                    .saveUserLogin(Constants.USERDATA, user)
+
+                            }
+                        }
+                    } catch (e: java.lang.Exception) {
+                        e.message
+                        showToastMsg("Exception: " + e.message)
+                    }
+                }
+
+                override fun onError(error: ANError) {
+                    error.errorDetail
+                    showToastMsg("Error: " + error.errorDetail)
+                }
+            })
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS -> {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getImage()
+                } else {
+                    showToastMsg("Approve permissions to open Pix ImagePicker.")
+                }
+                return
+            }
+        }
+    }
 }

@@ -72,8 +72,7 @@
 
 
         <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/loginViaEmailLayout"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
@@ -98,10 +97,12 @@
                 android:textSize="@dimen/_12sdp" />
 
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/loginViaEmailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
 
                 <LinearLayout
@@ -125,16 +126,17 @@
                         android:textSize="@dimen/_12sdp" />
                 </LinearLayout>
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:background="@drawable/bg_solid"
+                    android:text="Submit" />
             </LinearLayout>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:textColor="@color/white"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/bg_solid"
-                android:text="Submit" />
+
 
         </LinearLayout>
 

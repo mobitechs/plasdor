@@ -16,4 +16,8 @@
         android:id="@+id/menuWallet"
         android:icon="@drawable/ic_baseline_account_balance_wallet_24"
         android:title="Wallet" />
+    <item
+        android:id="@+id/menuProfile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
 </menu>

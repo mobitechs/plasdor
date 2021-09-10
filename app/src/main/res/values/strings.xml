@@ -2,6 +2,7 @@
     <string name="app_name">Plasdor</string>
     <string name="channel_id">PlasdorChannelId</string>
     <string name="channel_name">PlasdorChannelName</string>
+    <string name="googleClientId">448090107772-u42rr6qpqi7fr4rtn3evu8gipph6j1km.apps.googleusercontent.com</string>
 
     <string name="admob_app_id">ca-app-pub-5799348942632742~8783416261</string>
     <string name="rewardedAd">ca-app-pub-5799348942632742/6098022101</string>

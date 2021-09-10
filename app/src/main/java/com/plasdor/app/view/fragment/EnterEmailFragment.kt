@@ -113,10 +113,10 @@ class EnterEmailFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener
 
         btnGmailLogin.setOnClickListener {
 
-            requireActivity().showToastMsg("Work in progress")
-//            layoutLoader.visibility = View.VISIBLE
-//            val intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
-//            startActivityForResult(intent, RC_SIGN_IN)
+//            requireActivity().showToastMsg("Work in progress")
+            layoutLoader.visibility = View.VISIBLE
+            val intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
+            startActivityForResult(intent, RC_SIGN_IN)
         }
     }
     private fun logOutFromAccounts() {
@@ -148,8 +148,6 @@ class EnterEmailFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener
             if(account.photoUrl != null){
                 avtarUrl = account.photoUrl.toString()
             }
-
-
             // showToastMsg("Login Success $userName $email")
             socialMediaLoginSuccess()
         } else {

@@ -6,6 +6,6 @@ import com.androidnetworking.AndroidNetworking
 class PlasdorApplication:Application() {
     override fun onCreate() {
         super.onCreate()
-        AndroidNetworking.initialize(getApplicationContext());
+        //AndroidNetworking.initialize(getApplicationContext());
     }
 }

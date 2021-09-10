@@ -13,4 +13,9 @@
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="My Order" />
 
+    <item
+        android:id="@+id/menuProfile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
+
 </menu>
