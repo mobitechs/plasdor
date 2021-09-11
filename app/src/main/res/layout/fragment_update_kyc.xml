@@ -83,9 +83,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Update"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_10sdp"/>
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="Add" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Update"
+                    android:text="Add"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"/>
             </RelativeLayout>
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Update"
+                    android:text="Add"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"/>
             </RelativeLayout>

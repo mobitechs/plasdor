@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
@@ -46,7 +47,8 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener {
     var listItems = ArrayList<ProductListItems>()
     var cartListItems = ArrayList<ProductListItems>()
     var allProductListItems = ArrayList<ProductListItems>()
-    lateinit var mLayoutManager: GridLayoutManager
+//    lateinit var mLayoutManager: GridLayoutManager
+    lateinit var mLayoutManager: LinearLayoutManager
 
     lateinit var btnGetRewards: Button
     var getRewardCounter = 0
@@ -135,7 +137,8 @@ class UserHomeFragment : Fragment(), AddOrRemoveListener {
         val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView)!!
         val progressBar: ProgressBar = rootView.findViewById(R.id.progressBar)!!
 
-        mLayoutManager = GridLayoutManager(requireActivity(), 2)
+//        mLayoutManager = GridLayoutManager(requireActivity(), 2)
+        mLayoutManager = LinearLayoutManager(requireActivity())
         recyclerView.layoutManager = mLayoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
 

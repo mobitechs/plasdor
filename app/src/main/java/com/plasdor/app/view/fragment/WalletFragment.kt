@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +39,7 @@ class WalletFragment : Fragment(), ApiResponse {
     lateinit var  txtRedeemHistory:TextView
     lateinit var  layoutPointDetails: LinearLayout
     lateinit var  hideShowPointDetails: ImageView
+    lateinit var  layoutHowToEarnPoints: RelativeLayout
 
     lateinit var viewModelUser: UserListViewModel
     lateinit var listAdapter: UserOrderListAdapter
@@ -71,8 +69,9 @@ class WalletFragment : Fragment(), ApiResponse {
         recyclerView = rootView.findViewById(R.id.recyclerView)!!
         layoutPointDetails = rootView.findViewById(R.id.layoutPointDetails)!!
         hideShowPointDetails = rootView.findViewById(R.id.hideShowPointDetails)!!
+        layoutHowToEarnPoints = rootView.findViewById(R.id.layoutHowToEarnPoints)!!
 
-        hideShowPointDetails.setOnClickListener{
+        layoutHowToEarnPoints.setOnClickListener{
             if(isHide){
                 isHide = false
                 layoutPointDetails.visibility = View.VISIBLE

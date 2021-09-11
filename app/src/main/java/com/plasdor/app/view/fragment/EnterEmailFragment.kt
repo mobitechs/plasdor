@@ -84,7 +84,6 @@ class EnterEmailFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener
             loginViaEmailLayout.visibility = View.VISIBLE
         }
 
-
         setupGoogleSignIn()
 
         txtEmail.setOnKeyListener(object : View.OnKeyListener {
@@ -105,7 +104,6 @@ class EnterEmailFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener
     }
 
     private fun setupGoogleSignIn() {
-
         googleApiClient = GoogleApiClient.Builder(requireActivity())
             .enableAutoManage(requireActivity(), this)
             .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -162,7 +160,12 @@ class EnterEmailFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener
         if (requestCode === RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result != null) {
-                handleSignInResult(result)
+                try{
+                    handleSignInResult(result)
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+
             }
         }
     }

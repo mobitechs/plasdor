@@ -366,7 +366,35 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/black_logo" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Plasdor Services"
+                        android:textColor="@color/white"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/_16sdp" />
+                </LinearLayout>
             </RelativeLayout>
+
+
 
         </LinearLayout>
     </FrameLayout>

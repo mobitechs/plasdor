@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_60sdp"
         android:layout_marginBottom="@dimen/_15sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:orientation="vertical">
@@ -50,6 +50,9 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Your City"
                     android:inputType="text"
+                    android:background="@null"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="@dimen/_12sdp" />
@@ -69,6 +72,9 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Your PinCode"
                     android:inputType="phone"
+                    android:background="@null"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
                     android:imeOptions="actionGo"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
@@ -81,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_60sdp"
                 android:background="@drawable/bg_solid"
                 android:text="Submit"
                 android:textColor="@color/white" />

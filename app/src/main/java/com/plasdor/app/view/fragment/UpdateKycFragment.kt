@@ -89,8 +89,6 @@ class UpdateKycFragment : Fragment() {
         btnUpdatePassbook = rootView.findViewById(R.id.btnUpdatePassbook)!!
         btnUpdateElectricityBill = rootView.findViewById(R.id.btnUpdateElectricityBill)!!
 
-
-
         passbookPath =
             SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
                 ?.get(0)?.imgPathAvatar.toString()
@@ -104,8 +102,6 @@ class UpdateKycFragment : Fragment() {
         imgPassbook.setImage(adharPath,R.drawable.img_not_available)
         imgAdhar.setImage(adharPath,R.drawable.img_not_available)
         imgElectricityBill.setImage(electricityBillPath,R.drawable.img_not_available)
-
-
 
         if (userType.equals(Constants.MERCHANT)) {
             layoutPassbook.visibility = View.VISIBLE

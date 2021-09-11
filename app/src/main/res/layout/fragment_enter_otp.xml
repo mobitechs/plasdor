@@ -6,6 +6,7 @@
     android:background="@color/black">
 
     <LinearLayout
+        android:layout_marginTop="@dimen/_50sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_16sdp"
@@ -126,7 +127,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_solid"
             android:textColor="@color/white"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_60sdp"
             android:layout_alignParentBottom="true"
             android:text="Submit" />
     </LinearLayout>
