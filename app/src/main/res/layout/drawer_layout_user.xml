@@ -14,7 +14,7 @@
         android:clickable="true"
         android:touchscreenBlocksFocus="false"
         >
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -120,14 +120,34 @@
                     android:src="@drawable/ic_baseline_close_24"
                     android:tint="@color/black_transparent" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgUserPic"
-                    app:civ_border_color="@color/yellow"
-                    android:padding="@dimen/_2sdp"
-                    app:civ_border_width="@dimen/_1sdp"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:src="@drawable/ic_baseline_add_24"/>
+                <RelativeLayout
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUserPic"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/user"
+                        app:civ_border_color="@color/yellow"
+                        app:civ_border_width="@dimen/_1sdp" />
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUserPic2"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:padding="@dimen/_4sdp"
+                        android:backgroundTint="@color/green"
+                        android:background="@drawable/circle_red"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:src="@drawable/ic_photo_camera" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 

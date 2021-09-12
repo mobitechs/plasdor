@@ -47,6 +47,7 @@ import com.google.gson.reflect.TypeToken
 import com.plasdor.app.model.UserModel
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
 import kotlinx.android.synthetic.main.drawer_layout_user.imgUserPic
+import kotlinx.android.synthetic.main.drawer_layout_user.imgUserPic2
 import kotlinx.android.synthetic.main.drawer_layout_user.ivClose
 import kotlinx.android.synthetic.main.drawer_layout_user.llFeedback
 import kotlinx.android.synthetic.main.drawer_layout_user.llHome
@@ -199,6 +200,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         llRentOnPlasdor.setOnClickListener(this)
         llUpdateKyc.setOnClickListener(this)
         imgUserPic.setOnClickListener(this)
+        imgUserPic2.setOnClickListener(this)
 
     }
 
@@ -251,6 +253,10 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 isProfilePicNeedToChange=true
                 getImage()
             }
+            R.id.imgUserPic2 -> {
+                isProfilePicNeedToChange=true
+                getImage()
+            }
             R.id.llLogout -> {
                 //clear sesssion
                 drawerOpenorClose()
@@ -292,7 +298,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             txtMobile.setText(userDetails!![0].mobile)
             txtEmail.setText(userDetails!![0].email)
 
-            imgUserPic.setImage(userDetails!![0].userProfilePic,R.drawable.ic_baseline_add_24)
+            imgUserPic.setImage(userDetails!![0].userProfilePic,R.drawable.user)
 
         }
 

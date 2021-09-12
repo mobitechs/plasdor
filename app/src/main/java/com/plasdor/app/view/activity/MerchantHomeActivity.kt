@@ -44,6 +44,7 @@ import kotlinx.android.synthetic.main.activity_merchant_home.*
 import kotlinx.android.synthetic.main.contenair.*
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
 import kotlinx.android.synthetic.main.drawer_layout_merchant.imgUserPic
+import kotlinx.android.synthetic.main.drawer_layout_merchant.imgUserPic2
 import kotlinx.android.synthetic.main.drawer_layout_merchant.ivClose
 import kotlinx.android.synthetic.main.drawer_layout_merchant.llFeedback
 import kotlinx.android.synthetic.main.drawer_layout_merchant.llHome
@@ -182,6 +183,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         llLogout.setOnClickListener(this)
         menuWallet.setOnClickListener(this)
         imgUserPic.setOnClickListener(this)
+        imgUserPic2.setOnClickListener(this)
 
     }
 
@@ -216,6 +218,9 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                 displayView(6)
             }
 
+            R.id.imgUserPic2 -> {
+                getImage()
+            }
             R.id.imgUserPic -> {
                 getImage()
             }
@@ -261,7 +266,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
             txtMobile.setText(userDetails!![0].mobile)
             txtEmail.setText(userDetails!![0].email)
 
-            imgUserPic.setImage(userDetails!![0].userProfilePic,R.drawable.ic_baseline_add_24)
+            imgUserPic.setImage(userDetails!![0].userProfilePic,R.drawable.user)
         }
 
     }
