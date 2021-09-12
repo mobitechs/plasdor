@@ -24,6 +24,7 @@ data class UserModel(
     var imgPathAvatar: String,
     var imgPathAdhar: String,
     var imgPathEBill: String,
+    var consoleImgPath: String,
     var latitude: String,
     var longitude: String,
     var firstFreeOrder: String,

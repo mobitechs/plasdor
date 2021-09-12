@@ -47,6 +47,9 @@ class UpdateKycFragment : Fragment() {
     lateinit var btnUpdateAdhar: AppCompatButton
     lateinit var btnUpdateElectricityBill: AppCompatButton
     lateinit var btnUpdatePassbook: AppCompatButton
+    lateinit var layoutConsole: RelativeLayout
+    lateinit var imgConsole: AppCompatImageView
+    lateinit var btnUpdateConsole: AppCompatButton
     var imageType = 0
 
     var passbookPath = ""
@@ -56,7 +59,9 @@ class UpdateKycFragment : Fragment() {
     var adharFile: File? = null
 
     var electricityBillPath = ""
+    var consolePath = ""
     var electricityBillFile: File? = null
+    var consoleFile: File? = null
     var userId = ""
     var userType = ""
 
@@ -88,6 +93,9 @@ class UpdateKycFragment : Fragment() {
         btnUpdateAdhar = rootView.findViewById(R.id.btnUpdateAdhar)!!
         btnUpdatePassbook = rootView.findViewById(R.id.btnUpdatePassbook)!!
         btnUpdateElectricityBill = rootView.findViewById(R.id.btnUpdateElectricityBill)!!
+        layoutConsole = rootView.findViewById(R.id.layoutConsole)!!
+        imgConsole = rootView.findViewById(R.id.imgConsole)!!
+        btnUpdateConsole = rootView.findViewById(R.id.btnUpdateConsole)!!
 
         passbookPath =
             SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
@@ -98,15 +106,21 @@ class UpdateKycFragment : Fragment() {
         electricityBillPath =
             SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
                 ?.get(0)?.imgPathEBill.toString()
+        consolePath =
+            SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)
+                ?.get(0)?.consoleImgPath.toString()
 
         imgPassbook.setImage(adharPath,R.drawable.img_not_available)
         imgAdhar.setImage(adharPath,R.drawable.img_not_available)
         imgElectricityBill.setImage(electricityBillPath,R.drawable.img_not_available)
+        imgConsole.setImage(consolePath,R.drawable.img_not_available)
 
         if (userType.equals(Constants.MERCHANT)) {
             layoutPassbook.visibility = View.VISIBLE
+            layoutConsole.visibility = View.VISIBLE
         } else {
             layoutPassbook.visibility = View.GONE
+            layoutConsole.visibility = View.GONE
         }
         btnUpdatePassbook.setOnClickListener {
             imageType = 0
@@ -118,6 +132,10 @@ class UpdateKycFragment : Fragment() {
         }
         btnUpdateElectricityBill.setOnClickListener {
             imageType = 2
+            getImage()
+        }
+        btnUpdateConsole.setOnClickListener {
+            imageType = 3
             getImage()
         }
 
@@ -174,6 +192,15 @@ class UpdateKycFragment : Fragment() {
                     .load(fileUri)
                     .into(imgElectricityBill);
             }
+            else if (imageType == 3) {
+                consoleFile = null
+                consoleFile = ImagePicker.getFile(data)!!
+                consolePath = ImagePicker.getFilePath(data)!!
+                //imgConsole.setImageURI(fileUri)
+                Glide.with(this)
+                    .load(fileUri)
+                    .into(imgConsole);
+            }
 
         }
     }
@@ -192,11 +219,15 @@ class UpdateKycFragment : Fragment() {
         if (electricityBillFile?.isFile == true) {
             androidNetworking.addMultipartFile("electricityBillFile", electricityBillFile)
         }
+        if (consoleFile?.isFile == true) {
+            androidNetworking.addMultipartFile("consoleFile", consoleFile)
+        }
 
         androidNetworking.addMultipartParameter("userId", userId)
         androidNetworking.addMultipartParameter("passbookUrl", passbookPath)
         androidNetworking.addMultipartParameter("adharImgUrl", adharPath)
         androidNetworking.addMultipartParameter("electricityBillUrl", electricityBillPath)
+        androidNetworking.addMultipartParameter("consoleUrl", consolePath)
         androidNetworking.addMultipartParameter("method", method)
         androidNetworking.setTag(method)
         androidNetworking.setPriority(Priority.HIGH)

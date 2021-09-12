@@ -85,7 +85,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:text="Add" />
+                    android:text="Change" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Add"
+                    android:text="Change"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"/>
             </RelativeLayout>
@@ -161,7 +161,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Add"
+                    android:text="Change"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/layoutConsole"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/bg_rect_stroke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/txtConsoleTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.Console"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:id="@+id/imgConsole"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_toStartOf="@+id/btnUpdateConsole"
+                    android:src="@drawable/img_not_available" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUpdateConsole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Change"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"/>
             </RelativeLayout>

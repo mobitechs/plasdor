@@ -45,20 +45,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.plasdor.app.model.UserModel
-import kotlinx.android.synthetic.main.drawer_layout_merchant.*
-import kotlinx.android.synthetic.main.drawer_layout_user.imgUserPic
-import kotlinx.android.synthetic.main.drawer_layout_user.imgUserPic2
-import kotlinx.android.synthetic.main.drawer_layout_user.ivClose
-import kotlinx.android.synthetic.main.drawer_layout_user.llFeedback
-import kotlinx.android.synthetic.main.drawer_layout_user.llHome
-import kotlinx.android.synthetic.main.drawer_layout_user.llLogout
-import kotlinx.android.synthetic.main.drawer_layout_user.llMyOrder
-import kotlinx.android.synthetic.main.drawer_layout_user.llProfile
-import kotlinx.android.synthetic.main.drawer_layout_user.llShare
-import kotlinx.android.synthetic.main.drawer_layout_user.llSupport
-import kotlinx.android.synthetic.main.drawer_layout_user.txtEmail
-import kotlinx.android.synthetic.main.drawer_layout_user.txtMobile
-import kotlinx.android.synthetic.main.drawer_layout_user.txtUserName
+import kotlinx.android.synthetic.main.drawer_layout_user.*
 import org.json.JSONArray
 import java.io.File
 

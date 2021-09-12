@@ -32,10 +32,7 @@ import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.UserModel
 import com.plasdor.app.session.SharePreferenceManager
 import com.plasdor.app.utils.*
-import com.plasdor.app.view.fragment.FeedbackFragment
-import com.plasdor.app.view.fragment.ProfileFragment
-import com.plasdor.app.view.fragment.SupportFragment
-import com.plasdor.app.view.fragment.WalletFragment
+import com.plasdor.app.view.fragment.*
 import com.plasdor.app.view.fragment.merchant.MerchantAllProductListFragment
 import com.plasdor.app.view.fragment.merchant.MerchantFragmentProductList
 import com.plasdor.app.view.fragment.merchant.MerchantOrderDetailsFragment
@@ -43,20 +40,7 @@ import com.plasdor.app.view.fragment.merchant.MerchantOrderListFragment
 import kotlinx.android.synthetic.main.activity_merchant_home.*
 import kotlinx.android.synthetic.main.contenair.*
 import kotlinx.android.synthetic.main.drawer_layout_merchant.*
-import kotlinx.android.synthetic.main.drawer_layout_merchant.imgUserPic
-import kotlinx.android.synthetic.main.drawer_layout_merchant.imgUserPic2
-import kotlinx.android.synthetic.main.drawer_layout_merchant.ivClose
-import kotlinx.android.synthetic.main.drawer_layout_merchant.llFeedback
-import kotlinx.android.synthetic.main.drawer_layout_merchant.llHome
-import kotlinx.android.synthetic.main.drawer_layout_merchant.llLogout
-import kotlinx.android.synthetic.main.drawer_layout_merchant.llMyOrder
-import kotlinx.android.synthetic.main.drawer_layout_merchant.llProfile
-import kotlinx.android.synthetic.main.drawer_layout_merchant.llShare
-import kotlinx.android.synthetic.main.drawer_layout_merchant.llSupport
-import kotlinx.android.synthetic.main.drawer_layout_merchant.txtEmail
-import kotlinx.android.synthetic.main.drawer_layout_merchant.txtMobile
-import kotlinx.android.synthetic.main.drawer_layout_merchant.txtUserName
-import kotlinx.android.synthetic.main.drawer_layout_user.*
+
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -72,6 +56,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     lateinit var bottomNavigationMerchant: BottomNavigationView
     var proPicUrlPath = ""
     var proPicFile: File? = null
+    var isProfilePicNeedToChange = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,6 +169,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         menuWallet.setOnClickListener(this)
         imgUserPic.setOnClickListener(this)
         imgUserPic2.setOnClickListener(this)
+        llUpdateKyc.setOnClickListener(this)
 
     }
 
@@ -217,11 +203,16 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
             R.id.llSupport -> {
                 displayView(6)
             }
+            R.id.llUpdateKyc -> {
+                displayView(10)
+            }
 
             R.id.imgUserPic2 -> {
+                isProfilePicNeedToChange = true
                 getImage()
             }
             R.id.imgUserPic -> {
+                isProfilePicNeedToChange = true
                 getImage()
             }
             R.id.llShare -> {
@@ -412,9 +403,23 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                 )
             }
 
+            10 -> {
+                OpenKYCUpdate()
+            }
+
         }
     }
 
+
+    fun OpenKYCUpdate() {
+        toolbarTitle("KYC Update")
+        addFragment(
+            UpdateKycFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "UpdateKycFragment"
+        )
+    }
 
     fun openPage(menuId: String) {
         if (menuId == "1") {
@@ -487,21 +492,20 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
-            val fileUri = data?.data
-
-            proPicFile = null
-            proPicFile = ImagePicker.getFile(data)!!
-            proPicUrlPath = ImagePicker.getFilePath(data)!!
+        if (isProfilePicNeedToChange) {
+            if (resultCode == Activity.RESULT_OK) {
+                val fileUri = data?.data
+                proPicFile = null
+                proPicFile = ImagePicker.getFile(data)!!
+                proPicUrlPath = ImagePicker.getFilePath(data)!!
 //                imgPassbook.setImageURI(fileUri)
 
-            Glide.with(this)
-                .load(fileUri)
-                .into(imgUserPic)
+                Glide.with(this)
+                    .load(fileUri)
+                    .into(imgUserPic)
 
-            callUpdateProfileAPI()
-
-
+                callUpdateProfileAPI()
+            }
         }
     }
     private fun callUpdateProfileAPI() {
