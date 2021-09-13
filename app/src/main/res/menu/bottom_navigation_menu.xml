@@ -7,7 +7,7 @@
     <item
         android:id="@+id/menuBazar"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="Bazar" />
+        android:title="Bazaar" />
     <item
         android:id="@+id/menuMyOrder"
         android:icon="@drawable/ic_baseline_format_list_numbered_rtl_24"

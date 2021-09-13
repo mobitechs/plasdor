@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/tools"
-    app:cardElevation="@dimen/_6sdp"
-    card_view:cardCornerRadius="@dimen/_8sdp"
-    app:cardUseCompatPadding="true">
+    android:layout_margin="@dimen/_5sdp"
+    android:padding="@dimen/_2sdp"
+    android:background="@drawable/bg_rect_stroke_product">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Merchant Name"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -58,6 +58,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtMobile"
                 android:visibility="gone"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="12345678990" />
@@ -65,6 +66,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtEmail"
                 android:visibility="gone"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="abc@gmail.com" />
@@ -73,6 +75,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:visibility="gone"
                     android:id="@+id/txtAddress"
+                    android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="full Address" />
@@ -88,6 +91,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtCity"
                             android:visibility="gone"
+                            android:textColor="@color/white"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Mumbai" />
@@ -95,6 +99,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtPinCode"
                             android:visibility="gone"
+                            android:textColor="@color/white"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -126,12 +131,14 @@
                 android:id="@+id/txtDOB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="Dob" />
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_marginTop="@dimen/_5sdp"
                 android:id="@+id/txtDistance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="Distance " />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -150,4 +157,4 @@
     </RelativeLayout>
 
 
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -47,6 +48,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     lateinit var btnGetRewards: Button
     lateinit var txtWalletPoints: TextView
     lateinit var nextRewardTime: TextView
+    lateinit var txtEarnedRewardCount: AppCompatTextView
     var userId = ""
     var rewardPoints = ""
     var userWalletPoint = ""
@@ -56,6 +58,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     var lastRewardTime = ""
     var canIncreament = false
     var isAddAvailable = false
+    var doesRewardGet = false
     var firstFreeOrder = ""
 
     private var mRewardedAd: RewardedAd? = null
@@ -90,6 +93,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         txtWalletPoints = rootView.findViewById(R.id.txtWalletPoints)!!
         nextRewardTime = rootView.findViewById(R.id.nextRewardTime)!!
         btnGetRewards = rootView.findViewById(R.id.btnGetRewards)!!
+        txtEarnedRewardCount = rootView.findViewById(R.id.txtEarnedRewardCount)!!
 
         if (!todaysDate.equals(rewardDate)) {
             getRewardCounter = 0
@@ -144,20 +148,20 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                 override fun onAdShowedFullScreenContent() {
                     // Called when ad is shown.
                     Log.d(TAG, "Ad was shown.")
-//                requireContext().showToastMsg("Ad was shown")
+                requireContext().showToastMsg("Ad was shown")
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
                     // Called when ad fails to show.
                     Log.d(TAG, "Ad failed to show.")
-//                requireContext().showToastMsg("Ad failed to show.")
+                requireContext().showToastMsg("Ad failed to show.")
                 }
 
                 override fun onAdDismissedFullScreenContent() {
                     // Called when ad is dismissed.
                     // Set the ad reference to null so you don't show the ad a second time.
                     Log.d(TAG, "Ad was dismissed.")
-//                requireContext().showToastMsg("Ad was dismissed.")
+                requireContext().showToastMsg("Ad was dismissed.")
                     mRewardedAd = null
                 }
             }
@@ -189,7 +193,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 //                    requireContext().showToastMsg("onAdLoaded:")
                     isAddAvailable = true
                     mRewardedAd = rewardedAd
-                    btnGetRewards.visibility = View.VISIBLE
+//                    btnGetRewards.visibility = View.VISIBLE
 
                 }
             })
@@ -276,13 +280,15 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                 //btnGetRewards.visibility = View.VISIBLE
                 nextRewardTime.visibility = View.GONE
             }else{
+
                 btnGetRewards.visibility = View.GONE
                 nextRewardTime.visibility = View.VISIBLE
                 nextRewardTime.setText("Next Rewards in 5 min")
                 calculateTimeDifferance()
             }
-
             getRewardAd()
+            txtEarnedRewardCount.text = getRewardCounter.toString()
+
         }
     }
 
@@ -304,6 +310,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
             nextRewardTime.visibility = View.GONE
         }else{
             val timeToRunTimer = tenMinInSeconds - difference_In_Seconds
+            btnGetRewards.visibility = View.GONE
             startTimetimerCounter(timeToRunTimer)
         }
 
@@ -330,6 +337,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 
 //                nextRewardTime.text = "Next reward in :" + timerCounter.toString()
                 nextRewardTime.text = "Next reward in :" + remainTime
+                btnGetRewards.visibility = View.GONE
                 timerCounter--
             }
 

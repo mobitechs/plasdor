@@ -232,6 +232,7 @@
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:text="Contact Us On"
                     android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/blue"
                     android:textStyle="bold" />
 
                 <TextView
