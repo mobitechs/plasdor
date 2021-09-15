@@ -171,7 +171,7 @@
                     <LinearLayout
                         android:visibility="gone"
                         android:id="@+id/llHome"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -197,7 +197,7 @@
                     <LinearLayout
                         android:visibility="gone"
                         android:id="@+id/llProfile"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -221,7 +221,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/llUpdateKyc"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -246,7 +246,7 @@
                     <LinearLayout
                         android:visibility="gone"
                         android:id="@+id/llMyOrder"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -271,7 +271,7 @@
                     <LinearLayout
                         android:visibility="gone"
                         android:id="@+id/llBazar"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -299,7 +299,7 @@
                         android:background="@color/iconColor" />
                     <LinearLayout
                         android:id="@+id/llRentOnPlasdor"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -327,7 +327,7 @@
                         android:background="@color/iconColor" />
                     <LinearLayout
                         android:id="@+id/llShare"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -355,7 +355,7 @@
                         android:background="@color/iconColor" />
                     <LinearLayout
                         android:id="@+id/llFeedback"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -383,7 +383,7 @@
                         android:background="@color/iconColor" />
                     <LinearLayout
                         android:id="@+id/llSupport"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
@@ -411,7 +411,7 @@
                         android:background="@color/iconColor" />
                     <LinearLayout
                         android:id="@+id/llLogout"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
