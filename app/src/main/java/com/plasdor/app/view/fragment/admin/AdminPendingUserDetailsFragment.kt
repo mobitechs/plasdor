@@ -114,13 +114,29 @@ class AdminPendingUserDetailsFragment : Fragment(), ApiResponse {
     }
 
     override fun onSuccess(data: Any, tag: String) {
+
         if (data.equals("FAILED")) {
-            requireContext().showToastMsg("Verification Failed")
+            if(isVerified==1){
+                requireContext().showToastMsg("Verification Failed")
+            }else{
+                requireContext().showToastMsg("Block Failed")
+            }
+
         } else {
-            requireContext().showToastMsg("Verified Successfully")
-            btnVerify.setText("Verified")
-            btnVerify.isEnabled = false
-            btnVerify.isClickable = false
+
+            if(isVerified==1){
+                requireContext().showToastMsg("User Verified Successfully")
+                btnVerify.setText("Verified")
+                btnVerify.isEnabled = false
+                btnVerify.isClickable = false
+            }else{
+                requireContext().showToastMsg("User Blocked Successfully")
+                btnBlock.setText("Blocked")
+                btnBlock.isEnabled = false
+                btnBlock.isClickable = false
+            }
+
+
 
             (context as AdminHomeActivity).openUserVerificationPendingList()
         }

@@ -8,17 +8,26 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.ProgressBar
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
+import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.UserModel
+import com.plasdor.app.utils.Constants
 import com.plasdor.app.utils.ThreeTwoImageView
+import com.plasdor.app.utils.apiPostCall
+import com.plasdor.app.utils.showToastMsg
+import com.plasdor.app.view.activity.AdminHomeActivity
+import org.json.JSONException
+import org.json.JSONObject
 
 class AdminAllUserAdapter(
     activityContext: Context
 ) :
-    RecyclerView.Adapter<AdminAllUserAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<AdminAllUserAdapter.MyViewHolder>(), ApiResponse {
 
     private var allListItems = ArrayList<UserModel>()
     private var listItems = ArrayList<UserModel>()
@@ -26,7 +35,7 @@ class AdminAllUserAdapter(
 
     lateinit var adapter: ArrayAdapter<String>
     var selectedPosition = -1
-
+    var userId =""
 
     fun updateListItems(items: ArrayList<UserModel>) {
         listItems.clear()
@@ -61,6 +70,28 @@ class AdminAllUserAdapter(
         holder.txtPinCode.text = item.pincode
         holder.txtDOB.text = "Dob: "+item.dob
 
+        if(item.isVerified == "2"){
+            //blocked
+            holder.txtVerification.text = "Blocked"
+            holder.txtVerification.setTextColor(ContextCompat.getColor(context, R.color.red))
+        }
+        else if(item.isVerified == "1"){
+            //pending
+            holder.txtVerification.text = "Verified"
+            holder.txtVerification.setTextColor(ContextCompat.getColor(context, R.color.green))
+            holder.btnBlock.visibility = View.VISIBLE
+        }
+        else if(item.isVerified == "0"){
+            //pending
+            holder.txtVerification.text = "Verification Pending"
+            holder.txtVerification.setTextColor(ContextCompat.getColor(context, R.color.yellow))
+        }
+
+        holder.btnBlock.setOnClickListener {
+            userId = item.userId
+            verifyBlockAPICall()
+        }
+
         holder.imgRadioBtn.visibility = View.GONE
 
         holder.txtDistance.visibility = View.GONE
@@ -70,6 +101,8 @@ class AdminAllUserAdapter(
         holder.txtCity.visibility = View.VISIBLE
         holder.txtPinCode.visibility = View.VISIBLE
         holder.txtDOB.visibility = View.VISIBLE
+        holder.txtVerification.visibility = View.VISIBLE
+
 
     }
 
@@ -85,11 +118,39 @@ class AdminAllUserAdapter(
         var imgRadioBtn: AppCompatImageView = view.findViewById(R.id.imgRadioBtn)
         var txtDistance: AppCompatTextView = view.findViewById(R.id.txtDistance)
         var txtDOB: AppCompatTextView = view.findViewById(R.id.txtDOB)
+        var txtVerification: AppCompatTextView = view.findViewById(R.id.txtVerification)
+        var btnBlock: AppCompatButton = view.findViewById(R.id.btnBlock)
 
         val cardView: View = itemView
 
     }
 
+    private fun verifyBlockAPICall() {
+        val isVerified = 2
+        val method = "isVerifiedOrRejected"
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("method", method)
+            jsonObject.put("userId", userId)
+            jsonObject.put("isVerified", isVerified)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        apiPostCall(Constants.BASE_URL, jsonObject, this, method)
+    }
+
+    override fun onSuccess(data: Any, tag: String) {
+        if (data.equals("FAILED")) {
+            context.showToastMsg("Blocked Failed")
+        } else {
+            context.showToastMsg("User Blocked Successfully")
+            (context as AdminHomeActivity).openAllUser()
+        }
+    }
+
+    override fun onFailure(message: String) {
+        context.showToastMsg(message)
+    }
 
     fun getFilter(): Filter? {
         return object : Filter() {

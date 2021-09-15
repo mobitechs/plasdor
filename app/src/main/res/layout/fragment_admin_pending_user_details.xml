@@ -26,6 +26,7 @@
                 android:text="Address: " />
 
             <TextView
+                android:textColor="@color/white"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:id="@+id/txtAddress"
                 android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal">
 
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_130sdp"
                 android:layout_weight="5">
@@ -59,9 +61,10 @@
                     android:layout_height="@dimen/_130sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp" />
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_130sdp"
                 android:layout_weight="5">
@@ -81,7 +84,7 @@
                     android:layout_height="@dimen/_130sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp" />
-            </RelativeLayout>
+            </LinearLayout>
 
 
         </LinearLayout>

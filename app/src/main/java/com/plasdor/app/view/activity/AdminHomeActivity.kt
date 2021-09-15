@@ -229,13 +229,7 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
                 )
             }
             4 -> {
-                toolbarTitle("All User")
-                addFragment(
-                    AdminAllUserListFragment(),
-                    false,
-                    R.id.nav_host_fragment,
-                    "AdminAllUserListFragment"
-                )
+                openAllUser()
             }
             5 -> {
                 toolbarTitle("All Merchant")
@@ -252,6 +246,16 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
             }
 
         }
+    }
+
+     fun openAllUser() {
+        toolbarTitle("All User")
+        addFragment(
+            AdminAllUserListFragment(),
+            false,
+            R.id.nav_host_fragment,
+            "AdminAllUserListFragment"
+        )
     }
 
 
