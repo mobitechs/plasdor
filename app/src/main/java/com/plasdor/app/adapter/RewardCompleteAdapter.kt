@@ -9,19 +9,26 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.plasdor.app.R
+import com.plasdor.app.model.AddressListItems
 import kotlinx.android.synthetic.main.adapter_item_reward_complete.view.*
 
 class RewardCompleteAdapter (
     activityContext: Context,
-    val listItems: ArrayList<String>,
-    val count: Int,
+    val listItems: ArrayList<String>
 ) :
     RecyclerView.Adapter<RewardCompleteAdapter.MyViewHolder>() {
 
 
+
     var context: Context = activityContext
+    var count = 0
     var selectedPosition = -1
 
+
+    fun updateCount(updatedCount: Int) {
+        count = updatedCount
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var itemView: View =

@@ -7,13 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.Window
-import android.widget.EditText
+import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatTextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.plasdor.app.R
@@ -32,17 +31,18 @@ import kotlinx.android.synthetic.main.loader.*
 import org.json.JSONException
 import org.json.JSONObject
 
-class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListener {
+
+    class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListener {
 
 
-    lateinit var merchantItem: AvailableMerchantListItem
-    lateinit var listItem: ProductListItems
+        lateinit var merchantItem: AvailableMerchantListItem
+        lateinit var listItem: ProductListItems
 
-    var productId = ""
-    var merchantId = ""
-    var userId = ""
-    var userEmail = ""
-    var userMobile = ""
+        var productId = ""
+        var merchantId = ""
+        var userId = ""
+        var userEmail = ""
+        var userMobile = ""
     var address = ""
     var city = ""
     var pinCode = ""
@@ -195,9 +195,9 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         btnPlaceOrder.setOnClickListener {
             if(isVerified.equals("1")){
                 transactionNo = "TID" + System.currentTimeMillis()
-//            amount = listItem.totalPayable.toString()
+//              amount = listItem.totalPayable.toString()
                 amount = finalPayableAmount.toString()
-//                note = "Payment for Plasdor Services."
+//              note = "Payment for Plasdor Services."
                 note = listItem.productName
                 //payUsingUpi(amount, upiId, name, note)
                 showSelectPaymentTypeDialog()
@@ -357,6 +357,7 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
         // Create an alert builder
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setTitle("Select Payment Option")
+        builder.setPositiveButton("Submit", null)
 
         // set the custom layout
         val customLayout: View = layoutInflater.inflate(R.layout.payment_type_dialog_layout, null)
@@ -368,20 +369,25 @@ class PlaceOrderActivity : AppCompatActivity(), ApiResponse, PaymentResultListen
                 paymentType = radio.text.toString()
             })
 
-        builder.setPositiveButton(
-            "Submit",
-            DialogInterface.OnClickListener { dialog, which -> // send data from the
-                // AlertDialog to the Activity
 
-                if(paymentType.equals("UPI/Card/NEFT")){
-                    razorPayGateway()
-                }else{
-                    callAPIToSaveOrder()
-                }
-            })
         // create and show
         // the alert dialog
         val dialog: AlertDialog = builder.create()
+        dialog.setOnShowListener {
+            val positiveButton: Button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            positiveButton.setOnClickListener {
+                if (paymentType.equals("")) {
+                    showToastMsg("Please select payment option")
+                } else {
+                    if (paymentType.equals("UPI/Card/NEFT")) {
+                        razorPayGateway()
+                    } else if (paymentType.equals("Cash On Delivery")) {
+                        callAPIToSaveOrder()
+                    }
+                    dialog.dismiss();
+                }
+            }
+        }
 //        dialog.setCancelable(false)
         dialog.show()
     }

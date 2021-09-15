@@ -143,9 +143,9 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         rewardRecyclerView.layoutManager = horizontalLayoutMngr
         rewardRecyclerView.itemAnimator = DefaultItemAnimator()
 
-        rewardCompleteAdapter = RewardCompleteAdapter(requireActivity(), rewardListItems,getRewardCounter)
+        rewardCompleteAdapter = RewardCompleteAdapter(requireActivity(), rewardListItems)
         rewardRecyclerView.adapter = rewardCompleteAdapter
-
+        rewardCompleteAdapter.updateCount(getRewardCounter)
     }
 
 
@@ -286,8 +286,8 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         SharePreferenceManager.getInstance(requireContext())
             .save(Constants.LAST_REWARD_TIME, lastRewardTime)
 
-        rewardCompleteAdapter.notifyDataSetChanged()
-       checkRewardCountAndBtnVisiblity()
+        rewardCompleteAdapter.updateCount(getRewardCounter)
+        checkRewardCountAndBtnVisiblity()
 
     }
 
@@ -298,7 +298,6 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
             nextRewardTime.setText("Today's limit reached")
         }
         else{
-
             if(getRewardCounter == 0){
                 //btnGetRewards.visibility = View.VISIBLE
                 nextRewardTime.visibility = View.GONE
@@ -310,8 +309,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                 calculateTimeDifferance()
             }
             getRewardAd()
-//            txtEarnedRewardCount.text = getRewardCounter.toString()
-
+//          txtEarnedRewardCount.text = getRewardCounter.toString()
         }
     }
 
@@ -319,7 +317,6 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         lastRewardTime =   SharePreferenceManager.getInstance(requireActivity())
             .getValueString(Constants.LAST_REWARD_TIME).toString()
         var currentDateTime = getTodaysDateTime()
-
 
         val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
         val d1: Date = sdf.parse(lastRewardTime)
