@@ -23,6 +23,7 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.plasdor.app.R
 import com.plasdor.app.adapter.BazarListAdapter
+import com.plasdor.app.adapter.RewardCompleteAdapter
 import com.plasdor.app.callbacks.AddOrRemoveListener
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.ProductListItems
@@ -43,12 +44,14 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     lateinit var rootView: View
     lateinit var viewModelUser: UserListViewModel
     lateinit var listAdapter: BazarListAdapter
+    lateinit var rewardCompleteAdapter: RewardCompleteAdapter
     var listItems = ArrayList<ProductListItems>()
     lateinit var mLayoutManager: LinearLayoutManager
     lateinit var btnGetRewards: Button
     lateinit var txtWalletPoints: TextView
     lateinit var nextRewardTime: TextView
-    lateinit var txtEarnedRewardCount: AppCompatTextView
+    lateinit var rewardRecyclerView: RecyclerView
+//    lateinit var txtEarnedRewardCount: AppCompatTextView
     var userId = ""
     var rewardPoints = ""
     var userWalletPoint = ""
@@ -60,6 +63,8 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     var isAddAvailable = false
     var doesRewardGet = false
     var firstFreeOrder = ""
+
+    var rewardListItems = ArrayList<String>()
 
     private var mRewardedAd: RewardedAd? = null
     private final var TAG = "BazarListFragment"
@@ -84,6 +89,10 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         lastRewardTime = SharePreferenceManager.getInstance(requireActivity())
             .getValueString(Constants.LAST_REWARD_TIME).toString()
 
+        for(i in 0..Constants.REWARD_LIMIT-1){
+            rewardListItems.add(i.toString())
+        }
+
        // rewardDate = "31-08-2021"
 
         userId = SharePreferenceManager.getInstance(requireActivity()).getUserLogin(Constants.USERDATA)?.get(0)?.userId.toString()
@@ -93,7 +102,8 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         txtWalletPoints = rootView.findViewById(R.id.txtWalletPoints)!!
         nextRewardTime = rootView.findViewById(R.id.nextRewardTime)!!
         btnGetRewards = rootView.findViewById(R.id.btnGetRewards)!!
-        txtEarnedRewardCount = rootView.findViewById(R.id.txtEarnedRewardCount)!!
+        rewardRecyclerView = rootView.findViewById(R.id.rewardRecyclerView)!!
+//        txtEarnedRewardCount = rootView.findViewById(R.id.txtEarnedRewardCount)!!
 
         if (!todaysDate.equals(rewardDate)) {
             getRewardCounter = 0
@@ -115,6 +125,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         txtWalletPoints.text = userWalletPoint
 
         setupRecyclerView()
+        setupRewardRecyclerView()
 
         MobileAds.initialize(requireContext())
 //        RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("E3EBB20286FEE729C04269FCFBA201EE"))
@@ -127,6 +138,15 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         }
     }
 
+    private fun setupRewardRecyclerView() {
+       val horizontalLayoutMngr = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rewardRecyclerView.layoutManager = horizontalLayoutMngr
+        rewardRecyclerView.itemAnimator = DefaultItemAnimator()
+
+        rewardCompleteAdapter = RewardCompleteAdapter(requireActivity(), rewardListItems,getRewardCounter)
+        rewardRecyclerView.adapter = rewardCompleteAdapter
+
+    }
 
 
     private fun playAd() {
@@ -246,6 +266,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     override fun onSuccess(data: Any, tag: String) {
         requireContext().showToastMsg("You have earned $rewardPoints points.")
 
+
         userWalletPoint = (userWalletPoint.toInt() + rewardPoints.toInt()).toString()
         txtWalletPoints.text = userWalletPoint
         SharePreferenceManager.getInstance(requireContext())
@@ -265,7 +286,9 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         SharePreferenceManager.getInstance(requireContext())
             .save(Constants.LAST_REWARD_TIME, lastRewardTime)
 
+        rewardCompleteAdapter.notifyDataSetChanged()
        checkRewardCountAndBtnVisiblity()
+
     }
 
     private fun checkRewardCountAndBtnVisiblity() {
@@ -287,7 +310,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                 calculateTimeDifferance()
             }
             getRewardAd()
-            txtEarnedRewardCount.text = getRewardCounter.toString()
+//            txtEarnedRewardCount.text = getRewardCounter.toString()
 
         }
     }

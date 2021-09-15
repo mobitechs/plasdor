@@ -86,7 +86,7 @@
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,21 +97,26 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rewardRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <RelativeLayout
+                    android:visibility="gone"
                     android:background="@drawable/red_circle"
                     android:layout_gravity="center"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_centerInParent="true"
+                        android:id="@+id/txtEarnedRewardCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
                         android:text="12"
-                        android:id="@+id/txtEarnedRewardCount"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sdp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
             </LinearLayout>
