@@ -17,6 +17,7 @@ import com.plasdor.app.R
 import com.plasdor.app.callbacks.ApiResponse
 import com.plasdor.app.model.MyOrderListItems
 import com.plasdor.app.utils.Constants
+import com.plasdor.app.utils.Constants.Companion.Order_ID_INITIAL
 import com.plasdor.app.utils.apiPostCall
 import com.plasdor.app.utils.parseDateToddMMyyyy
 import com.plasdor.app.utils.showToastMsg
@@ -74,7 +75,7 @@ class MerchantOrderListAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         var item: MyOrderListItems = listItems.get(position)
-        holder.txtOrderId.text = item.orderId
+        holder.txtOrderId.text = Constants.Order_ID_INITIAL+item.orderId
         holder.txtOrderAmount.text = "Rs." + item.totalPrice
         //holder.status = item.status
 

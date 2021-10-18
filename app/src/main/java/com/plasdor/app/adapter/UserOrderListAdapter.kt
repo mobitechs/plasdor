@@ -52,7 +52,7 @@ class UserOrderListAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         var item: MyOrderListItems = listItems.get(position)
-        holder.txtOrderId.text = item.orderId
+        holder.txtOrderId.text = Constants.Order_ID_INITIAL+ item.orderId
         holder.txtOrderAmount.text = "Rs." + item.totalPrice
         //holder.status = item.status
         holder.txtOrderStatus.text = holder.status

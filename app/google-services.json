@@ -22,6 +22,22 @@
           }
         },
         {
+          "client_id": "448090107772-b6bph7nit7noqbi2m4706tmg5i36mjuk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plasdor.app",
+            "certificate_hash": "94288c3e372666ed650bde8b90453536c72a5194"
+          }
+        },
+        {
+          "client_id": "448090107772-qk1te7t6ea2prl5hihl0tnqne8d2e8l7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plasdor.app",
+            "certificate_hash": "030830337c6a53a5499f68ec01cc3d49e19cb772"
+          }
+        },
+        {
           "client_id": "448090107772-of839l97ttatho6vju43r1l3vo42a917.apps.googleusercontent.com",
           "client_type": 3
         }

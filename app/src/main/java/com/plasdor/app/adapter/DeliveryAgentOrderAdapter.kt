@@ -61,7 +61,7 @@ class DeliveryAgentOrderAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         var item: AdminAllOrderListItems = listItems.get(position)
-        holder.txtOrderId.text = item.orderId
+        holder.txtOrderId.text = Constants.Order_ID_INITIAL+item.orderId
         holder.txtOrderAmount.text = "Rs." + item.totalPrice
 
         holder.txtProductDetails.text = item.productName //+ " Type " + item.type

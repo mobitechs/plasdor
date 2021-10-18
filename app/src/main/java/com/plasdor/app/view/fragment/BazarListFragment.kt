@@ -99,6 +99,10 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
         firstFreeOrder = SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.FIRST_FREE_ORDER_COMPLETE).toString()
         userWalletPoint = SharePreferenceManager.getInstance(requireContext()).getValueString(Constants.EARNED_POINTS).toString()
 
+        if (userWalletPoint.equals("null") || userWalletPoint.equals("")) {
+            userWalletPoint = "0"
+        }
+
         txtWalletPoints = rootView.findViewById(R.id.txtWalletPoints)!!
         nextRewardTime = rootView.findViewById(R.id.nextRewardTime)!!
         btnGetRewards = rootView.findViewById(R.id.btnGetRewards)!!
@@ -118,9 +122,7 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
 
         checkRewardCountAndBtnVisiblity()
 
-        if (userWalletPoint.equals("null") || userWalletPoint.equals("")) {
-            userWalletPoint = "0"
-        }
+
 
         txtWalletPoints.text = userWalletPoint
 
@@ -314,21 +316,23 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
     }
 
     private fun calculateTimeDifferance() {
-        lastRewardTime =   SharePreferenceManager.getInstance(requireActivity())
+        lastRewardTime = SharePreferenceManager.getInstance(requireActivity())
             .getValueString(Constants.LAST_REWARD_TIME).toString()
         var currentDateTime = getTodaysDateTime()
 
-        val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
+        val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss aa")
         val d1: Date = sdf.parse(lastRewardTime)
         val d2: Date = sdf.parse(currentDateTime)
 
         val difference_In_Time = d2.time - d1.time
         val difference_In_Seconds = (difference_In_Time / 1000)
         val tenMinInSeconds = (Constants.NEXT_REWARD_TIME * 60)
+
         if(difference_In_Seconds > tenMinInSeconds){
             btnGetRewards.visibility = View.VISIBLE
             nextRewardTime.visibility = View.GONE
-        }else{
+        }
+        else{
             val timeToRunTimer = tenMinInSeconds - difference_In_Seconds
             btnGetRewards.visibility = View.GONE
             startTimetimerCounter(timeToRunTimer)

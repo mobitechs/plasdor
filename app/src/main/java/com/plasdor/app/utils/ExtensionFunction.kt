@@ -526,7 +526,7 @@ fun getTodaysDate(): String {
     return todaysDate
 }
 fun getTodaysDateTime(): String {
-    val simpleDateFormat= SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
+    val simpleDateFormat= SimpleDateFormat("dd-MM-yyyy hh:mm:ss aa")
     var todaysDate = simpleDateFormat.format(Date())
     return todaysDate
 }

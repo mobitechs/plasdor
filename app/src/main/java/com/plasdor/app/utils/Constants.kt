@@ -28,7 +28,7 @@ class Constants {
         const val LAST_REWARD_TIME= "lastRewardTime"
         const val EARNED_POINTS= "earnedPoints"
         const val FIRST_FREE_ORDER_COMPLETE= "firstFreeOrderComplete"
-        const val REWARD_LIMIT= 7
+        const val REWARD_LIMIT= 5
         const val NEXT_REWARD_TIME= 20
 
         const val IS_TOKEN_SAVE_API_CALLED = "isTokenSAveAPICalled"
@@ -59,6 +59,7 @@ class Constants {
         const val selfPickup = "Self PickUp"
         const val deliveryByCompany = "Delivery"
         const val First_Order = "First Order"
+        const val Order_ID_INITIAL = "ORD100"
 
         //if u add new item in weightArray then please add in qtyArray as well its must
         val qtyArray = arrayOf("1", "2", "3", "4", "6", "8 ", "10", "12", "14", "16", "18", "20")
