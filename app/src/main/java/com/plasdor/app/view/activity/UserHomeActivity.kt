@@ -188,6 +188,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
         llUpdateKyc.setOnClickListener(this)
         imgUserPic.setOnClickListener(this)
         imgUserPic2.setOnClickListener(this)
+        llMyReferral.setOnClickListener(this)
 
     }
 
@@ -235,6 +236,9 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             R.id.llUpdateKyc -> {
                 displayView(10)
+            }
+            R.id.llMyReferral -> {
+                displayView(11)
             }
             R.id.imgUserPic -> {
                 isProfilePicNeedToChange=true
@@ -417,6 +421,16 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
             }
             10 -> {
                 OpenKYCUpdate()
+            }
+
+            11 -> {
+                toolbarTitle("My Referral")
+                addFragment(
+                    MyRefferalListFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "MyRefferalListFragment"
+                )
             }
         }
         drawerOpenorClose()

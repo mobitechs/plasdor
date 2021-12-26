@@ -323,6 +323,35 @@
                     </LinearLayout>
 
                     <View
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/iconColor" />
+                    <LinearLayout
+                        android:id="@+id/llMyReferral"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/drawer_menu_icon_height"
+                            android:layout_height="@dimen/drawer_menu_icon_width"
+                            android:src="@drawable/ic_baseline_format_list_numbered_rtl_24"
+                            android:tint="@color/white" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="My Referral"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/drawer_menu_label" />
+                    </LinearLayout>
+
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_marginTop="@dimen/_10sdp"

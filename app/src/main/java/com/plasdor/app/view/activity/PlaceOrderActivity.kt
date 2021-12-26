@@ -1,7 +1,6 @@
     package com.plasdor.app.view.activity
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log

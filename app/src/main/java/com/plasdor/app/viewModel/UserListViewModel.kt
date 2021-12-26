@@ -16,6 +16,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
     val redeemHistoryListItems: LiveData<ArrayList<MyOrderListItems>>
     val merchantListItems: LiveData<ArrayList<AvailableMerchantListItem>>
     val bazarListItems: LiveData<ArrayList<ProductListItems>>
+    val referralList: LiveData<ArrayList<ReferralList>>
 
 
     init {
@@ -26,6 +27,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
         this.allProductListItems = repository.allProductListItems
         this.merchantListItems = repository.merchantListItems
         this.bazarListItems = repository.bazarListItems
+        this.referralList = repository.referralList
     }
 
     fun changeState() {
@@ -33,6 +35,9 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
     }
 
 
+    fun getMyReferralList(userId: String) {
+        repository.getMyReferralList(userId)
+    }
     fun getMyOrderList(userId: String) {
         repository.getMyOrderList(userId)
     }

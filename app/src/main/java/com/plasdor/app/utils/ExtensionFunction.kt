@@ -503,6 +503,7 @@ fun Context.removeToCart(item: ProductListItems) {
 
 
 fun getLocationFromAddress(context: Context?, strAddress: String?): LatLng? {
+
     val coder = Geocoder(context)
     val address: List<Address>?
     var p1: LatLng? = null

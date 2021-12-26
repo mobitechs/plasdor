@@ -170,6 +170,7 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
         imgUserPic.setOnClickListener(this)
         imgUserPic2.setOnClickListener(this)
         llUpdateKyc.setOnClickListener(this)
+        llMyReferral.setOnClickListener(this)
 
     }
 
@@ -205,6 +206,9 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
             }
             R.id.llUpdateKyc -> {
                 displayView(10)
+            }
+            R.id.llMyReferral -> {
+                displayView(11)
             }
 
             R.id.imgUserPic2 -> {
@@ -402,9 +406,18 @@ class   MerchantHomeActivity : AppCompatActivity(), View.OnClickListener,
                     "WalletFragment"
                 )
             }
-
             10 -> {
                 OpenKYCUpdate()
+            }
+
+            11 -> {
+                toolbarTitle("My Referral")
+                addFragment(
+                    MyRefferalListFragment(),
+                    false,
+                    R.id.nav_host_fragment,
+                    "MyRefferalListFragment"
+                )
             }
 
         }

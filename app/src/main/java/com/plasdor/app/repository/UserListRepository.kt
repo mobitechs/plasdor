@@ -20,6 +20,7 @@ class UserListRepository(val application: Application) : ApiResponse {
     val merchantListItems = MutableLiveData<ArrayList<AvailableMerchantListItem>>()
     val addressListItems = MutableLiveData<ArrayList<AddressListItems>>()
     val bazarListItems = MutableLiveData<ArrayList<ProductListItems>>()
+    val referralList = MutableLiveData<ArrayList<ReferralList>>()
 
     var method = ""
     var userId = ""
@@ -44,6 +45,12 @@ class UserListRepository(val application: Application) : ApiResponse {
     fun getMyOrderList(userId: String) {
         showProgressBar.value = true
         method = "getUserWiseOrders"
+        var url = Constants.BASE_URL + "?method=$method&userId=$userId"
+        apiGetCall(url, this, method)
+    }
+    fun getMyReferralList(userId: String) {
+        showProgressBar.value = true
+        method = "myReferralList"
         var url = Constants.BASE_URL + "?method=$method&userId=$userId"
         apiGetCall(url, this, method)
     }
@@ -105,6 +112,13 @@ class UserListRepository(val application: Application) : ApiResponse {
                 var listItems: ArrayList<ProductListItems>? =
                     gson.fromJson(data.toString(), type)
                 bazarListItems.value = listItems
+            }
+            else if (method == "myReferralList") {
+                showProgressBar.value = false
+                val type = object : TypeToken<ArrayList<ReferralList>>() {}.type
+                var listItems: ArrayList<ReferralList>? =
+                    gson.fromJson(data.toString(), type)
+                referralList.value = listItems
             }
         }
     }

@@ -136,7 +136,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/llHome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,6 +160,11 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/drawer_menu_label" />
                     </LinearLayout>
+                    <View
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/iconColor" />
 
                     <LinearLayout
                         android:visibility="gone"
