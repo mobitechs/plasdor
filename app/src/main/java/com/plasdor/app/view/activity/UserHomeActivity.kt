@@ -317,6 +317,8 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 "&sd=" + "Reward Coins 15" +
                 "&si=" + "https://plasdorservice.com/images/logo_.png"
 
+
+
         val shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
 //            .setLongLink(Uri.parse(dynamicLink.uri.toString()))
             .setLongLink(manualUrlLinkText.toUri()) // this is for manual url

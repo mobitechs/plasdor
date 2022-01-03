@@ -230,6 +230,7 @@ class AuthRegisterFragment : Fragment(), ApiResponse {
         }
         apiPostCall(Constants.BASE_URL, jsonObject, this, method)
     }
+
     private fun callRegisterAPIWithImg() {
         val method = "registerWithImage"
         val androidNetworking = AndroidNetworking.upload(Constants.BASE_URL)
