@@ -298,7 +298,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
     private fun ShareApp() {
 
         val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-            .setLink(Uri.parse("http://www.plasdorservice.com/"))
+            .setLink(Uri.parse("http://www.plasdorservices.in/"))
             .setDomainUriPrefix("https://plasdorservicemobi.page.link") // Open links with this app on Android
             .setAndroidParameters(
                 AndroidParameters.Builder().build()
@@ -315,7 +315,7 @@ class UserHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialogB
                 "&apn=" + packageName +
                 "&st=" + "My Refer Link" +
                 "&sd=" + "Reward Coins 15" +
-                "&si=" + "https://plasdorservice.com/images/logo_.png"
+                "&si=" + "http://plasdorservices.in/images/logo_.png"
 
 
 

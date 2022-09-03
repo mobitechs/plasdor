@@ -209,6 +209,11 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
             if (controllerQty.toInt() > merchantControllerQty.toInt()) {
                 requireContext().showToastMsg("This merchant have remains only $merchantControllerQty Controller.")
             } else {
+//                if(){
+//                    deliveryCharges = 0
+//                }else{
+//                    deliveryCharges = Constants.deliveryCharges
+//                }
                 requireActivity().openActivity(PlaceOrderActivity::class.java) {
                     putParcelable("productItem", listItem)
                     putParcelable("merchantItem", selectedMerchantItem)
@@ -320,9 +325,9 @@ class ProductDetailsFragment : Fragment(), MerchantSelectionClickListener {
 
 
         if (controllerQty == 1) {
-            controllerCharges = 50
+            controllerCharges = 0
         } else {
-            controllerCharges = 50 * (controllerQty)
+            controllerCharges = (50 * (controllerQty))-50
         }
 
         setLabelPrice()

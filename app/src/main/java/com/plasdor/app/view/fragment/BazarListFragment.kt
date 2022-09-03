@@ -173,11 +173,11 @@ class BazarListFragment : Fragment(), ApiResponse, AddOrRemoveListener {
                 requireContext().showToastMsg("Ad was shown")
                 }
 
-                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                    // Called when ad fails to show.
-                    Log.d(TAG, "Ad failed to show.")
-                requireContext().showToastMsg("Ad failed to show.")
-                }
+//                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+//                    // Called when ad fails to show.
+//                    Log.d(TAG, "Ad failed to show.")
+//                requireContext().showToastMsg("Ad failed to show.")
+//                }
 
                 override fun onAdDismissedFullScreenContent() {
                     // Called when ad is dismissed.

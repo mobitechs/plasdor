@@ -7,6 +7,7 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the "MyLocation" functionality.
     -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -29,7 +30,8 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:theme"
         tools:targetApi="m">
-        <activity android:name=".view.activity.DeliveryAgentHomeActivity" android:theme="@style/noActionBar"/>
+
+        <activity android:exported="true" android:name=".view.activity.DeliveryAgentHomeActivity" android:theme="@style/noActionBar"/>
         <!-- Add your API key here -->
         <meta-data
             android:name="com.razorpay.ApiKey"
@@ -52,26 +54,50 @@
 
 
         <service
+            android:exported="true"
             android:name=".firebase.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+        <receiver
+            android:name="com.razorpay.RzpTokenReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="rzp.device_token.share" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name="com.razorpay.CheckoutActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@style/CheckoutTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <data
+                    android:host="rzp.io"
+                    android:scheme="io.rzp" />
+            </intent-filter>
+        </activity>
 
         <activity
+            android:exported="true"
             android:name=".view.activity.MapsMerchantListActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
+            android:exported="true"
             android:name=".view.activity.AdminHomeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
+            android:exported="true"
             android:name=".view.activity.MerchantHomeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" /> <!-- android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" -->
         <activity
             android:name=".view.activity.UserHomeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -82,12 +108,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:exported="true"
             android:name=".view.activity.PlaceOrderActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
+            android:exported="true"
             android:name=".view.activity.AuthActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
+            android:exported="true"
             android:name=".view.activity.SplashActivity"
             android:noHistory="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

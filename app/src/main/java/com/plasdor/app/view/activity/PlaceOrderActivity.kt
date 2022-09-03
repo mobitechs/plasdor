@@ -267,7 +267,7 @@ import org.json.JSONObject
             co.open(activity, options)
         } catch (e: Exception) {
             Toast.makeText(activity, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
-            e.printStackTrace()
+           // e.printStackTrace()
         }
     }
 

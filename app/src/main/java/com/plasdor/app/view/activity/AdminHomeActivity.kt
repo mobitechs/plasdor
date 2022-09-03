@@ -137,7 +137,7 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
 //        startActivity(sendIntent)
 
         val dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-            .setLink(Uri.parse("https://www.plasdorservice.com/"))
+            .setLink(Uri.parse("https://www.plasdorservices.in/"))
             .setDomainUriPrefix("https://plasdorservice.page.link/") // Open links with this app on Android
             .setAndroidParameters(
                 DynamicLink.AndroidParameters.Builder().build()
@@ -150,11 +150,11 @@ class AdminHomeActivity : AppCompatActivity(), View.OnClickListener, AlertDialog
 
         ///manual Url Link Text
         val manualUrlLinkText = "https://plasdorservice.page.link//?" +
-                "link=http://www.plasdorservice.com/" +
+                "link=http://www.plasdorservices.in/" +
                 "&apn=" + packageName +
                 "&st=" + "My Refer Link" +
                 "&sd=" + "Reward Coins 20" +
-                "&si=" + "https://plasdorservice.com/images/logo_.png"
+                "&si=" + "http://plasdorservices.in/images/logo_.png"
 
         val shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
 //            .setLongLink(Uri.parse(dynamicLink.uri.toString()))

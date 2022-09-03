@@ -158,14 +158,9 @@ class EnterEmailFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener
 
 //        callbackManager.onActivityResult(requestCode, resultCode, data)
         if (requestCode === RC_SIGN_IN) {
-            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+            val result = data?.let { Auth.GoogleSignInApi.getSignInResultFromIntent(it) }
             if (result != null) {
-                try{
-                    handleSignInResult(result)
-                }catch (e:Exception){
-                    e.printStackTrace()
-                }
-
+                handleSignInResult(result)
             }
         }
     }
